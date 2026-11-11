@@ -1,0 +1,65 @@
+{
+  "base_field_degree": 6,
+  "base_polynomial_hex": "0x43",
+  "extension_polynomial": "T^3+T+a",
+  "a": 6,
+  "m": 18,
+  "field_size": 262144,
+  "h": 19,
+  "C": 1,
+  "root_orbit": [
+    64,
+    129536,
+    129600
+  ],
+  "Y": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    16,
+    17,
+    20,
+    15
+  ],
+  "basis_size": 18,
+  "zero_sum_masks_in_each_orbit_column": [
+    [
+      0,
+      275153
+    ],
+    [
+      0,
+      275153
+    ],
+    [
+      0,
+      275153
+    ]
+  ],
+  "nonempty_zero_sum_subset": [
+    0,
+    4,
+    6,
+    7,
+    9,
+    12,
+    13,
+    15
+  ],
+  "subsets_checked_per_root": 524288,
+  "orbit_colors": 3,
+  "available_subsets": 2,
+  "Hall_deficit": 1
+}

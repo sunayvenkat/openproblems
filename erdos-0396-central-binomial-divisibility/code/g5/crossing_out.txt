@@ -1,0 +1,2 @@
+E_1 family: inequalities hold for x > 9
+E_2 family (x=42y+9): inequalities hold for y > 0

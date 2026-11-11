@@ -1,0 +1,1 @@
+﻿d=8544965 [5, 11, 13, 17, 19, 37] K=7: first negative level 4 (offset 0, coeff -8.753e+49)

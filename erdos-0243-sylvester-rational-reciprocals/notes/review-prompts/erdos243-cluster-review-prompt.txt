@@ -1,0 +1,155 @@
+Adversarial mathematical review. Find what is wrong with this artifact. Assume the author is overconfident. Look for unstated assumptions, edge cases, invalid inequalities, quantifier or indexing errors, and circular reasoning. Do NOT validate. Do NOT summarize. Find substantive issues, or state explicitly that you cannot find any after thorough examination.
+
+CONTRACT:
+Check whether the theorem and proof below follow from the stated setup and the supplied preliminary facts. The full Erdős 243 conjecture, novelty, and a Lean proof are outside this contract. Do not use the theorem under review as a preliminary fact.
+
+SETUP AND AVAILABLE PRELIMINARY FACTS:
+Positive integer states C_n,D_n and integer multipliers a_n>=2 satisfy
+D_{n+1}=a_n D_n, C_{n+1}=a_n C_n-D_n,
+a_n -> infinity, a_{n+1}/a_n^2 -> 1, C_{n+1}/C_n -> 1.
+The sequence C_n is not eventually constant.
+L_0=D_0 and L_{n+1}=lcm(L_n,a_n).
+Delta_n=D_n/L_n and U_n=C_n/Delta_n are positive integers.
+E_n=D_n-(a_n-1)C_n and V_n=E_n/Delta_n are integers.
+Let rho_n=gcd(a_n,L_n). Then
+Delta_{n+1}=rho_n Delta_n,
+rho_n U_{n+1}=a_n U_n-L_n=U_n-V_n,
+L_{n+1}=a_n L_n/rho_n,
+U_{n+1}/U_n=(C_{n+1}/C_n)/rho_n.
+We may use the following already established facts:
+(1) log C_n=o(n), log Delta_n=o(n), and V_n/U_n -> 0.
+(2) U_n -> infinity. For completeness: E_n=0 at a sufficiently late index forces all subsequent C-states equal, since the next C-ratio is an integer and lies in (1/2,3/2). Thus V_n is eventually a nonzero integer; together with V_n/U_n ->0 this implies U_n ->infinity.
+(3) There are constants c_1,c_2>0 with c_1 2^n <= log a_n <= c_2 2^n.
+(4) The fresh indices i_j with rho_{i_j}=1 satisfy i_j=j+o(j). Their multipliers b_j=a_{i_j} are pairwise coprime and coprime to L_{i_j}. Indeed each non-fresh index multiplies Delta by >=2, so there are o(n) such indices below n.
+(5) For B comparable to W ->infinity one can choose B fresh multipliers all >2W whose last original index J=B+o(B). Take an initial offset O(log log(W+3)) in the enumeration in (4). Their product Q, even after multiplying by any fixed M, has log log Q <= (B+o(B))log2. Also H=max_{0<=n<=J+1} U_n satisfies log H=o(B).
+Deleting a finite prefix leaves these asymptotic facts valid with the original state variables restricted to that prefix.
+Natural logarithms are used and ell(x)=log log(max{x,exp(e)}).
+
+ARTIFACT:
+\section{Clustered barriers for the LCM-cleared numerator}
+The following refinement does not require the common divisor of $C_n,D_n$
+to stabilize. We keep the original LCM coordinates of
+Theorem~\ref{thm:lcmbarrier} throughout.
+
+\begin{theorem}\label{thm:lcmwheel}
+Assume the integer recurrences and limits of Theorem~\ref{thm:main},
+and suppose that $C_n$ is not eventually constant. Let
+\[
+ \Lambda_U=\limsup_{n\to\infty}
+ \frac{U_{n+1}-U_n}{\ellog(U_n)},\qquad
+ \mathcal P_L=\{p\text{ prime}:p\mid L_n\text{ for some }n\}.
+\]
+For every finite $P\subseteq\mathcal P_L$, with
+$\rho(P)=\prod_{p\in P}(1-1/p)$, one has
+\[
+ \Lambda_U\ge\frac1{\rho(P)\log2}.
+\]
+Consequently $\Lambda_U>1/\log2$. If $\Lambda_U<\infty$, then
+\[
+ \prod_{p\in\mathcal P_L}(1-1/p)>0,
+ \qquad \sum_{p\in\mathcal P_L}\frac1p<\infty.
+\]
+In particular, the conclusion of Theorem~\ref{thm:lcmbarrier} holds
+also for $\alpha=1/\log2$.
+\end{theorem}
+
+\begin{proof}
+We use the previously proved facts $U_n\to\infty$, $V_n/U_n\to0$,
+$\log C_n=o(n)$, and
+\[
+ \rho_n U_{n+1}=U_n-V_n,\qquad
+ L_{n+1}=a_nL_n/\rho_n,\qquad \rho_n=\gcd(a_n,L_n).
+\]
+Also $U_{n+1}/U_n=(C_{n+1}/C_n)/\rho_n$. Hence eventually
+\begin{equation}\label{eq:reusecontraction}
+ \rho_n>1\ \Longrightarrow\ U_{n+1}\le\tfrac34 U_n.
+\end{equation}
+If $\rho_n=1$ and $M\mid L_n$, then
+\begin{equation}\label{eq:gcdclass}
+ \gcd(U_{n+1},M)=\gcd(a_nU_n-L_n,M)=\gcd(U_n,M).
+\end{equation}
+Thus the gcd class is preserved between reuse steps.
+
+Fix finite $P$, put $M=\prod_{p\in P}p$ and $\rho=\rho(P)$.
+Suppose for contradiction that $\Lambda_U\rho\log2<1$.
+Choose $\beta>\max\{\Lambda_U,0\}$ with $\beta\rho\log2<1$.
+After discarding a fixed prefix, we may assume $M\mid L_0$,
+\eqref{eq:reusecontraction}, and
+\[
+ U_{n+1}-U_n\le h(U_n),\qquad h(x)=\beta\ellog(x)+K,
+ \quad K\ge1.
+\]
+The discarded prefix does not change the definitions of the LCM states.
+
+Let $W$ tend to infinity through multiples of $M$ and put
+$B=\rho W$. For every divisor $d\mid M$ define
+\[
+ J_d=\{0\le j<W:\gcd(j,M)=d\}.
+\]
+Then $|J_d|=W\varphi(M/d)/M\le B$, since $M$ is squarefree.
+For $M=1$ there is just one class, containing every position.
+Enumerate the fresh multipliers as in Theorem~\ref{thm:lcmbarrier}.
+Select $B$ of them, denoted $b_1,\ldots,b_B$, all greater than $2W$.
+Their last original index is $J=B+o(B)$, they are pairwise coprime,
+and they are coprime to $M$. Set
+\[
+ Q=M\prod_{i=1}^B b_i,\qquad S=Q^2,\qquad
+ H=\max_{0\le n\le J+1}U_n.
+\]
+The same growth estimates give
+\[
+ \log\log Q\le(B+o(B))\log2,
+ \qquad \log H=o(B).
+\]
+In particular $S>H$ for large $W$, since $Q>(2W)^B$.
+
+For each $d\mid M$, assign the positions of $J_d$ injectively to
+the same list $b_1,\ldots,b_B$. The Chinese remainder theorem supplies
+$0\le r_d<Q$ such that
+\[
+ r_d\equiv0\pmod M,\qquad
+ r_d+j\equiv0\pmod{b_i}
+ \quad\text{whenever position }j\in J_d\text{ is assigned to }b_i.
+\]
+Unused moduli may be given arbitrary residues. Put $T_d=S+r_d$.
+These barriers all lie in the common interval
+$[S,S+Q+W]$. Their construction uses $B$ shared moduli,
+rather than a separate set of moduli for every class. Moreover
+\[
+ h(S+Q+W)\le\beta(B+o(B))\log2+O(1)<W.
+\]
+
+Let $N$ be the first index with $U_N\ge S+Q+W$, and let $k<N$
+be the last index with $U_k<S$. Both exist because $U_n\to\infty$
+and $U_0<S$. We have $k\ge J+1$ and
+\[
+ S\le U_{k+1}<S+h(S)<S+W.
+\]
+For $k+1\le n<N$, a reuse step would give
+\[
+ U_{n+1}\le\tfrac34 U_n
+ <\tfrac34(S+Q+W)<S,
+\]
+contradicting the choice of $k$. Thus $\rho_n=1$ throughout this
+crossing and $\gcd(U_n,M)$ has a fixed value $d$ there.
+
+We start below $T_d+W$ and finish above it. At the first rise crossing
+$T_d+W$, its starting point has the form $U_n=T_d+j$, $0\le j<W$,
+and its positive jump $t$ is less than $W$. Since $T_d\equiv0\pmod M$,
+we have $j\in J_d$. Its assigned modulus $b_i$ divides both $U_n$
+and $L_n$, because $n>J$. As $\rho_n=1$,
+\[
+ t=U_{n+1}-U_n=(a_n-1)U_n-L_n,
+\]
+so $b_i\mid t$. This contradicts $0<t<W<b_i$.
+The claimed coefficient bound follows.
+
+The set $\mathcal P_L$ is nonempty since each $a_n\ge2$ divides
+$L_{n+1}$. A singleton $P$ therefore gives $\Lambda_U>1/\log2$.
+If $\Lambda_U$ is finite, the bound for all finite $P$ implies
+$\rho(P)\ge1/(\Lambda_U\log2)>0$, which proves the Euler-product
+and reciprocal-sum claims. Finally the endpoint envelope would imply
+$\Lambda_U\le1/\log2$, a contradiction.
+\end{proof}
+
+

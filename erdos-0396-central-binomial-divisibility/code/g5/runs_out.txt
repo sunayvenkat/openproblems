@@ -1,0 +1,13 @@
+density.py 2000000:
+N=    10000: dens D0=0.1068  dens E1=0.00730  E1/D0^2=0.640
+N=   100000: dens D0=0.1136  dens E1=0.01029  E1/D0^2=0.798
+N=  1000000: dens D0=0.1181  dens E1=0.01203  E1/D0^2=0.862
+N=  2000000: dens D0=0.1202  dens E1=0.01260  E1/D0^2=0.872
+
+e1fam.py: 12 quadruple families (A <= 600) pass all asymptotic carry tests; each has E_1 hits, e.g.
+(336,310,51): n=(14x+3)(24x+17), n-1=2(24x+5)(7x+5)  [no congruence conditions needed]
+(240,224,49): n=(20x+7)(12x+7), n-1=16(3x+1)(5x+3)   (x=2: n=1457)
+
+e2big.py 300000: 3 sextuple families (2 distinct up to substitution); A<=6000 gives none.
+(52920,47166,10509): n=3(70x+31)(252x+113), n-1=2(84x+37)(315x+142), n-2=7(180x+79)(42x+19)
+(182520,3354,15):   n=3(130x+1)(468x+5),   n-1=2(156x+1)(585x+7),    n-2=13(180x+1)(78x+1)

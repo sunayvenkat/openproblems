@@ -1,0 +1,1 @@
+s=2 first nonzero (offset, coeff) = (0, 208867414006179380586709070)  [81s]

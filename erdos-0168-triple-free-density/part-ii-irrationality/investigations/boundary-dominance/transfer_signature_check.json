@@ -1,0 +1,154 @@
+{
+  "inner_t": 4,
+  "middle_t": 24,
+  "outer_t": 144,
+  "cases": [
+    {
+      "inner_cover": [
+        2
+      ],
+      "one_step_signature": [
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "two_step_total": 7,
+      "intermediate_cover": [
+        2,
+        9,
+        12,
+        16
+      ],
+      "intermediate_size": 4,
+      "valid_intermediate_covers": 51
+    },
+    {
+      "inner_cover": [
+        3
+      ],
+      "one_step_signature": [
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "two_step_total": 8,
+      "intermediate_cover": [
+        2,
+        8,
+        9,
+        18
+      ],
+      "intermediate_size": 4,
+      "valid_intermediate_covers": 45
+    }
+  ],
+  "matrix_counterexample": {
+    "inner_t": 64,
+    "middle_t": 384,
+    "outer_t": 2304,
+    "vertical_word": [
+      0,
+      1,
+      1,
+      0
+    ],
+    "vertical_response": [
+      4,
+      4
+    ],
+    "cases": [
+      {
+        "inner_cover": [
+          3,
+          6,
+          8,
+          9,
+          12,
+          18,
+          24,
+          36,
+          48,
+          54
+        ],
+        "color_counts": [
+          4,
+          3,
+          3
+        ],
+        "horizontal_word": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "horizontal_matrix": [
+          [
+            4,
+            4
+          ],
+          [
+            3,
+            3
+          ]
+        ],
+        "one_step_total": 16,
+        "horizontal_response": [
+          7,
+          7
+        ],
+        "two_step_total": 22
+      },
+      {
+        "inner_cover": [
+          2,
+          3,
+          6,
+          8,
+          9,
+          12,
+          24,
+          32,
+          36,
+          48
+        ],
+        "color_counts": [
+          4,
+          3,
+          3
+        ],
+        "horizontal_word": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "horizontal_matrix": [
+          [
+            4,
+            4
+          ],
+          [
+            3,
+            3
+          ]
+        ],
+        "one_step_total": 16,
+        "horizontal_response": [
+          7,
+          6
+        ],
+        "two_step_total": 21
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+105 z= (0.3 + 0.7j) S roots (0.9 + 2.1j) S poly (0.9 + 2.1j) S series (0.9 + 2.1j)
+105 z= -1.7 S roots (-5.1 + 0.0j) S poly -5.1 S series -5.1
+105 T 2 phi 48 rho0 9 levels a_s = [3] digit leads [0, 3, 0] OK
+165 z= (0.3 + 0.7j) S roots (-0.3 - 0.7j) S poly (-0.3 - 0.7j) S series (-0.3 - 0.7j)
+165 z= -1.7 S roots (1.7 + 0.0j) S poly 1.7 S series 1.7
+165 T 2 phi 80 rho0 5 levels a_s = [-1] digit leads [0, -1, 0] OK
+195 z= (0.3 + 0.7j) S roots (-1.2 - 2.8j) S poly (-1.2 - 2.8j) S series (-1.2 - 2.8j)
+195 z= -1.7 S roots (6.8 + 0.0j) S poly 6.8 S series 6.8
+195 T 2 phi 96 rho0 3 levels a_s = [-4] digit leads [0, -4, 0] OK
+1155 z= (0.3 + 0.7j) S roots (78.9 + 184.1j) S poly (78.9 + 184.1j) S series (78.9 + 184.1j)
+1155 z= -1.7 S roots -447.1 S poly -447.1 S series -447.1
+1155 T 2 phi 480 rho0 195 levels a_s = [263] digit leads [0, 263, 0] OK
+1365 z= (0.3 + 0.7j) S roots (-22.5 - 52.5j) S poly (-22.5 - 52.5j) S series (-22.5 - 52.5j)
+1365 z= -1.7 S roots 127.5 S poly 127.5 S series 127.5
+1365 T 2 phi 576 rho0 213 levels a_s = [-75] digit leads [0, -75, 0] OK
+EXIT 0

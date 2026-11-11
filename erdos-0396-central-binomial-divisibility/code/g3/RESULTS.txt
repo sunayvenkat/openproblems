@@ -1,0 +1,36 @@
+g3: effective A3 / non-top pieces (Erdos 396).  Files: tr.py resid.py band.py stats.py survey.py k0.py exactrange.py
+cmp319.py exact10023013.py; outputs band_<m>.txt stats_out.txt survey_out.txt ex10023013_s<k>.txt.
+
+Notation: d odd squarefree, delta = phi(d), theta = delta/d, zeta = e^{i pi a/d} (a odd, gcd(a,d)=1), z = H(zeta)/2,
+S_k(K) = [x^{delta-1}] D_k (= lc D_k when nonzero), a_n = Tr(zeta z^n).
+
+Closed forms (checked to 1e-10):  |H(zeta_a)| = 2 prod_{q|d,q>1} |2cos(pi a/2q)|^{-mu(q)};
+  tau_a := Im(zeta H'/H)/d = -(1/2) sum_{q|d,q>1} mu(q) tan(pi a/2q)/q;  Re(zeta H'/H) = (2d-delta)/2 exactly.
+
+Lemma X (exact low levels, proved): if (k+1)delta > (k-1)d + 1 then S_k(K) = -C(K,k) a_{k+1}/d for every odd K.
+  (digit G_{r,j} of g^r can reach degree delta-1 only if (j+1)delta <= r(d-delta)+1; with r = k-j, j >= 1 this
+  needs (k+1)delta <= (k-1)d+1.)  Band: k <= 3 always, k <= 4 if theta > 3/5.  Checked: exactrange.py.
+
+Thm E (effective A3): S_k(K) = -(1/(d k!)) sum_zeta zeta z^{k+1} (K+beta_zeta)^k (1+E_zeta),
+  beta = 1/d + (k+1)(-theta/2 + i tau),  |E| <= e sqrt(k)(exp(0.3(k+1)k^2/|K+beta|^2)-1) + k! e^{|beta|+0.3(k+1)}/|K+beta|^k
+  (d >= 1000, |K+beta| >= k).  Proof: x = zeta e^{w/d}, saddle circle |w| = k/|K+beta|.
+  Check d=319865, K=187, k=2..14: shifted predictor within 0.3% of exact; unshifted off by up to 48% (cmp319.py).
+
+Float residue method (resid.py) = exact K-polynomial S_k(K) in floating point; agrees with all 25 exact values of
+  DRAFT 8.4 and with deep.py on (125895,25179), (151305,30261), (217175,43435).
+
+Four 7-prime m (band_*.txt): 187 band pieces, large-K level kstar = actual first level in 186/187 (exception d=10023013 below).
+  59814755, 46881835, 37182145: every non-top piece good (max level 14 at d=319865, 10 at 145145, 6 at 572033).
+  50115065: piece d=10023013 = 7*11*13*17*19*31 (K=5, T-1=7): float resolves levels 2..6 (all +, match exact)
+  but NOT level 7 (|S|/sum|terms| = 5e-18).  Exact deep.py (ex10023013_s*.txt): s=2..6 positive,
+  s=7 (last level) = -3299327387824433105301865655986924920323754547685215817308920, residues re-checked at
+  two unused primes (verify7_*.txt).  => good at level 7; all 46 band pieces of 50115065 good (45 by float only).
+  a_3..a_8 < 0, so large-K level for this d is > 7: the K=5 piece is saved by the finite-K terms.
+  Caveat: float sign 0 = unresolved; badK lists in band_*.txt may include unresolved (not truly bad) K.
+
+Bug: agentAC/fastser.py CRT uses 2 primes (|coeff| < 2.3e18); larger coefficients get wrong sign.
+  Lemma A "failures" d=30261 (good at level 7, c=-3168776066731122820) and d=43435 (good at level 5,
+  c=-2741669466900719135) are false; only 25179 (K=5) is real.  agentAC scans (bigscan 738/1487 etc.) need recheck.
+
+Survey (survey_out.txt, 3-free band d from primes 5..47): fraction with kstar >= 5 by omega 3,4,5,6:
+  0, 0.05, 0.12, 0.15; max kstar 4, 13, 14, 8; max tau 0.28, 0.34, 0.38, 0.39.  No parity effect (stats_out.txt).

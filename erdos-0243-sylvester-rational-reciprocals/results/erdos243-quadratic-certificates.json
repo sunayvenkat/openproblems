@@ -1,0 +1,280 @@
+{
+  "scope": "Exact necessary finite-field conditions for C_n=A*n(n+1)-1, for the five coefficients returned by the elliptic reduction. No arbitrary-orbit exclusion.",
+  "results": [
+    {
+      "A": 16,
+      "p": 11,
+      "table": [
+        10,
+        9,
+        7,
+        4,
+        0,
+        6,
+        0,
+        4,
+        7,
+        9,
+        10
+      ],
+      "empty": true,
+      "rows": [
+        {
+          "index": 4,
+          "C": 0,
+          "values": [
+            5
+          ]
+        },
+        {
+          "index": 3,
+          "C": 4,
+          "values": [
+            3,
+            8
+          ]
+        },
+        {
+          "index": 2,
+          "C": 7,
+          "values": [
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "index": 1,
+          "C": 9,
+          "values": [
+            2,
+            5,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "index": 0,
+          "C": 10,
+          "values": [
+            6,
+            7
+          ]
+        },
+        {
+          "index": -1,
+          "C": 10,
+          "values": []
+        }
+      ]
+    },
+    {
+      "A": 64,
+      "p": 13,
+      "table": [
+        12,
+        10,
+        6,
+        0,
+        5,
+        8,
+        9,
+        8,
+        5,
+        0,
+        6,
+        10,
+        12
+      ],
+      "empty": true,
+      "rows": [
+        {
+          "index": 3,
+          "C": 0,
+          "values": [
+            8
+          ]
+        },
+        {
+          "index": 2,
+          "C": 6,
+          "values": [
+            3,
+            10
+          ]
+        },
+        {
+          "index": 1,
+          "C": 10,
+          "values": [
+            10
+          ]
+        },
+        {
+          "index": 0,
+          "C": 12,
+          "values": []
+        }
+      ]
+    },
+    {
+      "A": 252,
+      "p": 19,
+      "table": [
+        18,
+        9,
+        10,
+        2,
+        4,
+        16,
+        0,
+        13,
+        17,
+        12,
+        17,
+        13,
+        0,
+        16,
+        4,
+        2,
+        10,
+        9,
+        18
+      ],
+      "empty": true,
+      "rows": [
+        {
+          "index": 6,
+          "C": 0,
+          "values": [
+            6
+          ]
+        },
+        {
+          "index": 5,
+          "C": 16,
+          "values": [
+            1,
+            18
+          ]
+        },
+        {
+          "index": 4,
+          "C": 4,
+          "values": [
+            4,
+            18
+          ]
+        },
+        {
+          "index": 3,
+          "C": 2,
+          "values": []
+        }
+      ]
+    },
+    {
+      "A": 1932,
+      "p": 11,
+      "table": [
+        10,
+        2,
+        8,
+        6,
+        7,
+        0,
+        7,
+        6,
+        8,
+        2,
+        10
+      ],
+      "empty": true,
+      "rows": [
+        {
+          "index": 5,
+          "C": 0,
+          "values": [
+            4
+          ]
+        },
+        {
+          "index": 4,
+          "C": 7,
+          "values": []
+        }
+      ]
+    },
+    {
+      "A": 2700,
+      "p": 11,
+      "table": [
+        10,
+        9,
+        7,
+        4,
+        0,
+        6,
+        0,
+        4,
+        7,
+        9,
+        10
+      ],
+      "empty": true,
+      "rows": [
+        {
+          "index": 4,
+          "C": 0,
+          "values": [
+            5
+          ]
+        },
+        {
+          "index": 3,
+          "C": 4,
+          "values": [
+            3,
+            8
+          ]
+        },
+        {
+          "index": 2,
+          "C": 7,
+          "values": [
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "index": 1,
+          "C": 9,
+          "values": [
+            2,
+            5,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "index": 0,
+          "C": 10,
+          "values": [
+            6,
+            7
+          ]
+        },
+        {
+          "index": -1,
+          "C": 10,
+          "values": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+t=13 tau(floor)=2 Q=[3, 3, 2] Q(A=1 patch)=[3, 2, 2]
+t=27/2 tau(floor)=2 Q=[3, 3, 2] Q(A=1 patch)=[3, 3, 2]
+checked 336 3-smooth t in [3,3000000000]; mismatches: 0
+
+Section 8 windows:
+[54,64) smooth inside=[] rows=[6, 5, 3, 2] K=[6, 5, 5] I=[0, 0, 0] P=[0, 0, 0] Q=[6, 5, 5] Q(hi-)=[6, 5, 5] jtop=0 Qtop=6 M=5 tau=5 Qtop>M=True
+[64,72) smooth inside=[] rows=[7, 5, 3, 2] K=[7, 5, 5] I=[1, 0, 0] P=[0, 0, 0] Q=[6, 5, 5] Q(hi-)=[6, 5, 5] jtop=0 Qtop=6 M=5 tau=5 Qtop>M=True
+[216,243) smooth inside=[] rows=[8, 7, 5, 4, 2] K=[9, 8, 9] I=[0, 0, 0] P=[0, 0, 0] Q=[9, 8, 9] Q(hi-)=[9, 8, 9] jtop=2 Qtop=9 M=8 tau=8 Qtop>M=True
+[576,648) smooth inside=[] rows=[10, 8, 7, 5, 3, 2] K=[12, 12, 11] I=[1, 0, 0] P=[0, 0, 0] Q=[11, 12, 11] Q(hi-)=[11, 12, 11] jtop=1 Qtop=12 M=11 tau=11 Qtop>M=True
+[5184,5832) smooth inside=[] rows=[13, 11, 10, 8, 7, 5, 3, 2] K=[20, 19, 20] I=[1, 0, 0] P=[0, 0, 0] Q=[19, 19, 20] Q(hi-)=[19, 19, 20] jtop=2 Qtop=20 M=19 tau=19 Qtop>M=True
+
+Section 9:
+3 tau 1 Q [1, 1, 1] Q(A=1) [1, 1, 1]
+4 tau 1 Q [1, 1, 1] Q(A=1) [1, 1, 1]
+6 tau 1 Q [2, 1, 2] Q(A=1) [2, 1, 2]
+8 tau 1 Q [2, 1, 2] Q(A=1) [2, 1, 2]
+9 tau 2 Q [2, 2, 2] Q(A=1) [2, 2, 2]
+12 tau 2 Q [3, 3, 2] Q(A=1) [3, 2, 2]
+16 tau 2 Q [3, 3, 2] Q(A=1) [3, 3, 2]

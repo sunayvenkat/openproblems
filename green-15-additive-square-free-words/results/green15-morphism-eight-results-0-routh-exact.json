@@ -1,0 +1,44 @@
+{
+  "scope": "All substitutions obtained by at most maxChanges output-symbol replacements from the displayed eight-letter substitution, preserving image lengths, the first h in h(e), and the first e in h(h). The tested fixed point is that of h squared starting at e. Finite prefix checks only.",
+  "spectralMethod": "Exact Routh tests after a Cayley transform, with exact small rational shifts for singular tables. Exactly two expanding eigenvalues, counted with algebraic multiplicity, and no unit-modulus eigenvalues are pursued.",
+  "original": [
+    [
+      7
+    ],
+    [
+      6
+    ],
+    [
+      5
+    ],
+    [
+      4
+    ],
+    [
+      7,
+      2
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ]
+  ],
+  "maxChanges": 0,
+  "eight": true,
+  "tested": 1,
+  "valid81": 1,
+  "primitive81": 1,
+  "eligibleSpectrum": 0,
+  "shiftedSpectrum": 0,
+  "survivors": [],
+  "best": null,
+  "completed": true
+}

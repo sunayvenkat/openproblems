@@ -1,0 +1,10 @@
+﻿d=95095 [5, 7, 11, 13, 19] K=629: first negative level 5 (offset 0, coeff -1.602e+44)
+d=185185 [5, 7, 11, 13, 37] K=323: first negative level 3 (offset 0, coeff -8.305e+23)
+d=242165 [5, 7, 11, 17, 37] K=247: first negative level 3 (offset 0, coeff -2.080e+23)
+d=270655 [5, 7, 11, 19, 37] K=221: first negative level 5 (offset 0, coeff -1.636e+39)
+d=286195 [5, 7, 13, 17, 37] K=209: first negative level 3 (offset 0, coeff -9.550e+25)
+d=319865 [5, 7, 13, 19, 37] K=187: first negative level None 
+d=323323 [7, 11, 13, 17, 19] K=185: first negative level 3 (offset 0, coeff -1.098e+26)
+d=629629 [7, 11, 13, 17, 37] K=95: first negative level 5 (offset 0, coeff -5.291e+50)
+d=776815 [5, 13, 17, 19, 37] K=77: first negative level 4 (offset 0, coeff -7.831e+34)
+d=1616615 [5, 7, 11, 13, 17, 19] K=37: first negative level 4 (offset 0, coeff -1.004e+46)

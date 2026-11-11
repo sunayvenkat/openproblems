@@ -1,0 +1,86 @@
+Adversarial mathematical review. Find what is wrong with the artifact. Assume the author is overconfident. Look for invalid arithmetic, incomplete divisor enumeration, failure to establish minimal unit-fraction length, hidden primality assumptions, and overstated implications. Do NOT validate or summarize. Find substantive issues, or explicitly state that none were found after thorough examination.
+
+CONTRACT:
+Verify the two finite counterexamples and their proof. No claim is made that they refute Erdős 243, that such events occur infinitely often, or that any fixed small-error threshold is ruled out. The claim is only that Egyptian unit-fraction length need not decrease under the specified single steps, with the two particular sets of local properties.
+lambda(r) counts positive unit fractions with repetitions allowed.
+The accompanying exact BigInt verification is erdos243-check.mjs You may read and execute it. The relevant fixtures run from the comment "Egyptian length can increase" through the definition of descentExamples. All primality tests are exhaustive trial divisions. The remaining script checks unrelated prior arithmetic and is not part of this contract.
+Do not use external CLIs, browse, or spawn subagents.
+
+ARTIFACT:
+\section{A failed Egyptian-length descent}
+For a positive rational $r$, let $\lambda(r)$ be the least number of
+positive unit fractions summing to $r$; repetitions are allowed.
+It is tempting to use $\lambda$ as a decreasing integer invariant for
+the near-Sylvester step $r\mapsto r-1/a$.
+The following exact examples exclude a descent assertion based only
+on the displayed local data. They do not exclude an argument using
+additional information about all later states.
+
+\begin{lemma}\label{lem:lengthfailure}
+There is a positive rational $r=C/D$ and an integer $a\ge2$ with
+\[
+ \lambda(r)=2,\quad \lambda(r-1/a)\ge3,\quad
+ 0<\frac{aC-D-C}{C}<1.2\cdot10^{-14},
+ \quad a=1+\operatorname{round}(D/C).
+\]
+There is another such length increase with $a>2\cdot10^7 C$,
+$\gcd(a,D)=1$, and relative numerator rise less than $10^{-3}$.
+\end{lemma}
+
+\begin{proof}
+For the first assertion take
+\[
+ b=29719973,\quad c=441638367840389,\quad a=29719972,
+ \qquad C=b+c,\quad D=bc.
+\]
+The integers $a/4=7429993$, $b$, and $c$ are prime. They may be
+checked by the exact trial divisions in the accompanying script.
+Direct multiplication gives $aC-D=C+5$, so the relative rise is
+$5/441638397560362<1.2\cdot10^{-14}$ and $a-1$ is the nearest integer
+to $D/C$. Since $b,c$ are distinct primes, $r=1/b+1/c$ has length two.
+
+Write $u=C+5$ and $v=aD$, so $r-1/a=u/v$, and put $M=5103$.
+We have
+\[
+ M\mid u,\qquad v\equiv1030\pmod M,
+ \quad a=4p,\quad p\equiv25,\ b\equiv101,\ c\equiv4997\pmod M.
+\]
+If $u/v=1/x+1/y$, then
+\[
+ (ux-v)(uy-v)=v^2,
+ \qquad ux-v>0,\quad uy-v>0.
+\]
+Thus a positive divisor of $v^2$ must be congruent to $-v=4073$ modulo
+$M$. Every divisor has the form $2^e p^f b^g c^h$ with
+$0\le e\le4$, $0\le f,g,h\le2$. The following finite residue sets
+are disjoint:
+\begin{align*}
+ \{2^e25^f\bmod M\}
+ &=\{1,2,4,8,16,25,50,100,200,400,625,1250,2500,4897,5000\},\\
+ \{4073(101^g4997^h)^{-1}\bmod M\}
+ &=\{106,206,394,2020,3062,3082,4073,5003,5102\}.
+\end{align*}
+All inverses exist modulo $M$. This excludes two unit fractions,
+and also one, since a unit fraction is the sum of two equal unit fractions.
+
+For the second assertion put
+\[
+ L=1222709419,\quad a=121047033277,\qquad
+ r=\frac1{101L}+\frac1{4997L}=\frac{5098}{504697L}.
+\]
+Both $L$ and $a$ are prime, and
+\[
+ L=1+5098\cdot239841,\qquad
+ a=100+504697\cdot239841.
+\]
+Consequently $aC-D=C+5=5103$, $a>2\cdot10^7C$, and
+$\gcd(a,D)=1$. The relative rise is $5/5098<10^{-3}$.
+The input again has length two. The output denominator is
+$v=19\cdot101\cdot263\cdot L\cdot a$, with $L\equiv1$ and
+$a\equiv100$ modulo $M$; also $v\equiv1030\pmod M$.
+The same divisor test now checks the $3^5=243$ positive divisors
+of $v^2$. The script exhausts them and finds none congruent to $4073$
+modulo $M$, proving the asserted length increase.
+\end{proof}
+
+

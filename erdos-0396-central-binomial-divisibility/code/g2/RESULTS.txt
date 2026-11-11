@@ -1,0 +1,22 @@
+g2 results (top piece, Conjecture G)
+
+Verified identities: ident.py -> ident_out.txt (m = 105,165,195,1155,1365); ram.py -> ram_out.txt.
+  a_s = [x^{phi-1}] D_s = c_{E_s+1} = [y^{m+1-(s+1)phi}] Q_{s+1},  Q_k = (-Psi_m)^k exactly.
+  S(z) = sum a_s z^s = sum_{Phi_2m(x)=z} (x^m+1)/Phi_2m'(x) = [y^{m+1-phi}] 1/(Phi_m(y) - z y^phi).
+  log Q_1 = sum_{N<m} c_m(N) y^N/N  (Ramanujan sums), mod y^m.
+  T=2: a_1 = [y^{rho0+1}] Psi^2 = -(1/2pi) int |Psi(e^{it})|^2 cos((phi-1)t) dt.
+
+Peak lemma (ram.py): all p|m with chi(p) = -1 (even real chi mod q) =>
+  log|Psi_m(zeta_q^b)| = chi(b) (-1)^r 2^r B_q + log|1 - zeta_q^{bm}|,
+  B_8 = log(1+sqrt2)/2, B_10 = log((1+sqrt5)/2), B_12 = log(2+sqrt3)/2.
+
+Localization (peak.py, windows +-0.02 turns): bulk coefficients of Q^2
+  q=12 m=11305 (r=4) 99.4% sign agreement; 327845 (r=5) 100%; 11905457 (primes 17..41) 100%
+  q=8  m=2145 96.8%; 40755 99.9%; 1181895 (r=6) 100%, median rel err 3.7e-9
+  q=5 windows fail (true peak is at zeta_10, B_10 = 0.481).
+
+Gaussian saddle predictor at the peak (saddle.py -> saddle_out.txt), level-1 sign vs exact:
+  2145 -/-, 40755 -/-, 1181895 +/+, 43730115 -/- (exact -3.602e41, crtcheck.py -> crt_out.txt),
+  106743 -/-, 3949491 -/-, 4641 +/- (wrong; |a_1| = 7).
+  Bulk (bulk_saddle.py): 82% for r=5 with small primes, 51% for primes 17..41 (bulk_out.txt):
+  the saddle leaves the root-free gap around zeta_q, so its phase depends on the divisors m/p.

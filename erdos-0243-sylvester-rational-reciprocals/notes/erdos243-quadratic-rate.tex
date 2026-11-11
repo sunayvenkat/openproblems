@@ -1,0 +1,291 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Fp}{\mathbb F_p}
+\title{A computer-assisted exclusion at the quadratic regular rate}
+\author{Research notes on Erd\H{o}s 243; no priority claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Status.} This does not solve Erd\H{o}s 243. The final
+irrationality theorem assumes the much stronger rate
+$a_n^2/a_{n+1}=1+2/n+o(n^{-2})$. The unrestricted limit $1$ does not
+imply this rate. No counterexample to the full problem is constructed.
+The proof below uses two complete integral-point computations in Magma;
+it does not use GRH or BSD as assumptions. Their input, proved full-group
+flags, and output are retained separately for audit.
+
+The exact rational-tail framework is from
+\href{https://math.colgate.edu/~integers/aa28/aa28.pdf}{Koizumi (2026)}.
+Gcd stabilization, adjacent coprimality, and Chebotarev square
+specialisation are used in
+\href{https://github.com/wcook04/plectis-erdos/blob/main/paper/243/erdos243-reciprocal-tail-reasoning-surface.tex}{Cook's companion paper}.
+No novelty or priority claim is made here.
+
+\paragraph{Integer orbits.}
+Throughout an orbit means positive integers satisfying
+\begin{equation}\label{eq:orbit}
+ C_{n+1}=a_n C_n-D_n>0,\qquad D_{n+1}=a_nD_n.
+\end{equation}
+The same equations hold for $U_n=C_n/g$, $V_n=D_n/g$ if a fixed
+integer $g$ divides both states. Two useful exact identities are
+\begin{align}
+ U_{n+2}&=(a_n+a_{n+1})U_{n+1}-a_n^2U_n,\label{eq:three}\\
+ U_n V_{n+1}&=V_n(V_n+U_{n+1}).\label{eq:quadratic}
+\end{align}
+In particular, if $U_n\equiv0\pmod p$, then
+\begin{equation}\label{eq:neighbours}
+ -U_{n-1}U_{n+1}\equiv(a_{n-1}U_{n-1})^2\pmod p.
+\end{equation}
+
+\begin{lemma}[Two quadratic tests via Chebotarev]\label{lem:cheb}
+Let $K=\Q(\alpha)$ be a number field. If $h\in K^\times$ is a
+nonsquare, infinitely many rational primes have a reduction of $\alpha$
+in $\Fp$ at which the reduction of $h$ is a nonsquare. If $h_1,h_2$
+are both nonsquares in $K^\times$, infinitely many rational primes
+have such a reduction at which both are nonsquares. In either statement
+one may exclude any fixed finite set of bad primes.
+\end{lemma}
+\begin{proof}
+In the first case the nontrivial automorphism of $K(\sqrt h)/K$
+fixes $\alpha$ and negates $\sqrt h$. In the second case there is an
+automorphism of $K(\sqrt{h_1},\sqrt{h_2})/K$ negating both square
+roots: the two quadratic extensions are either equal or independent.
+Extend that automorphism to a finite Galois extension $L/\Q$.
+Chebotarev supplies infinitely many rational primes with its conjugacy
+class as Frobenius; choose an above-prime having the specified
+automorphism itself as Frobenius. Apart from the finitely many
+denominator, ramification, characteristic-two, and zero-reduction
+exceptions, $\overline\alpha$ is Frobenius-fixed and lies in $\Fp$,
+whereas neither square root of each $\overline h_i$ is fixed.
+Thus the indicated reductions are nonsquares. See
+\href{https://www.jmilne.org/math/CourseNotes/CFT.pdf}{Milne,
+Class Field Theory, Chapter V, Theorem 3.23} for the Chebotarev input.
+\end{proof}
+
+\begin{lemma}[Complete integral-point computations]\label{lem:integral}
+The integral $x$ coordinates on the following two elliptic curves are
+\[
+\begin{array}{c|l}
+ E_1:\ y^2+y=x^3+12x^2-16 & \{-8,4\}\\
+ E_2:\ y^2+y=x^3-12x^2-6x+64 & \{-2,2,16,44,52\}.
+\end{array}
+\]
+\end{lemma}
+\begin{proof}[Computer-assisted verification]
+The file \texttt{erdos243-elliptic-points.m} constructs precisely these
+models in Magma V2.29-10. It explicitly sets both class-group bound maps
+to the Minkowski bound, calls \texttt{MordellWeilGroup}, and asserts that
+both its rank-proved and full-group-proved booleans are true. It obtains
+respectively a group $\Z$, with free generator $(-8,-16)$, and
+$\Z/3\oplus\Z$, with free generator $(2,3)$ modulo torsion. It then
+calls \texttt{IntegralPoints} with the resulting full free bases and
+\texttt{SafetyFactor := 2}, retaining torsion as provided by that routine.
+The returned points, up to the involution $y\mapsto-y-1$, are
+\[
+\begin{array}{c|l}
+ E_1&(-8,-16),\ (4,15)\\
+ E_2&(-2,4),\ (2,3),\ (16,31),\ (44,248),\ (52,-329).
+\end{array}
+\]
+The script asserts the claimed complete $x$ sets. The actual response,
+including all proof flags, is saved in
+\texttt{erdos243-elliptic-magma-certified.xml}.
+The completeness here uses Magma's implemented integral-point algorithm,
+not a bounded-height point search. The relevant documented contracts are
+\href{https://magma.maths.usyd.edu.au/magma/handbook/text/1567}{IntegralPoints},
+\href{https://magma.maths.usyd.edu.au/magma/releasenotes/2/21/}{the two
+Mordell--Weil proof flags}, and
+\href{https://magma.maths.usyd.edu.au/magma/handbook/text/416}{the unconditional
+Minkowski class-group bounds}. These software computations have not been
+formally verified in Lean or reproduced by a second implementation here.
+\end{proof}
+
+\begin{theorem}[Centered quadratic profiles]\label{thm:profiles}
+No orbit~\eqref{eq:orbit} can have, eventually,
+\[
+ C_n=A_0 n(n+1)+B_0,\qquad A_0\in\Q_{>0},\quad B_0\in\Q.
+\]
+The same conclusion holds after any integer shift of the index.
+\end{theorem}
+\begin{proof}
+Clear coefficient denominators by multiplying both states by a fixed
+positive integer, so $C_n=A n(n+1)+B$ with $A\in\Z_{>0}$, $B\in\Z$.
+Put $G_n=\gcd(C_n,D_n)$. The recurrence gives $G_n\mid G_{n+1}$,
+and $G_n$ divides every subsequent $C_j$. Hence $G_n\mid2A$ by
+second differences; the chain stabilizes at $g\mid2A$. It also divides
+$B$, because every $A n(n+1)$ is a multiple of $2A$. Dividing by $g$
+gives primitive states with
+\[
+ U_n=m\frac{n(n+1)}2+c,\quad m=2A/g\in\Z_{>0},\quad c=B/g\in\Z,
+ \qquad \gcd(U_n,V_n)=\gcd(U_n,U_{n+1})=1.
+\]
+If $c\notin\{-1,1\}$, choose a prime dividing $c$, or any prime
+if $c=0$. At every sufficiently late $n$ divisible by $2p$ both
+$U_{n-1},U_n$ are divisible by $p$, a contradiction. Thus $c=\pm1$.
+If $m$ is odd, $U_n,U_{n+1}$ are both even at $n\equiv1\pmod4$.
+So $m$ is even and the primitive profile is
+\[
+ U_n=k n(n+1)+c,\qquad k\in\Z_{>0},\quad c=\pm1.
+\]
+
+For $c=1$, let $f(X)=kX(X+1)+1$, with root $\alpha$ and
+$\Delta=k(k-4)$. Equation~\eqref{eq:neighbours} at every root modulo
+every good prime forces
+$-f(\alpha-1)f(\alpha+1)=-4k$ to be a square in $\Q(\alpha)$ by
+Lemma~\ref{lem:cheb}. If $k\ge4$, that field is real, including the
+repeated-root case $k=4$, which is impossible for the negative number
+$-4k$. For $k=1$ the field is $\Q(\sqrt{-3})$, where $-4$ is not a
+square; for $k=2$ it is $\Q(i)$, where $-8$ is not a square.
+The remaining $k=3$ has, at $n\equiv1\pmod7$, the four values
+$(U_{n-2},U_{n-1},U_n,U_{n+1})\equiv(1,1,0,5)$.
+Then $V_n=2$, $V_{n-1}^2=2$, and $V_{n-1}=3$ or $4$ modulo $7$.
+The preceding step in~\eqref{eq:quadratic} would require a root of
+$x^2+x-V_{n-1}$, with nonsquare discriminant $6$ or $3$ modulo $7$.
+This excludes $c=1$.
+
+It remains to treat $c=-1$. Write $f(X)=kX(X+1)-1$ and
+$\Delta=k(k+4)$. The discriminant is nonsquare for every positive
+integer $k$, since $(k+1)^2<\Delta<(k+2)^2$. The same square test
+forces $4k$ to be a square in $K=\Q(\sqrt\Delta)$.
+A rational number $h$ is a square in $\Q(\sqrt d)$ only if $h$ or
+$h/d$ is a rational square, by expanding $(u+v\sqrt d)^2$.
+Consequently
+\begin{equation}\label{eq:twofamilies}
+ k=s^2\quad(s\ge1),\qquad\hbox{or}\qquad k=s^2-4\quad(s\ge3).
+\end{equation}
+
+Here is a second backward step in the square test. At an algebraic root
+$\alpha$ of $f$, put $\eta=k(2\alpha+1)$, so
+\[
+ \eta^2=\Delta,\qquad f(\alpha+j)=kj^2+\eta j.
+\]
+At a corresponding root modulo a good prime, the state at the root is
+$V_0=-f(\alpha+1)$ and its predecessor obeys $V_{-1}^2=4k$.
+For each of the two possible predecessor values, the preceding state
+must solve a quadratic with discriminant
+\begin{equation}\label{eq:backdisc}
+ (k-\eta)^2+4(4k-2\eta)V_{-1}.
+\end{equation}
+These statements are congruences at the root in a finite field; we are
+not assuming that the actual integer states are polynomial functions
+of $\alpha$.
+
+In the first case of~\eqref{eq:twofamilies}, take $t=\sqrt{s^2+4}$,
+so $K=\Q(t)$ and $\eta=st$. The choices $V_{-1}=\sigma 2s$,
+$\sigma\in\{-1,1\}$, make~\eqref{eq:backdisc} equal to $s^2b_\sigma$,
+where
+\[
+ b_\sigma=2s^2+4+32\sigma s-(2s+16\sigma)t,
+ \qquad
+ N_{K/\Q}(b_\sigma)=16(4\sigma s^3+48s^2-63).
+\]
+In the second case take $t=\sqrt{s^2-4}$, so $\eta=st$ and the
+choices are $V_{-1}=\sigma2t$. The discriminants are $t^2b_\sigma$,
+where
+\[
+ b_\sigma=2s^2-4-16\sigma s+(32\sigma-2s)t,
+ \qquad
+ N_{K/\Q}(b_\sigma)=16(4\sigma s^3-48s^2-24\sigma s+257).
+\]
+The norm formulas are polynomial identities, also checked symbolically
+in the Magma script. None of these $b_\sigma$ is zero, since each norm
+divided by $16$ is $1$ modulo $4$.
+
+In either case at least one $b_\sigma$ must be a square in $K$.
+Otherwise Lemma~\ref{lem:cheb} supplies a good prime and a root in
+$\Fp$ at which both are nonsquares, so neither possible predecessor
+can extend one step further backward. This contradicts the integer
+orbit, since the selected residue class contains arbitrarily late
+indices. The norm of a square is a rational square. Thus in the first
+case an integer square equals
+$4x^3+48x^2-63$ at $x=\sigma s$; in the second it equals
+$4x^3-48x^2-24x+257$. Each square is odd. Writing its square root as
+$2y+1$ gives exactly $E_1$ or $E_2$ of Lemma~\ref{lem:integral}.
+That complete computation leaves only
+\begin{equation}\label{eq:five}
+ k\in\{16,64,252,1932,2700\}.
+\end{equation}
+
+All five possibilities are excluded by the following small finite-field
+certificates. For the indicated prime $p$ and root residue $r$, put
+$S_r=\{-f(r+1)\}$, and recursively set
+\[
+ S_j=\{x\in\Fp^\times:\text{ for some }d\in S_{j+1},\ 
+                 x(x+f(j+1))=f(j)d\},\qquad j=r-1,r-2,\ldots .
+\]
+The successive sets, starting at $S_r$, are
+\[
+\begin{array}{c|c|c|l}
+ k&p&r& S_r,S_{r-1},\ldots\\\hline
+ 16,2700&11&4&
+ \{5\},\{3,8\},\{2,3,4,5\},\{2,5,6,9,10\},\{6,7\},\varnothing\\
+ 64&13&3&\{8\},\{3,10\},\{10\},\varnothing\\
+ 252&19&6&\{6\},\{1,18\},\{4,18\},\varnothing\\
+ 1932&11&5&\{4\},\varnothing
+\end{array}
+\]
+Here all displayed $f(r+1)$ are nonzero. At an arbitrarily late index
+in the root class, $V_r=-f(r+1)$ is a unit. Every earlier $V_j$ in
+the window is also a unit, since it divides $V_r$. Identity~\eqref{eq:quadratic}
+would put their values successively in the displayed sets, which end
+empty, a contradiction. The sets can be checked by testing at most
+$p-1$ values per row. They are exhaustively checked, both by the
+quadratic identity and independently by the original two recurrences,
+in \texttt{erdos243-quadratic-certificates.mjs}; the output is retained
+in \texttt{erdos243-quadratic-certificates.json}.
+This eliminates~\eqref{eq:five} and proves the theorem.
+\end{proof}
+
+\begin{theorem}[Quadratic regular-rate irrationality]\label{thm:rate}
+If $(a_n)_{n\ge1}$ is a strictly increasing sequence of positive
+integers with
+\[
+ \frac{a_n^2}{a_{n+1}}=1+\frac2n+o(n^{-2}),
+\]
+then $\sum_{n\ge1}1/a_n$ is irrational.
+\end{theorem}
+\begin{proof}
+Assume the sum is rational, with denominator $q$. Define
+$R_n=\sum_{j\ge n}1/a_j$, $D_n=q\prod_{j<n}a_j$, and $C_n=D_nR_n$.
+These are positive integer states satisfying~\eqref{eq:orbit}.
+The ratio hypothesis implies $a_{n+1}\sim a_n^2$, superpolynomial
+growth, and
+\[
+ R_n=\frac1{a_n}+\frac1{a_{n+1}}+O(a_{n+1}^{-2}),\qquad
+ R_n^{-1}=a_n-\frac{a_n^2}{a_{n+1}}+O(a_n^{-1}).
+\]
+Consequently
+\[
+ \frac{C_{n+1}}{C_n}=a_n-R_n^{-1}
+ =1+\frac2n+o(n^{-2}).
+\]
+Normalizing by $n(n+1)$, the ratio of consecutive normalized terms is
+$1+o(n^{-2})$. Its logarithmic tail is $o(n^{-1})$, so for some
+$A>0$,
+\[
+ C_n=A n(n+1)+o(n),\qquad
+ C_{n+1}-C_n=2A(n+1)+o(1).
+\]
+The consecutive differences are integers, so their own differences
+are integers tending to $2A$. Thus $2A=m\in\Z_{>0}$ and
+$C_{n+2}-2C_{n+1}+C_n=m$ eventually. The preceding asymptotic then
+forces $C_{n+1}-C_n=m(n+1)$ eventually, and hence
+\[
+ C_n=\frac m2 n(n+1)+B
+\]
+eventually for a fixed integer $B$. This contradicts
+Theorem~\ref{thm:profiles}.
+\end{proof}
+
+\paragraph{Unresolved step for the full problem.}
+The unrestricted condition $a_{n+1}/a_n^2\to1$ yields relative errors
+tending to zero, but supplies neither the regular rate above nor a
+polynomial numerator. This proof does not rule out a nonpolynomial
+infinite orbit with nonzero errors tending to zero. The full proof or
+disproof requested for Erd\H{o}s 243 remains outstanding.
+\end{document}

@@ -1,0 +1,1 @@
+prime 2147483123 residue 793753489 expected 793753489 OK

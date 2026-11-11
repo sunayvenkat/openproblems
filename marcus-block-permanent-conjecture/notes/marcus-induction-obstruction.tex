@@ -1,0 +1,144 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{proposition}{Proposition}
+\newcommand{\per}{\operatorname{per}}
+\title{An exact obstruction to gap-monotonicity induction for Marcus's conjecture}
+\author{Research notes for independent verification; no priority claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+\noindent\textbf{Status.} This does not prove or disprove Marcus's
+block-permanent conjecture. It gives an exact failure of a stronger
+inductive inequality, using split quadratic forms and positive definite
+diagonal blocks. The full conjecture remains the goal.
+
+For homogeneous polynomials of equal positive degree, use the Fock inner
+product, conjugate-linear in its first argument, with
+$\langle z^\alpha,z^\beta\rangle=\mathbf1_{\alpha=\beta}\alpha!$, and put
+\[
+ F_m(p_1,\ldots,p_m)=\|p_1\cdots p_m\|^2
+             -\per[\langle p_i,p_j\rangle]_{i,j=1}^m.
+\]
+When every $p_i$ is a product of $k$ linear forms, this is the gap in
+Marcus's conjecture for the Gram matrix of their $mk$ coefficient vectors.
+
+\paragraph{The attempted induction.}
+A sufficient inductive bound would have been
+\begin{equation}\label{bad}
+ F_m(p_1,\ldots,p_m)\ge
+ F_{m-1}(p_1,\ldots,p_{m-1})\|p_m\|^2.
+\end{equation}
+Since $F_1=0$, this would prove the inequality for all $m$.
+It fails already at $m=3,k=2$, including with positive definite diagonal
+blocks, as shown below.
+
+The exact operator behind the attempt can still be useful. Set
+$f=\prod_{i<m}p_i$, $H=[\langle p_i,p_j\rangle]_{i,j<m}$,
+$q=\per H$, and $c_{ij}=\per H^{(i|j)}$, where the indicated row and
+column are removed and the empty permanent is one. For a degree-$k$ form $g$,
+expansion according to how the last row and column of the permanent are
+matched gives
+\[
+ \per\operatorname{Gram}(p_1,\ldots,p_{m-1},g)
+ =q\|g\|^2+\sum_{i,j<m}c_{ij}
+       \langle p_i,g\rangle\langle g,p_j\rangle.
+\]
+Consequently, with
+\[
+ \langle g,Tg\rangle=
+ \sum_{i,j<m}c_{ij}\langle p_i,g\rangle\langle g,p_j\rangle,
+ \qquad K=M_f^*M_f-\|f\|^2I,
+\]
+where $M_f$ is multiplication by $f$, the exact remainder is
+\begin{equation}\label{remainder}
+ F_m=F_{m-1}\|g\|^2+\langle g,(K-T)g\rangle.
+\end{equation}
+The normal-ordering identity
+\[
+ \|fg\|^2=\sum_\alpha\frac1{\alpha!}
+       \|(\partial^\alpha f)^*(\partial)g\|^2
+\]
+shows $K\succeq0$: the terms $|\alpha|=\deg f$ sum to
+$\|f\|^2\|g\|^2$ and all other terms are nonnegative.
+However, $K\succeq T$ is false. Dropping the scalar slack
+$F_{m-1}I$ from the full operator comparison loses essential information.
+Nonnegativity of $F_m$ for every homogeneous degree-$k$ form $g$ would
+be equivalent to $K+F_{m-1}I\succeq T$. This operator inequality is not
+proved here. Marcus's original statement requires the quadratic-form
+inequality only on split $g$.
+
+\begin{proposition}[Exact family of failures]
+Let $A,C>0$ and $B=\sqrt{2AC}$ be real. Set
+\[
+ p_1=Ax^2+Bxy+Cy^2,\quad
+ p_2=Ax^2-Bxy+Cy^2,\quad
+ g=cx^2+dy^2
+\]
+with real $c,d$. Then
+\begin{align}\label{family}
+ F_3(p_1,p_2,g)-F_2(p_1,p_2)\|g\|^2
+ =32\bigl[21A^4c^2+21C^4d^2
+             -(A^2+C^2)(Ac+Cd)^2\bigr].
+\end{align}
+\end{proposition}
+\begin{proof}
+The imposed relation cancels the mixed term in
+$f=p_1p_2=A^2x^4+C^2y^4$, giving
+\[
+ \|f\|^2=24(A^4+C^4),\qquad
+ \|fg\|^2=(720A^4+48C^4)c^2+(48A^4+720C^4)d^2.
+\]
+Writing $n=2(A^2+AC+C^2)$ and $s=2(A^2-AC+C^2)$, the first
+two forms have Gram matrix $\left(\begin{smallmatrix}n&s\\s&n\end{smallmatrix}\right)$.
+Both their inner products with $g$ equal $t=2(Ac+Cd)$.
+The third norm is $\|g\|^2=2(c^2+d^2)$. Therefore
+\[
+ \per\operatorname{Gram}(p_1,p_2,g)
+ =\|g\|^2(n^2+s^2)+2(n+s)t^2.
+\]
+Subtracting $F_2\|g\|^2$ cancels the first permanent term and yields
+\eqref{family}.
+\end{proof}
+
+\paragraph{A Gaussian-integer witness with nonsingular diagonal blocks.}
+Choose $A=8,C=1,B=4,c=1,d=36$. The six coefficient vectors are
+\[
+ V=\begin{pmatrix}
+ 2+2i&1\\2-2i&1\\-2+2i&1\\-2-2i&1\\1&6i\\1&-6i
+ \end{pmatrix}.
+\]
+Each consecutive pair gives one quadratic form. Let
+$\mathcal A_{ij}=\langle v_i,v_j\rangle$ and partition this positive
+semidefinite Gram matrix into three pairs. The determinants of its three
+diagonal blocks are $16,16,144$, so they are all positive definite.
+The matrix of block permanents is
+\[
+ G=\begin{pmatrix}146&114&88\\114&146&88\\88&88&2594\end{pmatrix}.
+\]
+Exact values are
+\[
+ \per\mathcal A=258686256,\quad \per G=93032208,\quad
+ F_3=165654048,
+\]
+whereas
+\[
+ F_2=64016,\quad\|g\|^2=2594,\quad
+ F_2\|g\|^2=166057504.
+\]
+Thus the proposed increment is $-403456$, even though $F_3$ is positive.
+This is not a counterexample to Marcus's conjecture.
+
+The script \texttt{marcus-induction-obstruction.mjs} verifies these
+quantities with Gaussian-integer arithmetic. It compares the original Gram
+permanent, independent permutation enumeration, and polynomial convolution
+with factorial norms. It also checks \eqref{family} at $100$ integer-factor
+specializations $A=2t^2,C=1,B=2t,c=1,d=s^2$, $1\le t\le5$,
+$1\le s\le20$. The symbolic derivation proves the family; the checks
+do not extend its scope.
+
+\paragraph{Implication for the full problem.}
+An induction using \eqref{remainder} must control the negative part of
+$K-T$ using the previous gap, or use a different decomposition. Positivity
+of $K$ alone, and nonnegativity of the previous gap alone, do not accomplish
+this. No adequate uniform control is proved here.
+\end{document}

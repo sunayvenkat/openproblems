@@ -1,0 +1,4 @@
+FAIL d 25179 [3, 7, 11, 109] phi/d=0.515 K 5 [1, 1, 1, 1, 1, 1, 1, 1] least working K 7
+FAIL d 30261 [3, 7, 11, 131] phi/d=0.516 K 5 [1, 1, 1, 1, 1, 1, 1, 1] least working K 7
+FAIL d 43435 [5, 7, 17, 73] phi/d=0.637 K 5 [1, 1, 1, 1, 1, 1] least working K 7
+band d tested 3635 failures per K {5: 3, 7: 0, 9: 0}

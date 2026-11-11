@@ -1,0 +1,6 @@
+{
+  "separationChecks": 120,
+  "coneChecks": 54,
+  "recurrenceChecks": 18,
+  "lastCutoff": 294912
+}

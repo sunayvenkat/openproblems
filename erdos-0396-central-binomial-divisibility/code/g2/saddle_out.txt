@@ -1,0 +1,14 @@
+m=2145 r=4 primes mod 8: [3, 5] T=2 phi/m=0.44755
+  level 1 n=226: predicted sign - (|pred| ~ e^6.12, cos-phase -1.000); b=1 |w0|m=25.1 eps=0.678; b=3 |w0|m=1.27 eps=0.834; b=5 |w0|m=1.27 eps=0.834; b=7 |w0|m=25.1 eps=0.678; exact - log|c|=5.09
+m=40755 r=5 primes mod 8: [3, 5] T=2 phi/m=0.42400
+  level 1 n=6196: predicted sign - (|pred| ~ e^17.66, cos-phase -1.000); b=1 |w0|m=1.38 eps=0.745; b=3 |w0|m=20 eps=2.675; b=5 |w0|m=20 eps=2.675; b=7 |w0|m=1.38 eps=0.745; exact - log|c|=18.02
+m=1181895 r=6 primes mod 8: [3, 5] T=2 phi/m=0.40938
+  level 1 n=214216: predicted sign + (|pred| ~ e^42.18, cos-phase +1.000); b=1 |w0|m=12.7 eps=4.263; b=3 |w0|m=1.22 eps=0.684; b=5 |w0|m=1.22 eps=0.684; b=7 |w0|m=12.7 eps=4.263; exact + log|c|=42.92
+m=43730115 r=7 primes mod 8: [3, 5] T=2 phi/m=0.39831
+  level 1 n=8893636: predicted sign - (|pred| ~ e^94.95, cos-phase -1.000); b=1 |w0|m=1.09 eps=0.654; b=3 |w0|m=11.7 eps=3.118; b=5 |w0|m=11.7 eps=3.118; b=7 |w0|m=1.09 eps=0.654
+m=4641 r=4 primes mod 10: [3, 7] T=2 phi/m=0.49644
+  level 1 n=34: predicted sign + (|pred| ~ e^1.74, cos-phase +1.000); b=1 |w0|m=327 eps=1.142; b=3 |w0|m=1.55 eps=0.991; b=7 |w0|m=1.55 eps=0.991; b=9 |w0|m=327 eps=1.142; exact - log|c|=1.95
+m=106743 r=5 primes mod 10: [3, 7] T=2 phi/m=0.47486
+  level 1 n=5368: predicted sign - (|pred| ~ e^17.02, cos-phase -1.000); b=1 |w0|m=1.78 eps=0.875; b=3 |w0|m=98.1 eps=0.822; b=7 |w0|m=98.1 eps=0.822; b=9 |w0|m=1.78 eps=0.875; exact - log|c|=15.53
+m=3949491 r=6 primes mod 10: [3, 7] T=2 phi/m=0.46203
+  level 1 n=299956: predicted sign - (|pred| ~ e^44.92, cos-phase -1.000); b=1 |w0|m=70 eps=0.957; b=3 |w0|m=1.55 eps=0.818; b=7 |w0|m=1.55 eps=0.818; b=9 |w0|m=70 eps=0.957; exact - log|c|=45.37

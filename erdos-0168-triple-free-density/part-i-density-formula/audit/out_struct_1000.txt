@@ -1,0 +1,5 @@
+all assertions passed for 3-smooth t in [3,1000] {'tight': 81, 'covers': 85, 'critical_a1': 26, 'minmax': 43, 'caseO': 23, 'D1': 8, 'D2': 8, 'I': 4}
+case (I) maximiser: (54, 0, 1, 1, [(3, 0), (0, 3), (2, 2), (4, 1)])
+case (I) maximiser: (64, 0, 1, 1, [(3, 0), (0, 3), (2, 2), (4, 1)])
+case (I) maximiser: (216, 2, 2, 1, [(5, 0), (0, 4), (2, 3), (4, 2), (6, 1)])
+case (I) maximiser: (576, 1, 1, 2, [(4, 0), (3, 2), (5, 1), (0, 5), (2, 4), (4, 3), (6, 2)])

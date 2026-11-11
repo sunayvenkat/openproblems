@@ -1,0 +1,97 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{lemma}{Lemma}
+\title{The length-three branch of the ratio-25 problem}
+\author{Research attempt prepared in the accompanying Codex conversation}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\noindent
+Status: this treats only $k=3$ of the
+\href{https://conjectures.io/problems/erdos686-erdos-686-variants-twenty-five}{listed ratio-25 target}.
+It does not settle the target, whose block length is unbounded. No novelty
+claim is made. The finite classification below depends on a Magma Thue
+computation; its completeness has not been independently certified here.
+
+\section*{Reduction to sixty Thue equations}
+At length three the required product identity becomes, with
+$x=m+2$ and $y=n+2$,
+\[
+ x^3-x=25(y^3-y),\qquad x,y\ge2.
+\]
+The disjointness condition is not needed for the exclusion below.
+
+\begin{lemma}
+Any positive integer solution with $x,y\ge2$ gives coprime positive
+integers $a,b$, a positive divisor $h$ of $15600$, and an integer $g\ge1$
+satisfying
+\[
+ a^3-25b^3=-h,\qquad g^2h=25b-a,\qquad (x,y)=(ga,gb).
+\]
+\end{lemma}
+\begin{proof}
+Put $g=\gcd(x,y)$, $x=ga$, $y=gb$. Dividing the cubic identity by $g$
+gives
+\[
+ g^2(a^3-25b^3)=a-25b.
+\]
+For $t\ge1$, the function $t^3-t$ is strictly increasing, and
+$(25y)^3-25y>25(y^3-y)$. Hence $x<25y$ and $a<25b$.
+Thus $h=25b^3-a^3$ is positive and $g^2h=25b-a$.
+In particular $a\equiv25b\pmod h$. Substitution into
+$a^3-25b^3\equiv0\pmod h$ gives
+$h\mid25(25^2-1)b^3=15600b^3$.
+Since $\gcd(a,b)=1$, also $\gcd(h,b)=1$, so $h\mid15600$.
+\end{proof}
+
+\section*{Observed complete-solver output and postfilter}
+The script \texttt{erdos686-thue-check.m} was evaluated in the official
+\href{https://magma.maths.usyd.edu.au/calc/}{Magma calculator}, version
+V2.29-10, with seed 2399912018. The observed output is transcribed in
+\texttt{erdos686-thue-results.json}. It computes
+\texttt{Solutions(Thue(t\^{}3-25),-h)} for every positive $h\mid15600$.
+Magma's \href{https://magma.maths.usyd.edu.au/magma/handbook/text/418}{documentation}
+specifies that this returns all integer solutions; no GRH class-group
+setting was requested. The
+\href{https://magma.maths.usyd.edu.au/magma/handbook/text/416}{class-group documentation}
+states that its default proof bound is unconditional.
+
+Among the reported solutions, the only coprime pairs with $a,b>0$ are
+\[
+\begin{array}{c|c|c|c}
+ a&b&h&(25b-a)/h\\\hline
+ 1&1&24&1\\
+ 5&2&75&3/5\\
+ 35&12&325&53/65\\
+ 25&9&2600&1/13\\
+ 15&7&5200&2/65
+\end{array}
+\]
+The last four ratios are below one and cannot equal $g^2$ for $g\ge1$.
+The first gives $g=1$ and $x=y=1$, outside the required range.
+Thus the computed classification excludes length three for every pair of
+natural offsets, even without disjointness.
+
+The local script \texttt{erdos686-thue-verify.mjs} checks all sixty right-hand
+sides, every transcribed solution, and the exact postfilter. It checks
+neither the completeness of the Thue output nor the internal correctness
+of Magma's algorithm. A separate bounded elliptic-group search also found
+only the trivial cubic pairs; it is not used for completeness.
+
+\section*{Elliptic model used for exploration}
+The rational substitutions
+\[
+ X=625+\frac{15600y}{x-25y},\qquad Y=\frac{15600}{x-25y}
+\]
+give $Y^2=X^3-1875X+391250$, with inverse
+\[
+ x=\frac{25(X-1)}Y,\qquad y=\frac{X-625}Y.
+\]
+Magma reported rank bounds $[2,2]$ and generators $(1,624),(25,600)$,
+followed by two true verification flags. No rank computation is needed
+for the sixty-equation reduction above. The local exact rational code is
+\texttt{erdos686-elliptic-search.mjs}; its completed coefficient box is
+$[-12,12]^2$. A larger box was stopped after the Thue computation made
+further subgroup searching unnecessary for this branch.
+\end{document}

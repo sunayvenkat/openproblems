@@ -1,0 +1,8 @@
+(5, 8) log2|z_n-z_best|=-31.58 z_n != Z certified: True  den(z_n) bits 44  W_eff - log2 den = -12.4
+(12, 19) log2|z_n-z_best|=-92.81 z_n != Z certified: True  den(z_n) bits 108  W_eff - log2 den = -15.2
+(41, 65) log2|z_n-z_best|=-156.09 z_n != Z certified: True  den(z_n) bits 393  W_eff - log2 den = -236.9
+(53, 84) log2|z_n-z_best|=-578.33 z_n != Z certified: True  den(z_n) bits 507  W_eff - log2 den = 71.3
+(306, 485) log2|z_n-z_best|=-1548.90 z_n != Z certified: True  den(z_n) bits 2908  W_eff - log2 den = -1359.1
+(665, 1054) log2|z_n-z_best|=-63973.13 z_n != Z certified: True  den(z_n) bits 18184  W_eff - log2 den = 45789.1
+(15601, 24727) log2|z_n-z_best|=-75252.35 z_n != Z certified: True  den(z_n) bits 148363  W_eff - log2 den = -73110.7
+(31867, 50508) log2|z_n-z_best|=-212338.04 z_n != Z certified: True  den(z_n) bits 303048  W_eff - log2 den = -90710.0

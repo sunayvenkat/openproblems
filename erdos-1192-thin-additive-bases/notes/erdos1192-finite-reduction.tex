@@ -1,0 +1,206 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\title{A finite cyclic reformulation of Erd\H{o}s Problem 1192}
+\author{Research notes; no novelty claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Status.} This does not solve Problem 1192. The live
+\href{https://conjectures.io/problems/erdos1192-erdos-1192}{listed problem}
+is open at the time of this check. The order-two case is a theorem of
+Ruzsa (1990); the target asks for every order $r\ge2$. The argument below
+removes a proposed gluing obstruction but supplies no required finite family.
+
+For a finitely supported nonnegative function $u$ on $\mathbb Z$, let
+\[
+ E_r(u)=\sum_n (u^{*r}(n))^2
+       =\int_0^1\left|\sum_n u(n)e^{2\pi in\theta}\right|^{2r}\,d\theta.
+\]
+For a finite set $B$ use $E_r(B)=E_r(1_B)$. For $B\subset\mathbb Z/q\mathbb Z$
+write $E_{r,q}(B)=\sum_{s\bmod q} (1_B^{*r}(s))^2$, with convolution in the
+cyclic group. All representations are ordered and allow repeated summands.
+
+\begin{lemma}[Energy triangle inequality]
+For finitely many finite integer sets $B_j$,
+\[
+ E_r\left(\bigcup_j B_j\right)^{1/(2r)}
+ \le \sum_j E_r(B_j)^{1/(2r)}.
+\]
+\end{lemma}
+\begin{proof}
+The indicator of the union is pointwise at most $u=\sum_j1_{B_j}$.
+Convolution preserves pointwise inequalities for nonnegative functions, so
+$E_r(\bigcup B_j)\le E_r(u)$. The displayed Fourier identity and Minkowski's
+inequality in $L^{2r}([0,1])$ give the result. No pointwise comparison of
+Fourier transforms is being asserted.
+\end{proof}
+The same statement holds in a finite abelian group: replace the integral
+by the normalized average over its characters in the identical proof.
+
+\begin{theorem}[Exact finite reformulation]
+Fix $r\ge2$. The following are equivalent.
+\begin{enumerate}
+\item There is $A\subset\mathbb N_0$ such that $rA$ contains all sufficiently
+large integers and $\sum_{n\le x}f_{r,A}(n)^2=O(x)$.
+\item There are $K<\infty$ and $j_0$ such that, for every $j\ge j_0$, there
+is $B_j\subset\mathbb Z/2^j\mathbb Z$ with $rB_j=\mathbb Z/2^j\mathbb Z$ and
+\[
+ E_{r,2^j}(B_j)\le K2^j.
+\]
+\end{enumerate}
+The blocks in (2) need not be compatible under reduction modulo smaller
+powers of two. No bound on mixed correlations between different blocks is
+an additional hypothesis.
+\end{theorem}
+\begin{proof}
+Assume (1). For $X_x=A\cap[0,x]$, every sum of $r$ elements lies in $[0,rx]$,
+so
+\[
+ E_r(X_x)\le\sum_{n\le rx}f_{r,A}(n)^2=O(x).
+\]
+Choose $q=2^j$ large enough that $[q,2q)$ is covered by $rA$. Project
+$X_{2q}$ modulo $q$, and call its image $B_j$. Every representation of a
+number in $[q,2q)$ uses elements of $X_{2q}$, hence $rB_j$ is the whole group.
+Let $u$ be the projected multiplicity function of $X_{2q}$; then $1_{B_j}\le u$.
+Integer $r$-sums of $X_{2q}$ lie in $[0,2rq]$, with at most $2r+1$ sums in
+each residue class modulo $q$. Cauchy--Schwarz within each residue class gives
+\[
+ E_{r,q}(B_j)\le E_{r,q}(u)\le(2r+1)E_r(X_{2q})=O(q).
+\]
+The constant is independent of $j$, proving (2).
+
+Conversely, take the representatives of $B_j$ in $[0,q)$, $q=2^j$, and put
+\[
+ V_j=\bigcup_{\ell=1}^4(B_j+\ell q)\subset[q,5q).
+\]
+We claim $[2rq,4rq)\subset rV_j$. Given $n$ in this interval, choose
+$b_1,\ldots,b_r\in B_j$ whose sum $s$ is congruent to $n$ modulo $q$.
+Then $0\le s\le r(q-1)$, and $k=(n-s)/q$ is an integer with $r\le k\le4r$.
+Every integer in $[r,4r]$ is a sum of $r$ integers in $[1,4]$; choosing
+those shifts represents $n$ in $rV_j$.
+
+Integer equalities are also equalities modulo $q$, so $E_r(B_j)\le E_{r,q}(B_j)$.
+The lemma and translation invariance therefore imply
+\[
+ E_r(V_j)^{1/(2r)}\le4K^{1/(2r)}q^{1/(2r)}.
+\]
+Let $A=\bigcup_{j\ge j_0}V_j$. The intervals $[2r2^j,4r2^j)$ tile a tail
+of the positive integers, giving the basis property. Because $V_j\subset[2^j,\infty)$,
+only $2^j\le x$ contribute to $A\cap[0,x]$. Monotonicity and the lemma give
+\[
+\begin{split}
+ E_r(A\cap[0,x])^{1/(2r)}
+ &\le4K^{1/(2r)}\sum_{\substack{j\ge j_0\\2^j\le x}}2^{j/(2r)}\\
+ &\le\frac{4K^{1/(2r)}}{1-2^{-1/(2r)}}x^{1/(2r)}.
+\end{split}
+\]
+Finally every representation of $n\le x$ uses elements of $A\cap[0,x]$.
+Thus
+\[
+ \sum_{n\le x} f_{r,A}(n)^2
+ \le\frac{4^{2r}K}{(1-2^{-1/(2r)})^{2r}}x,
+\]
+proving (1).
+\end{proof}
+
+\paragraph{The order-three mixed terms.}
+For $\Delta_{j,S}(d)$ counting differences of two ordered $j$-sums from $S$,
+the previously proposed extra conditions were bounds for
+\[
+ C_{11}(V,X)=\sum_d\Delta_{1,V}(d)\Delta_{2,X}(d),\qquad
+ C_{22}(V,X)=\sum_d\Delta_{2,V}(d)\Delta_{1,X}(d).
+\]
+Parseval and H\"older give directly
+\[
+ C_{11}(V,X)\le E_3(V)^{1/3}E_3(X)^{2/3},\qquad
+ C_{22}(V,X)\le E_3(V)^{2/3}E_3(X)^{1/3}.
+\]
+Thus both are $O(P^3)$ whenever both individual three-fold energies are
+$O(P^3)$. The geometric-block proof above handles their accumulation.
+The missing mathematical construction is a uniform family of cyclic bases
+with $E_{r,q}=O(q)$, rather than control of these mixed terms.
+
+\begin{lemma}[A sufficient finite-field construction]
+Fix $r\ge2$. Suppose that for every sufficiently large prime $p$ there is
+$C_p\subset\mathbb F_p^r$ such that $rC_p=\mathbb F_p^r$ and
+$E_r(C_p)\le Kp^r$, with $K$ independent of $p$. Then the equivalent
+conditions of the theorem hold for this $r$.
+\end{lemma}
+\begin{proof}
+Use coordinate representatives $0,\ldots,p-1$, put $R=r(p-1)+1$ and
+$Q=R^r$, and encode $v$ as $b(v)=\sum_{i=0}^{r-1}v_iR^i$. In an equality
+of two integer $r$-sums of encoded points, each coordinate difference has
+absolute value at most $r(p-1)<R$. Reducing successively modulo $R$ forces
+every difference to vanish. Thus, for $B=b(C_p)$,
+$E_r(B)\le E_r(C_p)\le Kp^r$.
+
+Let
+\[
+ D=\left\{\sum_{i=0}^{r-1}p\delta_iR^i:
+                 -r\le\delta_i\le r\right\},\qquad H=B+D.
+\]
+Every $n\in[0,Q)$ has base-$R$ digits $n_i$. Choose $r$ points of $C_p$
+whose coordinate sums $s_i$ satisfy $s_i\equiv n_i\pmod p$.
+Both $s_i$ and $n_i$ lie in $[0,r(p-1)]$, so
+$\delta_i=(n_i-s_i)/p$ is an integer of absolute value less than $r$.
+Adding the resulting element of $D$ to one summand proves $[0,Q)\subset rH$.
+There are at most $m=(2r+1)^r$ shifts in $D$. The energy lemma yields
+$E_r(H)\le m^{2r}Kp^r$. Also $B\subset[0,Q)$ and
+\[
+ |d|\le rp\frac{Q-1}{R-1}<2Q\quad(d\in D),
+\]
+so $H\subset[-2Q,3Q]$.
+
+For a large desired modulus $q$, Bertrand's postulate supplies a prime
+$q^{1/r}\le p\le4q^{1/r}$ (the generous factor accommodates rounding).
+Then $q\le Q\le(4r)^rq$. Project $H$ modulo $q$. Its $r$-sumset is the
+whole cyclic group. Its integer $r$-sums lie in $[-2rQ,3rQ]$, so the
+number in any residue class is at most $5r(4r)^r+2$. As in the forward
+direction of the theorem, Cauchy--Schwarz on residue classes bounds the
+cyclic energy by
+\[
+ \bigl(5r(4r)^r+2\bigr)m^{2r}K4^r q.
+\]
+This is a constant times $q$, independently of $q$. Apply the theorem at
+dyadic moduli.
+\end{proof}
+
+For example, put $\gamma(t)=(t,t^2,\ldots,t^r)$ over $\mathbb F_p$, $p>r$.
+Newton's identities show that an ordered $r$-sum of points on $\gamma$
+determines the multiset of its parameters. Hence
+$E_r(\gamma(\mathbb F_p))\le r!p^r$. Any fixed finite union of invertible
+linear images of this curve still has energy $O_r(p^r)$ by the energy
+triangle inequality. Thus a uniform covering construction using a bounded
+number of such curves would suffice. No such construction is proved here.
+
+\paragraph{Finite experiment, with no asymptotic inference.}
+The program \texttt{erdos1192-curves.mjs} tests the union
+$C_{p,m}=\bigcup_{a\in\{\pm1,\ldots,\pm m\}}a\gamma(\mathbb F_p)$ for $r=3$.
+It exhausts dilation orbits rather than every target separately. The latest
+sweep uses $p=127,251,503,1009$ and $m=2,3,4$.
+At $p=1009,m=3$ it finds $3C_{p,m}=\mathbb F_p^3$; at $p=127,m=3$ a cubic-axis
+orbit is missing. With $m=4$ it reports no missing orbit at these four primes.
+These finite checks do not establish coverage for arbitrarily large primes.
+The output is \texttt{erdos1192-curves-results.json}; raw triple-sum/orbit
+selfchecks include primes $5,7,17,31$ and exercise both exceptional zero-first-coordinate
+branches. The finite-field construction lemma also requires all large scales,
+and Problem 1192 requires every order, not just $r=3$.
+
+\paragraph{Remaining problem.}
+No such family is provided here for every $r\ge3$. Small finite examples,
+or a bound whose constant grows with $q$, do not prove (2).
+The entire all-order target remains unresolved.
+
+\begin{thebibliography}{9}
+\bibitem{ruzsa} I. Z. Ruzsa, \emph{A just basis}, Monatshefte f\"ur Mathematik
+109 (1990), 145--152. The known order-two result is also recorded in
+\url{https://github.com/google-deepmind/formal-conjectures/blob/7d1a8c9912747679d0093f6d1216420c33ee5ffa/FormalConjectures/ErdosProblems/1192.lean}.
+\bibitem{report} P. White, \emph{Erd\H{o}s 1192 working report},
+\url{https://www.erdosproblemaday.com/report/1192}, checked 6 November 2026.
+This is the source of the proposed mixed-correlation obstacle corrected above;
+its remaining finite-family question is not resolved by this correction.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,304 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref,geometry}
+\geometry{margin=1in}
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\N}{\mathbb N}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{Marcus's block-permanent conjecture:\\a coefficient reduction and proved special cases}
+\author{Working research notes}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The full conjecture is not solved here. We give an exact coefficient formulation,
+prove the inequality and its equality statement under an explicit absence-of-collisions
+hypothesis, and exhibit an exact obstruction to a termwise cumulant proof.
+Later in this research session, an exact sum-of-squares identity gave a proof
+of the complete three-block, block-size-two case. That stronger result, its
+rank reduction, and its equality proof are in the separate file
+\texttt{marcus-three-pairs-proof.tex}.
+The special-case arguments are self-contained; their novelty has not been established.
+Numerical searches are recorded separately from proofs. This is the fixed problem
+for the ongoing goal; no alternative problem is being substituted.
+\end{abstract}
+
+\section{Fixed problem and status}
+Let $A$ be a complex Hermitian positive semidefinite matrix of order $mk$,
+partitioned into $k\times k$ blocks $A_{ij}$. Set $G_{ij}=\per(A_{ij})$.
+Marcus's conjecture asserts
+\begin{equation}\label{goal}
+ \per(A)\geq\per(G).
+\end{equation}
+For $k\geq2$, with every $A_{ii}$ positive definite, the additional assertion is
+that equality holds precisely when every off-diagonal block is zero.
+The cases $m=1$ and $k=1$ of the inequality are immediate.
+
+The chosen catalog entry is
+\href{https://conjectures.io/problems/fulloldproblemscatalog-marcusblockpermanent-conjecture}{Marcus Block Permanent on Conjectures.io}.
+The catalog survey and
+\href{https://yair-lavi.com/mincs-list/conjecture-9/index.html}{Yair Lavi's current research page}
+identified it as open on the research date. The latter reports new low-rank
+results; those reports were not independently proved in this work.
+\href{https://arxiv.org/html/2202.01867v1}{Wanless's survey, Conjecture 3}
+states the classical problem and its relation to Lieb's conjecture.
+Neither a full proof nor a counterexample is established below.
+
+\section{An exact Fock-space formulation}
+Use the inner product conjugate-linear in the first argument. For polynomials in
+$z=(z_1,\ldots,z_r)$ put
+\[
+ \langle z^\alpha,z^\beta\rangle_F
+   =\mathbf1_{\alpha=\beta}\,\alpha!,\qquad
+ \alpha!=\prod_{s=1}^r\alpha_s!.
+\]
+Equivalently this is $\mathbb E[\overline{f(Z)}g(Z)]$ for independent standard
+circular complex Gaussians, normalized by $\mathbb E|Z_s|^2=1$.
+
+Write $A$ as the Gram matrix of vectors $v_{ia}$, $1\leq i\leq m$,
+$1\leq a\leq k$, and let
+\[
+ L_{ia}(z)=\sum_s(v_{ia})_s z_s,\qquad p_i(z)=\prod_{a=1}^k L_{ia}(z).
+\]
+Expanding Gaussian moments, or expanding monomials and using their factorial
+norms, gives
+\begin{equation}\label{fock}
+ G_{ij}=\langle p_i,p_j\rangle_F,
+ \qquad \per(A)=\left\|\prod_{i=1}^m p_i\right\|_F^2.
+\end{equation}
+Thus the desired assertion is a permanent lower bound for the norm of a product
+of homogeneous polynomials which themselves split into linear factors.
+
+Let $E$ be the finite union of the monomial supports of the $p_i$; every
+$\alpha\in E$ has $|\alpha|=k$. Write
+\[
+ p_i(z)=\sum_{\alpha\in E}c_{i\alpha}\frac{z^\alpha}{\sqrt{\alpha!}},
+ \qquad
+ P(y)=\prod_{i=1}^m\left(\sum_{\alpha\in E}c_{i\alpha}y_\alpha\right)
+     =\sum_{|\nu|=m}d_\nu y^\nu.
+\]
+Here $\nu\in\N^E$ and $\nu!=\prod_{\alpha\in E}\nu_\alpha!$.
+Put $\Phi(\nu)=\sum_{\alpha\in E}\nu_\alpha\alpha$. Since the coefficient
+rows of $P$ have Gram matrix $G$, the same Gaussian identity gives
+\begin{align}
+ \per(G)&=\sum_{|\nu|=m}|d_\nu|^2\nu!,\label{rhs}\\
+ \per(A)&=\sum_\beta\beta!\left|
+       \sum_{\substack{|\nu|=m\\\Phi(\nu)=\beta}}
+       \frac{d_\nu}{\sqrt{\prod_{\alpha\in E}(\alpha!)^{\nu_\alpha}}}
+                         \right|^2.\label{lhs}
+\end{align}
+Equations \eqref{rhs}--\eqref{lhs} are exact for arbitrary homogeneous $p_i$.
+For Marcus's problem, their coefficient rows have the additional restriction
+that each $p_i$ splits into $k$ linear factors. Discarding this restriction
+produces a stronger conjecture, not an equivalent reformulation.
+
+\section{A proved family, including its equality condition}
+\begin{lemma}\label{factorial}
+For any nonzero multi-indices $\alpha$ and multiplicities $\nu_\alpha$,
+\[
+ W(\nu):=\frac{\Phi(\nu)!}{\prod_\alpha(\alpha!)^{\nu_\alpha}}\geq\nu!.
+\]
+If all $|\alpha|=k\geq2$, equality holds exactly when the selected monomials
+have pairwise disjoint coordinate supports, with no monomial selected twice.
+\end{lemma}
+\begin{proof}
+Add the multi-indices one at a time, processing identical types consecutively.
+If $t$ copies of a nonzero $\alpha$ have already been added, and $\gamma$ is
+the current sum, then $\gamma\geq t\alpha$ coordinatewise. The increase in
+$W$ on adding another copy is
+\[
+ \prod_s\binom{\gamma_s+\alpha_s}{\alpha_s}\geq t+1.
+\]
+Indeed, choose any $s$ with $\alpha_s>0$ and use
+$\binom{(t+1)\alpha_s}{\alpha_s}\geq t+1$. Multiplying these bounds over
+all copies gives $\prod_\alpha\nu_\alpha!$.
+
+If $t\geq1$ and $|\alpha|\geq2$, the displayed inequality is strict:
+either two coordinates are positive, contributing at least $(t+1)^2$, or
+one coordinate is at least two, for which there are mixed choices in addition
+to the $t+1$ disjoint prescribed subsets. If two distinct selected monomials
+overlap in a coordinate, adding the later one gives a binomial factor greater
+than one, again strictly exceeding the required factor for its first copy.
+Conversely, disjoint supports and multiplicities at most one give $W=\nu!=1$.
+\end{proof}
+
+\begin{theorem}\label{nocollisions}
+Suppose $p_1,\ldots,p_m$ are nonzero homogeneous polynomials of degree $k$,
+and $\Phi$ is injective on $\{\nu\in\N^E:|\nu|=m\}$.
+Then
+\[
+ \left\|\prod_i p_i\right\|_F^2
+    \geq\per\bigl[\langle p_i,p_j\rangle_F\bigr].
+\]
+For $k\geq2$, equality holds exactly when distinct $p_i$ involve disjoint sets
+of coordinate variables. In particular this proves Marcus's inequality and
+the expected equality condition for split block polynomials satisfying the
+injectivity hypothesis, without needing positive definiteness of the diagonal
+blocks beyond the nonzero-polynomial assumption.
+\end{theorem}
+\begin{proof}
+Injectivity removes the inner sums in \eqref{lhs}. Therefore the difference is
+the explicit nonnegative sum
+\begin{equation}\label{gap}
+ \sum_{|\nu|=m}|d_\nu|^2\bigl(W(\nu)-\nu!\bigr).
+\end{equation}
+The lemma proves the inequality.
+
+For equality, no nonzero $d_\nu$ can have a repeated symbol $y_\alpha$.
+Hence $P$ is multiaffine in its $y$ variables. In the polynomial domain,
+the degree in $y_\alpha$ of the product defining $P$ is exactly the number
+of its linear factors containing that symbol. Thus each $\alpha\in E$ can
+occur in at most one $p_i$.
+
+If a monomial of $p_i$ and a monomial of $p_j$, $i\ne j$, overlapped in an
+original coordinate, select these and any nonzero monomial from each other
+factor. Because symbols belong to unique factors, the resulting $d_\nu$
+is their nonzero coefficient product. The lemma then makes its contribution
+in \eqref{gap} strictly positive. Thus equality forces disjoint coordinate
+supports. Disjoint supports plainly give equality.
+
+Finally, if a nonzero product of linear forms does not involve a coordinate,
+none of its linear factors involves that coordinate: degrees in that variable
+add in a polynomial domain. Disjoint polynomial supports therefore imply
+orthogonal spans for distinct blocks of Gram vectors, so $A_{ij}=0$ for
+$i\ne j$. The converse follows directly from block diagonality.
+\end{proof}
+
+If a block polynomial is zero, a constituent linear form is zero in the split
+case. Then the original Gram matrix has a zero row and both permanents vanish;
+the original positive-definite-diagonal-block equality hypothesis excludes this.
+
+\subsection*{Concrete sufficient conditions}
+Linear independence over $\mathbb Q$ of the exponent vectors in $E$ implies
+injectivity for every $m$. In particular $E=\{k e_1,\ldots,k e_r\}$ works.
+For this pure-power case, putting
+$P(y)=\sum_{|\nu|=m}d_\nu y^\nu$ as above yields
+\[
+ \per(A)-\per(G)=\sum_{|\nu|=m}|d_\nu|^2
+ \left(\prod_s\frac{(k\nu_s)!}{(k!)^{\nu_s}}-\prod_s\nu_s!\right).
+\]
+
+For $k=2$, view monomials $z_s z_t$ as graph edges and $z_s^2$ as loops.
+A forest has independent exponent vectors: eliminate a leaf repeatedly.
+An odd cycle also has independent exponent vectors, since its vertex equations
+force successive edge coefficients to alternate sign and then to vanish.
+Thus any union of tree components and components consisting of an odd cycle
+with trees attached satisfies the hypothesis. An even cycle has the familiar
+alternating-edge relation and does not satisfy it.
+
+For an exact example take
+\[
+ p_1=z_1(z_2+z_3),\quad p_2=z_2(z_3-z_1),\quad
+ p_3=z_3(z_1+i z_2).
+\]
+The three exponent vectors of $z_1z_2,z_2z_3,z_3z_1$ are independent. Here
+\[
+ G=\begin{pmatrix}2&-1&1\\-1&2&i\\1&-i&2\end{pmatrix},
+ \qquad \per(G)=14,\qquad\left\|p_1p_2p_3\right\|_F^2=88.
+\]
+The permanent values were independently checked by exact subset dynamic
+programming and enumeration of all permutations. The certificate is stored
+in \texttt{marcus-collision-free-example.json}.
+
+\section{Why the coefficient argument does not finish the problem}
+The monomial map is not expansive on all polynomials in the independent $y$
+variables. For example, use the orthonormal quadratic monomials
+\[
+ \phi_1=x^2/\sqrt2,\quad\phi_2=xy,\quad\phi_3=y^2/\sqrt2.
+\]
+Then $2\phi_1\phi_3-\phi_2^2=0$, whereas
+$\|2y_1y_3-y_2^2\|_F^2=6$. Thus replacing a product of linear forms $P(y)$
+by an unrestricted polynomial and claiming norm expansion is false.
+This example is not a Marcus counterexample: the displayed quadratic in $y$
+is not a product of linear forms.
+
+A second exact barrier comes from orthogonal coordinate groups. Let $B,C$ be
+arbitrary PSD $m\times m$ matrices and choose Gram vectors $x_i,y_i$ in
+orthogonal spaces. Take block $i$ to consist of $x_i,y_i$. Then
+\[
+ A\text{ is permutation-similar to }B\oplus C,\quad
+ G=B\circ C,
+\]
+so Marcus in this family becomes
+\[
+ \per(B)\per(C)\geq\per(B\circ C).
+\]
+This is Chollet's permanent inequality. The corresponding polynomial support
+has the four-cycle relation
+$(x_1y_1)(x_2y_2)=(x_1y_2)(x_2y_1)$. Consequently, resolving all collisions
+would already handle this substantial additional permanent conjecture; the
+absence-of-collisions hypothesis cannot just be omitted.
+
+\section{An exact obstruction to positive cumulants}
+For three homogeneous polynomials of the same positive degree, let
+\[
+ p=\|p_1p_2p_3\|_F^2,\quad q=\per(G),\quad
+ H_{ab}=\left\langle\prod_{i\ne a}p_i,\prod_{j\ne b}p_j\right\rangle_F,
+ \quad S=\sum_{a,b=1}^3G_{ab}H_{ab}.
+\]
+Define $D_1=S-3q$ and $D_2=p-S+2q$. Their sum is exactly $p-q$.
+If $Z^{(1)},\ldots,Z^{(R)}$ are independent copies and
+$U_i=R^{-1/2}\sum_{a=1}^R p_i(Z^{(a)})$, grouping the copy labels gives
+\begin{equation}\label{replica}
+ \mathbb E\prod_{i=1}^3|U_i|^2
+  =q+\frac{D_1}{R}+\frac{D_2}{R^2}.
+\end{equation}
+To verify this, assignments using one copy contribute $Rp$, those using
+two copies contribute $R(R-1)S$, and those using three copies contribute
+$R(R-1)(R-2)q$, before division by $R^3$. Unequal holomorphic and
+antiholomorphic degrees within any copy give zero by circular symmetry.
+
+Consider the following real integer Gram vectors, paired in row order:
+\[
+ V=\begin{pmatrix}
+ -1&-1&-1\\1&-1&0\\1&1&-1\\1&1&-1\\0&0&1\\0&0&-1
+ \end{pmatrix},\qquad A=VV^{\mathsf T}.
+\]
+Exact arithmetic gives
+\[
+ G=\begin{pmatrix}6&0&0\\0&18&-2\\0&-2&2\end{pmatrix},\quad
+ p=624,\quad q=240,\quad S=1168,
+\]
+and therefore
+\[
+ D_1=448,\qquad D_2=-64,\qquad p-q=384.
+\]
+This disproves termwise nonnegativity of the expansion, not Marcus's
+inequality. The PSD condition is exact from the displayed Gram factorization.
+The values were checked both by integer subset dynamic programming and
+independent permutation enumeration. Full data are in
+\texttt{marcus-negative-connected-term.json}.
+
+\section{Numerical work and the remaining gap}
+The direct Gram search completed 1,650 random-start descents over eleven
+combinations of block size, block count, and rank, up to order 14. It found
+no negative difference. Its permanent calculation was checked against direct
+permutation sums, and its analytic derivatives against finite differences.
+The smallest numerical ratios approached 1 from above. These are local
+searches and establish no universal lower bound.
+
+Separate experiments tested the stronger assertion for arbitrary homogeneous
+polynomials, and the independent-copy expansion \eqref{replica}. Those tests
+also produced no counterexample. Some values below 1 by about $10^{-15}$
+are ordinary floating-point roundoff, not violations. In searches for the
+ratio $D_2/D_1$, negative local optima around $-0.388$ occurred; no global
+bound is claimed, and such a ratio by itself is not a counterexample.
+
+The complete open step is to prove \eqref{lhs}$\geq$\eqref{rhs} in the presence
+of colliding exponent sums for every split family $p_i$, and to establish
+the equality clause in that generality, or else to give an exact split-family
+counterexample. The exact certificate code is ready to verify any strict
+numerical witness after rational reconstruction.
+The later three-pairs proof handles all collisions for $m=3,k=2$; it does
+not remove this remaining gap for general block counts and sizes.
+
+\paragraph{Reproducibility.}
+\texttt{marcus-block-search.mjs} contains the main Gram search;
+\texttt{marcus-block-exact.mjs} contains independent exact checks;
+\texttt{marcus-chaos-search.mjs} explores arbitrary homogeneous polynomials;
+\texttt{marcus-replica-search.mjs} explores the cumulant terms.
+\texttt{marcus-search-summary.json} indexes the direct-search results.
+Lean formalization has not been attempted, as requested. The goal remains active.
+\end{document}

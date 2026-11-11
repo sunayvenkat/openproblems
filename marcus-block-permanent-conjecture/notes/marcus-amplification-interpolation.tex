@@ -1,0 +1,152 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{proposition}{Proposition}
+\newcommand{\per}{\operatorname{per}}
+\title{Two reductions for Marcus's block-permanent inequality}
+\author{Research notes for independent verification; no priority claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+\noindent\textbf{Status.} Neither reduction below proves the full conjecture.
+The direct-sum observation identifies the strength a uniform approximate
+bound would need. The Gaussian interpolation gives a sufficient inequality
+that remains unproved. Equality in Marcus's conjecture is not addressed here.
+
+\paragraph{Direct sums and the published factorial.}
+Fix the block size $k$. Write $G(A)_{ij}=\per A_{ij}$ for a positive
+semidefinite Hermitian matrix with $m$ blocks. When $\per G(A)>0$, put
+$R(A)=\per A/\per G(A)$. For block-aligned orthogonal direct sums,
+\[
+ G(A\oplus B)=G(A)\oplus G(B),\qquad R(A\oplus B)=R(A)R(B).
+\]
+Here $k\ge1$, so the permanent of a zero off-diagonal block is zero.
+
+\begin{proposition}
+Suppose positive numbers $c_{m,k}$ satisfy
+$\per A\ge c_{m,k}\per G(A)$ for every matrix with $m$ blocks of size $k$,
+and $\liminf_{m\to\infty}c_{m,k}^{1/m}\ge1$.
+Then Marcus's inequality holds for every number of blocks of size $k$.
+In particular a positive lower bound depending only on $k$ would suffice.
+\end{proposition}
+\begin{proof}
+For $t$ copies of a fixed matrix with $m$ blocks,
+$R(A)^t\ge c_{tm,k}$. Taking $t$th roots and then the lower limit gives
+$R(A)\ge1$. If $\per G(A)=0$, the desired inequality follows from
+$\per A\ge0$, which follows from its Gram/Fock representation.
+\end{proof}
+
+The publisher's abstract of Pate's 1981 paper uses $k$ for the number of
+blocks, each of size $n$, and states the factor $1/k!$. Thus in the notation
+of these notes the factor is $1/m!$, not $1/k!$. The full text was not
+retrieved. This abstract resolves an apparent parameter swap in the 2016
+survey and the current Minc-list webpage. The factorial in the number of
+blocks does not satisfy the hypothesis above.
+Sources: \href{https://doi.org/10.1080/03081088108817400}{Pate (1981), publisher abstract};
+\href{https://doi.org/10.1515/spma-2016-0030}{Zhang (2016), p.~313};
+\href{https://yair-lavi.com/mincs-list/conjecture-9/index.html}{Minc-list entry}.
+The publisher's abstract of
+\href{https://doi.org/10.1080/03081088208817427}{Pate (1982)} instead fixes
+the number of blocks and lets their size grow, for real symmetric matrices.
+
+\paragraph{The endpoint inequality.}
+Use the complex Fock norm, with the inner product conjugate-linear in its
+first argument and $\|z^\alpha\|^2=\alpha!$.
+Let $p_1,\ldots,p_m$ be arbitrary homogeneous polynomials of one positive
+degree $k$ in finitely many variables. Set
+\[
+ f=\prod_i p_i,\quad f_i=\prod_{j\ne i}p_j,\quad
+ G_{ij}=\langle p_i,p_j\rangle,\quad
+ B(p)=\sum_{i,j}G_{ij}\langle f_i,f_j\rangle.
+\]
+The same-index placement in the last expression is intentional. Indeed
+\[
+ B(p)=\left\|\sum_i p_i(x)f_i(y)\right\|^2,
+\]
+where $x$ and $y$ are independent sets of standard complex Gaussian
+variables. Define $D(p)=m\|f\|^2-B(p)$.
+The sufficient inequality to be investigated is
+\begin{equation}\label{endpoint}
+ D(p)\ge0.
+\end{equation}
+It is not assumed to follow from previously proved finite cases.
+
+\begin{proposition}
+Fix $m,k$. If \eqref{endpoint} holds for every such tuple of arbitrary
+homogeneous polynomials in every finite number of variables, then
+\[
+ \|p_1\cdots p_m\|^2\ge\per G
+\]
+for all those tuples. In particular it implies the Marcus inequality for
+$m$ blocks of size $k$.
+\end{proposition}
+\begin{proof}
+Write $X_i=p_i(Z)$, and let $W$ be an independent centered proper complex
+Gaussian vector with $\mathbb E\overline W_iW_j=G_{ij}$. Define
+\[
+ Y(t)=\sqrt t\,X+\sqrt{1-t}\,W,\qquad
+ M(t)=\mathbb E\left|\prod_iY_i(t)\right|^2,\quad 0\le t\le1.
+\]
+Its covariance is $G$ for every $t$. Put
+$Y_{-i}(t)=\prod_{j\ne i}Y_j(t)$ and
+$B(t)=\sum_{i,j}G_{ij}\mathbb E\overline{Y_{-i}(t)}Y_{-j}(t)$.
+Complex Gaussian integration by parts, or the elementary Gaussian
+Ornstein--Uhlenbeck generator applied to $|\prod_i y_i|^2$, gives
+\begin{equation}\label{derivative}
+ tM'(t)=mM(t)-B(t),\qquad 0<t\le1.
+\end{equation}
+For clarity, with $s=-\log t$ the drift contributes $-mM$ and the Gaussian
+second-derivative term contributes $B$, so $dM/ds=-mM+B$.
+All expressions are polynomials in $t$ in this homogeneous circular case,
+so the identity also has its endpoint interpretation.
+
+To apply the hypothesis to the mixed-degree vector $Y(t)$, approximate $W$
+by
+\[
+ W_i^{(R)}=R^{-1/2}\sum_{a=1}^R p_i(Z^{(a)}),
+\]
+using independent copies, also independent of $Z$. For every finite $R$,
+$\sqrt t\,p_i(Z)+\sqrt{1-t}\,W_i^{(R)}$ is still a homogeneous degree-$k$
+polynomial in finitely many variables. These vectors converge in all the
+moments used here to $Y(t)$: expand a joint moment of order at most $2m$
+according to copy labels. Terms with a singleton vanish; the surviving
+leading terms pair a holomorphic and an antiholomorphic factor and give
+the Gaussian Wick moments. Every other nonzero grouping uses fewer copy
+labels and tends to zero after normalization. Homogeneity and circular
+Gaussian input give zero means, zero unconjugated covariances, and finite
+moments of all orders.
+
+Taking limits in \eqref{endpoint} therefore gives $mM(t)-B(t)\ge0$.
+Equation \eqref{derivative} implies that $M$ is nondecreasing. Its endpoints
+are $M(1)=\|f\|^2$ and $M(0)=\per G$, as required.
+For split $p_i$, the two sides are exactly the permanents in Marcus's
+conjecture, by the Gram/Fock representation.
+\end{proof}
+
+The hypothesis is genuinely dimension-uniform and concerns arbitrary
+homogeneous forms. A bound restricted to split forms is insufficient for
+this argument, because sums of independent copies need not split.
+
+\paragraph{Combinatorial form.}
+For split forms, let $A$ be the Gram matrix of the $mk$ linear factors,
+with its designated partition into $m$ blocks. If $b(\sigma)$ counts the
+blocks sent wholly onto some block by $\sigma\in S_{mk}$, then exactly
+\[
+ D(p)=\sum_{\sigma\in S_{mk}}(m-b(\sigma))
+                    \prod_{a=1}^{mk}a_{a,\sigma(a)}.
+\]
+To see this, expand each term of $B$. It chooses one source block and one
+target block, matches those blocks internally, and matches their
+complements; hence a permutation occurs exactly $b(\sigma)$ times.
+The nonnegative integer coefficient does not establish nonnegativity of
+the sum, since individual diagonal products can be complex or negative.
+
+\paragraph{Exploration, not a proof of the hypothesis.}
+The standalone script \texttt{marcus-gaussian-interpolation.py} minimizes
+$D$ by exact one-form Hermitian eigenproblems, with floating-point arithmetic.
+It checks its quadratic pencil against direct Fock products and also checks
+\eqref{derivative} against finite differences of the full interpolation.
+Completed restarts were 100 each for $(m,k,r)=(3,2,4),(4,2,5),(5,2,6),(4,3,4)$,
+and 200 for $(3,2,8)$. No negative value exceeding roundoff was found.
+Only the derivative at $t=1$ was optimized. Neither this experiment nor the
+conditional proposition proves \eqref{endpoint} or the full conjecture.
+\end{document}

@@ -1,0 +1,27 @@
+Fresh-context adversarial mathematical review of the uniform spectral projection theorem.
+Reviewer: /root/review_green15_projection.
+Result: "I cannot find any mathematical gap that invalidates the implication after thorough examination. The argument remains conditional: it provides no existence proof for a substitution satisfying the hypotheses."
+
+Fresh-context adversarial review of green15-morphism-search.mjs, including enumeration, the abelian-square checker, and exact root classification with rational shifts.
+Reviewer: /root/review_green15_search.
+Result: "No substantive issues found after thorough examination, including the resultant bound and rational-shift argument."
+Limitation: "I did not independently rerun the full radius-five search; its completion remains outside this review."
+
+The parent ran the complete radius-five enumeration: 20,913,486 substitutions, 5,729 passing the 81-letter check, 5,715 primitive among those, 73 with the required spectrum, no survivors. The best eligible candidate's first abelian square ends at letter 203.
+Cross-model review was skipped in this non-interactive goal continuation. No external CLI was invoked for these new artifacts.
+
+6 November 2026 continuation:
+- /root/review_green15_nonuniform reviewed the extension to primitive nonuniform substitutions and power-prolongable fixed points: "No substantive issues were found."
+- /root/review_green15_eight_search reviewed the nonuniform eight-letter mutation mode: "No substantive issues found under the stated contract." It did not rerun the full radius-five enumeration.
+- /root/review_green15_forests reviewed the complete unit-forest reduction and its search: "No substantive correctness errors found in the forest enumeration, pruning, restoration, counting, or spectral-filter use." It did not rerun the full search.
+- /root/review_green15_parabolic reviewed dependency backjumping. It independently reproduced the p=5,slack=0 exhaustive lengths45 with2644 chronological versus1332 backjump nodes, and compared several additional small cases. No substantive issue was found. Later marker and restart extensions were separately validated by direct witness checks; no full exclusion relies on their capped runs.
+- /root/review_green15_z3 reviewed the dependency-conditioned linear learned clauses and the modular normalization lemma: "No substantive issues found in the learned-clause implementation or the normalization lemma. No solver rerun performed."
+
+Observed completed records:
+- Eight-letter mutation radius5:4,783,010 inputs,95 spectral candidates after filtering, no survivors; best valid prefix252.
+- Complete four-unit/four-double forest family:318,767,104 normalized completions covered,33,285,888 full assignments inspected,1948 spectral candidates reaching longer tests, no survivors; known positive control visited once.
+- Modular marker K=3,L=4: exhaustive backtracking and Z3 both exclude the family; longest valid prefix42. Z3 returned unsat after26 learned cuts, with no independent solver certificate.
+- Modular marker K=18,L=16: the one-cut-per-model integer solver returned unknown at iteration405 after404 learned cuts; best valid prefix422. This is not an exclusion.
+
+The solver binding's odd-width signed bitvector decoder was found incorrect by an independent domain assertion; the experimental bitvector path now decodes two's complement explicitly. Its runs returned unknown and support no exclusion claim.
+Cross-model review skipped: non-interactive goal continuation. No external proof-review CLI was invoked.

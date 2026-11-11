@@ -1,0 +1,5 @@
+1. Phi_{2d}(t) = prod (1+t^e)^mu(d/e): mismatches over odd sqfree d<400: 0
+2. mod t^(2p1) refinement: 6065 (d,k) cases, mismatches 0
+3. last-level window rule: 4110 (m,d) cases with r+1<p1(d), mismatches 0
+   sign sets by (mu(d), regime): {(1, 'r=0'): [-1], (-1, 'Td>r'): [1], (-1, 'Td<=r'): [-1], (1, 'Td>r'): [1], (1, 'Td<=r'): [1]}
+4. digit-vs-series sign at the last level: 376 (m,d) with m<400, mismatches 0

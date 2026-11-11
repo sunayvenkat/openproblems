@@ -1,0 +1,166 @@
+ACTIVE GOAL, fixed selection: Marcus block-permanent conjecture.
+Catalog: https://conjectures.io/problems/fulloldproblemscatalog-marcusblockpermanent-conjecture
+Do not choose another problem. Full goal remains unachieved: arbitrary m,k.
+User does not want Lean formalization yet.
+
+STRONGEST CURRENT RESULTS (6 Nov 2026, continuation):
+Complete cases now proved, including equality iff block diagonal with no zero
+rows: (m,k)=(3,2), (4,2), (3,3). Arbitrary m,k STILL UNRESOLVED.
+No novelty claim has been independently checked.
+
+marcus-further-cases-proof.tex contains the full argument for (4,2) and (3,3).
+Exact rational SOS certificates:
+  marcus-invariant-exact-4-6.json : 4 arbitrary quadratics on C^6.
+  marcus-invariant-exact-3-9-k3.json : 3 arbitrary cubics on C^9.
+  marcus-invariant-exact-3-6-k3.json : earlier weaker cubic certificate.
+
+CERTIFICATE INTERPRETATION (fully specified in the paper):
+For a cut c, take Q_1...Q_c holomorphic, other Q's antiholomorphic.
+One raw covariant has B=mk-2 free indices, L=kc-1 holomorphic and the rest
+antiholomorphic. Its networks field gives k legs of each factor and delta
+pairs, with t>=1 internal hol/anti contractions and t-1 delta lifts.
+Block integer matrix C gives tensor combinations V_a=sum_n C_na T_n.
+Block rational PD matrix H gives S_b=sum_ab H_ab <V_a,V_b>.
+Exact identity F=(1/m!) sum_{permutations of block labels} sum_b S_b.
+F is Fock product norm squared minus permanent of polynomial Gram matrix.
+
+Both final certificates independently verified exactly:
+  node marcus-invariant-verify.mjs marcus-invariant-exact-4-6.json
+  node marcus-invariant-verify.mjs marcus-invariant-exact-3-9-k3.json
+Standalone verifier uses only Node built-ins and BigInt rational arithmetic.
+It enumerates 8! or 9! Wick pairings, checks all orbit coefficients, proves
+all H positive definite by exact LDL, and checks equality completeness by
+closing the cut-one bases under boundary permutations over prime 1000003.
+Counts: 4,2,6 ->282 Wick tables,25 orbits,15 PD blocks,spanning rank360.
+        3,3,9 ->55 Wick tables,16 orbits,11 PD blocks,spanning rank320.
+Equality: PD makes all V=0; complete boundary-permutation span gives every
+raw T=0. A t=1 raw tensor is a pairwise one-index contraction times nonzero
+other tensors, hence all essential-variable support spaces are orthogonal.
+
+APPLICATION: Cubic case directly uses rank <=9 for nine Gram vectors.
+Four-pair case projects last pair onto U=span(first six vectors), dim<=6.
+F=F(first3,p0)+sum_alpha(||f h_alpha||^2-q||h_alpha||^2), q=perGram(first3).
+First term uses new SOS; extras use Bombieri and proved three-pair theorem.
+Equality: nonzero p0 impossible by support orthogonality inside U, so p0=0;
+nonzero outside coefficient forces first-three equality; strict linear
+multiplier identity then forces both last-pair projections to vanish.
+
+NEW RESEARCH TOOLS:
+marcus-invariant-sdp.py generates contraction covariants and coefficient
+equations; reduces under boundary S_L x S_R using primitive Young/Jucys--
+Murphy projectors; solves numerical SDP using cvxpy. Only discovery.
+marcus-invariant-certify.py rounds Gram entries, corrects exact linear
+equations with rational arithmetic, and checks exact LDL. Independent JS
+verifier does not depend on this engine or numerical solvers.
+Examples:
+  python marcus-invariant-sdp.py --blocks 4 --dimension 6 --cuts 1 2 --objective feasible
+  python marcus-invariant-sdp.py --blocks 3 --degree 3 --dimension 9 --cuts 1 --objective feasible
+  python marcus-invariant-certify.py <numeric-certificate.json>
+Always use orthonormal basis (now implemented) and objective feasible when
+seeking an interior rational certificate; earlier trace objective inaccurate.
+Restricted m4 cut2-only infeasible; both cut1+2 needed. m4 r7 infeasible in
+this particular covariant ansatz, NOT a counterexample. m3 k2 r6 likewise.
+m3 cubics r9 feasible, r12 and20 CLARABEL failed (no conclusion).
+m4r6 trivial boundary channels infeasible; hook-only CLARABEL failed.
+The engine currently enumerates whole raw covariant sets (m3k3 320,
+m4k2 cut1 360/cut2 378); m5 grows drastically, so do not blindly scale it.
+
+NEW NUMERICAL EXPERIMENTS:
+marcus-chaos-spectral.py alternates exact generalized-eigenvector minimization
+of one polynomial at a time. It tests the stronger arbitrary-polynomial
+statement, so a counterexample may not split into linear factors.
+200 runs m3k2r6; 1000 runs m4k2r7; 1000 runs m5k2r8. All minima >=1 within
+roundoff, converging to equality. Files marcus-chaos-spectral-*-*-*.json.
+marcus-cycle-transfer.mjs tests p_i=x_i^2+a x_i x_(i+1)+b x_(i+1)^2 on a ring.
+Exact transfer: F=tr M0^m-tr N^m+2Re tr M1^m, with matrices in script.
+Worst fixed-modulus phases a=u exp(i*pi/m), b=v exp(2i*pi/m), u,v>=0,
+make cross=-2tr R^m with R=u[[2,v],[6,2v]]. 150000 samples m3..200,
+no negative. Files marcus-cycle-transfer-worst-results.json, ordinary results.
+marcus-banded-transfer.py: pairs of vectors with translation-invariant
+three-site support on a ring. Permanent computed via all flux sectors of
+finite transfer matrices (256 states for A,16 for G), independently checked
+against order10 DP. Completed 2000 samples and30 refinements: best ratio
+1.000000000036295 at ring length5, independently checked by direct permanent.
+Output marcus-banded-transfer-results.json. No proof for general rings.
+All processes started in this continuation have completed.
+
+RUNTIME:
+Python python works.
+cvxpy, scipy etc installed under .research-tools/python. Native DLL imports
+need require_escalated tool execution due sandbox DLL access; auto-review
+has approved these research runs. Node standalone exact verifier works in
+default sandbox. OPENBLAS_NUM_THREADS=1 useful for small spectral searches.
+
+EARLIER THREE-PAIRS RESULT (retained details):
+marcus-three-pairs-proof.tex contains a complete mathematical argument for
+every PSD 6x6 matrix partitioned into three 2x2 blocks, with equality iff
+block diagonal when there are no zero rows (stronger equality hypothesis
+than required). The apparent novelty has not been independently assessed.
+
+CORE DISCOVERY:
+For three arbitrary complex symmetric quadratic matrices Q1,Q2,Q3 on C^5,
+p_i=z^T Q_i z and Gij=2 tr(Q_i^* Q_j), put F=||p1 p2 p3||_Fock^2-per G.
+For each distinguished C, others A,B:
+T_abcd=A_ab(BC*)_cd+B_ab(AC*)_cd;
+S_abcd=T_abcd+T_acbd+T_bcad; H=3T-S;
+W=AC*B+BC*A; L=A tr(BC*)+B tr(AC*).
+E(X)_abcd=delta_ad X_bc+delta_bd X_ac+delta_cd X_ab;
+K(X)_abcd=delta_ad X_bc+delta_bd X_ac-2 delta_cd X_ab.
+Exact positive identity in dimension five:
+189 F=sum_C [16||7S-E(L+2W)||^2+7||4H+K(L-W)||^2
+             +378||W||^2+126||2L+5W||^2].
+
+The raw identity, valid in all dimensions, is
+27F=sum_C[112||S||^2+16||H||^2+288||W||^2+216 Re<W,L>].
+marcus-quadratic-identity.mjs verifies it by exact symbolic Einstein
+contraction counting, independently of numerical fits: all 15 nontrivial
+3x3 incidence tables, representing 672 permutations; 48 wreath permutations
+are exactly per G. Counts and a five-row grouped table are in its JSON.
+
+The delta trace identities in the proof convert the raw identity into the
+positive identity. Explicit integer-scaled tensor norms were additionally
+checked on 40 complex integer matrix samples of dimension five by
+marcus-quadratic-sos.mjs. These sample fits are NOT the proof.
+The proof uses exact contraction counting plus elementary delta identities.
+
+RANK REDUCTION (proved in paper, not assumed from web):
+For six original Gram vectors, let U be the span of first four (dim<=4).
+Expand the third block polynomial in orthogonal outside Gaussian coordinates:
+p3=p0+sum_{alpha!=0}h_alpha w^alpha/sqrt(alpha!).
+F=F(p1,p2,p0)+sum_alpha(||p1p2 h_alpha||^2-per Gram(p1,p2)||h_alpha||^2).
+Every extra summand is nonnegative by normal-ordering/Bombieri and the
+two-polynomial permanent bound. The first bracket uses the C^5 SOS.
+Equality follows from the SOS kernel and the strict linear multiplier identity.
+Detailed equality proof and normal-ordering derivation are in the paper.
+
+EARLIER PROVED RESULT:
+marcus-block-working.tex gives exact coefficient/fiber formulation and a
+proof with equality whenever exponent-sum map is injective at degree m.
+Includes pure power supports, graph forests and odd-cycle components.
+This is a special family only. General collisions include Chollet's problem.
+
+EXPERIMENTS:
+marcus-block-search.mjs: complex Gram optimizer; permanent DP and analytic
+gradient checked independently against permutations and finite differences.
+1650 random-start direct searches, orders up to14, no counterexample.
+marcus-search-summary.json indexes the completed runs.
+marcus-chaos-search.mjs: stronger unrestricted homogeneous-polynomial search.
+marcus-replica-search.mjs: cumulant exploration, no full bound established.
+marcus-block-exact.mjs: BigInt complex Gram/permanent verifier.
+Exact connected term can be negative: p624,q240,S1168,D1=448,D2=-64.
+This is an obstruction to termwise positivity, NOT a counterexample.
+
+WHAT REMAINS (see new results above):
+Full Marcus inequality for arbitrary m,k and its equality condition.
+The cases m4k2 and m3k3 are now proved by exact certificates, but there is
+no uniform recurrence. Avoid endlessly collecting finite cases as a substitute
+for the full goal. Need a general inequality or an actual split-form violation.
+The stronger arbitrary-homogeneous-polynomial formulation is still a useful
+route but failure of its SOS ansatz is neither a counterexample nor proof.
+
+SELECTION RESEARCH COMPLETE:
+reports/Conjectures problem selection.md and research_notes/Conjectures problem
+selection contain survey. Many tempting entries already solved. All survey
+agents finished. No need to repeat the catalog or request permission.
+Applicable user guidelines: Ponytail full; Karpathy coding skill loaded.
+Deep-research skill used for initial delegated catalog survey, now finished.

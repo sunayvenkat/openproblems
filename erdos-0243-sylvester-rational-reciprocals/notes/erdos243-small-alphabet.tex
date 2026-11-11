@@ -1,0 +1,168 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{lemma}{Lemma}
+\title{Switches between reduced errors $-1$ and $-3$}
+\author{Finite counterexample exploration for Erd\H{o}s 243; no priority claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Status.} No infinite counterexample is obtained.
+The entire reduced-error alphabet $\{-1,-3\}$ has not been excluded.
+We prove necessary conditions on its switches and report an exact finite
+search of 140,000 rational starts. All those starts reached zero error.
+Neither the finite search nor the local conditions settle Erd\H{o}s 243.
+
+\paragraph{The exact states.}
+For the reduced rational tail $r_n=u_n/v_n$, let
+\[
+ e_n=v_n-(a_n-1)u_n,\quad w_n=u_n-e_n,\quad
+ h_n=\gcd(w_n,a_nv_n),\qquad
+ u_{n+1}=w_n/h_n,\quad v_{n+1}=a_nv_n/h_n.
+\]
+All states and multipliers are positive integers, and
+$\gcd(u_n,v_n)=1$. In the finite search, the multiplier is chosen by
+$a_n=1+\operatorname{round}(v_n/u_n)$, with half-integers rounded
+upward, following
+\href{https://math.colgate.edu/~integers/aa28/aa28.pdf}{Koizumi's
+pseudo-greedy recurrence}. This is also the eventual choice under the
+original near-squaring hypotheses.
+
+Define $\Delta_n=a_{n+1}-(a_n^2-a_n+1)$. Direct substitution gives
+\begin{equation}\label{eq:error}
+ h_ne_{n+1}=a_n^2e_n-\Delta_n(u_n-e_n).
+\end{equation}
+Indeed, using $v_n=a_nu_n-w_n$, the left side equals
+$a_nv_n-(a_{n+1}-1)w_n
+=a_n^2u_n-(a_n+a_{n+1}-1)w_n$.
+
+\begin{lemma}[Necessary conditions on an uncancelled switch]
+Suppose $h_n=1$ and $e_n,e_{n+1}$ are distinct elements of
+$\{-1,-3\}$. Then $\gcd(u_{n+1},3)=1$ and $3$ is a square
+modulo $u_{n+1}$. In particular, every odd prime divisor $\ell$
+of $u_{n+1}$ satisfies $\ell\equiv1$ or $11\pmod{12}$,
+and the power of $2$ dividing $u_{n+1}$ is at most $2$.
+
+If $u_{n+1}$ is even, then it is $2$ modulo $4$, $a_{n+1}$ is even,
+$h_{n+1}$ is odd, and $v_{n+2}$ is even. If also $e_{n+2}$ is odd,
+then $h_{n+2}$ is even and hence at least $2$.
+\end{lemma}
+\begin{proof}
+Since $h_n=1$, equation~\eqref{eq:error} gives
+$e_{n+1}\equiv a_n^2e_n\pmod{u_{n+1}}$.
+Also $\gcd(u_{n+1},e_n)=1$, because $u_{n+1}=u_n-e_n$ and
+$\gcd(u_n,e_n)=1$. Primitive coprimality similarly gives
+$\gcd(u_{n+1},e_{n+1})=1$. Thus $3$ is a unit modulo $u_{n+1}$.
+For the switch $-1\to-3$ one has $a_n^2\equiv3$;
+for $-3\to-1$, one has $3a_n^2\equiv1$, hence
+$(3a_n)^2\equiv3$. Quadratic reciprocity gives the stated odd-prime
+classes: $(3/\ell)=(\ell/3)(-1)^{(\ell-1)/2}$.
+There is no square congruent to $3$ modulo $4$.
+
+If $u_{n+1}$ is even, $v_{n+1}=a_nv_n$ is odd by coprimality,
+so $a_n$ and $v_n$ are odd. Hence
+$a_n^2e_n-e_{n+1}\equiv e_n-e_{n+1}\equiv\pm2\pmod8$.
+Its $2$-adic valuation is exactly one. Division by the even
+$u_{n+1}$ in~\eqref{eq:error} shows that $u_{n+1}\equiv2\pmod4$
+and $\Delta_n$ is odd. Since $a_n^2-a_n+1$ is odd,
+$a_{n+1}$ is even. Now
+$w_{n+1}=u_{n+1}-e_{n+1}$ is odd, so $h_{n+1}$ is odd and
+$v_{n+2}=a_{n+1}v_{n+1}/h_{n+1}$ is even.
+Thus $u_{n+2}$ is odd. If $e_{n+2}$ is odd, the defining error
+identity makes $a_{n+2}$ even. Both $w_{n+2}$ and
+$a_{n+2}v_{n+2}$ are even, proving $2\mid h_{n+2}$.
+\end{proof}
+
+The hypothesis on the third error matters. For instance,
+$(u_0,v_0)=(21,83)$ gives $e_0=-1$, then
+$(u_1,v_1)=(22,415)$ and $e_1=-3$, followed by a cancellation
+$h_1=25$ and $(u_2,v_2)=(1,332)$ with $e_2=0$. This is a
+finite prefix followed by a Sylvester tail, not a counterexample.
+
+\paragraph{A family with an enforced first switch.}
+For each
+\[
+ p\in\{11,13,23,37,47,61,73\},\quad b\in\{1,2\},
+\]
+let $r$ range over the two odd representatives with
+$3\le r<2p+3$ and $r^2\equiv3\pmod p$. For
+$0\le t<5000$, set
+\[
+ u_0=bp-1,\quad a_0=r+2pt,\quad
+ v_0=(a_0-1)u_0-1.
+\]
+These are positive primitive rational states. Rounding gives $e_0=-1$,
+and $w_0=bp$. The multiplier is odd and not divisible by $p$, so
+$h_0=\gcd(bp,a_0^2)=1$. Modulo $bp$, the next denominator is
+$-a_0^2\equiv-3$. Since $bp\ge11$, its centered error is exactly
+$-3$ and the next state is still primitive. Thus all
+$7\cdot2\cdot2\cdot5000=140000$ starts have the first two
+reduced errors $-1,-3$.
+
+The standalone executable \texttt{erdos243-small-alphabet-search.mjs}
+first follows each start exactly while its errors stay in this alphabet.
+It then follows \emph{every} start to an exact zero error using Koizumi's
+modular recomputation. To obtain $D_n\bmod C_n$, the algorithm starts
+modulo $\prod_{j\le n}C_j$, replays each preceding division by $C_j$
+while deleting that factor from the modulus, and ends modulo $C_n$.
+No pairwise coprimality of the raw numerators is assumed. Its gcd gives
+the reduced numerator and error. The computation has explicit caps;
+none was reached in this experiment.
+
+All 140,000 starts reached zero, with at most $22$ recorded states
+including the first zero state. Thus each has a Sylvester tail.
+The longest initial stay in $\{-1,-3\}$ had $13$ errors and started at
+\[
+ (u_0,v_0)=(10,582499).
+\]
+Its reduced numerator/error/cancellation triples were
+\[
+\begin{array}{c|c|c}
+u_n&e_n&h_n\\\hline
+10&-1&1\\
+11,14,17,20,23,26,29,32,35,38&-3&1\\
+41&-3&11\\
+4&-1&1\\
+5&1&1\\
+4&1&3\\
+1&0&\text{terminal}
+\end{array}
+\]
+The largest multiplier in that alphabet prefix had $63,953$ bits;
+only its bit length is stored in the compact report, since the seed
+determines it exactly. The longest full continuation instead began at
+$(121,45253757)$ and reached its first zero at its $22$nd state.
+The finite output and seed-class champions are retained in
+\texttt{erdos243-small-alphabet-results.json}.
+
+Direct reduced arithmetic was compared with independent unreduced
+updates for every reduced $0<p\le q\le40$ up to six steps, and the
+modular continuation was compared with every step of all $28$ class
+champions' alphabet prefixes. The known $11/29$ trajectory also checks
+the raw-to-reduced gcd handling. Each observed uncancelled switch
+was checked against the lemma, including the forced even cancellation
+when the subsequent error remained odd.
+
+\paragraph{Why a single-prime barrier is insufficient here.}
+An abstract increasing walk can use increments $1$ and $3$, obey
+$\gcd(u_n,u_{n+1})=1$, and avoid multiples of $5$ indefinitely.
+For example, repeat the following residue pattern with a shift of $30$:
+\[
+ 1,2,3,4,7,8,11,12,13,16,17,18,19,22,23,26,27,28,31.
+\]
+Every jump of length $3$ starts at a number coprime to $3$; the
+shift of $30$ preserves this and avoidance of $5$.
+This is only a scalar walk. No positive denominator sequence is
+specified, and it is not an orbit or a disproof. It shows that the
+fixed-magnitude lattice barrier cannot be extended to this alphabet
+using only small increments and adjacent coprimality. The exact
+denominator and switch constraints must do further work.
+
+\paragraph{Unresolved construction obligation.}
+A full counterexample still needs one fixed positive rational start,
+exact integral updates at every index, $u_n\to\infty$, and
+$e_n/u_n\to0$ with errors nonzero arbitrarily late. These finite
+trajectories and necessary switch conditions establish none of that
+infinite existence statement. No exclusion of all such infinite orbits
+has been proved either.
+\end{document}

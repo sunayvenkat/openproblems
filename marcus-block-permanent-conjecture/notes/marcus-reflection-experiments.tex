@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{proposition}{Proposition}
+\newcommand{\per}{\operatorname{per}}
+\title{Reflection-root partitions as structured tests of Marcus's conjecture}
+\author{Research notes; finite searches only; no priority claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+\noindent\textbf{Status.} These searches produce no counterexample.
+They exhaust specified partitions of fixed root sets, not arbitrary
+positive semidefinite matrices or all ranks. The determinant identity
+below supplies an exact large permanent without enumerating its terms.
+
+\paragraph{Root sets and their products.}
+In $\mathbb R^r$ consider the following lists of vectors, with one vector
+for each listed linear form:
+\[
+ \begin{array}{c|c|c}
+ \text{label}&\text{linear forms}&N\\\hline
+ A&x_i-x_j\ (i<j)&r(r-1)/2\\
+ D&x_i-x_j,\ x_i+x_j\ (i<j)&r(r-1)\\
+ B&x_i\ (1\le i\le r),\ x_i-x_j,\ x_i+x_j\ (i<j)&r^2
+ \end{array}
+\]
+The label $A$ denotes the roots in $r$ coordinates, of rank $r-1$.
+Let $\mathcal A$ be the $N\times N$ Gram matrix of the chosen list.
+For a partition into $m=N/k$ sets of size $k$, form its matrix $G$ of
+$k\times k$ block permanents. The value $\per\mathcal A$ is independent
+of the partition; only $\per G$ needs to be maximized.
+
+\begin{proposition}
+For the three root lists,
+\[
+ \per\mathcal A=r!\prod_{j=0}^{r-1}d_j!,\qquad
+ d_j=j\ (A),\quad d_j=2j\ (D),\quad d_j=2j+1\ (B).
+\]
+\end{proposition}
+\begin{proof}
+The product of all listed forms equals, up to an overall sign,
+$\det[x_i^{d_j}]_{i=1,\ldots,r;\ j=0,\ldots,r-1}$.
+For $A$ this is the Vandermonde formula; for $D$ apply that formula to
+$x_i^2$; for $B$ multiply the latter by $\prod_i x_i$.
+All $r!$ determinant monomials are distinct because the degrees $d_j$
+are distinct. They have coefficients of absolute value one and each has
+Fock norm squared $\prod_jd_j!$. Their orthogonality gives the displayed
+norm. Gaussian moment expansion equates that norm with $\per\mathcal A$.
+\end{proof}
+
+\paragraph{Completed exact searches.}
+The standalone program \texttt{marcus-reflection-search.mjs} enumerates
+every unlabeled partition in the rows marked ``all.'' It fixes the least
+unused root in the next block, then chooses its other $k-1$ members.
+The number of leaves is independently checked against
+$N!/((k!)^m m!)$. Block entries are cached and their permanents are
+calculated by subset dynamic programming. Every intermediate product and
+sum is required to stay in the exact integer range of JavaScript numbers.
+Thus integer equality is used throughout, not a floating-point comparison
+of nearly equal quantities. The maximizing partition in each row is
+checked again using the original Gram vectors and an independent BigInt
+permanent implementation.
+\[
+\begin{array}{c|r|r|r|r|r|l}
+ \text{type}&r&k&m&\text{partitions}&\per\mathcal A&\max\per G\\\hline
+ A&5&2&5&945&34560&4444\\
+ A&6&3&5&1401400&24883200&1069134\\
+ A&6&5&3&126126&24883200&4746560\\
+ D&4&2&6&10395&829440&34960\\
+ D&4&3&4&15400&829440&69632\\
+ D&4&4&3&5775&829440&111152
+\end{array}
+\]
+All six rows are exhaustive for their stated root set and block size.
+The total is $1560041$ partitions. In a separate finite random search of
+$30000$ partitions of $B$ at $r=4,k=4,m=4$, the largest observed value
+was $5779608$, while $\per\mathcal A=87091200$; no optimality is asserted
+for that row. Its reproducible generator seed is $117361$.
+
+For example, the third exhaustive row is reproduced by
+\texttt{node marcus-reflection-search.mjs A 6 5 all}; the random row by
+\texttt{node marcus-reflection-search.mjs B 4 4 random 30000}.
+Each output JSON stores the root vectors and the maximizing observed
+partition, as well as exact integer permanent values.
+
+\paragraph{What the experiment changes.}
+The reflection construction tests an organized source of extensive
+cancellation: a product of many linear forms collapses to a determinant
+with only $r!$ monomials. Despite that cancellation, every tested partition
+has a substantial positive gap. These particular fixed root systems do
+not yield a disproof. Nothing here bounds the effect of arbitrary
+deformations, other root systems, or arbitrary Gram matrices. The full
+Marcus conjecture and its general equality clause remain unresolved.
+\end{document}

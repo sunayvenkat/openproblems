@@ -1,0 +1,6 @@
+m=11905457 r=5 q=12 T=1 phi/m=0.8128 M=8388608 (82s)
+  global max log|Psi| on grid = 24.197 at turns 0.416671 (nearest b/q: 5/12)
+  log|Psi(zeta_q^b)|: 1:-20.413, 5:20.413, 7:20.413, 11:-20.413
+  max log|Psi| outside windows (+-0.02 turns) = 19.665 at turns 0.705282
+  bulk coeffs of Q^2: sign(total)==sign(window part) for 100.0% of 476 sampled n; median rel. err 1.47e-04
+saddle vs FFT over 399 bulk n: sign agreement 203/399, median rel err 1.00e+00, 90% 1.01e+00

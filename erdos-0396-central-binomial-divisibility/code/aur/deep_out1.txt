@@ -1,0 +1,33 @@
+﻿d=385 [5, 7, 11] K=155363: first negative level 3 (offset 0, coeff -2.200e+17)
+d=455 [5, 7, 13] K=131461: first negative level 4 (offset 0, coeff -5.436e+25)
+d=595 [5, 7, 17] K=100529: first negative level 3 (offset 0, coeff -6.340e+19)
+d=6545 [5, 7, 11, 17] K=9139: first negative level 4 (offset 0, coeff -9.596e+25)
+d=7315 [5, 7, 11, 19] K=8177: first negative level 3 (offset 0, coeff -1.740e+19)
+d=7735 [5, 7, 13, 17] K=7733: first negative level 3 (offset 0, coeff -9.933e+19)
+d=8645 [5, 7, 13, 19] K=6919: first negative level 3 (offset 0, coeff -6.609e+21)
+d=12155 [5, 11, 13, 17] K=4921: first negative level 4 (offset 0, coeff -1.668e+29)
+d=13585 [5, 11, 13, 19] K=4403: first negative level 3 (offset 0, coeff -7.869e+20)
+d=14245 [5, 7, 11, 37] K=4199: first negative level 3 (offset 0, coeff -2.161e+19)
+d=17765 [5, 11, 17, 19] K=3367: first negative level 3 (offset 0, coeff -4.160e+19)
+d=20995 [5, 13, 17, 19] K=2849: first negative level 4 (offset 0, coeff -6.358e+28)
+d=26455 [5, 11, 13, 37] K=2261: first negative level 3 (offset 0, coeff -1.118e+18)
+d=85085 [5, 7, 11, 13, 17] K=703: first negative level 3 (offset 0, coeff -1.849e+27)
+python : Traceback (most recent call last):
+At line:1 char:433
++ ... \e396\aur"; python deep.py 59814755 385 455 595 6545 7315 7735 8645 1 ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "(local scratch path, not included)
+aur\deep.py", line 72, in <module>
+    s, r = deep(m, d)
+           ~~~~^^^^^^
+  File "(local scratch path, not included)
+aur\deep.py", line 65, in deep
+    r = level(m, d, s)
+  File "(local scratch path, not included)
+aur\deep.py", line 57, in level
+    assert v4 == v5, ('CRT unstable', m, d, s, i)
+           ^^^^^^^^
+AssertionError: ('CRT unstable', 59814755, 95095, 5, 0)

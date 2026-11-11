@@ -1,0 +1,60 @@
+{
+  "t": 54,
+  "tau": 5,
+  "cover": [
+    1,
+    6,
+    12,
+    16,
+    18
+  ],
+  "color0_size": 6,
+  "maximum_deficiency": 1,
+  "minimum_maximizer_size": 4,
+  "minimum_maximizers": [
+    [
+      8,
+      27,
+      36,
+      48
+    ]
+  ],
+  "vertical_phases": [
+    [
+      1,
+      27
+    ],
+    [
+      9
+    ],
+    [
+      3
+    ]
+  ],
+  "submodularity_counterexample": {
+    "a": [
+      8,
+      48
+    ],
+    "b": [
+      6,
+      8,
+      36
+    ],
+    "union": [
+      6,
+      8,
+      36,
+      48
+    ],
+    "intersection": [
+      8
+    ],
+    "ranks_a_b_union_intersection": [
+      2,
+      4,
+      5,
+      2
+    ]
+  }
+}

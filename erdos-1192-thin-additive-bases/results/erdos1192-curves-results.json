@@ -1,0 +1,308 @@
+{
+  "scope": "Finite tested primes and color widths only; all dilation orbits are examined at each tested prime and missing orbits are reported. No asymptotic conclusion.",
+  "results": [
+    {
+      "p": 127,
+      "width": 2,
+      "colors": 4,
+      "missingOrbits": 2,
+      "missing": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          9
+        ]
+      ]
+    },
+    {
+      "p": 127,
+      "width": 3,
+      "colors": 6,
+      "missingOrbits": 1,
+      "missing": [
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "p": 127,
+      "width": 4,
+      "colors": 8,
+      "missingOrbits": 0,
+      "missing": []
+    },
+    {
+      "p": 251,
+      "width": 2,
+      "colors": 4,
+      "missingOrbits": 0,
+      "missing": []
+    },
+    {
+      "p": 251,
+      "width": 3,
+      "colors": 6,
+      "missingOrbits": 0,
+      "missing": []
+    },
+    {
+      "p": 251,
+      "width": 4,
+      "colors": 8,
+      "missingOrbits": 0,
+      "missing": []
+    },
+    {
+      "p": 503,
+      "width": 2,
+      "colors": 4,
+      "missingOrbits": 3,
+      "missing": [
+        [
+          1,
+          0,
+          230
+        ],
+        [
+          1,
+          205,
+          196
+        ],
+        [
+          1,
+          298,
+          196
+        ]
+      ]
+    },
+    {
+      "p": 503,
+      "width": 3,
+      "colors": 6,
+      "missingOrbits": 0,
+      "missing": []
+    },
+    {
+      "p": 503,
+      "width": 4,
+      "colors": 8,
+      "missingOrbits": 0,
+      "missing": []
+    },
+    {
+      "p": 1009,
+      "width": 2,
+      "colors": 4,
+      "missingOrbits": 37,
+      "missing": [
+        [
+          1,
+          0,
+          78
+        ],
+        [
+          1,
+          0,
+          330
+        ],
+        [
+          1,
+          0,
+          370
+        ],
+        [
+          1,
+          0,
+          678
+        ],
+        [
+          1,
+          10,
+          169
+        ],
+        [
+          1,
+          58,
+          192
+        ],
+        [
+          1,
+          103,
+          88
+        ],
+        [
+          1,
+          104,
+          816
+        ],
+        [
+          1,
+          135,
+          372
+        ],
+        [
+          1,
+          153,
+          249
+        ],
+        [
+          1,
+          175,
+          859
+        ],
+        [
+          1,
+          189,
+          735
+        ],
+        [
+          1,
+          198,
+          491
+        ],
+        [
+          1,
+          351,
+          261
+        ],
+        [
+          1,
+          379,
+          65
+        ],
+        [
+          1,
+          460,
+          505
+        ],
+        [
+          1,
+          466,
+          555
+        ],
+        [
+          1,
+          483,
+          716
+        ],
+        [
+          1,
+          497,
+          242
+        ],
+        [
+          1,
+          504,
+          320
+        ],
+        [
+          1,
+          505,
+          320
+        ],
+        [
+          1,
+          512,
+          242
+        ],
+        [
+          1,
+          526,
+          716
+        ],
+        [
+          1,
+          543,
+          555
+        ],
+        [
+          1,
+          549,
+          505
+        ],
+        [
+          1,
+          630,
+          65
+        ],
+        [
+          1,
+          658,
+          261
+        ],
+        [
+          1,
+          811,
+          491
+        ],
+        [
+          1,
+          820,
+          735
+        ],
+        [
+          1,
+          834,
+          859
+        ],
+        [
+          1,
+          856,
+          249
+        ],
+        [
+          1,
+          874,
+          372
+        ],
+        [
+          1,
+          905,
+          816
+        ],
+        [
+          1,
+          906,
+          88
+        ],
+        [
+          1,
+          951,
+          192
+        ],
+        [
+          1,
+          999,
+          169
+        ],
+        [
+          0,
+          11,
+          0
+        ]
+      ]
+    },
+    {
+      "p": 1009,
+      "width": 3,
+      "colors": 6,
+      "missingOrbits": 0,
+      "missing": []
+    },
+    {
+      "p": 1009,
+      "width": 4,
+      "colors": 8,
+      "missingOrbits": 0,
+      "missing": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+P=3: f_r(2)=2.978e-06  P(2<=r<2.05)=7.781e-08  c_P=0.304  E(Y) ~ 1.810e-06 * X * lnY
+    X=      5: ln Y needed for E=1: 1.105e+05  (decimal digits 4.798e+04)
+    X=     10: ln Y needed for E=1: 5.524e+04  (decimal digits 2.399e+04)
+    X=1000000: ln Y needed for E=1: 5.524e-01  (decimal digits 2.399e-01)
+P=5: f_r(2)=8.027e-18  P(2<=r<2.05)=3.227e-20  c_P=0.253  E(Y) ~ 4.066e-18 * X * lnY
+    X=      7: ln Y needed for E=1: 3.513e+16  (decimal digits 1.526e+16)
+    X=     14: ln Y needed for E=1: 1.757e+16  (decimal digits 7.629e+15)
+    X=1000000: ln Y needed for E=1: 2.459e+11  (decimal digits 1.068e+11)
+P=7: f_r(2)=1.166e-40  P(2<=r<2.05)=1.750e-44  c_P=0.222  E(Y) ~ 5.171e-41 * X * lnY
+    X=      9: ln Y needed for E=1: 2.149e+39  (decimal digits 9.332e+38)
+    X=     18: ln Y needed for E=1: 1.074e+39  (decimal digits 4.666e+38)
+    X=1000000: ln Y needed for E=1: 1.934e+34  (decimal digits 8.399e+33)
+P=11: f_r(2)=1.690e-70  P(2<=r<2.05)=2.091e-76  c_P=0.203  E(Y) ~ 6.866e-71 * X * lnY
+    X=     13: ln Y needed for E=1: 1.120e+69  (decimal digits 4.866e+68)
+    X=     26: ln Y needed for E=1: 5.602e+68  (decimal digits 2.433e+68)
+    X=1000000: ln Y needed for E=1: 1.456e+64  (decimal digits 6.325e+63)
+P=13: f_r(2)=1.193e-115  P(2<=r<2.05)=7.519e-125  c_P=0.189  E(Y) ~ 4.500e-116 * X * lnY
+    X=     15: ln Y needed for E=1: 1.481e+114  (decimal digits 6.433e+113)
+    X=     30: ln Y needed for E=1: 7.407e+113  (decimal digits 3.217e+113)
+    X=1000000: ln Y needed for E=1: 2.222e+109  (decimal digits 9.650e+108)

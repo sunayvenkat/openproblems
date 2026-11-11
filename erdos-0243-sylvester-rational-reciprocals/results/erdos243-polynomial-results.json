@@ -1,0 +1,78 @@
+{
+  "scope": "Necessary finite unit-state graphs for eventual C_n=n^d+k. An acyclic graph excludes only that polynomial pattern. The unrestricted Erdos243 problem is not solved.",
+  "controls": "Explicit quadratic acyclic and linear cyclic fixtures; brute legal-edge enumeration and independent DFS on every offset for q=4,9 and a cyclic q=25 family; every acyclic production graph has all edges checked against a strictly decreasing integer rank.",
+  "completed": true,
+  "results": [
+    {
+      "p": 2,
+      "q": 4,
+      "representatives": [
+        2
+      ],
+      "degreeClass": "Every even degree >=2",
+      "cases": 4,
+      "states": 16,
+      "transitions": 16,
+      "maxRank": 3,
+      "allAcyclic": true
+    },
+    {
+      "p": 3,
+      "q": 9,
+      "representatives": [
+        3
+      ],
+      "degreeClass": "Degrees ==3 modulo6",
+      "cases": 9,
+      "states": 162,
+      "transitions": 135,
+      "maxRank": 6,
+      "allAcyclic": true
+    },
+    {
+      "p": 3,
+      "q": 27,
+      "representatives": [
+        5,
+        11,
+        17
+      ],
+      "degreeClass": "Degrees ==5 modulo6",
+      "cases": 81,
+      "states": 39366,
+      "transitions": 32805,
+      "maxRank": 6,
+      "allAcyclic": true
+    },
+    {
+      "p": 5,
+      "q": 25,
+      "representatives": [
+        3,
+        7,
+        11,
+        15,
+        19
+      ],
+      "degreeClass": "Degrees ==3 modulo4",
+      "cases": 125,
+      "states": 52500,
+      "transitions": 44625,
+      "maxRank": 8,
+      "allAcyclic": true
+    },
+    {
+      "p": 11,
+      "q": 121,
+      "representatives": [
+        13
+      ],
+      "degreeClass": "Degrees ==13 modulo110, >=2",
+      "cases": 121,
+      "states": 1610510,
+      "transitions": 1478741,
+      "maxRank": 18,
+      "allAcyclic": true
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+Main-thread lemmas (Conjecture G work), verified by crossing.py.
+
+Notation: A_n(t) = Phi_{2n}(t) for odd squarefree n.  Top piece of m at level s: decisive coefficient is
+the first nonzero c_N = [t^N] A_m(t)^{-(s+1)} with N > E_s = m - (s+1) phi(m); negative = carry.
+
+L1 (localization).  For a prime p not dividing n, A_{np}(t) = A_n(t^p) / A_n(t), and A_n(t^p) = 1 mod t^p.
+  Hence for N < p:  [t^N] A_{np}^{-k} = [t^N] A_n^{+k}.
+  Iterating: if every prime of m_> is > N, then [t^N] A_m^{-k} = [t^N] A_{m_<=}^{k (-1)^{w(m_>)+1}},
+  where m = m_<= * m_>.  So the decisive coefficient depends only on the primes of m that are <= N,
+  plus the parity of the number of larger primes.  (N < p_1 gives Prop C1.)
+
+L2 (two-scale formula).  For m = M q (q prime, q not dividing M) and N < m, with y = -t:
+  c_N = (-1)^N [y^N] Phi_M(y)^2 Psi_M(y^q)^2     (level 1; general level: exponent s+1),
+  Psi_M = (y^M - 1)/Phi_M.  Checked exactly against the direct series for M = 15, 21, 33, 35, 39, 255.
+
+L3 (crossing prime).  Let M be odd squarefree with M < 2 phi(M), delta = 2 phi(M) - M, and let q be a prime
+  with 2 phi(M)/(delta+1) < q <= 2 phi(M)/delta.  Then m = Mq has T = 2, rho = m - 2 phi(m) = 2 phi(M) - q delta
+  lies in [0, q), and the top piece of m is good iff the first nonzero coefficient of Phi_{2M}(t)^2 at an
+  index > rho is negative.  Examples: M = 15 (delta = 1): q = 11, 13 give 165, 195, coefficients -1, -4 (good).
+  M = 255 (delta = 1): q = 131..251; signs mixed (e.g. q = 139: -32 good, q = 131: +1 bad).
+  Same statement for any T: delta_T = T phi(M) - M, crossing interval (T phi/(delta_T+1), T phi/delta_T],
+  coefficient of Phi_{2M}(t)^T.
+
+Obstacle.  The crossing interval has length about 2 phi(M)/delta^2, so it contains primes only when
+  delta <~ phi(M)^{0.32} (with Baker-Harman-Pintz gaps).  A greedy Sylvester-type chain of primes gives
+  delta ~ phi^theta with theta = prime-gap exponent; that is enough only if theta < (3 - sqrt5)/2 ~ 0.382
+  (true under Cramer-type gap conjectures, not known unconditionally, not even under RH).

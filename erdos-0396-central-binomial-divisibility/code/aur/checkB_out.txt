@@ -1,0 +1,95 @@
+﻿m = 59814755 [5, 7, 11, 13, 17, 19, 37]
+  d=385 [5, 7, 11] phi/d=0.6234 K=155363 offset=2 lc(g^2 mod f)~-6.000e+00 L2-BAD
+  d=455 [5, 7, 13] phi/d=0.6330 K=131461 offset=1 lc(g^2 mod f)~-1.290e+02 L2-BAD
+  d=595 [5, 7, 17] phi/d=0.6454 K=100529 offset=1 lc(g^2 mod f)~-1.070e+02 L2-BAD
+  d=665 [5, 7, 19] phi/d=0.6496 K=89947 offset=1 lc(g^2 mod f)~1.800e+02 good-L2
+  d=5005 [5, 7, 11, 13] phi/d=0.5754 K=11951 offset=1 lc(g^2 mod f)~2.267e+07 good-L2
+  d=6545 [5, 7, 11, 17] phi/d=0.5867 K=9139 offset=1 lc(g^2 mod f)~-7.986e+03 L2-BAD
+  d=7315 [5, 7, 11, 19] phi/d=0.5906 K=8177 offset=1 lc(g^2 mod f)~-2.873e+05 L2-BAD
+  d=7735 [5, 7, 13, 17] phi/d=0.5957 K=7733 offset=1 lc(g^2 mod f)~-3.728e+05 L2-BAD
+  d=8645 [5, 7, 13, 19] phi/d=0.5997 K=6919 offset=1 lc(g^2 mod f)~-1.624e+07 L2-BAD
+  d=11305 [5, 7, 17, 19] phi/d=0.6114 K=5291 offset=1 lc(g^2 mod f)~7.154e+08 good-L2
+  d=12155 [5, 11, 13, 17] phi/d=0.6318 K=4921 offset=1 lc(g^2 mod f)~-4.320e+06 L2-BAD
+  d=13585 [5, 11, 13, 19] phi/d=0.6360 K=4403 offset=1 lc(g^2 mod f)~-9.208e+05 L2-BAD
+  d=14245 [5, 7, 11, 37] phi/d=0.6065 K=4199 offset=1 lc(g^2 mod f)~-2.097e+05 L2-BAD
+  d=16835 [5, 7, 13, 37] phi/d=0.6159 K=3553 offset=1 lc(g^2 mod f)~6.789e+05 good-L2
+  d=17765 [5, 11, 17, 19] phi/d=0.6485 K=3367 offset=1 lc(g^2 mod f)~-1.192e+05 L2-BAD
+  d=20995 [5, 13, 17, 19] phi/d=0.6584 K=2849 offset=1 lc(g^2 mod f)~-1.184e+05 L2-BAD
+  d=22015 [5, 7, 17, 37] phi/d=0.6279 K=2717 offset=1 lc(g^2 mod f)~2.555e+06 good-L2
+  d=24605 [5, 7, 19, 37] phi/d=0.6321 K=2431 offset=1 lc(g^2 mod f)~2.697e+05 good-L2
+  d=26455 [5, 11, 13, 37] phi/d=0.6532 K=2261 offset=1 lc(g^2 mod f)~-3.350e+04 L2-BAD
+  d=34595 [5, 11, 17, 37] phi/d=0.6660 K=1729 offset=1 lc(g^2 mod f)~6.990e+02 good-L2
+  d=85085 [5, 7, 11, 13, 17] phi/d=0.5416 K=703 offset=1 lc(g^2 mod f)~-3.627e+13 L2-BAD
+  d=95095 [5, 7, 11, 13, 19] phi/d=0.5451 K=629 offset=1 lc(g^2 mod f)~-1.349e+14 L2-BAD
+  d=124355 [5, 7, 11, 17, 19] phi/d=0.5558 K=481 offset=1 lc(g^2 mod f)~4.305e+11 good-L2
+  d=146965 [5, 7, 13, 17, 19] phi/d=0.5644 K=407 offset=1 lc(g^2 mod f)~4.403e+13 good-L2
+  d=185185 [5, 7, 11, 13, 37] phi/d=0.5599 K=323 offset=1 lc(g^2 mod f)~-5.751e+11 L2-BAD
+  d=230945 [5, 11, 13, 17, 19] phi/d=0.5986 K=259 offset=1 lc(g^2 mod f)~4.637e+11 good-L2
+  d=242165 [5, 7, 11, 17, 37] phi/d=0.5709 K=247 offset=1 lc(g^2 mod f)~-1.115e+11 L2-BAD
+  d=270655 [5, 7, 11, 19, 37] phi/d=0.5746 K=221 offset=1 lc(g^2 mod f)~-2.260e+10 L2-BAD
+  d=286195 [5, 7, 13, 17, 37] phi/d=0.5796 K=209 offset=1 lc(g^2 mod f)~-1.029e+13 L2-BAD
+  d=319865 [5, 7, 13, 19, 37] phi/d=0.5834 K=187 offset=1 lc(g^2 mod f)~-2.579e+11 L2-BAD
+  d=323323 [7, 11, 13, 17, 19] phi/d=0.6413 K=185 offset=1 lc(g^2 mod f)~-5.645e+11 L2-BAD
+  d=418285 [5, 7, 17, 19, 37] phi/d=0.5949 K=143 offset=1 lc(g^2 mod f)~8.644e+13 good-L2
+  d=449735 [5, 11, 13, 17, 37] phi/d=0.6148 K=133 offset=1 lc(g^2 mod f)~6.147e+10 good-L2
+  d=502645 [5, 11, 13, 19, 37] phi/d=0.6188 K=119 offset=1 lc(g^2 mod f)~1.259e+12 good-L2
+  d=629629 [7, 11, 13, 17, 37] phi/d=0.6587 K=95 offset=1 lc(g^2 mod f)~-1.748e+13 L2-BAD
+  d=657305 [5, 11, 17, 19, 37] phi/d=0.6309 K=91 offset=1 lc(g^2 mod f)~1.209e+13 good-L2
+  d=703703 [7, 11, 13, 19, 37] phi/d=0.6630 K=85 offset=1 lc(g^2 mod f)~8.193e+08 good-L2
+  d=776815 [5, 13, 17, 19, 37] phi/d=0.6406 K=77 offset=1 lc(g^2 mod f)~-5.079e+13 L2-BAD
+  d=1616615 [5, 7, 11, 13, 17, 19] phi/d=0.5131 K=37 offset=1 lc(g^2 mod f)~-2.419e+21 L2-BAD
+  d=3148145 [5, 7, 11, 13, 17, 37] phi/d=0.5269 K=19 offset=1 lc(g^2 mod f)~2.521e+21 good-L2
+  d=3518515 [5, 7, 11, 13, 19, 37] phi/d=0.5304 K=17 offset=1 lc(g^2 mod f)~2.851e+22 good-L2
+  d=4601135 [5, 7, 11, 17, 19, 37] phi/d=0.5408 K=13 offset=1 lc(g^2 mod f)~1.365e+20 good-L2
+  d=5437705 [5, 7, 13, 17, 19, 37] phi/d=0.5491 K=11 offset=1 lc(g^2 mod f)~1.099e+22 good-L2
+  d=8544965 [5, 11, 13, 17, 19, 37] phi/d=0.5824 K=7 offset=1 lc(g^2 mod f)~-1.158e+26 L2-BAD
+  d=11962951 [7, 11, 13, 17, 19, 37] phi/d=0.6240 K=5 offset=1 lc(g^2 mod f)~1.984e+23 good-L2
+  needs deeper check: [385, 455, 595, 6545, 7315, 7735, 8645, 12155, 13585, 14245, 17765, 20995, 26455, 85085, 95095, 185185, 242165, 270655, 286195, 319865, 323323, 629629, 776815, 1616615, 8544965]
+m = 50115065 [5, 7, 11, 13, 17, 19, 31]
+  d=385 [5, 7, 11] phi/d=0.6234 K=130169 offset=2 lc(g^2 mod f)~-6.000e+00 L2-BAD
+  d=455 [5, 7, 13] phi/d=0.6330 K=110143 offset=1 lc(g^2 mod f)~-1.290e+02 L2-BAD
+  d=595 [5, 7, 17] phi/d=0.6454 K=84227 offset=1 lc(g^2 mod f)~-1.070e+02 L2-BAD
+  d=665 [5, 7, 19] phi/d=0.6496 K=75361 offset=1 lc(g^2 mod f)~1.800e+02 good-L2
+  d=1085 [5, 7, 31] phi/d=0.6636 K=46189 offset=1 lc(g^2 mod f)~1.800e+01 good-L2
+  d=5005 [5, 7, 11, 13] phi/d=0.5754 K=10013 offset=1 lc(g^2 mod f)~2.267e+07 good-L2
+  d=6545 [5, 7, 11, 17] phi/d=0.5867 K=7657 offset=1 lc(g^2 mod f)~-7.986e+03 L2-BAD
+  d=7315 [5, 7, 11, 19] phi/d=0.5906 K=6851 offset=1 lc(g^2 mod f)~-2.873e+05 L2-BAD
+  d=7735 [5, 7, 13, 17] phi/d=0.5957 K=6479 offset=1 lc(g^2 mod f)~-3.728e+05 L2-BAD
+  d=8645 [5, 7, 13, 19] phi/d=0.5997 K=5797 offset=1 lc(g^2 mod f)~-1.624e+07 L2-BAD
+  d=11305 [5, 7, 17, 19] phi/d=0.6114 K=4433 offset=1 lc(g^2 mod f)~7.154e+08 good-L2
+  d=11935 [5, 7, 11, 31] phi/d=0.6033 K=4199 offset=1 lc(g^2 mod f)~5.589e+06 good-L2
+  d=12155 [5, 11, 13, 17] phi/d=0.6318 K=4123 offset=1 lc(g^2 mod f)~-4.320e+06 L2-BAD
+  d=13585 [5, 11, 13, 19] phi/d=0.6360 K=3689 offset=1 lc(g^2 mod f)~-9.208e+05 L2-BAD
+  d=14105 [5, 7, 13, 31] phi/d=0.6125 K=3553 offset=1 lc(g^2 mod f)~1.628e+06 good-L2
+  d=17765 [5, 11, 17, 19] phi/d=0.6485 K=2821 offset=1 lc(g^2 mod f)~-1.192e+05 L2-BAD
+  d=18445 [5, 7, 17, 31] phi/d=0.6246 K=2717 offset=1 lc(g^2 mod f)~1.812e+08 good-L2
+  d=20615 [5, 7, 19, 31] phi/d=0.6287 K=2431 offset=1 lc(g^2 mod f)~1.527e+07 good-L2
+  d=20995 [5, 13, 17, 19] phi/d=0.6584 K=2387 offset=1 lc(g^2 mod f)~-1.184e+05 L2-BAD
+  d=22165 [5, 11, 13, 31] phi/d=0.6497 K=2261 offset=1 lc(g^2 mod f)~4.040e+04 good-L2
+  d=28985 [5, 11, 17, 31] phi/d=0.6624 K=1729 offset=1 lc(g^2 mod f)~5.928e+03 good-L2
+  d=85085 [5, 7, 11, 13, 17] phi/d=0.5416 K=589 offset=1 lc(g^2 mod f)~-3.627e+13 L2-BAD
+  d=95095 [5, 7, 11, 13, 19] phi/d=0.5451 K=527 offset=1 lc(g^2 mod f)~-1.349e+14 L2-BAD
+  d=124355 [5, 7, 11, 17, 19] phi/d=0.5558 K=403 offset=1 lc(g^2 mod f)~4.305e+11 good-L2
+  d=146965 [5, 7, 13, 17, 19] phi/d=0.5644 K=341 offset=1 lc(g^2 mod f)~4.403e+13 good-L2
+  d=155155 [5, 7, 11, 13, 31] phi/d=0.5569 K=323 offset=1 lc(g^2 mod f)~-1.848e+13 L2-BAD
+  d=202895 [5, 7, 11, 17, 31] phi/d=0.5678 K=247 offset=1 lc(g^2 mod f)~8.295e+12 good-L2
+  d=226765 [5, 7, 11, 19, 31] phi/d=0.5715 K=221 offset=1 lc(g^2 mod f)~5.433e+12 good-L2
+  d=230945 [5, 11, 13, 17, 19] phi/d=0.5986 K=217 offset=1 lc(g^2 mod f)~4.637e+11 good-L2
+  d=239785 [5, 7, 13, 17, 31] phi/d=0.5765 K=209 offset=1 lc(g^2 mod f)~-1.123e+12 L2-BAD
+  d=267995 [5, 7, 13, 19, 31] phi/d=0.5803 K=187 offset=1 lc(g^2 mod f)~-4.760e+15 L2-BAD
+  d=323323 [7, 11, 13, 17, 19] phi/d=0.6413 K=155 offset=1 lc(g^2 mod f)~-5.645e+11 L2-BAD
+  d=350455 [5, 7, 17, 19, 31] phi/d=0.5917 K=143 offset=1 lc(g^2 mod f)~-2.489e+21 L2-BAD
+  d=376805 [5, 11, 13, 17, 31] phi/d=0.6115 K=133 offset=1 lc(g^2 mod f)~1.526e+13 good-L2
+  d=421135 [5, 11, 13, 19, 31] phi/d=0.6155 K=119 offset=1 lc(g^2 mod f)~1.362e+11 good-L2
+  d=527527 [7, 11, 13, 17, 31] phi/d=0.6551 K=95 offset=1 lc(g^2 mod f)~7.377e+13 good-L2
+  d=550715 [5, 11, 17, 19, 31] phi/d=0.6275 K=91 offset=1 lc(g^2 mod f)~-1.557e+12 L2-BAD
+  d=589589 [7, 11, 13, 19, 31] phi/d=0.6594 K=85 offset=1 lc(g^2 mod f)~5.762e+09 good-L2
+  d=650845 [5, 13, 17, 19, 31] phi/d=0.6372 K=77 offset=1 lc(g^2 mod f)~1.410e+15 good-L2
+  d=1616615 [5, 7, 11, 13, 17, 19] phi/d=0.5131 K=31 offset=1 lc(g^2 mod f)~-2.419e+21 L2-BAD
+  d=2637635 [5, 7, 11, 13, 17, 31] phi/d=0.5241 K=19 offset=1 lc(g^2 mod f)~-8.513e+22 L2-BAD
+  d=2947945 [5, 7, 11, 13, 19, 31] phi/d=0.5276 K=17 offset=1 lc(g^2 mod f)~-2.102e+23 L2-BAD
+  d=3855005 [5, 7, 11, 17, 19, 31] phi/d=0.5379 K=13 offset=1 lc(g^2 mod f)~1.239e+27 good-L2
+  d=4555915 [5, 7, 13, 17, 19, 31] phi/d=0.5462 K=11 offset=1 lc(g^2 mod f)~-4.667e+27 L2-BAD
+  d=7159295 [5, 11, 13, 17, 19, 31] phi/d=0.5793 K=7 offset=1 lc(g^2 mod f)~-2.879e+22 L2-BAD
+  d=10023013 [7, 11, 13, 17, 19, 31] phi/d=0.6207 K=5 offset=1 lc(g^2 mod f)~-2.089e+25 L2-BAD
+  needs deeper check: [385, 455, 595, 6545, 7315, 7735, 8645, 12155, 13585, 17765, 20995, 85085, 95095, 155155, 239785, 267995, 323323, 350455, 550715, 1616615, 2637635, 2947945, 4555915, 7159295, 10023013]

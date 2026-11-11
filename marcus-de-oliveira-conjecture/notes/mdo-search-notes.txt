@@ -1,0 +1,38 @@
+Marcus-de Oliveira search notes, 6 November 2026
+
+The target is the full conjecture for all normal complex matrices, in every
+dimension. A single exactly certified counterexample would suffice to refute it.
+No counterexample has been found here.
+
+For spectra a,b and a sampled unitary U, the program compares
+  det(diag(a) + U diag(b) U*)
+with the convex hull of all permutation products prod_i(a_i + b_sigma(i)).
+The signed gap is the largest outward-edge projection of the determinant
+minus the support of that polygon. Positive gap means a numerical candidate.
+The reported normalization is the maximum modulus of a permutation product.
+
+The latest completed batch is reproduced by
+  node mdo-search.mjs --distinct 1000
+
+It fixes a sampled U in each restart and optimizes four complex spectral
+coordinates. The first three a-values and first b-value remain fixed. Their
+nonzero four-point circle determinant excludes a common generalized circle
+for a_0,a_1,a_2,-b_0. Eigenvalues within each spectrum stay at least 0.15 apart.
+All eigenvalues are constrained to the unit disc. Half the unitary samples
+come from the Drury skew-conference family; the others use random Givens
+rotations, without a claim that the sampling is Haar uniform.
+
+Each coordinate objective comes from affine dependence of the determinant
+and all permutation products on that coordinate. The program tests interior,
+line-intersection and circle-boundary candidates, with direct determinant
+checks of the predicted value and monotonicity. Small analytic fixtures
+include excluded-disc and intersecting-circle cases.
+
+Observed result: 1,000 completed restarts, 192,000 coordinate updates,
+best normalized signed gap -0.002375736320523357, no positive candidate.
+The best sampled case is retained in mdo-distinct-search-results.json.
+
+These are floating-point finite computations. There is no completeness,
+global-optimality, interval-arithmetic or exact-rational certificate. They
+neither prove the conjecture nor exclude counterexamples outside these
+sampled, bounded, separated spectral configurations.

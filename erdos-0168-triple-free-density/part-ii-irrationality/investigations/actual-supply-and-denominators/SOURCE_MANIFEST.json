@@ -1,0 +1,147 @@
+{
+  "integrationDate": "2026-11-08",
+  "scope": "New Claude scalar-supply and model-denominator files; source files preserved unchanged",
+  "files": [
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/actual.py",
+      "bytes": 1288,
+      "sha256": "89b6ed4be36c8a1cd4d7cdba73031b07d26b0b38810d01d378bcbe42a2838e10"
+    },
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/avoid.py",
+      "bytes": 624,
+      "sha256": "447432d029681103748782fcc6df737c9536f785cec709239303bd6113e62607"
+    },
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/elig.py",
+      "bytes": 1062,
+      "sha256": "1b06a0b2dd2086c531b972d582ad4aa4a1f065f95341d44420f9906e7bd74a14"
+    },
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/eset.py",
+      "bytes": 1086,
+      "sha256": "10fb57bb3d3baebfc1dfd6e44f55690ce1bfe4d6461fd1fba0b2ee2fe12c79b9"
+    },
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/rec.py",
+      "bytes": 829,
+      "sha256": "d09918cab5a61c895d173903c8b13b6152fa6a20580abf48955a7a31c0115a9a"
+    },
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/resid.py",
+      "bytes": 716,
+      "sha256": "1a36539a0bec2c753c2570fdb8626213f530cd5f5eadc2bfa43e4eac3fedbf0a"
+    },
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/supply_barrier.md",
+      "bytes": 13147,
+      "sha256": "62a64854f1ba13f55f6526beadace31e11d5d0482fbe00ce087df4332d98dc78"
+    },
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/tail.py",
+      "bytes": 1131,
+      "sha256": "f37865b80e43bdb6a2d1040f6466866601e966152dc06457d13e172eb8003266"
+    },
+    {
+      "path": "research_notes/Erdos 168 scalar supply barrier/tail2.py",
+      "bytes": 1278,
+      "sha256": "d0c3bb9ab4b053d5f43a050c250f32b2b9a3cc896ba212db139df93062f70856"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/actual_models.json",
+      "bytes": 3033,
+      "sha256": "4de21acb0ac4ecb5c9356aaa9d66f0cf0ae85d1b1ca6417b2fa2d2651f66ee89"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/actual_models.py",
+      "bytes": 2856,
+      "sha256": "3ddacbbd5ea66c28309b1a56c48d2fe7e0337c8c2b5c2c0ef746bdced88338c7"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/actual_models_out.txt",
+      "bytes": 3352,
+      "sha256": "0c76ef0dbe8325aff52bd81bb74df30cdfe48d6d9323fd1dd6619dff819876d8"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/certify.py",
+      "bytes": 2612,
+      "sha256": "f9c104972d626677937e8c0dbfa49d1b736d22f338d8d7c7da1bcf1214009a51"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/certify_out.txt",
+      "bytes": 1374,
+      "sha256": "a6d972f3420e3cef8af8a1475a9983d6e5141969fac77ee78dc76e8134007d2e"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/fastmodel.py",
+      "bytes": 4340,
+      "sha256": "f9e92253480fcc4f2e0c1f20a33f25af5dd41f3a03eca2653d9256641d877d29"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/firstdiff.py",
+      "bytes": 2238,
+      "sha256": "f2f163dd447e23c5a4ce6b7a1569310d2d7f8bf8b72d1a9e959b54b55db52ee3"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/firstdiff_nr.py",
+      "bytes": 2133,
+      "sha256": "7460174d8b7bfd069a48318a67fd322fd73a4bf0144c54466fe864832c352f19"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/kappa_min.py",
+      "bytes": 1319,
+      "sha256": "cc806492e3749184f92a0c860ba1b09a49dc1eff30dbe3511b1a9302669f7209"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/models.pkl",
+      "bytes": 307202,
+      "sha256": "febd665a591a8985ed70f2857a04a0b2ca09534b22658821320ced7fff5a182a"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/nonvanish_out.txt",
+      "bytes": 879,
+      "sha256": "e0c41857a38f7f43aa5adc9f5ff04d66f03adb2e32f7f84530ef3fcb0b926847"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/res1054.pkl",
+      "bytes": 4572,
+      "sha256": "6482715dd20711452eacacde918a22580ae0af8d04a0dc1f2654ce0ebb838a74"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/res1054.py",
+      "bytes": 1435,
+      "sha256": "089feb4601a5eb9e20a65f812f496f7056e9cb53b62e5178cba1ee521fefb54a"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/resmodel.py",
+      "bytes": 6750,
+      "sha256": "7cc26e4a314946f5c127dae967a19c6667c996be1102cf46ca91d2cf3854d445"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/theory.md",
+      "bytes": 16982,
+      "sha256": "071677afbdfe9e20259a870d1d96f270a6e4728cfa24d28efc22d6c79553f837"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/z24727.pkl",
+      "bytes": 37126,
+      "sha256": "c81c2cfe2f8cac99954c4e01d9fd3b1a09022828407d0760a17ae2b173090b6c"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/zcf.pkl",
+      "bytes": 21506,
+      "sha256": "a6dcdcb2b754ed19bd8cf08a93f8c4aa3df1e2bcc9e3fe84c80807bb2efa113c"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/zcf.py",
+      "bytes": 1979,
+      "sha256": "18d7bb07a373f68ed03810fdf0c79842ff0fda4afeaf1514c6f73dce8564098f"
+    },
+    {
+      "path": "research_notes/Erdos 168 actual supply and denominators/zcf_best.pkl",
+      "bytes": 147892,
+      "sha256": "e5825c28cf104514d7761a33df5c7f92356c97175a4410f4a4406344d6e9b5a5"
+    }
+  ],
+  "progressBeforeIntegrationSHA256": "0017dd16ba4bd7f2f5262a3fbd963f35bfe9c9441706e9f3c3e385919b9b5939"
+}

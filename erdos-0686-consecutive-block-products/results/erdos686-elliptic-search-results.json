@@ -1,0 +1,58 @@
+{
+  "coefficientBound": 12,
+  "checkedPoints": 624,
+  "distinctPoints": 624,
+  "largestCoordinateDigits": 284,
+  "integralPairs": [
+    {
+      "i": -1,
+      "j": -2,
+      "x": "1",
+      "y": "0"
+    },
+    {
+      "i": -1,
+      "j": -1,
+      "x": "-1",
+      "y": "-1"
+    },
+    {
+      "i": -1,
+      "j": 0,
+      "x": "0",
+      "y": "1"
+    },
+    {
+      "i": 0,
+      "j": -1,
+      "x": "-1",
+      "y": "1"
+    },
+    {
+      "i": 0,
+      "j": 1,
+      "x": "1",
+      "y": "-1"
+    },
+    {
+      "i": 1,
+      "j": 0,
+      "x": "0",
+      "y": "-1"
+    },
+    {
+      "i": 1,
+      "j": 1,
+      "x": "1",
+      "y": "1"
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "x": "-1",
+      "y": "0"
+    }
+  ],
+  "candidate": null,
+  "scope": "Exact rational subgroup search with coefficient bounds; not an exhaustive integral-point computation."
+}

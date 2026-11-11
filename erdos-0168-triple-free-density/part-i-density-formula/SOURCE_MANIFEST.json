@@ -1,0 +1,152 @@
+{
+  "integrationDate": "2026-11-08",
+  "sourceRoot": "C:\\Users\\sunay\\Erdos\\erdos168",
+  "description": "Unmodified source snapshot; final rigor and novelty review deferred by user.",
+  "files": [
+    {
+      "path": "brute_check.py",
+      "bytes": 633,
+      "sha256": "428949C6619852FEDF53B02ED2294FC84DA980805B715D11AA3B7FFC5B416090"
+    },
+    {
+      "path": "c_digits.py",
+      "bytes": 1621,
+      "sha256": "7406FABE4728EBBE69A132D26DAFF6EB7EC1A3E2FB79EAD4C15AFB3F1C8AC121"
+    },
+    {
+      "path": "col0.py",
+      "bytes": 1720,
+      "sha256": "AF3CFF558DCF00BAC84CF8447C359EDAD93A97EAA9F8DB297C521DA0E0ED979D"
+    },
+    {
+      "path": "eta_rule.py",
+      "bytes": 2636,
+      "sha256": "F7969E6FF8D98044F2BE9C7730C0843B891447595322C41B2FFD987B0AA3F4FB"
+    },
+    {
+      "path": "fit3.py",
+      "bytes": 884,
+      "sha256": "D90490FF58C8115DCBDFBCB371D240BEA75EB25E9AA456075FCF830233E49677"
+    },
+    {
+      "path": "lemma_probe.py",
+      "bytes": 2685,
+      "sha256": "F1F1E338758A5325C767A3C391AF5145C57519A4C6EF6C453BEDDAA3DE6A96D4"
+    },
+    {
+      "path": "lp.py",
+      "bytes": 828,
+      "sha256": "2C43741A02E3D543A3A429A74CF2E821D8A9FE090AD0F9B87F1E3B3A97C56B1C"
+    },
+    {
+      "path": "packing.py",
+      "bytes": 1098,
+      "sha256": "8A60337F08471E727EE685DA95396391FFDBF4BE798E273D30C21091437A2FFE"
+    },
+    {
+      "path": "PROOF.md",
+      "bytes": 36510,
+      "sha256": "90010CEA3EABE334A7CED5971181F9B4CAF230F89B40506050BA0585A62EAA31"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 19339,
+      "sha256": "2B725F6853CF05101AEBEEB089D72A786CD497DCC5CFDFAC62C82895A749ABAC"
+    },
+    {
+      "path": "rowdp.py",
+      "bytes": 957,
+      "sha256": "4652DEF3DFDE2FEAEF3E04E4133A85C636A07131B13DB4F66F5111894DD46C2C"
+    },
+    {
+      "path": "S3_big.txt",
+      "bytes": 21,
+      "sha256": "5C9467BB886F66AE8B2E0027A3A702B2F99065AF93E33A022FB223E82BF0E335"
+    },
+    {
+      "path": "shapes.py",
+      "bytes": 1456,
+      "sha256": "4A60D18AEF6E59F9AFDFD72495171171E0E15722771ED8BE658CAF3FD93939A0"
+    },
+    {
+      "path": "symbolic_audit.py",
+      "bytes": 11710,
+      "sha256": "08C84D19F3B66CBDA077D89BC413FFB9E4D4E73C58CB921BC4CDB2A83C7057CA"
+    },
+    {
+      "path": "tau_dp.py",
+      "bytes": 2169,
+      "sha256": "FC56655B6A98A621F38450D176F9444C00D757674EB0325D01EDF4B10E1DF24B"
+    },
+    {
+      "path": "test_pack.py",
+      "bytes": 569,
+      "sha256": "7D66D16E624F17CA1C792AEB35F35720061F36874C0BFCC16FDEB675A17C2E06"
+    },
+    {
+      "path": "test_S.py",
+      "bytes": 520,
+      "sha256": "C134575EEC8B4EA6C4EF8827DE549C7425A8AA9DBCECFA0BEB6414459A833E58"
+    },
+    {
+      "path": "test_S2.py",
+      "bytes": 543,
+      "sha256": "7EC9DC2A8B870DC218F8E2BCB70D1062BBF88BCFB49E4992C1689B7EC085A570"
+    },
+    {
+      "path": "test_S3.py",
+      "bytes": 751,
+      "sha256": "67BC80631324C050FEB6112CDEC58A435B3F78CDD499039F66E935043F5A6406"
+    },
+    {
+      "path": "test_S4.py",
+      "bytes": 745,
+      "sha256": "4E5C652BC9484701B43B95225BA966D40645BA3516F4A27951D72B563401198E"
+    },
+    {
+      "path": "walk.py",
+      "bytes": 1672,
+      "sha256": "7F8FD3EB7055E6BE6EDFAE639F2D54DC52B01B1C2866962CB0A9F81455FBDF7E"
+    },
+    {
+      "path": "audit/audit_formula.py",
+      "bytes": 3816,
+      "sha256": "7819FC2F2C4F506F5F748322514C1B1D6B57793BCBECB90D70CBF854EF3F2300"
+    },
+    {
+      "path": "audit/audit_ilp.py",
+      "bytes": 4289,
+      "sha256": "AFAE19AE1624DED25F4B64CC0E7A349E34AA6E1EB189B3A92BB7F9A5C0EC890C"
+    },
+    {
+      "path": "audit/audit_struct.py",
+      "bytes": 10548,
+      "sha256": "18A7625A725260BF3F1E7D6E31429A8F002163333924DE259A487E5127AAEC26"
+    },
+    {
+      "path": "audit/AUDIT.md",
+      "bytes": 20948,
+      "sha256": "4A918C9216E3534953DFCC9BFC04DD93DBAC9DA7936E7EF2529C10B28B720378"
+    },
+    {
+      "path": "audit/out_formula_3e9.txt",
+      "bytes": 1253,
+      "sha256": "EBA6E985940EE16585075E6C2D95A749A6470B2E3154E24C75860CAA657726C2"
+    },
+    {
+      "path": "audit/out_ilp_60000.txt",
+      "bytes": 562,
+      "sha256": "2E6425189D75E0F25DE671C19A8F7959CA5F0378C349FD5FE5AC48E319D3F9B1"
+    },
+    {
+      "path": "audit/out_struct_1000.txt",
+      "bytes": 460,
+      "sha256": "A9C3E913DD2ED27E68AA459C73C0CA310A9C13601566A64E67609892DC1AC3DC"
+    },
+    {
+      "path": "audit/out_struct_2200.txt",
+      "bytes": 464,
+      "sha256": "114D6575ED8656B4970EF2B4C16DDE48A59967D8F3A273D5E9B6F8C626885690"
+    }
+  ]
+}

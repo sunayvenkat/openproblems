@@ -1,0 +1,18 @@
+{'n': 4, 'p': 5, 'q': 8, 'a_next': 2, 'Q': 19, 's': 1, 'side': 'lower', 'Q_minus_5q': -21, 'den_bits': 44, 'D_bits': 53, 'log2_cleared_bound': 29.9, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 0.0}
+{'n': 5, 'p': 12, 'q': 19, 'a_next': 3, 'Q': 65, 's': 1, 'side': 'upper', 'Q_minus_5q': -30, 'den_bits': 108, 'D_bits': 119, 'log2_cleared_bound': 38.9, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 0.0}
+{'n': 6, 'p': 41, 'q': 65, 'a_next': 1, 'Q': 84, 's': 1, 'side': 'lower', 'Q_minus_5q': -241, 'den_bits': 393, 'D_bits': 395, 'log2_cleared_bound': 249.9, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 0.0}
+{'n': 7, 'p': 53, 'q': 84, 'a_next': 5, 'Q': 485, 's': 2, 'side': 'upper', 'Q_minus_5q': 65, 'den_bits': 507, 'D_bits': 509, 'log2_cleared_bound': -56.1, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 0.0}
+{'n': 8, 'p': 306, 'q': 485, 'a_next': 2, 'Q': 1054, 's': 2, 'side': 'lower', 'Q_minus_5q': -1371, 'den_bits': 2908, 'D_bits': 2915, 'log2_cleared_bound': 1379.9, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 0.0}
+{'n': 9, 'p': 665, 'q': 1054, 'a_next': 23, 'Q': 24727, 's': 0, 'side': 'upper', 'Q_minus_5q': 19457}
+{'n': 10, 'p': 15601, 'q': 24727, 'a_next': 2, 'Q': 50508, 's': 2, 'side': 'lower', 'Q_minus_5q': -73127, 'den_bits': 148363, 'D_bits': 148367, 'log2_cleared_bound': 73135.9, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 2.0}
+{'n': 11, 'p': 31867, 'q': 50508, 'a_next': 2, 'Q': 125743, 's': 1, 'side': 'upper', 'Q_minus_5q': -126797, 'den_bits': 303048, 'D_bits': 303053, 'log2_cleared_bound': 126805.9, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 20.8}
+{'n': 12, 'p': 79335, 'q': 125743, 'a_next': 1, 'Q': 176251, 's': 1, 'side': 'lower', 'Q_minus_5q': -452464, 'den_bits': 754461, 'D_bits': 754463, 'log2_cleared_bound': 452472.9, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 125.0}
+{'n': 13, 'p': 111202, 'q': 176251, 'a_next': 1, 'Q': 301994, 's': 2, 'side': 'upper', 'Q_minus_5q': -579261, 'den_bits': 1057509, 'D_bits': 1057511, 'log2_cleared_bound': 579269.9, 'full_Phi3q2': True, 'full_Phi3p3': True, 'gcdN_Phi3q2_bits': 1, 'gcdN_Phi3p3_bits': 1, 'secs': 285.6}
+diff n=4 vs n=5: log2|z_i-z_j| = -31.58 ; -(q+Q) = -27 ; normalized r=(z_j-z_i)2^(q+Q) = 0.0418493
+diff n=5 vs n=6: log2|z_i-z_j| = -92.81 ; -(q+Q) = -84 ; normalized r=(z_j-z_i)2^(q+Q) = 0.0022356
+diff n=6 vs n=7: log2|z_i-z_j| = -156.09 ; -(q+Q) = -149 ; normalized r=(z_j-z_i)2^(q+Q) = -0.00732198
+diff n=7 vs n=8: log2|z_i-z_j| = -578.33 ; -(q+Q) = -569 ; normalized r=(z_j-z_i)2^(q+Q) = -0.00155185
+diff n=8 vs n=10: log2|z_i-z_j| = -1548.90 ; -(q+Q) = -1539 ; normalized r=(z_j-z_i)2^(q+Q) = 0.00104929
+diff n=10 vs n=11: log2|z_i-z_j| = -75252.35 ; -(q+Q) = -75235 ; normalized r=(z_j-z_i)2^(q+Q) = 5.9876e-06
+diff n=11 vs n=12: log2|z_i-z_j| = -212338.04 ; -(q+Q) = -176251 ; normalized r=(z_j-z_i)2^(q+Q) = 0
+diff n=12 vs n=13: log2|z_i-z_j| = -302018.25 ; -(q+Q) = -301994 ; normalized r=(z_j-z_i)2^(q+Q) = -5.01465e-08

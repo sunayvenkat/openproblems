@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-10",
+  "files": [
+    {
+      "path": "research_notes/Erdos 168 tail gcd obstruction/notes.md",
+      "sha256": "1520a78d6a188c03838b6f510274f85037bbc505d652199de441278111218fb3",
+      "bytes": 8098
+    },
+    {
+      "path": "research_notes/Erdos 168 tail gcd obstruction/master_proof_synthesis.md",
+      "sha256": "29da57652d7ef3d2f23153c579f09cec7008d9b74c8ddad2362ad547e0fee6be",
+      "bytes": 11402
+    },
+    {
+      "path": "research_notes/Erdos 168 tail gcd obstruction/verify_tail_gcd.py",
+      "sha256": "dc21c21da9d364adccdcebf61b282ec2e663da6322bea65e6f5cfe70569fcd48",
+      "bytes": 2629
+    },
+    {
+      "path": "research_notes/Erdos 168 tail gcd obstruction/verify_single_clearer_obstruction.py",
+      "sha256": "6881a53c6084679f3811a725d303a11dd8712fec140eb6278551c7a77b149a10",
+      "bytes": 7405
+    },
+    {
+      "path": "research_notes/Erdos 168 tail gcd obstruction/verify_pigeonhole_gcd.py",
+      "sha256": "fbedf2fe1800aae5c2a312d18beba725187fed7d2c7fef7e6cfaec682b73757d",
+      "bytes": 3984
+    }
+  ]
+}

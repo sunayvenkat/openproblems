@@ -1,0 +1,11 @@
+{
+  "seed": 2432026,
+  "order": 4,
+  "restarts": 10000,
+  "pinnedEigenvaluesPerSpectrum": 3,
+  "completedRestarts": 10000,
+  "coordinateUpdates": 960000,
+  "bestNormalizedExcess": -0.0008502443985303457,
+  "candidate": null,
+  "scope": "Floating-point joint spectral/unitary search. A positive candidate requires exact reconstruction and verification."
+}

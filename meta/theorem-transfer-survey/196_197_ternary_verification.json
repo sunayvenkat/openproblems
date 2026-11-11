@@ -1,0 +1,8 @@
+{
+  "vertices": 27,
+  "monotoneTriples": 65,
+  "monotoneFours": 0,
+  "coloringsUpToComplement": 0,
+  "visited": 3665,
+  "rejected": 3666
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "t": 1536,
+    "j": 2,
+    "vertices": 45,
+    "status": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+  },
+  {
+    "t": 3072,
+    "j": 0,
+    "vertices": 53,
+    "status": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+  },
+  {
+    "t": 24576,
+    "j": 0,
+    "vertices": 80,
+    "status": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)"
+  }
+]

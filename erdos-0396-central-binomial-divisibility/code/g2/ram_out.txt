@@ -1,0 +1,8 @@
+105 log Q = sum c_m(N) y^N/N  OK
+1155 log Q = sum c_m(N) y^N/N  OK
+8 2145 r 4 peak lemma OK: log|Psi(zeta_q)| = 6.7836
+8 1181895 r 6 peak lemma OK: log|Psi(zeta_q)| = 27.9366
+8 43730115 r 7 peak lemma OK: log|Psi(zeta_q)| = -55.7939
+12 327845 r 5 peak lemma OK: log|Psi(zeta_q)| = -20.4128
+10 106743 r 5 peak lemma OK: log|Psi(zeta_q)| = -14.9176
+10 3949491 r 6 peak lemma OK: log|Psi(zeta_q)| = 30.3163

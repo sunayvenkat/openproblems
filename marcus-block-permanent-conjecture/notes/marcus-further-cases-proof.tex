@@ -1,0 +1,260 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry,hyperref}
+\geometry{margin=1in}
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{Exact tensor-square certificates for two further cases\\of Marcus's block-permanent conjecture}
+\author{Research proof for independent verification}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give computer-assisted, exact rational certificates for the complete cases
+$(m,k)=(4,2)$ and $(3,3)$ of Marcus's block-permanent conjecture, including
+its equality condition. The certificates establish stronger inequalities for
+arbitrary symmetric tensors in specified dimensions. They are verified by two
+separate implementations, one using only Node's built-in libraries and exact
+integer and rational arithmetic. The arbitrary-$m,k$ conjecture remains
+unresolved in this work; novelty has not been independently assessed.
+\end{abstract}
+
+\begin{theorem}\label{main}
+Let $A$ be a complex Hermitian positive semidefinite matrix, partitioned into
+$m\times m$ blocks of size $k\times k$, and let $G_{ij}=\per A_{ij}$.
+If $(m,k)=(4,2)$ or $(m,k)=(3,3)$, then
+\[
+\per A\geq\per G.
+\]
+When $A$ has no zero row, equality holds exactly when $A$ is block diagonal.
+In particular this includes the equality clause with positive definite diagonal
+blocks in the original conjecture.
+\end{theorem}
+
+\section{The stronger tensor statements}
+The Fock inner product satisfies
+$\langle z^\alpha,z^\beta\rangle_F=\mathbf1_{\alpha=\beta}\alpha!$
+and is conjugate-linear in its first entry. For a symmetric order-$k$ tensor
+$Q$ on $\mathbb C^r$, write
+\[
+p_Q(z)=\sum_{a_1,\ldots,a_k=1}^r Q_{a_1\cdots a_k}z_{a_1}\cdots z_{a_k}.
+\]
+In particular $\langle p_Q,p_R\rangle_F=k!\langle Q,R\rangle$.
+For $m$ such tensors define
+\[
+F(Q_1,\ldots,Q_m)=\left\|\prod_i p_{Q_i}\right\|_F^2
+-\per[\langle p_{Q_i},p_{Q_j}\rangle_F]_{i,j=1}^m.
+\]
+The support space $U_Q$ is the span of the vectors obtained by fixing all but
+one index of $Q$. Equivalently it is the smallest subspace whose $k$th
+symmetric power contains $Q$.
+
+\begin{lemma}\label{certified}
+The inequality $F\geq0$ holds for arbitrary symmetric tensors for both
+parameter triples
+\[
+(m,k,r)=(4,2,6),\qquad (m,k,r)=(3,3,9).
+\]
+If every tensor is nonzero, equality holds if and only if their support spaces
+are pairwise orthogonal. Both statements also hold in smaller dimension by
+zero padding.
+\end{lemma}
+
+The exact certificates for this lemma are the accompanying files
+\texttt{marcus-invariant-exact-4-6.json} and
+\texttt{marcus-invariant-exact-3-9-k3.json}. The next two sections specify
+their meaning and give a finite exact proof procedure. These files contain
+the rational numbers in the identities, rather than numerical solver output.
+
+\section{Definition and interpretation of the certificates}
+Fix a cut $c\in\{1,\ldots,m-1\}$ and set
+$L=kc-1$, $R=k(m-c)-1$, and $B=L+R=km-2$.
+A network consists of one list of $k$ indices for each of the $m$ tensor
+factors, and a list of Kronecker delta pairs. Indices $0,\ldots,B-1$ are free;
+the first $L$ are holomorphic free indices and the rest are antiholomorphic.
+Every free index occurs once, either in a tensor or in a delta. Internal
+indices occur twice, joining one tensor on each side of the cut. Each delta
+joins one holomorphic and one antiholomorphic free index. There is at least
+one internal contraction; the number of deltas is one less than the number
+of internal contractions.
+
+For such a network $n$, $T_n(Q)$ is the tensor obtained by taking
+$Q_1,\ldots,Q_c,\overline{Q_{c+1}},\ldots,\overline{Q_m}$, placing their
+indices as specified, multiplying by the specified deltas, and summing all
+internal indices from $1$ to $r$. The free indices label its entries.
+The certificate field \texttt{networks} lists these networks in order for
+each cut. All entries are integers; indices, tensor labels and matrix entries
+in the JSON files are zero-based.
+
+Each block $b$ of the certificate gives an integer matrix $C_b$ with one row
+per network for its cut, and a rational symmetric matrix $H_b$. Set
+\[
+V_{b,a}=\sum_n(C_b)_{na}T_n,
+\qquad S_b(Q)=\sum_{a,d}(H_b)_{ad}\langle V_{b,a},V_{b,d}\rangle.
+\]
+Here $C_b$ is the field \texttt{basis}, and $H_b$ is \texttt{gram}; rational
+entries are written as exact integer fractions. The identity certified is
+\begin{equation}\label{identity}
+ F(Q)=\frac1{m!}\sum_{\pi\in S_m}\sum_b
+ S_b(Q_{\pi(1)},\ldots,Q_{\pi(m)}).
+\end{equation}
+Every $H_b$ is positive definite, so the right side is nonnegative.
+The block names record how the bases were discovered but are not assumptions
+needed to verify the inequality. Only the cut prefix has mathematical
+meaning for the verifier.
+
+\section{Exact verification of the identity and positivity}
+An Einstein contraction with one copy each of $Q_i$ and $\overline{Q_i}$ is
+specified by an $m\times m$ table $N$ of nonnegative integers with every row
+and column sum $k$. Its invariant $I_N$ contracts $N_{ij}$ indices between
+$Q_i$ and $\overline{Q_j}$. Symmetry of the tensors makes the choice of indices
+irrelevant. Wick expansion gives
+\[
+\left\|\prod_i p_{Q_i}\right\|_F^2
+=\sum_N\frac{(k!)^{2m}}{\prod_{ij}N_{ij}!}\,I_N.
+\]
+The terms with $N=kP$, $P$ a permutation matrix, are exactly $\per G$.
+Thus $F$ has coefficient zero on those tables and the displayed positive
+coefficient on every other table.
+
+To expand $\langle T_n,T_{n'}\rangle$, glue the free indices of the two
+networks, conjugating the first. Each remaining index component either joins
+one holomorphic tensor leg to an antiholomorphic one, or is a closed loop
+of deltas. It therefore equals $r^\ell I_N$, where $\ell$ is the number of
+closed loops. This computes every coefficient of every $S_b$ using integers
+and the rational entries of $H_b$.
+
+Both sides of \eqref{identity} are invariant under simultaneous permutation
+of tensor labels. Their real coefficient expansions are also invariant under
+$N\mapsto N^{\mathsf T}$. It is therefore sufficient to compare the total
+coefficient in each orbit under these operations. Averaging the right side
+by $1/m!$ distributes its orbit total uniformly, exactly as on the left.
+The following are the exact verification counts:
+\[
+\begin{array}{c|r|r|r|r|r}
+(m,k,r)&\text{Wick tables}&\text{orbits}&\text{Gram blocks}
+&\text{cut-1 networks}&\text{spanning rank}\\\hline
+(4,2,6)&282&25&15&360&360\\
+(3,3,9)&55&16&11&320&320
+\end{array}
+\]
+Every orbit coefficient agrees exactly. A rational $LDL^{\mathsf T}$
+decomposition gives strictly positive pivots for every $H_b$, proving
+positive definiteness without an eigenvalue tolerance.
+
+The independent verifier \texttt{marcus-invariant-verify.mjs} enumerates
+the individual Wick pairings ($8!$ or $9!$), constructs the glued contraction
+tables directly from the saved networks, checks every rational coefficient
+equation, and performs rational $LDL^{\mathsf T}$. It uses only Node built-ins.
+Run
+\begin{verbatim}
+node marcus-invariant-verify.mjs marcus-invariant-exact-4-6.json
+node marcus-invariant-verify.mjs marcus-invariant-exact-3-9-k3.json
+\end{verbatim}
+The separate Python verifier \texttt{marcus-invariant-certify.py} reaches
+the same conclusion using the factorial formula for Wick coefficients.
+Floating-point semidefinite optimization was used to discover candidate
+matrices, but it is not used in either final positivity or identity check.
+
+\section{Equality in the tensor statements}
+Equality in \eqref{identity}, with every $H_b$ positive definite, forces every
+$V_{b,a}$ to vanish for every permutation of the input tensors.
+For cut one, the columns of the matrices $C_b$, together with their
+permutations of free holomorphic and antiholomorphic boundary positions,
+span the entire network space. This is checked exactly: the standalone
+verifier closes this span under adjacent boundary transpositions and finds
+full rank over the prime field of order $1000003$. Full rank modulo that
+prime implies full rank over $\mathbb Q$, and hence over $\mathbb C$.
+Boundary permutations act as isometries on tensor entries, so the vanishing
+of the $V_{b,a}$ implies vanishing of every cut-one raw tensor $T_n$.
+
+In particular take a network with just one internal contraction, between
+$Q_i$ and $\overline{Q_j}$, and no deltas. The other nonzero factors occur
+as an ordinary tensor product. Its vanishing therefore says
+\[
+\sum_s(Q_i)_{s\alpha}\overline{(Q_j)_{s\beta}}=0
+\quad\hbox{for every }\alpha,\beta.
+\]
+By permuting block labels this holds for every pair $i\ne j$. It is precisely
+$U_{Q_i}\perp U_{Q_j}$. Conversely pairwise orthogonal support spaces give
+disjoint Gaussian coordinates and factorization, proving equality. This
+finishes the proof of Lemma~\ref{certified}.
+
+\section{Application to three blocks of size three}
+Choose Gram vectors $v_{ia}$ for $A$ and let
+$p_i=\prod_{a=1}^kL_{v_{ia}}$, where $L_v(z)=\sum_s v_sz_s$.
+Then Gaussian expansion gives
+\[
+\per A=\left\|\prod_i p_i\right\|_F^2,\qquad
+G_{ij}=\langle p_i,p_j\rangle_F.
+\]
+For $m=k=3$ the nine Gram vectors span at most nine dimensions, so
+Lemma~\ref{certified} applies directly.
+
+For a nonzero product of linear forms its support space is exactly the span
+of its coefficient vectors. Indeed, its derivative in a direction vanishes
+identically if and only if every factor has zero derivative in that direction:
+under translation the degree in the translation parameter is the number of
+factors with nonzero directional derivative. Thus the equality statement in
+the lemma says precisely that the three block spans are orthogonal. This is
+block diagonality of $A$.
+
+\section{Application to four blocks of size two}
+We use the previously proved three-pairs theorem, with its explicit integer
+tensor-square identity, in \texttt{marcus-three-pairs-proof.tex}.
+It says that $\|p_1p_2p_3\|_F^2\geq\per\operatorname{Gram}(p_1,p_2,p_3)$
+for split quadratics in every dimension, with equality for nonzero factors
+exactly when the three block spans are pairwise orthogonal.
+
+Let $U$ be the span of the six vectors in the first three blocks, so
+$\dim U\leq6$. In coordinates $z\in U$ and $w\in U^\perp$, expand
+\[
+p_4(z,w)=p_0(z)+\sum_{\alpha\ne0}h_\alpha(z)
+                    \frac{w^\alpha}{\sqrt{\alpha!}}.
+\]
+Put $f=p_1p_2p_3$ and $q=\per\operatorname{Gram}(p_1,p_2,p_3)$.
+Only $p_0$ contributes to inner products with the first three forms. Expanding
+the final diagonal entry of the Gram permanent and using orthogonality of
+the $w$ monomials gives
+\begin{align*}
+\|fp_4\|_F^2-\per G
+={}&F(p_1,p_2,p_3,p_0)
+ +\sum_{\alpha\ne0}(\|fh_\alpha\|_F^2-q\|h_\alpha\|_F^2).
+\end{align*}
+The first term is nonnegative by the $(4,2,6)$ certificate. The elementary
+Fock multiplication inequality $\|fh\|_F^2\geq\|f\|_F^2\|h\|_F^2$,
+together with the three-pairs theorem, makes every other term nonnegative.
+For completeness that multiplication inequality follows from normal ordering:
+\[
+\|fh\|_F^2=\sum_\beta\frac1{\beta!}
+\| (\partial^\beta f)^*(\partial)h\|_F^2;
+\]
+the terms of maximum derivative degree give the required product of norms.
+
+Assume all eight vectors are nonzero and equality holds. If $p_0\ne0$,
+equality in the certificate would force its support, contained in $U$, to be
+orthogonal to the supports of the first three forms, which span $U$.
+This is impossible, so $p_0=0$. Some $h_\alpha$ is nonzero; its summand then
+forces $\|f\|_F^2=q$, and the first three block spans are pairwise orthogonal.
+
+Write the fourth block vectors as $x+x'$ and $y+y'$, with $x,y\in U$ and
+$x',y'\in U^\perp$. Since $p_0=L_xL_y=0$, at least one of $x,y$ is zero.
+If $x=0$ and $y\ne0$, nonzeroness of $x'$ gives an outside-degree-one
+coefficient $h_\alpha$ which is a nonzero multiple of $L_y$.
+The linear multiplication identity
+\[
+\|fL_y\|_F^2-\|f\|_F^2\|y\|^2=\|D_y f\|_F^2
+\]
+then makes its summand strictly positive, since the factors of $f$ span $U$
+and $y\in U\setminus\{0\}$. The other case is identical. Hence $x=y=0$.
+All four block spans are orthogonal, proving the required equality condition.
+The converse follows by permanent factorization. This completes the proof
+of Theorem~\ref{main}.
+
+\section{Scope}
+Together with the earlier three-pairs identity, this proves the complete
+cases $(3,2)$, $(4,2)$ and $(3,3)$. The certificates do not establish a
+uniform inequality for arbitrary numbers of blocks or arbitrary block sizes.
+No resolution of that remaining statement is claimed here.
+\end{document}

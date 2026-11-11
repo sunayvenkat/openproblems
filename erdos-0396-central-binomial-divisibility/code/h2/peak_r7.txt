@@ -1,0 +1,9 @@
+8 m
+43730115 exact good | float sum sign ok True | top-term ok True | share 0.47
+50821485 exact bad | float sum sign ok True | top-term ok True | share 0.49
+62640435 exact good | float sum sign ok True | top-term ok True | share 0.47
+64841205 exact bad | float sum sign ok True | top-term ok True | share 0.48
+69731805 exact bad | float sum sign ok True | top-term ok True | share 0.48
+72095595 exact good | float sum sign ok True | top-term ok True | share 0.47
+79186965 exact bad | float sum sign ok True | top-term ok True | share 0.48
+79920555 exact good | float sum sign ok True | top-term ok True | share 0.47

@@ -1,0 +1,290 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\title{A spectral route and modular normal form for Green's Problem 15}
+\author{Research notes; no novelty claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Target retired after live status check.} On 6 November 2026,
+the live Conjectures.io page was checked and reports Green 15 approved on
+11 September 2026, submitted by JenW1N, with increments between 1 and 125.
+The attached proof uses a six-letter substitution and endpoint tags.
+This is an external result, not a result of these notes. The research below
+was conducted under a stale open-status assumption and does not fulfill
+the user's request to solve a currently unsolved problem. Source:
+\url{https://conjectures.io/results/66df312f-30b4-4331-b1fa-04be52f7f8ca/solution}.
+
+\noindent\textbf{Status.} Green's Problem 15 has not been solved here.
+The sufficient condition below has been reviewed, but no substitution satisfying
+all its hypotheses has been found. The computations exclude only specified finite
+families. A long square-free prefix would not establish an infinite construction.
+No Lean proof or literature priority claim is made.
+
+An additive square is a pair of adjacent nonempty blocks with the same length
+and the same sum. An abelian square has adjacent blocks with identical letter
+counts. For a word $u$ on $s$ letters, write $\Psi(u)\in\mathbb Z^s$ for its
+column vector of letter counts and $\ell(x)=\sum_i x_i$.
+
+\begin{theorem}[Sufficient spectral condition]
+Let $h$ be a primitive non-erasing substitution with Perron eigenvalue greater
+than one. Suppose a power $g=h^t$ is prolongable on $a$, and let
+$W=g^\omega(a)$. Let $M$ be the column incidence matrix of $h$.
+Suppose $M$ has no eigenvalues of modulus one and that the real generalized
+eigenspace $E$ corresponding to eigenvalues of modulus greater than one has
+dimension two. If $W$ is abelian-square-free, then its letters admit distinct
+positive integer weights for which the resulting integer word is additive-square-free.
+Such a word gives a positive answer to Green's Problem 15.
+\end{theorem}
+
+\begin{proof}
+Replace $g$ by a further power so every image has length at least two;
+primitivity and growth permit this. Write $A$ for its incidence matrix, a
+power of $M$. The expanding and contracting generalized eigenspaces of $A$
+are the same $E$ and $F$ as those of $M$. Let $\pi$ be projection onto $F$
+along $E$, so $\mathbb R^s=E\oplus F$. The Perron eigenvector is positive
+and belongs to $E$, so $\ell$ is nonzero on $E$.
+In particular, $E\cap\ker\ell$ is a line.
+Choose a real row vector $w_0$ nonzero on that line. The map
+\[
+ T_w:x\longmapsto (\ell(x),wx,\pi(x))\in\mathbb R^2\oplus F
+\]
+is invertible at $w=w_0$. There are an open neighborhood $U$ of $w_0$ and
+$K<\infty$ such that $\|T_w^{-1}\|\le K$ for every $w\in U$.
+
+The projected Parikh vectors of factors of $W$ are uniformly bounded.
+Indeed, successively removing whole substitution blocks from a prefix $z$
+gives a finite expansion
+\[
+ \Psi(z)=\sum_{j\ge0}A^j\Psi(p_j),
+\]
+where each $p_j$ is a proper prefix of an image of the powered substitution.
+The parent prefix has at most half the previous length, so this expansion
+terminates. Only finitely many $p_j$ are possible, $\pi$ commutes with $A$,
+and $\sum_j\|A^j|_F\|<\infty$. Hence projected prefixes are bounded. A factor is
+a difference of two prefixes, so there is $B$ such that
+$\|\pi\Psi(u)\|\le B$ for every factor $u$.
+
+For two factors put $d=\Psi(u)-\Psi(v)$. Then $\|\pi d\|\le2B$.
+If $\ell(d)=wd=0$ for $w\in U$, the inverse bound gives $\|d\|\le2KB$.
+There are finitely many nonzero integer vectors $d$ in this ball with
+$\ell(d)=0$. Choose a rational $w\in U$ outside their finitely many
+hyperplanes $wd=0$, and outside the hyperplanes $w_i=w_j$ for $i\ne j$.
+Multiplying by a common denominator and adding a sufficiently large integer
+multiple of $\ell$ makes the weights distinct positive integers. These two
+operations preserve vanishing on vectors with $\ell(d)=0$.
+
+Consequently, factors with equal length and equal weighted sum have equal
+Parikh vectors. An additive square in the weighted word would therefore be an
+abelian square in $W$, a contradiction. Finally let $f(0)=0$ and let
+$f(n+1)-f(n)$ be the $n$th weight. Its bounded increments make it Lipschitz,
+and $f(n)+f(n+2r)=2f(n+r)$, $r>0$, is precisely the excluded additive square.
+\end{proof}
+
+\paragraph{Exact spectral filtering.}
+The search uses integer characteristic polynomials and a Cayley transform,
+rather than approximate eigenvalues. If $q$ has degree $d$, set
+\[
+ R(s)=(1-s)^d q\!\left(\frac{1+s}{1-s}\right).
+\]
+Roots outside the unit disk correspond to roots of $R$ in the open right
+half-plane. Roots $1$ and $-1$ of $q$ are detected directly. In a nonsingular
+Routh table the signs of its first column are those of
+\[
+ a_0,\quad \Delta_1,\quad
+ \Delta_2/\Delta_1,\ldots,\Delta_d/\Delta_{d-1},
+\]
+where $a_0$ is the leading coefficient of $R$ and $\Delta_j$ its leading
+Hurwitz determinants. Their sign changes count right-half-plane roots.
+All determinants in the program are computed with integers.
+
+Singular tables are handled by exact rational shifts as follows.
+If $R$ is an integer polynomial of degree $d$, height $H$, and nonzero
+leading and constant coefficients, put
+\[
+ K=(2d)!\,(H2^{d+1})^{2d},\qquad J=d^2(d+1)+1.
+\]
+The nonzero polynomial
+$T(t)=\operatorname{Res}_s(R(s),R(t-s))$ has integer coefficients of absolute
+value at most $K$. To see the height bound, each entry of its Sylvester matrix
+has coefficient $\ell^1$ norm at most $H2^{d+1}$; expand the determinant and
+use the $(2d)!$ possible permutation terms. Its roots include
+$\alpha+\overline\alpha=2\operatorname{Re}\alpha$ for every root $\alpha$ of $R$.
+After removing any power of $t$, Cauchy's reciprocal root bound shows that
+every nonzero root of $T$ has absolute value at least $1/(1+K)$. Thus
+\[
+ \operatorname{Re}\alpha\ne0
+ \quad\Longrightarrow\quad
+ |\operatorname{Re}\alpha|\ge\frac1{2(1+K)}.
+\]
+Choose an integer $Q>4J(1+K)$. For some $1\le j\le J$, both Routh tables
+of $R(s+j/Q)$ and $R(s-j/Q)$ are nonsingular. Indeed each size-$k$ Hurwitz
+determinant is a nonzero polynomial of degree at most $kd$ in the shift:
+nontriviality follows by moving all roots into one open half-plane.
+Across both signs these polynomials have total degree at most $d^2(d+1)$.
+The two right-half-plane counts respectively exclude and include the
+imaginary-axis roots of $R$; their difference counts those roots with
+multiplicity. The chosen shifts cannot cross any other root by the bound above.
+
+\paragraph{Completed finite search.}
+The starting substitution, due to Rao and Rosenfeld, is
+\[
+ a\mapsto ace,\quad b\mapsto adf,\quad c\mapsto bdf,\quad
+ d\mapsto bdc,\quad e\mapsto afe,\quad f\mapsto bce.
+\]
+Its known abelian-square-free fixed point is a positive control, and its
+incidence characteristic polynomial is $x^3(x-3)(x^2-3)$.
+The program changes at most five of its eighteen output symbols, keeping
+the initial $a$ in $h(a)$ fixed. It therefore enumerates exactly
+\[
+ \sum_{j=0}^{5}\binom{17}{j}5^j=20\,913\,486
+\]
+substitutions. Of these, $5729$ pass the abelian-square check through
+$h^4(a)$, of length $81$; $5715$ of those have primitive incidence matrices.
+Exactly $73$ of those meet the two-expanding-direction condition and have no
+unit-modulus eigenvalues. Every one has an abelian square by position $203$,
+with positions numbered starting at one. Thus no substitution in this finite
+family satisfies all the theorem's hypotheses. This says nothing about more
+distant substitutions, other image lengths, other alphabet sizes, or the
+existence question itself.
+
+The suffix checker was compared against direct Parikh counts on every
+length-six word over three letters. The unmodified six-letter substitution
+passed a $6561$-letter positive-control check. The Routh counter was checked
+on products of known linear and quadratic factors, including repeated and
+reciprocal roots. The projection proof and search logic received separate
+fresh-context reviews; the search reviewer did not independently rerun the
+complete radius-five enumeration.
+
+\paragraph{Files and remaining gap.}
+The executable is \texttt{green15-morphism-search.mjs}; run
+\texttt{node green15-morphism-search.mjs 5}.
+The completed output is \texttt{green15-morphism-results-5-routh-exact.json}.
+The main unresolved task is to construct an infinite square-free word with
+the requisite spectral structure, or to find a different argument settling
+Green's Problem 15. No such construction or impossibility proof is supplied.
+
+\paragraph{Complete short-image exclusion.}
+A second completed computation covers all primitive substitutions on eight
+letters with four images of length one and four of length two, up to renaming,
+subject to the spectral hypothesis of the theorem. A cycle consisting only of
+length-one letters would contradict primitivity. Their maps therefore form
+forests rooted at the four other letters. Enumerating all $8^4$ maps gives
+$2048$ acyclic maps, in $19$ classes under independent permutations of the
+four letters of each type. Equivalently, distributing four nonroot vertices
+among four unlabeled rooted components gives $9+4+3+2+1=19$ shapes.
+
+For each representative there are $64^4$ assignments of the two-letter
+images. The program assigns an image only when an iterate of the starting
+letter requests it. A square in a determined word prefix rejects every
+completion. A closed reachable subalphabet omitting letters rejects every
+completion by failure of primitivity. Otherwise all $64$ assignments of the
+requested image are explored. Each pruned node accounts for $64^u$ completions,
+where $u$ is the number of unassigned images. Thus the checked coverage is
+\[
+ 19\cdot64^4=318\,767\,104.
+\]
+The computation inspected $33\,285\,888$ complete assignments after pruning;
+$1948$ candidates reached the longer test after the initial factor, primitivity,
+and spectral filters. None survived. The largest reported valid prefix of a
+tested generated factor was $207$, followed by a square ending at position $208$.
+The known eight-letter Rao--Rosenfeld example, canonically renamed, reached its
+expected leaf exactly once as a control.
+
+The iterates in this search need not be nested prefixes. For primitive $h$,
+every $h^k(b)$ is a factor of a fixed point $W$ of a prolongable power $h^t$:
+choose $m$ large enough that $h^{tm-k}(a)$ contains $b$, and use the occurrence
+of $h^k(b)$ in the prefix $h^{tm}(a)$ of $W$. This justifies the square pruning.
+The complete record is \texttt{green15-forest-results.json}, obtained with
+\texttt{node green15-morphism-search.mjs 0 --forests}.
+
+\begin{lemma}[Modular normal form]
+Fix $t\ge1$, $L=4^t$, and $M=3^t$. There exists an infinite additive-square-free
+word over a finite integer alphabet if and only if one exists whose prefix sums
+$S$ satisfy
+\[
+ S(n)\equiv F_t(n\bmod L)\pmod M,
+ \qquad
+ F_t(n)=\sum_{j=0}^{t-1}3^j\mathbf1_{\{n_j\ge2\}},
+\]
+where $n_j\in\{0,1,2,3\}$ are the base-four digits of $n\in[0,L)$.
+\end{lemma}
+\begin{proof}
+The cyclic pattern $F_1=(0,0,1,1)$ has no three-term arithmetic progression
+in its graph modulo $(4,3)$ with nonzero first-coordinate step; checking the
+four starting positions and steps $1,2,3$ proves this. Inductively, if
+\[
+ F_t(n)+F_t(n+2d)-2F_t(n+d)\equiv0\pmod {3^t},
+\]
+with arguments reduced modulo $4^t$, reduction modulo $3$ forces $4\mid d$.
+Writing $n=4q+r$ then divides the congruence by $3$ and gives the corresponding
+congruence for $F_{t-1}$ at $q,q+d/4,q+2d/4$. Hence $4^t\mid d$.
+
+Put $F_t(L)=F_t(0)=0$ and $c_r=F_t(r+1)-F_t(r)$. Code an input integer $a$ by
+\[
+ c_0,c_1,\ldots,c_{L-2},c_{L-1}+Ma.
+\]
+This sends a finite input alphabet to a finite output alphabet. The output
+prefix sums are
+\[
+ S_{\rm out}(Ln+r)=M S_{\rm in}(n)+F_t(r),\qquad 0\le r<L.
+\]
+An output additive square must have half-length divisible by $L$, by the
+cyclic property just proved. All three cut positions then have the same
+offset $r$; the displayed formula gives an input additive square, a
+contradiction. The converse is immediate by forgetting the marker condition.
+\end{proof}
+
+This is a normalization of the full word-existence question. The searches
+impose the additional hypothesis of a finite substitution; the lemma does
+not establish that hypothesis. Nor does iterating this particular code keep
+its alphabet finite: its exceptional output letter is
+$a\mapsto Ma-(M-1)/2$. A finite orbit would force its fixed point $a=1/2$,
+which is not an integer.
+
+\paragraph{Affine synthesis and its current limits.}
+The marker searches use $L$-uniform substitutions with
+\[
+ h(a)_r=c_r+Mz_{a,r}\in[-K,K],\qquad
+ \sum_r z_{a,r}=a,\qquad h(0)_0=0.
+\]
+Thus image sums equal $Ma$. The prefix is determined by
+$W(0)=0$ and $W(n)=h(W(\lfloor n/L\rfloor))_{n\bmod L}$ for $n>0$.
+All additive-square half-lengths must be multiples of $L$.
+
+The local Z3 solver uses dependency-conditioned linear cuts. A concrete
+square determines the image-entry variables used at its positions. Fixing
+the image-entry variables needed to determine their parent letters fixes
+which entries are selected. Under that context, equality of block sums is
+one integer linear equation in the selected $z_{a,r}$. The solver learns
+the disjunction that the parent context changes or this equation is nonzero.
+The argument and its implementation received a fresh-context review with
+no substantive issue reported.
+
+For $t=1,K=3$, the solver returned unsatisfiable after $26$ learned cuts,
+reproducing an independent exhaustive backtracking exclusion whose longest
+valid prefix was $42$. No independent solver proof certificate is supplied.
+For $t=2,K=18$, a one-cut-per-model run checked $404$ models, reached a
+$422$-letter valid prefix, and returned \texttt{unknown} on its next solver
+call. That outcome leaves the family unresolved. Separate bounded parabolic
+image searches reached a $1954$-letter prefix and hit their node limits;
+they also provide no infinite construction or exhaustive exclusion.
+
+The relevant executables are \texttt{green15-marker-z3.mjs},
+\texttt{green15-marker-synthesis.mjs}, and \texttt{green15-parabolic-search.mjs}.
+Z3's official JavaScript package, version 5.3.3, is installed locally under
+\texttt{.research-tools}; all generated candidates are checked with exact
+integer sums outside the solver. \textbf{The full problem remains unsolved.}
+
+\begin{thebibliography}{9}
+\bibitem{rr} M. Rao and M. Rosenfeld,
+\emph{Avoiding two consecutive blocks of same size and same sum over
+$\mathbb Z^2$}, \url{https://arxiv.org/abs/1511.05875}.
+\bibitem{green} B. Green, \emph{100 open problems}, Problem 15,
+\url{https://people.maths.ox.ac.uk/greenbj/papers/open-problems.pdf}.
+\bibitem{routh} X. Chen, \emph{Stability Analysis: the Routh--Hurwitz Approach},
+\url{https://faculty.washington.edu/chx/teaching/fbintro/lec10-routh-hurwitz-stability/}.
+\end{thebibliography}
+\end{document}

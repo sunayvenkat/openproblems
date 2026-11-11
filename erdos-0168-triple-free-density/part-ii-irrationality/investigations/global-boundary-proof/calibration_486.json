@@ -1,0 +1,150 @@
+{
+  "t": 486,
+  "vertices": 33,
+  "constraints": 50,
+  "integer_tau": 11,
+  "strengthened_lp": "235/23",
+  "primal": {
+    "2": "10/23",
+    "3": "13/23",
+    "4": "9/23",
+    "6": "4/23",
+    "8": "5/23",
+    "9": "10/23",
+    "12": "9/23",
+    "16": "9/23",
+    "18": "10/23",
+    "24": "11/23",
+    "27": "3/23",
+    "32": "7/23",
+    "36": "3/23",
+    "48": "7/23",
+    "54": "10/23",
+    "72": "7/23",
+    "81": "10/23",
+    "96": "16/23",
+    "108": "13/23",
+    "128": "1",
+    "144": "16/23",
+    "162": "13/23",
+    "288": "7/23",
+    "324": "10/23"
+  },
+  "dual": [
+    {
+      "family": "corner",
+      "root": 1,
+      "weight": "11/23"
+    },
+    {
+      "family": "corner",
+      "root": 4,
+      "weight": "1/23"
+    },
+    {
+      "family": "corner",
+      "root": 6,
+      "weight": "11/23"
+    },
+    {
+      "family": "corner",
+      "root": 9,
+      "weight": "7/23"
+    },
+    {
+      "family": "corner",
+      "root": 12,
+      "weight": "1/23"
+    },
+    {
+      "family": "corner",
+      "root": 16,
+      "weight": "1/23"
+    },
+    {
+      "family": "corner",
+      "root": 27,
+      "weight": "11/23"
+    },
+    {
+      "family": "corner",
+      "root": 32,
+      "weight": "10/23"
+    },
+    {
+      "family": "corner",
+      "root": 36,
+      "weight": "7/23"
+    },
+    {
+      "family": "corner",
+      "root": 72,
+      "weight": "3/23"
+    },
+    {
+      "family": "corner",
+      "root": 81,
+      "weight": "7/23"
+    },
+    {
+      "family": "corner",
+      "root": 96,
+      "weight": "3/23"
+    },
+    {
+      "family": "corner",
+      "root": 108,
+      "weight": "8/23"
+    },
+    {
+      "family": "corner",
+      "root": 128,
+      "weight": "1"
+    },
+    {
+      "family": "corner",
+      "root": 144,
+      "weight": "10/23"
+    },
+    {
+      "family": "corner",
+      "root": 162,
+      "weight": "8/23"
+    },
+    {
+      "family": "six",
+      "root": 1,
+      "weight": "12/23"
+    },
+    {
+      "family": "six",
+      "root": 4,
+      "weight": "10/23"
+    },
+    {
+      "family": "six",
+      "root": 8,
+      "weight": "12/23"
+    },
+    {
+      "family": "six",
+      "root": 9,
+      "weight": "4/23"
+    },
+    {
+      "family": "six",
+      "root": 48,
+      "weight": "10/23"
+    },
+    {
+      "family": "six",
+      "root": 54,
+      "weight": "7/23"
+    },
+    {
+      "family": "nine",
+      "root": 9,
+      "weight": "1/23"
+    }
+  ]
+}

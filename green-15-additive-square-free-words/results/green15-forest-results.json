@@ -1,0 +1,314 @@
+{
+  "scope": "All primitive non-erasing substitutions on eight letters with four images of length one and four images of length two, up to renaming. Unit-image cycles are impossible under primitivity; their acyclic forests have nineteen renaming classes. Each representative has all 64^4 completions covered by branching or sound pruning. Generated finite factors are checked; no infinite avoidance conclusion follows from a survivor.",
+  "spectralMethod": "Exact Routh tests after a Cayley transform, with exact small rational shifts for singular tables. Exactly two expanding eigenvalues, counted with algebraic multiplicity, and no unit-modulus eigenvalues are pursued.",
+  "original": [
+    [
+      7
+    ],
+    [
+      6
+    ],
+    [
+      5
+    ],
+    [
+      4
+    ],
+    [
+      7,
+      2
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ]
+  ],
+  "maxChanges": 0,
+  "eight": true,
+  "tested": 33285888,
+  "valid81": 194600,
+  "primitive81": 134650,
+  "eligibleSpectrum": 1948,
+  "shiftedSpectrum": 11666,
+  "survivors": [],
+  "best": {
+    "h": [
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        4
+      ],
+      [
+        2
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        5,
+        7
+      ],
+      [
+        5,
+        3
+      ]
+    ],
+    "coefficients": [
+      1,
+      -1,
+      -1,
+      -1,
+      -1,
+      1,
+      0,
+      1,
+      0
+    ],
+    "spectrum": {
+      "quotient": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        1
+      ],
+      "outside": 2,
+      "halfplane": [
+        "-1",
+        "21",
+        "7",
+        "69",
+        "5",
+        "39",
+        "-11",
+        "-1"
+      ],
+      "hurwitz": [
+        "21",
+        "216",
+        "11880",
+        "-55296",
+        "3692544",
+        "-39845888",
+        "39845888"
+      ],
+      "firstColumnSigns": [
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unitRoots": 0
+    },
+    "validPrefix": 207,
+    "checkedLength": 377,
+    "found": {
+      "start": 182,
+      "half": 13,
+      "end": 208
+    }
+  },
+  "completed": true,
+  "unitForests": [
+    {
+      "unit": [
+        1,
+        4,
+        1,
+        1
+      ],
+      "orbitSize": 16
+    },
+    {
+      "unit": [
+        1,
+        2,
+        4,
+        2
+      ],
+      "orbitSize": 96
+    },
+    {
+      "unit": [
+        1,
+        2,
+        4,
+        1
+      ],
+      "orbitSize": 48
+    },
+    {
+      "unit": [
+        1,
+        4,
+        1,
+        4
+      ],
+      "orbitSize": 48
+    },
+    {
+      "unit": [
+        1,
+        4,
+        1,
+        5
+      ],
+      "orbitSize": 144
+    },
+    {
+      "unit": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "orbitSize": 96
+    },
+    {
+      "unit": [
+        1,
+        4,
+        3,
+        4
+      ],
+      "orbitSize": 48
+    },
+    {
+      "unit": [
+        1,
+        4,
+        3,
+        5
+      ],
+      "orbitSize": 144
+    },
+    {
+      "unit": [
+        1,
+        2,
+        4,
+        4
+      ],
+      "orbitSize": 96
+    },
+    {
+      "unit": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "orbitSize": 288
+    },
+    {
+      "unit": [
+        1,
+        4,
+        4,
+        4
+      ],
+      "orbitSize": 48
+    },
+    {
+      "unit": [
+        1,
+        4,
+        5,
+        5
+      ],
+      "orbitSize": 144
+    },
+    {
+      "unit": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "orbitSize": 288
+    },
+    {
+      "unit": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "orbitSize": 288
+    },
+    {
+      "unit": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "orbitSize": 4
+    },
+    {
+      "unit": [
+        4,
+        4,
+        4,
+        5
+      ],
+      "orbitSize": 48
+    },
+    {
+      "unit": [
+        4,
+        4,
+        5,
+        5
+      ],
+      "orbitSize": 36
+    },
+    {
+      "unit": [
+        4,
+        4,
+        5,
+        6
+      ],
+      "orbitSize": 144
+    },
+    {
+      "unit": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "orbitSize": 24
+    }
+  ],
+  "coveredCompletions": 318767104,
+  "partialNodes": 35034323,
+  "squarePrunedCompletions": 55671808,
+  "closedAlphabetPrunedCompletions": 229809408,
+  "positiveControlVisited": 1
+}

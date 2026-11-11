@@ -1,0 +1,19 @@
+6 November 2026. Exact polynomial-pattern obstructions for Erdos243.
+
+Mathematical artifact: erdos243-polynomial-obstruction.tex.
+Computation: erdos243-polynomial-obstruction.mjs.
+Completed output: erdos243-polynomial-results.json.
+
+Fresh-context adversarial mathematical review: /root/review_243_polynomial_math.
+Contract: persistent divisibility, the polynomial-support/LCM-growth argument, the elementary quadratic exclusion, the unit-graph implication, exponent-class reduction from the finite table, and rational scaling. Finite table assumed separately reviewed. No full Erdos243 or novelty claim.
+Result: "I cannot find a mathematical defect after thorough examination of the contracted claims, including the infinite degree classes and rational scaling corollary."
+The reviewer did not independently verify the finite table in this mathematical review.
+
+Fresh-context adversarial computation review: /root/review_243_polynomial_code.
+Contract: exhaust all vertices and unit-multiplier transitions, sound period reduction, decreasing ranks on all edges for claimed acyclic graphs, exact reported finite counts and meaningful controls. Exponent-class deduction reviewed separately.
+Result: "No issues found after thorough examination, including independent exhaustive enumeration of all 1,702,554 vertices and 1,556,322 edges, period reductions, cycle checks, rank heights, reported counts, and controls."
+
+Parent run: node erdos243-polynomial-obstruction.mjs, exit0.
+All340 production graphs were acyclic. The small direct-edge/independent-DFS controls passed, and the linear cyclic control was retained.
+
+Limits: these exclude exact patterns C_n=t(n^d+k) for specified degree classes, with fixed positive rational t. They do not imply a polynomial form for arbitrary subexponential numerator sequences. The full original problem remains unresolved. No Lean proof or literature-priority certification was performed. Cross-model review skipped: non-interactive goal continuation.

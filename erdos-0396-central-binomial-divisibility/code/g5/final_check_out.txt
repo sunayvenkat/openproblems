@@ -1,0 +1,8 @@
+A: even x in [9,1e5) violating a digit inequality: []
+A: x<1e6 with 4 primes (x>=9): in E_1 = 265  not in E_1 = 0  first: [(176, 10462547), (254, 21756167), (326, 35809847)]
+A: direct C(2n,n) mod n(n-1) for n = 10462547 : 0
+B: forms in y: [2940*x + 661, 10584*x + 2381, 3528*x + 793, 13230*x + 2977, 7560*x + 1699, 1764*x + 397]
+B: congruence + digit conditions hold for all y in [1,2000)
+B: y<3e5 with 6 primes: in E_2 = 11  not = 0  first: [(9993, 9322443046715199), (55110, 283519401184163643), (64073, 383240662902928959)]
+
+[exited with code 0]

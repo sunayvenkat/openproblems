@@ -1,0 +1,279 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry,hyperref}
+\geometry{margin=1in}
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\ran}{\operatorname{ran}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{A sum-of-squares proof of the three-pairs case\\of Marcus's block-permanent inequality}
+\author{Research proof for independent verification}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give an explicit positive-integer sum-of-squares identity for three complex
+quadratic forms in at most five variables. A projection argument then proves
+Marcus's block-permanent inequality for every $6\times6$ PSD Hermitian matrix
+partitioned into three $2\times2$ blocks, with the expected equality condition.
+The unrestricted problem, for arbitrary block count and block size, remains
+unresolved in this work. Novelty has not been independently assessed, and
+Lean formalization has not been attempted.
+\end{abstract}
+
+\begin{theorem}\label{main}
+Let $A$ be a complex Hermitian positive semidefinite matrix of order six,
+partitioned into $2\times2$ blocks $A_{ij}$, $1\leq i,j\leq3$. Set
+$G_{ij}=\per(A_{ij})$. Then
+\[
+ \per(A)\geq\per(G).
+\]
+If $A$ has no zero row, equality holds if and only if $A_{ij}=0$ for $i\ne j$.
+In particular this proves the requested equality clause when the three
+diagonal blocks are positive definite.
+\end{theorem}
+
+\section{Notation and the quadratic identity}
+The Fock inner product on complex polynomials is conjugate-linear in its first
+argument and satisfies
+\[
+ \langle z^\alpha,z^\beta\rangle_F=\mathbf1_{\alpha=\beta}\alpha!.
+\]
+It is equivalently integration against independent circular complex Gaussians
+of variance one. For complex symmetric $r\times r$ matrices $Q_1,Q_2,Q_3$, set
+\[
+ p_i(z)=z^{\mathsf T}Q_i z,\quad
+ G_{ij}=2\tr(Q_i^*Q_j)=\langle p_i,p_j\rangle_F,\quad
+ F=\|p_1p_2p_3\|_F^2-\per(G).
+\]
+All matrix and tensor norms below are the ordinary sums of squared absolute
+values of their entries. A star denotes the Hermitian adjoint.
+
+For each choice of a distinguished matrix $C$ among $Q_1,Q_2,Q_3$, let $A,B$
+be the other two, in either order. Define
+\begin{align*}
+ T_{abcd}&=A_{ab}(BC^*)_{cd}+B_{ab}(AC^*)_{cd},\\
+ S_{abcd}&=T_{abcd}+T_{acbd}+T_{bcad},\qquad H=3T-S,\\
+ W&=AC^*B+BC^*A,\\
+ L&=A\tr(BC^*)+B\tr(AC^*).
+\end{align*}
+The matrices $W,L$ are symmetric. For a symmetric matrix $X$, define
+\begin{align*}
+ E(X)_{abcd}&=\delta_{ad}X_{bc}+\delta_{bd}X_{ac}+\delta_{cd}X_{ab},\\
+ K(X)_{abcd}&=\delta_{ad}X_{bc}+\delta_{bd}X_{ac}-2\delta_{cd}X_{ab}.
+\end{align*}
+The summation $\sum_C$ always means the three choices of distinguished matrix.
+
+\begin{lemma}[Raw contraction identity]\label{raw}
+In every dimension,
+\begin{equation}\label{rawidentity}
+ 27F=\sum_C\left(112\|S\|^2+16\|H\|^2+288\|W\|^2
+                     +216\operatorname{Re}\langle W,L\rangle\right).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Expand the six Gaussian holomorphic indices against the six antiholomorphic
+indices. A contraction is described by a $3\times3$ nonnegative integer table
+$N$ with all row and column sums two: its $(i,j)$ entry counts contractions
+from $Q_i$ to $\overline{Q_j}$. Symmetry of the matrices makes all contractions
+with the same table identical. The multiplicity of such a table is
+$64/\prod_{ij}N_{ij}!$.
+
+The six tables $N=2P$ for permutation matrices $P$ are exactly the terms of
+$\per(G)$; their total multiplicity is $48$. The remaining fifteen tables
+have total multiplicity $672$. The following table records the expansion of
+each expression, with coefficients already summed over the three choices of
+$C$. Entries in the representative column list the nine entries of $N$ row
+by row. The last column is the coefficient of
+$\sum_C 2\operatorname{Re}\langle W,L\rangle$.
+\[
+\begin{array}{c|c|r|r|r|r|r}
+\text{number}&N\text{ representative}&F&\sum\|S\|^2&\sum\|H\|^2&\sum\|W\|^2&\text{cross}\\\hline
+6&002110110&32&3&6&0&4\\
+1&011101110&64&0&0&6&0\\
+3&011110101&64&12&-12&2&0\\
+3&101020101&32&6&12&0&0\\
+2&101110011&64&18&-18&0&0
+\end{array}
+\]
+For every row, multiplying the last four columns by $112,16,288,108$
+respectively gives $27$ times the $F$ column. No other tables occur.
+This proves \eqref{rawidentity}. The table is also reproduced by the exact
+symbolic contraction enumerator \texttt{marcus-quadratic-identity.mjs},
+which checks each of the fifteen tables individually, with integer arithmetic.
+\end{proof}
+
+\begin{lemma}[Positive identity in dimension five]\label{sos}
+For three symmetric matrices of order five,
+\begin{align}\label{sosidentity}
+189F=\sum_C\bigl(&16\|7S-E(L+2W)\|^2
+             +7\|4H+K(L-W)\|^2\nonumber\\
+             &+378\|W\|^2+126\|2L+5W\|^2\bigr).
+\end{align}
+Consequently $F\geq0$ for three quadratic forms in at most five variables.
+If all three forms are nonzero, equality holds precisely when their matrix
+ranges are pairwise orthogonal.
+\end{lemma}
+\begin{proof}
+The tensor $S$ is symmetric in its first three indices. Its trace is
+\[
+ \sum_c S_{abcc}=L_{ab}+2W_{ab}.
+\]
+The tensor $H$ is symmetric in its first two indices, its cyclic sum over the
+first three indices is zero, and
+\[
+ \sum_c H_{abcc}=2(L-W)_{ab}.
+\]
+Direct contraction of Kronecker deltas gives, in dimension $r$,
+\begin{align*}
+ \|E(X)\|^2&=3(r+2)\|X\|^2,&
+ \langle S,E(X)\rangle&=3\langle L+2W,X\rangle,\\
+ \|K(X)\|^2&=6(r-1)\|X\|^2,&
+ \langle H,K(X)\rangle&=-6\langle L-W,X\rangle.
+\end{align*}
+For the last identity, the cyclic relation for $H$ says that the symmetric
+part of either of its other traces is minus half of the displayed trace.
+Taking $r=5$ therefore yields the exact formulas
+\begin{align*}
+ \|7S-E(L+2W)\|^2&=49\|S\|^2-21\|L+2W\|^2,\\
+ \|4H+K(L-W)\|^2&=16\|H\|^2-24\|L-W\|^2.
+\end{align*}
+Substituting these into \eqref{sosidentity} and expanding the matrix squares
+gives seven times \eqref{rawidentity}. This proves the identity and positivity.
+Smaller-dimensional matrices can be padded with zeros to order five.
+
+For equality, the positive coefficients force $W=0$ and then $L=0$ for
+each distinguished matrix. The other squares force $S=H=0$, hence $T=0$.
+Thus
+\[
+ A\otimes BC^*+B\otimes AC^*=0.
+\]
+If $A,B$ are linearly independent, this gives $BC^*=AC^*=0$. If $B=tA$
+with $t\ne0$, it gives $2tA\otimes AC^*=0$, with the same conclusion.
+Applying this for every $C$ shows $Q_iQ_j^*=0$ whenever $i\ne j$.
+Since the matrices are symmetric, this is equivalent to orthogonality of
+their ranges. Conversely orthogonal ranges allow disjoint orthonormal
+coordinate sets for the three forms, and their Gaussian moments factor,
+giving equality.
+\end{proof}
+
+\section{Two elementary multiplication facts}
+For a polynomial $f$, let $f^*(\partial)$ denote the constant-coefficient
+differential operator obtained by conjugating its coefficients and replacing
+$z_j$ by $\partial_j$. The commutation rule
+$[\partial_i,z_j]=\delta_{ij}$ gives the normal-ordering identity
+\begin{equation}\label{normal}
+ \|fg\|_F^2=\sum_\alpha\frac1{\alpha!}
+       \| (\partial^\alpha f)^*(\partial)g\|_F^2.
+\end{equation}
+If $f$ is homogeneous of degree $d$, the terms $|\alpha|=d$ alone give
+\begin{equation}\label{bombieri}
+ \|fg\|_F^2\geq\|f\|_F^2\|g\|_F^2.
+\end{equation}
+If $g$ also has degree $d>0$, the $\alpha=0$ term additionally gives
+\begin{equation}\label{two}
+ \|fg\|_F^2\geq\|f\|_F^2\|g\|_F^2+|\langle f,g\rangle_F|^2.
+\end{equation}
+For quadratic forms $f=z^{\mathsf T}Q_1z$, $g=z^{\mathsf T}Q_2z$, the
+remaining terms in \eqref{normal} give the exact gap
+\begin{equation}\label{twogap}
+ \|fg\|_F^2-\per[\langle p_i,p_j\rangle_F]_{i,j=1}^2
+       =16\|Q_1^*Q_2\|^2.
+\end{equation}
+Thus equality in \eqref{two} for quadratics means orthogonal matrix ranges.
+
+We also need the linear-factor identity
+\begin{equation}\label{linear}
+ \|fL_y\|_F^2-\|f\|_F^2\|y\|^2=\|D_y f\|_F^2,
+ \quad L_y(z)=\sum_s y_s z_s,\quad D_y=\sum_s\overline{y_s}\partial_s.
+\end{equation}
+If $f$ is a nonzero product of linear forms whose coefficient vectors span
+$U$, then $D_y f=0$ exactly when $y\perp U$. Indeed, under translation in
+the direction defining $D_y$, the degree in the translation parameter of
+that product equals the number of factors with nonzero directional derivative.
+It can be zero only if every factor has zero directional derivative.
+
+\section{Projection to at most four variables}
+Choose Gram vectors $v_{i1},v_{i2}$ for the six rows of the original matrix,
+and set $p_i=L_{v_{i1}}L_{v_{i2}}$. Gaussian moment expansion gives
+\[
+ \per(A)=\|p_1p_2p_3\|_F^2,\qquad G_{ij}=\langle p_i,p_j\rangle_F.
+\]
+Let $U$ be the span of the four coefficient vectors in the first two blocks.
+It has dimension at most four. In orthogonal coordinates $z\in U$ and
+$w\in U^\perp$, expand
+\[
+ p_3(z,w)=p_0(z)+\sum_{\alpha\ne0}h_\alpha(z)\frac{w^\alpha}{\sqrt{\alpha!}}.
+\]
+The polynomial $p_0$ is the product of the projections of the two linear
+factors onto $U$. Write $f=p_1p_2$ and
+$q_{12}=\per[\langle p_i,p_j\rangle_F]_{i,j=1}^2$.
+Orthogonality of the $w$ monomials, and expansion of the $3\times3$
+permanent in its last diagonal entry, give the exact decomposition
+\begin{align}\label{reduction}
+\|fp_3\|_F^2-\per(G)
+={}&\left(\|fp_0\|_F^2-
+       \per\operatorname{Gram}(p_1,p_2,p_0)\right)\nonumber\\
+ &+\sum_{\alpha\ne0}
+    \left(\|fh_\alpha\|_F^2-q_{12}\|h_\alpha\|_F^2\right).
+\end{align}
+The first bracket is nonnegative by Lemma~\ref{sos}, as all its forms use
+at most four variables. For every remaining bracket, \eqref{bombieri}
+and \eqref{two} give
+\[
+ \|fh_\alpha\|_F^2-q_{12}\|h_\alpha\|_F^2
+ \geq (\|f\|_F^2-q_{12})\|h_\alpha\|_F^2\geq0.
+\]
+This proves the inequality of Theorem~\ref{main}.
+
+\section{Equality in the six-vector problem}
+Assume none of the six Gram vectors is zero. Thus all $p_i$ are nonzero.
+For a product $L_vL_w$, its symmetric coefficient matrix is
+$(vw^{\mathsf T}+wv^{\mathsf T})/2$; its range is exactly
+$\operatorname{span}\{v,w\}$, including when $v,w$ are dependent.
+
+If equality holds in \eqref{reduction}, its first bracket is zero.
+If $p_0$ were nonzero, Lemma~\ref{sos} would force its matrix range to be
+orthogonal to the ranges of both $p_1,p_2$, whose sum is $U$. But its range
+lies in $U$, a contradiction. Hence $p_0=0$. Since $p_3\ne0$, at least one
+$h_\alpha$ is nonzero. Equality in \eqref{reduction} then forces
+$\|f\|_F^2=q_{12}$. Equation~\eqref{twogap} shows that the first two block
+spans are orthogonal.
+
+Write the coefficient vectors in the third block as $x+x'$ and $y+y'$,
+with $x,y\in U$ and $x',y'\in U^\perp$. The equation $p_0=L_xL_y=0$
+implies $x=0$ or $y=0$. Suppose $x=0$ and $y\ne0$. The first vector is
+nonzero, so $x'\ne0$, and at least one coefficient $h_\alpha$ of outside
+degree one is a nonzero scalar multiple of $L_y$.
+Its bracket in \eqref{reduction} is a positive multiple of
+$\|D_y f\|_F^2$ by \eqref{linear}. This cannot vanish: $y\in U\setminus\{0\}$
+and the linear factors of $f$ span $U$. This is a contradiction. Interchanging
+the two vectors handles the other case. Therefore $x=y=0$.
+
+The third block span is thus orthogonal to $U$, and all three block spans are
+pairwise orthogonal. This is exactly block diagonality of the Gram matrix.
+Conversely block diagonality gives equality by factorization of the permanent.
+This completes the proof of Theorem~\ref{main}.
+
+\section{Verification record and scope}
+The contraction identity was checked exactly on all fifteen contributing
+incidence tables by \texttt{marcus-quadratic-identity.mjs}; its data are in
+\texttt{marcus-quadratic-identity.json}. The dimension-five identity was also
+checked by directly forming its integer-scaled tensors on forty independent
+integer complex matrix samples. Those sample checks are supplementary; the
+contraction count and delta identities above are the proof.
+
+The initial coefficient discovery used \texttt{marcus-quadratic-sos.mjs} and
+the installed Z3 solver. Its fitted coefficients are not used as a proof:
+the final identity has the explicit positive integer coefficients in
+\eqref{sosidentity}. No numerical optimization or unproved rank-reduction
+claim is needed in the argument above.
+
+This addresses the entire $m=3,k=2$ case. It does not establish Marcus's
+conjecture for arbitrary $m,k$, so the original goal is still active.
+The source status screen was
+\href{https://yair-lavi.com/mincs-list/conjecture-9/index.html}{the current research page}
+and \href{https://conjectures.io/problems/fulloldproblemscatalog-marcusblockpermanent-conjecture}{the chosen Conjectures.io entry}.
+The general problem statement can also be found in
+\href{https://arxiv.org/html/2202.01867v1}{Wanless's survey}.
+\end{document}

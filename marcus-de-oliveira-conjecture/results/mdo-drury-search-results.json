@@ -1,0 +1,12 @@
+{
+  "seed": 2432026,
+  "order": 4,
+  "restarts": 1000,
+  "unitaryFamily": "Drury skew conference",
+  "pinnedEigenvaluesPerSpectrum": 3,
+  "completedRestarts": 1000,
+  "coordinateUpdates": 96000,
+  "bestNormalizedExcess": -0.005770874086656841,
+  "candidate": null,
+  "scope": "Floating-point joint spectral/unitary search. A positive candidate requires exact reconstruction and verification."
+}

@@ -1,0 +1,13 @@
+m=15 d=1 k=3 j'=2 x=1000002 digits(q)=7 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=7 predicted=7 OK
+m=15 d=3 k=3 j'=1 x=100008 digits(q)=11 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=3 predicted=3 OK
+m=15 d=5 k=2 j'=3 x=10003 digits(q)=17 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=1 predicted=1 OK
+m=21 d=3 k=4 j'=2 x=100008 digits(q)=11 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=4 predicted=4 OK
+m=21 d=7 k=1 j'=1 x=10004 digits(q)=25 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=1 predicted=1 OK
+m=45 d=9 k=2 j'=2 x=10006 digits(q)=25 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=3 predicted=3 OK
+m=45 d=15 k=3 j'=1 x=10000 digits(q)=33 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=1 predicted=1 OK
+m=105 d=105 k=1 j'=1 x=10054 digits(q)=193 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=0 predicted=0 OK
+m=105 d=35 k=2 j'=1 x=10010 digits(q)=97 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=2 predicted=2 OK
+m=165 d=165 k=1 j'=2 x=10057 digits(q)=321 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=1 predicted=1 OK
+m=195 d=195 k=2 j'=3 x=10026 digits(q)=385 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=1 predicted=1 OK
+m=195 d=65 k=1 j'=1 x=10149 digits(q)=193 nu_q(n-i)=1 Kummer nu_q(C(2n,n))=1 predicted=1 OK
+ALL OK

@@ -1,0 +1,6 @@
+Fresh-context adversarial review, 6 November 2026.
+Scope: The sieve theorem and endpoint corollary, assuming the earlier strict-coefficient theorem and elementary estimates are correct.
+
+After thorough examination, I cannot find a substantive mathematical error invalidating the sieve theorem or endpoint corollary, assuming the earlier strict-coefficient theorem and elementary estimates are correct.
+
+This is a mathematical review, not a formal proof or novelty certification.

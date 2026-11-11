@@ -1,0 +1,140 @@
+{
+  "scope": "All substitutions obtained by at most maxChanges output-symbol replacements from the displayed eight-letter substitution, preserving image lengths, the first h in h(e), and the first e in h(h). The tested fixed point is that of h squared starting at e. Finite prefix checks only.",
+  "spectralMethod": "Exact Routh tests after a Cayley transform, with exact small rational shifts for singular tables. Exactly two expanding eigenvalues, counted with algebraic multiplicity, and no unit-modulus eigenvalues are pursued.",
+  "original": [
+    [
+      7
+    ],
+    [
+      6
+    ],
+    [
+      5
+    ],
+    [
+      4
+    ],
+    [
+      7,
+      2
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ]
+  ],
+  "maxChanges": 5,
+  "eight": true,
+  "tested": 4783010,
+  "valid81": 10400,
+  "primitive81": 4350,
+  "eligibleSpectrum": 95,
+  "shiftedSpectrum": 165,
+  "survivors": [],
+  "best": {
+    "h": [
+      [
+        2
+      ],
+      [
+        6
+      ],
+      [
+        5
+      ],
+      [
+        0
+      ],
+      [
+        7,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        4,
+        1
+      ]
+    ],
+    "coefficients": [
+      1,
+      0,
+      -1,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      -1
+    ],
+    "spectrum": {
+      "quotient": [
+        1,
+        0,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        -1
+      ],
+      "outside": 2,
+      "halfplane": [
+        "-1",
+        "14",
+        "-2",
+        "110",
+        "4",
+        "122",
+        "2",
+        "10",
+        "-3"
+      ],
+      "hurwitz": [
+        "14",
+        "82",
+        "6528",
+        "27520",
+        "2424832",
+        "-5046272",
+        "268435456",
+        "-805306368"
+      ],
+      "firstColumnSigns": [
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "unitRoots": 0
+    },
+    "validPrefix": 252,
+    "checkedLength": 403,
+    "found": {
+      "start": 149,
+      "half": 52,
+      "end": 253
+    }
+  },
+  "completed": true
+}

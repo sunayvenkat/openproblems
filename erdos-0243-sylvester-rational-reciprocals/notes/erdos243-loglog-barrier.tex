@@ -1,0 +1,740 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newcommand{\N}{\mathbb N}
+\newcommand{\ellog}{\ell}
+\title{A conditional logarithmic barrier for Erd\H{o}s Problem 243}
+\author{Research attempt prepared in the accompanying Codex conversation}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note proves a conditional rigidity criterion for the integer remainder
+states associated with Erd\H{o}s Problem 243. If the positive increments of
+the numerator are eventually at most
+$\alpha\log\log C_n+O(1)$, with $\alpha\le1/\log 2$, the sequence must
+eventually obey the Sylvester recurrence. The argument combines a bound
+on the common divisor, control of prime reuse, and a Chinese remainder
+barrier. A further sieve argument constrains the denominator prime support
+of any counterexample with finite logarithmic rise coefficient.
+The barrier also holds at the endpoint for the smaller LCM-cleared
+numerator, even when redundant denominator factors grow without bound.
+A clustered family of CRT barriers gives a further denominator-support
+bound for its finite rise coefficient.
+The unrestricted problem does not supply this increment bound.
+This is not a proof or disproof of the full conjecture. Novelty of the
+conditional criterion has not been established.
+\end{abstract}
+
+\section{Problem and exact states}
+The \href{https://conjectures.io/problems/erdos243-erdos-243}{listed problem}
+asks whether strictly increasing positive integers satisfying
+\[
+ a_{n+1}/a_n^2\longrightarrow1,
+ \qquad S=\sum_{n\ge0}\frac1{a_n}\in\mathbb Q
+\]
+must satisfy $a_{n+1}=a_n^2-a_n+1$ eventually. The problem is also
+\href{https://www.erdosproblems.com/243}{recorded as open by Erd\H{o}s Problems}.
+
+Write $S=p/s$ with $s>0$, and put
+\[
+ R_n=\sum_{j\ge n}\frac1{a_j},\qquad
+ D_n=s\prod_{j<n}a_j,\qquad C_n=D_nR_n.
+\]
+Then $C_n,D_n$ are positive integers, since
+\[
+ C_n=p\prod_{j<n}a_j-
+ s\sum_{i<n}\prod_{\substack{j<n\\j\ne i}}a_j.
+\]
+They obey the exact recurrences
+\begin{equation}\label{eq:state}
+ D_{n+1}=a_nD_n,\qquad C_{n+1}=a_nC_n-D_n.
+\end{equation}
+These rational-tail coordinates and the associated centered residues are
+developed in Koizumi's
+\href{https://math.colgate.edu/~integers/aa28/aa28.pdf}{2026 paper}.
+The earlier bounded-error CRT approach is described in Bado's
+\href{https://www.researchgate.net/publication/413940355}{preprint}
+and in Cook's
+\href{https://github.com/wcook04/plectis-erdos/blob/main/paper/243/erdos-243-reciprocal-tail-rigidity.tex}{research note}.
+The proof below allows a specified unbounded increment envelope.
+
+The squaring hypothesis gives, after deleting finitely many terms,
+$a_{n+1}\ge a_n^2/2\ge2a_n$. Consequently
+\[
+ R_n=\frac1{a_n}+O\!\left(\frac1{a_{n+1}}\right)
+     =\frac{1+o(1)}{a_n}.
+\]
+It follows that
+\begin{equation}\label{eq:ratio}
+ \frac{C_{n+1}}{C_n}
+ =\frac{a_nR_{n+1}}{R_n}
+ =\frac{a_n^2}{a_{n+1}}(1+o(1))\longrightarrow1.
+\end{equation}
+Define, using natural logarithms,
+\[
+ \ellog(x)=\log\log\max\{x,\exp(e)\}.
+\]
+This only avoids irrelevant small-argument issues.
+
+\section{Conditional criterion}
+\begin{theorem}\label{thm:main}
+Let $a_n\ge2$, $C_n\ge1$, and $D_n\ge1$ be integers satisfying
+\eqref{eq:state}. Suppose
+\[
+ a_n\to\infty,\qquad a_{n+1}/a_n^2\to1,
+ \qquad C_{n+1}/C_n\to1.
+\]
+If constants $K$ and $0\le\alpha<1/\log2$ exist such that eventually
+\begin{equation}\label{eq:envelope}
+ C_{n+1}-C_n\le\alpha\ellog(C_n)+K,
+\end{equation}
+then $C_n$ is eventually constant and
+$a_{n+1}=a_n^2-a_n+1$ eventually.
+\end{theorem}
+
+\begin{proof}
+Discard a finite prefix and increase $K$ so that $K\ge1$ and
+\eqref{eq:envelope} holds at every remaining index. Reindex that tail.
+Let $h(x)=\alpha\ellog(x)+K$, which is nondecreasing and positive.
+
+First, a positive integer sequence with consecutive ratio tending to one
+either tends to infinity or is eventually constant. Indeed, if it visits
+$[1,M]$ at arbitrarily late indices, choose a time after which every ratio
+differs from one by less than $1/(2M)$. A visit to $C_n\le M$ forces
+$|C_{n+1}-C_n|<1/2$, hence equality. Induction traps it forever.
+
+If $C_n=C$ eventually, \eqref{eq:state} gives $D_n=(a_n-1)C$ and
+\[
+ (a_{n+1}-1)C=D_{n+1}=a_nD_n=a_n(a_n-1)C,
+\]
+which proves the conclusion. Hence assume for contradiction that
+$C_n\to\infty$.
+
+\paragraph{The common divisor is bounded by the rise envelope.}
+Put $G_n=\gcd(C_n,D_n)$. Equation \eqref{eq:state} implies
+$G_n\mid G_{n+1}$. We claim
+\begin{equation}\label{eq:gcd}
+ G_n\le h(C_n)\quad\hbox{for every }n.
+\end{equation}
+If $G_n>h(C_n)$, take the first subsequent strict rise
+$C_{t+1}>C_t$, $t\ge n$, which exists because $C_j\to\infty$.
+Before this rise $C_t\le C_n$. Also $G_n$ divides
+$C_{t+1}-C_t$, so
+\[
+ G_n\le C_{t+1}-C_t\le h(C_t)\le h(C_n)<G_n,
+\]
+a contradiction. Since $C_{n+1}/C_n\to1$, telescoping its logarithm
+gives $\log C_n=o(n)$. In particular \eqref{eq:gcd} yields
+\begin{equation}\label{eq:gcdsize}
+ G_n=O(\log(n+2)).
+\end{equation}
+
+\paragraph{Almost every multiplier introduces entirely new prime support.}
+Let
+\[
+ L_n=\operatorname{lcm}(D_0,a_0,\ldots,a_{n-1}),
+ \qquad \Delta_n=D_n/L_n.
+\]
+The quotient is an integer, and
+\[
+ \frac{C_n}{D_n}=\frac{C_0}{D_0}-\sum_{j<n}\frac1{a_j}
+\]
+shows that $L_nC_n/D_n$ is an integer. Thus $\Delta_n\mid C_n$;
+since it also divides $D_n$, we have $\Delta_n\mid G_n$.
+Furthermore,
+\begin{equation}\label{eq:reuse}
+ \frac{\Delta_{n+1}}{\Delta_n}
+ =\frac{a_nL_n}{\operatorname{lcm}(a_n,L_n)}
+ =\gcd(a_n,L_n).
+\end{equation}
+Each index with $\gcd(a_n,L_n)>1$ multiplies $\Delta_n$ by at least two.
+By \eqref{eq:gcdsize}, there are only $O(\log\log(N+3))$ such indices
+below $N$. Enumerate all remaining indices as $i_0<i_1<\cdots$, and set
+$b_j=a_{i_j}$. Then the $b_j$ are pairwise coprime and
+\begin{equation}\label{eq:indices}
+ i_j=j+O(\log\log(j+3)).
+\end{equation}
+The latter follows by subtracting the number of omitted indices from $i_j$;
+first obtain $i_j=O(j+1)$ and then substitute this into the error bound.
+
+\paragraph{The sizes of available moduli.}
+Put $x_n=\log a_n$. The squaring hypothesis gives
+$x_{n+1}=2x_n+\eta_n$, where $\eta_n\to0$.
+For some $m,M>0$, therefore,
+\begin{equation}\label{eq:doubleexp}
+ m2^n\le\log a_n\le M2^n
+\end{equation}
+eventually. To justify positivity of $m$, start at $N$ so late that
+$|\eta_n|\le1$ for $n\ge N$ and $x_N>1$.
+Iteration gives $x_{N+k}\ge2^k(x_N-1)+1$.
+The upper estimate follows in the same way.
+
+For each large positive integer $B$, choose
+$r_B=O(\log\log(B+3))$ such that $b_j>2B$ for every $j\ge r_B$.
+This follows from the lower bound in \eqref{eq:doubleexp} and $i_j\ge j$;
+finite exceptional indices are harmless. Choose the $B$ moduli
+\[
+ b_{r_B},b_{r_B+1},\ldots,b_{r_B+B-1}.
+\]
+Their largest original index is
+$J_B=i_{r_B+B-1}=B+o(B)$ by \eqref{eq:indices}.
+If $Q_B$ denotes their product, the upper bound in \eqref{eq:doubleexp}
+and the distinctness of their indices give
+\[
+ \log Q_B\le M\sum_{i\le J_B}2^i\le M2^{J_B+1},
+ \qquad
+ \log\log Q_B\le(B+o(B))\log2.
+\]
+
+\paragraph{A forbidden block at a controlled height.}
+Let $H_B=\max_{0\le n\le J_B+1}C_n$.
+The relation $\log C_n=o(n)$ implies $\log H_B=o(B)$: for each
+$\varepsilon>0$, all but finitely many terms satisfy
+$\log C_n\le\varepsilon n$, and the finite maximum contributes $O(1)$.
+The Chinese remainder theorem supplies an integer $T_B$ such that
+\[
+ T_B+j\equiv0\pmod{b_{r_B+j}}\quad(0\le j<B),
+ \qquad H_B<T_B\le H_B+Q_B.
+\]
+Consequently
+\[
+ \log\log(T_B+B)\le(B+o(B))\log2.
+\]
+For example, this follows by bounding $T_B+B$ by $H_B+Q_B+B$ and
+taking the maximum of the three corresponding logarithmic size bounds.
+As $T_B>H_B\to\infty$ and $\alpha\log2<1$, it follows that
+\begin{equation}\label{eq:width}
+ h(T_B+B)<B
+\end{equation}
+for all sufficiently large $B$.
+
+Let $N$ be the first index with $C_N\ge T_B$.
+It exists because $C_n\to\infty$, and $N>J_B+1$ by the definition
+of $H_B$. Since $C_{N-1}\le T_B-1$, we obtain
+\[
+ 0\le C_N-T_B<h(T_B)<B.
+\]
+Thus $C_N=T_B+j$ for some integer $0\le j<B$.
+The modulus $b=b_{r_B+j}$ divides both $C_N$ (by construction) and
+$D_N$ (its original index is less than $N$). Using \eqref{eq:gcd}
+and \eqref{eq:width},
+\[
+ 2B<b\le G_N\le h(C_N)\le h(T_B+B)<B,
+\]
+the required contradiction.
+\end{proof}
+
+\begin{corollary}\label{cor:necessary}
+For any counterexample to Erd\H{o}s Problem 243, with the integer states
+defined above,
+\[
+ C_n\to\infty,\qquad
+ \limsup_{n\to\infty}
+ \frac{C_{n+1}-C_n}{\ellog(C_n)}\ge\frac1{\log2}.
+\]
+\end{corollary}
+\begin{proof}
+Bounded visits would force a Sylvester tail by the first paragraph of the
+proof. If the displayed upper limit were smaller than $1/\log2$, choose
+$\alpha$ strictly between it and $1/\log2$, with $\alpha\ge0$.
+Theorem~\ref{thm:main} would apply, a contradiction.
+\end{proof}
+
+\section{A barrier for the LCM-cleared numerator}
+The product-cleared numerator can include redundant denominator factors.
+Removing those factors gives another conditional criterion, without a
+bounded common-divisor hypothesis. The coordinates and their exact updates
+are the LCM coordinates used by Bado and Cook, cited above; the bounded-rise
+case is included in their earlier criteria.
+
+\begin{theorem}\label{thm:lcmbarrier}
+Assume the integer recurrences and limits of Theorem~\ref{thm:main}.
+For every $n\ge0$ define
+\[
+ L_n=\operatorname{lcm}(D_0,a_0,\ldots,a_{n-1}),\quad
+ \Delta_n=D_n/L_n,\quad U_n=C_n/\Delta_n.
+\]
+These $U_n$ are positive integers. If constants
+$0\le\alpha<1/\log2$ and $K$ satisfy, eventually,
+\[
+ U_{n+1}-U_n\le\alpha\ellog(U_n)+K,
+\]
+then $C_n$ is eventually constant and the multipliers eventually satisfy
+$a_{n+1}=a_n^2-a_n+1$.
+\end{theorem}
+
+\begin{proof}
+The exact rational identity already used in the proof of
+Theorem~\ref{thm:main} gives $\Delta_n\mid C_n$.
+Put
+\[
+ E_n=D_n-(a_n-1)C_n,\quad
+ V_n=E_n/\Delta_n=L_n-(a_n-1)U_n,\quad
+ \rho_n=\gcd(a_n,L_n).
+\]
+Thus $V_n$ is an integer, and the exact updates are
+\begin{equation}\label{eq:lcmupdates}
+ \Delta_{n+1}=\rho_n\Delta_n,\qquad
+ \rho_n U_{n+1}=U_n-V_n,\qquad
+ \frac{V_n}{U_n}=1-\frac{C_{n+1}}{C_n}\longrightarrow0.
+\end{equation}
+In particular, once $|V_n|<U_n$, an index with $\rho_n\ge2$ is a strict
+decrease of $U_n$. Every sufficiently late strict rise therefore has
+$\rho_n=1$ and jump $U_{n+1}-U_n=-V_n$.
+
+Suppose $C_n$ is not eventually constant. A late zero of $E_n$ would
+give $C_{n+1}=C_n$ and $D_{n+1}/C_{n+1}\in\mathbb N$. At the next
+step $C_{n+2}/C_{n+1}$ would then be a positive integer. Taking the
+time sufficiently late that all subsequent consecutive ratios lie in
+$(1/2,3/2)$ forces that integer to be one. Induction gives a constant
+tail, a contradiction. Hence $E_n$, and therefore $V_n$, is nonzero
+at every sufficiently late index. Since $V_n$ is integral and
+$V_n/U_n\to0$, it follows that $U_n\to\infty$.
+
+As before, $\log C_n=o(n)$. Since
+$1\le\Delta_n\le C_n$, we have $\log\Delta_n=o(n)$.
+The first update in \eqref{eq:lcmupdates} shows that the number of
+indices $j<n$ with $\rho_j>1$ is $o(n)$: every such index multiplies
+$\Delta$ by at least two. Enumerate the remaining indices as
+$i_0<i_1<\cdots$, with $b_j=a_{i_j}$. Then
+\[
+ i_j=j+o(j),
+\]
+and the $b_j$ are pairwise coprime. We use the original $L_n$ throughout;
+no change of its initial denominator is made.
+
+For a large positive integer $B$, choose an offset
+$r_B=O(\log\log(B+3))$ for which $b_j>2B$ whenever $j\ge r_B$.
+The bounds $m2^n\le\log a_n\le M2^n$ established above justify this
+choice. Select $b_{r_B},\ldots,b_{r_B+B-1}$, and put
+\[
+ J=i_{r_B+B-1}=B+o(B),\qquad
+ Q=\prod_{j<B}b_{r_B+j},\qquad H=\max_{0\le n\le J+1}U_n.
+\]
+Since $U_n\le C_n$,
+\[
+ \log\log Q\le(B+o(B))\log2,\qquad \log H=o(B).
+\]
+Choose by CRT an integer $H<T\le H+Q$ such that
+$b_{r_B+j}\mid T+j$ for $0\le j<B$, and set $\tau=T+B$.
+For $h(x)=\alpha\ellog(x)+K$, increasing $K$ to be positive if needed,
+these estimates give
+\[
+ h(\tau)<B
+\]
+for sufficiently large $B$.
+
+Let $N$ be the first index with $U_N\ge\tau$. Then $N>J+1$ and
+$U_{N-1}<\tau$. This is a sufficiently late rise, so
+$\rho_{N-1}=1$ and its positive integer jump $d=U_N-U_{N-1}$ satisfies
+\[
+ 0<d\le h(U_{N-1})\le h(\tau)<B.
+\]
+The starting point of the rise lies in $[T,T+B)$: indeed
+$U_{N-1}=U_N-d\ge\tau-d>T$. Write $U_{N-1}=T+j$ with $0\le j<B$.
+The corresponding $b=b_{r_B+j}$ divides both $U_{N-1}$ and $L_{N-1}$,
+because its original index is at most $J<N-1$.
+The identity $V_{N-1}=L_{N-1}-(a_{N-1}-1)U_{N-1}$ shows that $b\mid V_{N-1}$.
+But $d=-V_{N-1}$, so $d\ge b>2B$, a contradiction.
+Thus $C_n$ is eventually constant, and the asserted multiplier recurrence
+follows as in Theorem~\ref{thm:main}.
+\end{proof}
+
+This condition is expressed in $U_n$, not in $C_n$. Positive changes of
+$C_n=\Delta_nU_n$ can be much larger when $\Delta_n$ grows. The theorem
+therefore does not assume the increment envelope of Theorem~\ref{thm:main}.
+The unrestricted problem also does not currently supply the new envelope.
+
+\begin{corollary}
+For a counterexample to Erd\H{o}s Problem 243, the LCM-cleared numerator
+$U_n=L_nR_n$ satisfies
+\[
+ U_n\longrightarrow\infty,\qquad
+ \limsup_{n\to\infty}\frac{U_{n+1}-U_n}{\ellog(U_n)}\ge\frac1{\log2}.
+\]
+\end{corollary}
+\begin{proof}
+The divergence was proved above. An upper limit smaller than $1/\log2$
+would supply the envelope in Theorem~\ref{thm:lcmbarrier}.
+\end{proof}
+
+\section{Finite rise coefficient and a sieve refinement}
+The strict inequality in Theorem~\ref{thm:main} is enough to obtain a
+stronger necessary condition, including the endpoint. The coordinates
+in the next statement are fixed; rescaling them rescales the coefficient.
+
+\begin{theorem}\label{thm:wheel}
+Assume the integer recurrences and limits of Theorem~\ref{thm:main},
+and suppose that $C_n$ is not eventually constant. Define
+\[
+ \Lambda=\limsup_{n\to\infty}
+ \frac{C_{n+1}-C_n}{\ellog(C_n)}.
+\]
+If $\Lambda<\infty$, then $G_n=\gcd(C_n,D_n)$ is eventually a fixed
+integer $g\ge1$. On that tail put $c_n=C_n/g$ and $d_n=D_n/g$, and let
+\[
+ \mathcal P=\{p\text{ prime}:p\mid d_n\text{ for some sufficiently late }n\}.
+\]
+For every finite $P\subseteq\mathcal P$, write
+$\rho(P)=\prod_{p\in P}(1-1/p)$, with the empty product equal to one.
+Then
+\begin{equation}\label{eq:wheelbound}
+ \Lambda\ge\frac{g}{\rho(P)\log2}.
+\end{equation}
+In particular
+\[
+ \prod_{p\in\mathcal P}(1-1/p)>0,\qquad
+ \sum_{p\in\mathcal P}\frac1p<\infty,
+ \qquad \Lambda>\frac1{\log2}.
+\]
+\end{theorem}
+
+\begin{proof}
+The integer-ratio argument already proved shows that $C_n\to\infty$.
+Corollary~\ref{cor:necessary} gives $\Lambda\ge1/\log2$.
+For each fixed index $N$, the integer $G_N$ divides every later $C_n,D_n$.
+Dividing both coordinates by $G_N$ preserves all the recurrences and
+limits, and $\ellog(C_n/G_N)/\ellog(C_n)\to1$. The new upper limit
+of normalized rises is therefore $\Lambda/G_N$. If
+$G_N>\Lambda\log2$, Theorem~\ref{thm:main} applied to this divided tail
+would force eventual constancy, a contradiction. Thus $G_N\le\Lambda\log2$
+for every $N$. The divisibility chain $G_N\mid G_{N+1}$ is bounded and
+must eventually be constant, say equal to $g$.
+
+The normalized coordinates satisfy $\gcd(c_n,d_n)=1$ at every later
+index. If a prime divided both $a_n$ and $d_n$, it would divide both
+$c_{n+1}=a_nc_n-d_n$ and $d_{n+1}=a_nd_n$, a contradiction.
+Hence $\gcd(a_n,d_n)=1$. In particular the late $a_n$ are pairwise
+coprime and are coprime to the denominator at the start of any such tail.
+Write $\lambda=\Lambda/g$.
+
+Fix finite $P\subseteq\mathcal P$, put $M=\prod_{p\in P}p$ and
+$\rho=\rho(P)$. Reindex a fixed sufficiently late tail so that
+$M\mid d_0$ and the coordinates are primitive throughout.
+Suppose, towards a contradiction, that $\lambda\rho\log2<1$.
+Choose $\beta>\lambda$ with $\beta\rho\log2<1$, and $K\ge1$ so that
+\[
+ c_{n+1}-c_n\le h(c_n),\qquad h(x)=\beta\ellog(x)+K
+\]
+on that tail (increasing $K$ handles its finite prefix).
+
+Let $W$ tend to infinity through positive multiples of $M$.
+There are exactly $B=\rho W$ integers $0\le j<W$ coprime to $M$;
+list them as $j_0,\ldots,j_{B-1}$. When $M=1$, every $j$ is included.
+Use the $B$ moduli $a_0,\ldots,a_{B-1}$, which are pairwise coprime
+and coprime to $M$. Put
+\[
+ Q=M\prod_{i<B}a_i,\qquad H=\max_{0\le n\le B}c_n.
+\]
+The growth estimates proved above give
+\[
+ \log\log Q\le B\log2+O(1),\qquad \log H=o(B).
+\]
+The Chinese remainder theorem supplies $H<T\le H+Q$ satisfying
+\[
+ T\equiv0\pmod M,\qquad T+j_i\equiv0\pmod{a_i}\quad(i<B).
+\]
+Consequently $\ellog(T+W)\le B\log2+O(1)$ and
+\[
+ h(T+W)\le\beta\rho W\log2+O(1)<W
+\]
+for sufficiently large $W$.
+
+At the first index $N$ with $c_N\ge T$ we have $N>B$ and
+$0\le c_N-T<h(T)<W$. Write $c_N=T+j$ with $0\le j<W$.
+If $\gcd(j,M)>1$, a prime of $M$ divides $c_N$ and $d_N$.
+Otherwise $j=j_i$ for some $i<B$, and $a_i$ divides both $c_N$ and $d_N$.
+Either case contradicts $\gcd(c_N,d_N)=1$. This proves
+$\lambda\rho\log2\ge1$, equivalently \eqref{eq:wheelbound}.
+
+Since \eqref{eq:wheelbound} holds for every finite $P$, every such
+product satisfies $\rho(P)\ge g/(\Lambda\log2)>0$. Thus the product
+over $\mathcal P$ is positive. The inequality
+$-\log(1-1/p)\ge1/p$ then proves convergence of the reciprocal sum.
+Finally $\mathcal P$ is nonempty: $d_{n+1}=a_nd_n$ and $a_n\ge2$.
+Using a singleton $P=\{p\}$ in \eqref{eq:wheelbound} gives
+$\Lambda\ge g/((1-1/p)\log2)>1/\log2$.
+\end{proof}
+
+\begin{corollary}\label{cor:endpoint}
+The conclusion of Theorem~\ref{thm:main} also holds when
+$\alpha=1/\log2$.
+\end{corollary}
+\begin{proof}
+If $C_n$ were not eventually constant, its rise bound would give
+$\Lambda\le1/\log2$, contrary to Theorem~\ref{thm:wheel}.
+\end{proof}
+
+\section{Clustered barriers for the LCM-cleared numerator}
+The following refinement does not require the common divisor of $C_n,D_n$
+to stabilize. We keep the original LCM coordinates of
+Theorem~\ref{thm:lcmbarrier} throughout.
+
+\begin{theorem}\label{thm:lcmwheel}
+Assume the integer recurrences and limits of Theorem~\ref{thm:main},
+and suppose that $C_n$ is not eventually constant. Let
+\[
+ \Lambda_U=\limsup_{n\to\infty}
+ \frac{U_{n+1}-U_n}{\ellog(U_n)},\qquad
+ \mathcal P_L=\{p\text{ prime}:p\mid L_n\text{ for some }n\}.
+\]
+For every finite $P\subseteq\mathcal P_L$, with
+$\rho(P)=\prod_{p\in P}(1-1/p)$, one has
+\[
+ \Lambda_U\ge\frac1{\rho(P)\log2}.
+\]
+Consequently $\Lambda_U>1/\log2$. If $\Lambda_U<\infty$, then
+\[
+ \prod_{p\in\mathcal P_L}(1-1/p)>0,
+ \qquad \sum_{p\in\mathcal P_L}\frac1p<\infty.
+\]
+In particular, if eventually
+\[
+ U_{n+1}-U_n\le\frac{\ellog(U_n)}{\log2}+K
+\]
+for a fixed $K$, then $C_n$ is eventually constant and
+$a_{n+1}=a_n^2-a_n+1$ eventually.
+\end{theorem}
+
+\begin{proof}
+We use the previously proved facts $U_n\to\infty$, $V_n/U_n\to0$,
+$\log C_n=o(n)$, and
+\[
+ \rho_n U_{n+1}=U_n-V_n,\qquad
+ L_{n+1}=a_nL_n/\rho_n,\qquad \rho_n=\gcd(a_n,L_n).
+\]
+Also $U_{n+1}/U_n=(C_{n+1}/C_n)/\rho_n$. Hence eventually
+\begin{equation}\label{eq:reusecontraction}
+ \rho_n>1\ \Longrightarrow\ U_{n+1}\le\tfrac34 U_n.
+\end{equation}
+If $\rho_n=1$ and $M\mid L_n$, then
+\begin{equation}\label{eq:gcdclass}
+ \gcd(U_{n+1},M)=\gcd(a_nU_n-L_n,M)=\gcd(U_n,M).
+\end{equation}
+Thus the gcd class is preserved between reuse steps.
+
+Fix finite $P$, put $M=\prod_{p\in P}p$ and $\rho=\rho(P)$.
+Suppose for contradiction that $\Lambda_U\rho\log2<1$.
+Choose $\beta>\max\{\Lambda_U,0\}$ with $\beta\rho\log2<1$.
+After discarding a fixed prefix, we may assume $M\mid L_0$,
+\eqref{eq:reusecontraction}, and
+\[
+ U_{n+1}-U_n\le h(U_n),\qquad h(x)=\beta\ellog(x)+K,
+ \quad K\ge1.
+\]
+The discarded prefix does not change the definitions of the LCM states.
+
+Let $W$ tend to infinity through multiples of $M$ and put
+$B=\rho W$. For every divisor $d\mid M$ define
+\[
+ J_d=\{0\le j<W:\gcd(j,M)=d\}.
+\]
+Then $|J_d|=W\varphi(M/d)/M\le B$, since $M$ is squarefree.
+For $M=1$ there is just one class, containing every position.
+Enumerate the fresh multipliers as in Theorem~\ref{thm:lcmbarrier}.
+Select $B$ of them, denoted $b_1,\ldots,b_B$, all greater than $2W$.
+Their last original index is $J=B+o(B)$, they are pairwise coprime,
+and they are coprime to $M$. Set
+\[
+ Q=M\prod_{i=1}^B b_i,\qquad S=Q^2,\qquad
+ H=\max_{0\le n\le J+1}U_n.
+\]
+The same growth estimates give
+\[
+ \log\log Q\le(B+o(B))\log2,
+ \qquad \log H=o(B).
+\]
+In particular $S>H$ for large $W$, since $Q>(2W)^B$.
+
+For each $d\mid M$, assign the positions of $J_d$ injectively to
+the same list $b_1,\ldots,b_B$. The Chinese remainder theorem supplies
+$0\le r_d<Q$ such that
+\[
+ r_d\equiv0\pmod M,\qquad
+ r_d+j\equiv0\pmod{b_i}
+ \quad\text{whenever position }j\in J_d\text{ is assigned to }b_i.
+\]
+Unused moduli may be given arbitrary residues. Put $T_d=S+r_d$.
+These barriers all lie in the common interval
+$[S,S+Q+W]$. Their construction uses $B$ shared moduli,
+rather than a separate set of moduli for every class. Moreover
+\[
+ h(S+Q+W)\le\beta(B+o(B))\log2+O(1)<W.
+\]
+
+Let $N$ be the first index with $U_N\ge S+Q+W$, and let $k<N$
+be the last index with $U_k<S$. Both exist because $U_n\to\infty$
+and $U_0<S$. We have $k\ge J+1$ and
+\[
+ S\le U_{k+1}<S+h(S)<S+W.
+\]
+For $k+1\le n<N$, a reuse step would give
+\[
+ U_{n+1}\le\tfrac34 U_n
+ <\tfrac34(S+Q+W)<S,
+\]
+contradicting the choice of $k$. Thus $\rho_n=1$ throughout this
+crossing and $\gcd(U_n,M)$ has a fixed value $d$ there.
+
+We start below $T_d+W$ and finish above it. At the first rise crossing
+$T_d+W$, its starting point has the form $U_n=T_d+j$, $0\le j<W$,
+and its positive jump $t$ is less than $W$. Since $T_d\equiv0\pmod M$,
+we have $j\in J_d$. Its assigned modulus $b_i$ divides both $U_n$
+and $L_n$, because $n>J$. As $\rho_n=1$,
+\[
+ t=U_{n+1}-U_n=(a_n-1)U_n-L_n,
+\]
+so $b_i\mid t$. This contradicts $0<t<W<b_i$.
+The claimed coefficient bound follows.
+
+The set $\mathcal P_L$ is nonempty since each $a_n\ge2$ divides
+$L_{n+1}$. A singleton $P$ therefore gives $\Lambda_U>1/\log2$.
+If $\Lambda_U$ is finite, the bound for all finite $P$ implies
+$\rho(P)\ge1/(\Lambda_U\log2)>0$, which proves the Euler-product
+and reciprocal-sum claims. Finally the endpoint envelope would imply
+$\Lambda_U\le1/\log2$, a contradiction.
+\end{proof}
+
+\section{A failed Egyptian-length descent}
+For a positive rational $r$, let $\lambda(r)$ be the least number of
+positive unit fractions summing to $r$; repetitions are allowed.
+It is tempting to use $\lambda$ as a decreasing integer invariant for
+the near-Sylvester step $r\mapsto r-1/a$.
+The following exact examples exclude a descent assertion based only
+on the displayed local data. They do not exclude an argument using
+additional information about all later states.
+
+\begin{lemma}\label{lem:lengthfailure}
+There is a positive rational $r=C/D$ and an integer $a\ge2$ with
+\[
+ \lambda(r)=2,\quad \lambda(r-1/a)\ge3,\quad
+ 0<\frac{aC-D-C}{C}<1.2\cdot10^{-14},
+ \quad a=1+\operatorname{round}(D/C).
+\]
+There is a second pair with $\lambda(r)=2$, $\lambda(r-1/a)\ge3$,
+$a=1+\operatorname{round}(D/C)$, $a>2\cdot10^7 C$,
+$\gcd(a,D)=1$, and relative numerator rise less than $10^{-3}$.
+\end{lemma}
+
+\begin{proof}
+For the first assertion take
+\[
+ b=29719973,\quad c=441638367840389,\quad a=29719972,
+ \qquad C=b+c,\quad D=bc.
+\]
+The integers $a/4=7429993$, $b$, and $c$ are prime. They may be
+checked by the exact trial divisions in the accompanying script.
+Direct multiplication gives $aC-D=C+5$, so the relative rise is
+$5/441638397560362<1.2\cdot10^{-14}$ and $a-1$ is the nearest integer
+to $D/C$. Since $b,c$ are distinct primes, $r=1/b+1/c$ has length two.
+
+Write $u=C+5$ and $v=aD$, so $r-1/a=u/v$, and put $M=5103$.
+We have
+\[
+ M\mid u,\qquad v\equiv1030\pmod M,
+ \quad a=4p,\quad p\equiv25,\ b\equiv101,\ c\equiv4997\pmod M.
+\]
+If $u/v=1/x+1/y$, then
+\[
+ (ux-v)(uy-v)=v^2,
+ \qquad ux-v>0,\quad uy-v>0.
+\]
+Thus a positive divisor of $v^2$ must be congruent to $-v=4073$ modulo
+$M$. Every divisor has the form $2^e p^f b^g c^h$ with
+$0\le e\le4$, $0\le f,g,h\le2$. The following finite residue sets
+are disjoint:
+\begin{align*}
+ \{2^e25^f\bmod M\}
+ &=\{1,2,4,8,16,25,50,100,200,400,625,1250,2500,4897,5000\},\\
+ \{4073(101^g4997^h)^{-1}\bmod M\}
+ &=\{106,206,394,2020,3062,3082,4073,5003,5102\}.
+\end{align*}
+All inverses exist modulo $M$. This excludes two unit fractions,
+and also one, since a unit fraction is the sum of two equal unit fractions.
+
+For the second assertion put
+\[
+ L=1222709419,\quad a=121047033277,\qquad
+ r=\frac1{101L}+\frac1{4997L}=\frac{5098}{504697L}.
+\]
+Both $L$ and $a$ are prime, and
+\[
+ L=1+5098\cdot239841,\qquad
+ a=100+504697\cdot239841.
+\]
+Consequently $aC-D=C+5=5103$, $a>2\cdot10^7C$, and
+$\gcd(a,D)=1$. The relative rise is $5/5098<10^{-3}$.
+The input again has length two. The output denominator is
+$v=19\cdot101\cdot263\cdot L\cdot a$, with $L\equiv1$ and
+$a\equiv100$ modulo $M$; also $v\equiv1030\pmod M$.
+The same divisor test now checks the $3^5=243$ positive divisors
+of $v^2$. The script exhausts them and finds none congruent to $4073$
+modulo $M$, proving the asserted length increase.
+\end{proof}
+
+\section{Verification and the unresolved step}
+The script \texttt{erdos243-check.mjs} checks exact state and LCM identities
+on all 3,044 reduced rationals $0<p\le q\le100$. It also constructs and
+checks twelve exact CRT blocks, using pairwise coprime Sylvester numbers
+as sample moduli, together with sieve blocks whose uncovered positions
+are assigned separate coprime moduli. These are finite checks, not evidence of an infinite
+termination theorem. Run the script with \texttt{node erdos243-check.mjs}.
+The script also constructs clustered barriers for every gcd class
+modulo $6$ and $30$, with one shared list of fresh moduli per cluster.
+It verifies the prime factorizations, unit-fraction identities and all
+divisor exclusions used in Lemma~\ref{lem:lengthfailure}.
+
+An independent agent reviewed the conditional argument without finding a
+substantive error. A separate Codex CLI review, using its configured
+\texttt{gpt-6.1-sol} model, reached the same finding. Its report is saved as
+\texttt{erdos243-codex-review.txt}; the supplied artifact and contract are
+in \texttt{erdos243-review-prompt.txt}. Neither review is a formal proof
+or a novelty certification. Those two reviews covered the strict-coefficient
+theorem. A further fresh-context adversarial review found no substantive
+error in the sieve refinement and endpoint corollary, assuming the earlier
+strict-coefficient theorem. That report is in
+\texttt{erdos243-sieve-review.txt}. A separately authorized Codex CLI
+review also found no substantive error or invalidating unstated assumption
+in the sieve theorem and endpoint argument, assuming the earlier strict
+theorem; see \texttt{erdos243-sieve-codex-review.txt}. Its isolated input is
+\texttt{erdos243-sieve-review-prompt.txt}.
+The LCM-numerator theorem received a separate fresh-context adversarial
+review, which found no substantive mathematical error under its stated
+hypotheses. That report is in \texttt{erdos243-lcm-review.txt}.
+No cross-model review of that theorem was run during the automatic goal
+continuation.
+The clustered LCM barrier in Theorem~\ref{thm:lcmwheel} received its own
+fresh-context adversarial review under the isolated preliminary facts;
+the reviewer found no substantive mathematical issue. Its report and
+input are \texttt{erdos243-cluster-review.txt} and
+\texttt{erdos243-cluster-review-prompt.txt}. This review does not
+establish novelty or solve the unrestricted conjecture.
+A separately authorized Codex CLI review found no substantive error
+in the explicit clustered-barrier claims under the supplied preliminary
+facts. It could not assess the endpoint corollary from its excerpt,
+because the referenced earlier envelope was not included. The endpoint
+envelope is now written explicitly in Theorem~\ref{thm:lcmwheel};
+it implies $\Lambda_U\le1/\log2$ directly. The original isolated
+review input is retained unchanged, and the review is in
+\texttt{erdos243-cluster-codex-review.txt}.
+The finite Egyptian-length counterexamples were separately reviewed
+against their exact verifier; the reviewer found no substantive issue.
+The isolated contract and report are
+\texttt{erdos243-descent-review-prompt.txt} and
+\texttt{erdos243-descent-review.txt}. Cross-model review was skipped
+for this automatic goal continuation.
+
+The original hypotheses yield only $C_{n+1}-C_n=o(C_n)$, and
+\eqref{eq:envelope} is much stronger. No argument here closes that gap.
+In particular, subexponential growth of an integer sequence does not
+imply this increment bound. Excluding the remaining larger-increment
+integer orbits is the work still required for the full problem.
+For the LCM-cleared numerator, the known estimate on a positive jump is
+only $U_{n+1}-U_n=o(U_n)$; this follows from \eqref{eq:lcmupdates}
+and $\rho_n=1$ at late rises. The new logarithmic envelope has not been
+deduced from that estimate or from the remaining arithmetic constraints.
+\end{document}

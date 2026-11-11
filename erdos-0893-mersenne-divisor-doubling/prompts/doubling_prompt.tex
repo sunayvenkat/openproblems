@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\begin{document}
+
+\textbf{Task.} For $k\ge 1$ let $T(k)=\tau(2^k-1)$, where $\tau$ is the number-of-divisors
+function, and let $f(n)=\sum_{k=1}^{n}T(k)$. Let $\Phi_d$ be the $d$-th cyclotomic polynomial,
+so $2^k-1=\prod_{d\mid k}\Phi_d(2)$. All logarithms are natural. Decide, with complete proofs, whether
+\[
+  \lim_{n\to\infty}\frac{f(2n)}{f(n)}=\infty .
+\]
+
+\textbf{Method to follow.}
+\begin{enumerate}
+\item \emph{Primitive divisors.} Using Zsigmondy's theorem, show that if $d\mid t$, $d\nmid k$, $d\notin\{1,6\}$,
+  then $2^d-1$ has a prime factor coprime to $2^k-1$; deduce $\omega(2^N+1)\ge\tau(M)-1$, where $M$ is the odd part of $N$.
+\item \emph{Supermodularity.} Prove $T(\operatorname{lcm}(a,b))\,T(\gcd(a,b))\ge T(a)\,T(b)$ and $T(2k)=T(k)\,\tau(2^k+1)$.
+\item \emph{Record doubling.} Let $N\le n$ maximise $T$ on $\{1,\dots,n\}$. Show $N>n/2$, so $2N\in(n,2n]$ and
+  \[
+    \frac{f(2n)}{f(n)}\ \ge\ 1+\frac{\tau(2^N+1)}{n}\ \ge\ 1+\frac{2^{\tau(M)-1}}{n}.
+  \]
+\item \emph{Dyadic warm-up.} With $A(x)=\sum_{x<t\le 2x}T(t)$, prove $A(x)\ge 2A(x/2)$ for all real $x>0$ and deduce
+  $f(2n)>2f(n)$ for every $n$.
+\item \emph{Forcing a highly divisible record.} Squeeze $T(N)$ between $T(N)\ge T(P)\ge 2^{\tau(P)-2}$ ($P$ the largest
+  primorial $\le n$) and $\log_2 T(N)\le \log_2(N+1)\sum_{d\mid N}\omega(\Phi_d(2))$. Find the exact condition on
+  $\max_{d\le n}\omega(\Phi_d(2))$ that forces $\tau(M)-\log_2 n\to\infty$. Prove in particular: if for some $\delta>0$
+  and all large $d$
+  \[
+    \omega(\Phi_d(2))\le 2^{(1-\delta)\log d/\log\log d}, \tag{H$_\delta$}
+  \]
+  then $f(2n)/f(n)\ge 2^{\,2^{(\delta-o(1))\log n/\log\log n}}$.
+\item \emph{Remove the hypothesis, or prove the method needs it.} Either prove (H$_\delta$), or any weaker input that rules
+  out an index $p\in(n/2,n]$ with $T(p)$ dominating $f(2n)$ while $\tau(2^p+1)$ stays bounded; or show this is
+  unavoidable: build an abstract model in which each $\Phi_d(2)$ is replaced by a product of $\omega_d\ge1$ distinct new
+  primes $\equiv1\pmod d$ (respecting every property used in steps 1--5, and $\omega_d\le 2^{(1+\delta)\log d/\log\log d}$)
+  whose analogue of $f$ satisfies $\liminf f(2n)/f(n)\le 5$.
+\end{enumerate}
+
+\textbf{Rules.} State every lemma precisely and prove it, citing only standard named theorems (Zsigmondy, Chebyshev or
+the prime number theorem). Handle the exceptional cases $d\in\{1,6\}$ and all constants explicitly. Do not assume any
+bound on $\omega(\Phi_d(2))$ you have not proved. If you do not reach an unconditional answer, say so plainly and give
+the strongest theorem you did prove, with its hypothesis stated in full.
+
+\end{document}

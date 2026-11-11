@@ -1,0 +1,2 @@
+BAD non-top piece: m=6825 d=2275 m/d=3 primes(m)=[3, 5, 7, 13]
+done 2001 8001 count 1

@@ -1,0 +1,7 @@
+N=3 d=455 primes(d)=[5, 7, 13] phi(d)/d=0.633  m=1365: BAD
+N=3 d=2275 primes(d)=[5, 7, 13] phi(d)/d=0.633  m=6825: BAD
+N=3 d=3185 primes(d)=[5, 7, 13] phi(d)/d=0.633  m=9555: BAD
+N=3 d=5915 primes(d)=[5, 7, 13] phi(d)/d=0.633  m=17745: BAD
+done N 3 d<= 6001 bad: [455, 2275, 3185, 5915]
+done N 5 d<= 2001 bad: []
+done N 7 d<= 1201 bad: []

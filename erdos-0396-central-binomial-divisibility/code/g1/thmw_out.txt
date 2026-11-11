@@ -1,0 +1,1 @@
+Thm W vs exact series: 9365 (prime set, rho) cases decided, mismatches 0, undecided by closed form 1037

@@ -1,0 +1,140 @@
+Adversarial mathematical review. Find what is wrong with this artifact.
+Assume the author is overconfident. Check unstated assumptions, quantifiers,
+asymptotics, integer divisibility, and indexing. Do NOT validate or summarize.
+Find substantive issues, or state explicitly that you cannot find any after
+thorough examination. Do not edit files, launch agents, browse, or read other
+artifacts. Reason only about this supplied text.
+
+CONTRACT
+Assuming the strict-coefficient theorem stated below is correct, determine
+whether the subsequent sieve theorem and endpoint corollary follow from
+their hypotheses. No full solution of unrestricted Erdos 243 is claimed.
+Novelty and machine-checked verification are unassessed.
+
+DEFINITIONS AND AVAILABLE RESULTS
+All sequences are indexed by nonnegative integers. All logarithms are natural.
+ell(x) = log(log(max(x,exp(exp(1))))).
+Integers a_n>=2, C_n>=1, D_n>=1 satisfy
+  D_{n+1}=a_n D_n, C_{n+1}=a_n C_n-D_n,
+  a_n -> infinity, a_{n+1}/a_n^2 -> 1, C_{n+1}/C_n -> 1.
+The following results may be assumed:
+1. If C_n is not eventually constant, then C_n -> infinity and log C_n=o(n).
+2. There exist fixed m,M>0 with m*2^n <= log a_n <= M*2^n eventually.
+3. G_n=gcd(C_n,D_n) divides G_{n+1}.
+4. Strict-coefficient theorem: if eventually
+     C_{n+1}-C_n <= alpha*ell(C_n)+K
+   for constants 0<=alpha<1/log(2) and K, then C_n is eventually constant.
+   Consequently, in any nonconstant case, the upper limit of the normalized
+   rises is at least 1/log(2).
+5. Eventual constancy yields a_{n+1}=a_n^2-a_n+1 eventually, directly from
+   the integer recurrences.
+
+ARTIFACT (LaTeX, using ellog for ell)
+\section{Finite rise coefficient and a sieve refinement}
+The strict inequality in Theorem~\ref{thm:main} is enough to obtain a
+stronger necessary condition, including the endpoint. The coordinates
+in the next statement are fixed; rescaling them rescales the coefficient.
+
+\begin{theorem}\label{thm:wheel}
+Assume the integer recurrences and limits of Theorem~\ref{thm:main},
+and suppose that $C_n$ is not eventually constant. Define
+\[
+ \Lambda=\limsup_{n\to\infty}
+ \frac{C_{n+1}-C_n}{\ellog(C_n)}.
+\]
+If $\Lambda<\infty$, then $G_n=\gcd(C_n,D_n)$ is eventually a fixed
+integer $g\ge1$. On that tail put $c_n=C_n/g$ and $d_n=D_n/g$, and let
+\[
+ \mathcal P=\{p\text{ prime}:p\mid d_n\text{ for some sufficiently late }n\}.
+\]
+For every finite $P\subseteq\mathcal P$, write
+$\rho(P)=\prod_{p\in P}(1-1/p)$, with the empty product equal to one.
+Then
+\begin{equation}\label{eq:wheelbound}
+ \Lambda\ge\frac{g}{\rho(P)\log2}.
+\end{equation}
+In particular
+\[
+ \prod_{p\in\mathcal P}(1-1/p)>0,\qquad
+ \sum_{p\in\mathcal P}\frac1p<\infty,
+ \qquad \Lambda>\frac1{\log2}.
+\]
+\end{theorem}
+
+\begin{proof}
+The integer-ratio argument already proved shows that $C_n\to\infty$.
+Corollary~\ref{cor:necessary} gives $\Lambda\ge1/\log2$.
+For each fixed index $N$, the integer $G_N$ divides every later $C_n,D_n$.
+Dividing both coordinates by $G_N$ preserves all the recurrences and
+limits, and $\ellog(C_n/G_N)/\ellog(C_n)\to1$. The new upper limit
+of normalized rises is therefore $\Lambda/G_N$. If
+$G_N>\Lambda\log2$, Theorem~\ref{thm:main} applied to this divided tail
+would force eventual constancy, a contradiction. Thus $G_N\le\Lambda\log2$
+for every $N$. The divisibility chain $G_N\mid G_{N+1}$ is bounded and
+must eventually be constant, say equal to $g$.
+
+The normalized coordinates satisfy $\gcd(c_n,d_n)=1$ at every later
+index. If a prime divided both $a_n$ and $d_n$, it would divide both
+$c_{n+1}=a_nc_n-d_n$ and $d_{n+1}=a_nd_n$, a contradiction.
+Hence $\gcd(a_n,d_n)=1$. In particular the late $a_n$ are pairwise
+coprime and are coprime to the denominator at the start of any such tail.
+Write $\lambda=\Lambda/g$.
+
+Fix finite $P\subseteq\mathcal P$, put $M=\prod_{p\in P}p$ and
+$\rho=\rho(P)$. Reindex a fixed sufficiently late tail so that
+$M\mid d_0$ and the coordinates are primitive throughout.
+Suppose, towards a contradiction, that $\lambda\rho\log2<1$.
+Choose $\beta>\lambda$ with $\beta\rho\log2<1$, and $K\ge1$ so that
+\[
+ c_{n+1}-c_n\le h(c_n),\qquad h(x)=\beta\ellog(x)+K
+\]
+on that tail (increasing $K$ handles its finite prefix).
+
+Let $W$ tend to infinity through positive multiples of $M$.
+There are exactly $B=\rho W$ integers $0\le j<W$ coprime to $M$;
+list them as $j_0,\ldots,j_{B-1}$. When $M=1$, every $j$ is included.
+Use the $B$ moduli $a_0,\ldots,a_{B-1}$, which are pairwise coprime
+and coprime to $M$. Put
+\[
+ Q=M\prod_{i<B}a_i,\qquad H=\max_{0\le n\le B}c_n.
+\]
+The growth estimates proved above give
+\[
+ \log\log Q\le B\log2+O(1),\qquad \log H=o(B).
+\]
+The Chinese remainder theorem supplies $H<T\le H+Q$ satisfying
+\[
+ T\equiv0\pmod M,\qquad T+j_i\equiv0\pmod{a_i}\quad(i<B).
+\]
+Consequently $\ellog(T+W)\le B\log2+O(1)$ and
+\[
+ h(T+W)\le\beta\rho W\log2+O(1)<W
+\]
+for sufficiently large $W$.
+
+At the first index $N$ with $c_N\ge T$ we have $N>B$ and
+$0\le c_N-T<h(T)<W$. Write $c_N=T+j$ with $0\le j<W$.
+If $\gcd(j,M)>1$, a prime of $M$ divides $c_N$ and $d_N$.
+Otherwise $j=j_i$ for some $i<B$, and $a_i$ divides both $c_N$ and $d_N$.
+Either case contradicts $\gcd(c_N,d_N)=1$. This proves
+$\lambda\rho\log2\ge1$, equivalently \eqref{eq:wheelbound}.
+
+Since \eqref{eq:wheelbound} holds for every finite $P$, every such
+product satisfies $\rho(P)\ge g/(\Lambda\log2)>0$. Thus the product
+over $\mathcal P$ is positive. The inequality
+$-\log(1-1/p)\ge1/p$ then proves convergence of the reciprocal sum.
+Finally $\mathcal P$ is nonempty: $d_{n+1}=a_nd_n$ and $a_n\ge2$.
+Using a singleton $P=\{p\}$ in \eqref{eq:wheelbound} gives
+$\Lambda\ge g/((1-1/p)\log2)>1/\log2$.
+\end{proof}
+
+\begin{corollary}\label{cor:endpoint}
+The conclusion of Theorem~\ref{thm:main} also holds when
+$\alpha=1/\log2$.
+\end{corollary}
+\begin{proof}
+If $C_n$ were not eventually constant, its rise bound would give
+$\Lambda\le1/\log2$, contrary to Theorem~\ref{thm:wheel}.
+\end{proof}
+
+

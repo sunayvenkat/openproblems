@@ -1,0 +1,88 @@
+Adversarial mathematical review. Find what is wrong with this artifact.
+Assume the author is overconfident. Check all quantifiers, asymptotics,
+integer-divisibility assertions, and indexing. Do not validate or summarize.
+Find substantive issues, or explicitly state that you cannot find any after
+thorough examination. Do not read unrelated files, edit files, launch other
+agents, or use external services. Only reason about the artifact below.
+
+CONTRACT
+Prove or refute the conditional theorem below. It is not offered as a solution
+of unrestricted Erdos problem 243. Novelty is unassessed. All logarithms are
+natural. Put ell(x)=log(log(max(x,exp(exp(1))))).
+
+ARTIFACT
+Theorem. Let a_n>=2, C_n>=1, D_n>=1 be integer sequences, indexed n>=0, with
+  D_{n+1}=a_n D_n,
+  C_{n+1}=a_n C_n-D_n.
+Suppose a_n tends to infinity, a_{n+1}/a_n^2 tends to 1, and
+C_{n+1}/C_n tends to 1. If constants 0<=alpha<1/log(2), K exist such that
+eventually
+  C_{n+1}-C_n <= alpha ell(C_n)+K,
+then C_n is eventually constant and a_{n+1}=a_n^2-a_n+1 eventually.
+
+Proof. Discard a finite prefix and increase K so K>=1 and the rise bound holds
+for every remaining index. Reindex; all hypotheses persist. Write
+h(x)=alpha ell(x)+K, a nondecreasing positive function.
+
+If C visits bounded values infinitely, integerness and C_{n+1}/C_n ->1
+force it to be eventually constant: for a fixed bound M, take all late ratios
+within 1/(2M) of 1. Once C_n<=M, the next positive integer differs from it by
+less than 1/2, and induction traps it forever. If C_n=C eventually, then
+D_n=(a_n-1)C and D_{n+1}=a_n D_n give the claimed Sylvester recurrence.
+
+Otherwise C_n -> infinity. Let G_n=gcd(C_n,D_n). Both C_{n+1} and D_{n+1}
+are divisible by G_n, so G_n divides G_{n+1}. We first show
+  G_n <= h(C_n)
+for every n. If G_n>h(C_n), consider the first subsequent strict rise at t>=n.
+There is such a rise because C tends to infinity. Until it, C_t<=C_n, but
+G_n divides the positive integer C_{t+1}-C_t, contradicting
+  C_{t+1}-C_t <= h(C_t) <= h(C_n) < G_n.
+
+Ratios tending to one give log C_n=o(n), hence G_n=O(log(n+2)). Put
+  L_n=lcm(D_0,a_0,...,a_{n-1}), Delta_n=D_n/L_n.
+The identity
+  C_n/D_n=C_0/D_0-sum_{j<n}1/a_j
+implies L_n C_n/D_n is an integer; consequently Delta_n divides C_n and G_n.
+Also
+  Delta_{n+1}/Delta_n=gcd(a_n,L_n).
+Thus at most O(log log(n+3)) indices up to n have gcd(a_n,L_n)>1: each such
+index multiplies Delta by at least two, while Delta<=G=O(log n).
+
+Enumerate all other indices as i_0<i_1<..., and put b_j=a_{i_j}. These
+multipliers are pairwise coprime, and
+  i_j=j+O(log log(j+3)).
+Almost squaring and a_n->infinity yield constants m,M>0 with
+  m 2^n <= log a_n <= M 2^n
+for every sufficiently large n: log a_{n+1}=2 log a_n+o(1); positive lower
+bound follows by starting sufficiently late that log a_n is larger than
+the bounded subsequent negative error.
+
+For a large positive integer B choose r_B=O(log log(B+3)) so that every
+b_j for j>=r_B exceeds 2B. This follows from the positive lower exponential
+bound on log a_n and i_j>=j. Choose B consecutive such multipliers
+  b_{r_B},...,b_{r_B+B-1}.
+Their last original index J_B is B+o(B). Let Q_B be their product. The upper
+bound on log a_n gives
+  log log Q_B <= (B+o(B)) log 2.
+Set H_B=max(C_0,...,C_{J_B+1}). Since log C_n=o(n), log H_B=o(B).
+The Chinese remainder theorem supplies an integer T_B with
+  T_B+j = 0 mod b_{r_B+j}, 0<=j<B,
+  H_B<T_B<=H_B+Q_B.
+Therefore
+  log log(T_B+B) <= (B+o(B)) log 2,
+and h(T_B+B)<B for sufficiently large B, since alpha log 2<1.
+
+Take the first N such that C_N>=T_B. Then N>J_B+1 and C_{N-1}<T_B, so
+  0<=C_N-T_B < h(T_B)<B.
+Hence C_N=T_B+j for an integer 0<=j<B. The chosen b_{r_B+j} divides C_N
+by CRT and divides D_N since its original index is less than N. Thus
+  2B < b_{r_B+j} <= G_N <= h(C_N) <= h(T_B+B)<B,
+a contradiction.
+
+Connection with Erdos 243, not an additional hypothesis proved above:
+For a strictly increasing positive integer sequence with a_{n+1}~a_n^2
+and sum_n 1/a_n =p/s rational, let R_n=sum_{j>=n}1/a_j,
+D_n=s product_{j<n}a_j, and C_n=D_n R_n. These are positive integers and
+satisfy the exact state recurrence. The growth hypothesis implies
+R_n=(1+o(1))/a_n, and therefore C_{n+1}/C_n->1. The unrestricted problem
+does not give the rise bound assumed in the theorem.

@@ -1,0 +1,35 @@
+Fresh-context adversarial reviews, 6 November 2026
+
+Artifact: erdos243-quadratic-exclusion.tex.
+
+1. /root/review_243_quadratic reviewed the first theorem in isolated context.
+Contract: exclude every exact eventual C_n=t(n^2+b*n+c), t>0 rational,
+b,c integers, in a positive integer orbit C_next=a*C-D, D_next=a*D.
+Checks included scaling, gcd stabilization, parity, reduction to four
+profiles, and the explicit modular contradictions, particularly mod11.
+Reviewer: "I cannot find any mathematical flaw or contract violation
+after thorough examination."
+
+2. /root/review_243_positivequadratic reviewed only the new extension in
+isolated context, including referenced earlier identities as needed.
+Contract: exclude exact C_n=A0*n(n+1)+B0 for positive rational A0,B0;
+verify the square-specialisation lemma (including reducible and repeated
+roots), gcd/primitive reductions, field-square elimination, and mod7 case.
+Reviewer: "I cannot find any correctness issue after thorough examination
+of the specified square-specialisation lemma and positive-offset theorem."
+
+Reconciliation: neither review supplied substantive findings. The first
+three finite-field contradictions and the mod11 four-value obstruction
+were also checked by exact integer assertions with Node. The mod7
+four-value obstruction has values (1,1,0,5), square roots 3,4 of 2, and
+discriminants 6,3, both nonsquares.
+
+External source priority was not verified by the reviewers and is not
+claimed by the artifact. Chebotarev is a standard external theorem,
+referenced to Milne; the square-specialisation method is attributed to Cook.
+Cross-model review skipped in this autonomous goal continuation.
+
+Scope: these are restricted exact polynomial profiles only. No full proof
+or disproof of Erdős243 is claimed. No assertion makes an arbitrary rational
+orbit polynomial. Negative rational offsets in the second family and
+general rational coefficients remain outside that additional theorem.

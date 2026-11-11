@@ -1,0 +1,15 @@
+{
+  "integrationDate": "2026-11-09",
+  "files": [
+    {
+      "path": "research_notes/Erdos 168 half-cleared vertical series/notes.md",
+      "bytes": 14378,
+      "sha256": "36739f0eb205c1ee821c8438e966e5ba492f42f0095541af37947ac6a8887517"
+    },
+    {
+      "path": "research_notes/Erdos 168 half-cleared vertical series/verify.py",
+      "bytes": 4171,
+      "sha256": "ca857f56ccd6cdd80c06f8fde636c9da0b6a86aa2f0e324ee625da0d22a298a3"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "totalRestarts": 1650,
+  "maxOrder": 14,
+  "rows": [
+    {
+      "file": "marcus-block-results-3-2-3-31.json",
+      "m": 3,
+      "k": 2,
+      "rank": 3,
+      "restarts": 200,
+      "steps": 600,
+      "bestRatio": 1.0000012280734536
+    },
+    {
+      "file": "marcus-block-results-3-2-4-41.json",
+      "m": 3,
+      "k": 2,
+      "rank": 4,
+      "restarts": 200,
+      "steps": 600,
+      "bestRatio": 1.0000000831233522
+    },
+    {
+      "file": "marcus-block-results-3-3-6-36.json",
+      "m": 3,
+      "k": 3,
+      "rank": 6,
+      "restarts": 100,
+      "steps": 600,
+      "bestRatio": 1.0000278003121799
+    },
+    {
+      "file": "marcus-block-results-4-2-3-43.json",
+      "m": 4,
+      "k": 2,
+      "rank": 3,
+      "restarts": 250,
+      "steps": 1000,
+      "bestRatio": 2.071797367192947
+    },
+    {
+      "file": "marcus-block-results-4-2-5-45.json",
+      "m": 4,
+      "k": 2,
+      "rank": 5,
+      "restarts": 300,
+      "steps": 700,
+      "bestRatio": 1.0000004512583895
+    },
+    {
+      "file": "marcus-block-results-4-3-5-435.json",
+      "m": 4,
+      "k": 3,
+      "rank": 5,
+      "restarts": 60,
+      "steps": 800,
+      "bestRatio": 1.0000092506163014
+    },
+    {
+      "file": "marcus-block-results-5-2-4-54.json",
+      "m": 5,
+      "k": 2,
+      "rank": 4,
+      "restarts": 150,
+      "steps": 800,
+      "bestRatio": 2.0717987678045517
+    },
+    {
+      "file": "marcus-block-results-5-2-6-56.json",
+      "m": 5,
+      "k": 2,
+      "rank": 6,
+      "restarts": 100,
+      "steps": 600,
+      "bestRatio": 1.000000378329908
+    },
+    {
+      "file": "marcus-block-results-6-2-5-65.json",
+      "m": 6,
+      "k": 2,
+      "rank": 5,
+      "restarts": 100,
+      "steps": 800,
+      "bestRatio": 2.0718000678056896
+    },
+    {
+      "file": "marcus-block-results-6-2-7-67.json",
+      "m": 6,
+      "k": 2,
+      "rank": 7,
+      "restarts": 150,
+      "steps": 1000,
+      "bestRatio": 1.0000001370440204
+    },
+    {
+      "file": "marcus-block-results-7-2-8-78.json",
+      "m": 7,
+      "k": 2,
+      "rank": 8,
+      "restarts": 40,
+      "steps": 900,
+      "bestRatio": 1.0000006612494199
+    }
+  ]
+}

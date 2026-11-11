@@ -1,0 +1,10 @@
+top_sign vs fastgood.first_sign: 185 odd sqfree m<=30000 with T>=2, mismatches 0
+Thm W closed form (T=2, rho<=2p1-3), m<=2e6: 2 cases decided, mismatches 0; (omega%2, good) counts {(1, True): 1, (0, False): 1}
+P=3 omega=30 (mu=+1) p1=5: good rho in [1,-5): 0/0; first good rho: []
+P=3 omega=31 (mu=-1) p1=5: good rho in [1,-5): 0/0; first good rho: []
+P=5 omega=30 (mu=+1) p1=7: good rho in [1,37): 8/18; first good rho: [11, 13, 15, 17, 19, 21, 23, 25]
+P=5 omega=31 (mu=-1) p1=7: good rho in [1,37): 10/18; first good rho: [3, 5, 7, 9, 11, 13, 21, 31, 33, 35]
+P=7 omega=30 (mu=+1) p1=11: good rho in [1,103): 25/51; first good rho: [15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 61, 63]
+P=7 omega=31 (mu=-1) p1=11: good rho in [1,103): 27/51; first good rho: [3, 5, 7, 9, 11, 13, 15, 17, 19, 37, 39, 41]
+P=11 omega=30 (mu=+1) p1=13: good rho in [1,181): 42/90; first good rho: [19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41]
+P=11 omega=31 (mu=-1) p1=13: good rho in [1,181): 45/90; first good rho: [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 39]

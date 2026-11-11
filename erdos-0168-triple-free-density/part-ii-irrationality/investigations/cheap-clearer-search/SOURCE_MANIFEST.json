@@ -1,0 +1,52 @@
+{
+  "integrationDate": "2026-11-09",
+  "scope": "New Claude cheap-clearer investigation; sources preserved unchanged",
+  "files": [
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/audit8.py",
+      "bytes": 2649,
+      "sha256": "6bf5a533035d1ae3402595f24145350d2e7f11ac95b6230a41905b92c19664b6"
+    },
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/cf_structure.py",
+      "bytes": 1216,
+      "sha256": "7e1dc8990c1f03c09383c75681884edd95c0573873f17032340def6ca587f110"
+    },
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/cheap.py",
+      "bytes": 2002,
+      "sha256": "3d6af7be9a6e3b0e8fece2ab6dc6012f9f9816ebf07aa095a545fe2eb5749a1e"
+    },
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/divisibility_check.py",
+      "bytes": 2343,
+      "sha256": "1b540871e943e8bca7de9f2027fc07e3a3b9cd4bd8a7ba4715ae42e49e7d7923"
+    },
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/isotypic_check.py",
+      "bytes": 1110,
+      "sha256": "40d927db78a1df74c112ab2f32d71ff9853dab9e22d7e1737934f08e6db05c3f"
+    },
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/lll.py",
+      "bytes": 1611,
+      "sha256": "afc687589d8f943779c11512c042e35edd9ee01ff3884ea81b7e813335be6700"
+    },
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/notes.md",
+      "bytes": 23385,
+      "sha256": "664c219b4c4ca079694482710dfa795cbe6c39b848f011092d6d2df25d674f33"
+    },
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/span_probe.py",
+      "bytes": 2602,
+      "sha256": "fdeab5e605a7f511e107ffe07d12d554bd2f77d0e87669ba34e3e7cd531a25d5"
+    },
+    {
+      "path": "research_notes/Erdos 168 cheap clearer search/walks.py",
+      "bytes": 1498,
+      "sha256": "1f891e8186345446208ea446582e270412f90f29cd03d76f4ec3af2d3cd6f1cc"
+    }
+  ],
+  "progressBeforeIntegrationSHA256": "ce535f2b1a0073b49b09f161cf86761a01b41dc5e508c3af65c37121a0fbf8df"
+}

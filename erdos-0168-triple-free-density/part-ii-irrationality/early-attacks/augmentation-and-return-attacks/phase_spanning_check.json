@@ -1,0 +1,28 @@
+{
+  "t": 729,
+  "board_size": 37,
+  "solver_status": 0,
+  "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "groups": [
+    [
+      1,
+      6,
+      8,
+      48,
+      288
+    ],
+    [
+      16,
+      72,
+      243,
+      324
+    ],
+    [
+      4,
+      18,
+      81,
+      486
+    ]
+  ],
+  "exact_witness_verified": true
+}

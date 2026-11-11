@@ -1,0 +1,920 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem*{theoremA}{Theorem A}
+\newtheorem*{theoremB}{Theorem B}
+\newtheorem*{theoremC}{Theorem C}
+\newtheorem*{theoremD}{Theorem D}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\DeclareMathOperator{\Nm}{N}
+
+\title{Divisors of Mersenne numbers under doubling, and prime factors of $2^p-1$\\
+beside near-Wagstaff numbers: sharp elementary bounds,\\ exact reductions, and barriers}
+% Author line: replace with the actual author(s).
+\author{[Author name]}
+\date{November 2026}
+\subjclass[2020]{Primary 11A51, 11N25; Secondary 11R18, 11B83}
+\keywords{Mersenne numbers, divisor function, Wagstaff primes, cyclotomic polynomials, Erd\H{o}s problems}
+
+\begin{document}
+
+\begin{abstract}
+Let $f(n)=\sum_{k\le n}\tau(2^k-1)$. Erd\H{o}s asked whether $f(2n)/f(n)$ tends to a limit
+(Problem~\#893). Kova\v{c} and Luca proved $\limsup f(2n)/f(n)=\infty$. Whether the limit is $+\infty$ is open.
+We prove that $f(2n)\ge 3f(n)$ for every $n$, with equality exactly for $n\in\{1,2,4\}$. If the Fermat number $F_a$ is
+composite, then $f(2n)\ge\bigl(4-\tfrac{16}{3\cdot2^{a-2}+4}\bigr)f(n)$ on $[2^a,2^{a+1})$. Hence
+$f(2n)\ge\tfrac{24}{7}f(n)$ for $32\le n<2^{33}$, and $\liminf f(2n)/f(n)\ge4$ if all large Fermat numbers are composite.
+For every $C$, the set $\{n:f(2n)>Cf(n)\}$ meets every chain $n,2n,\dots,2^{J(C)-1}n$ and has lower density at least
+$1/(2^{J(C)}-1)$. We reduce $f(2n)/f(n)\to\infty$ exactly to a statement about indices whose odd part has few
+divisors. This gives a conditional theorem whose hypothesis is far weaker than that of Kova\v{c} and Luca.
+We also show that one natural route to a negative answer needs primes $p$ for which
+$\tau(2^p+1)$ is bounded and $\omega(2^p-1)=\exp\bigl((\log2+o(1))\log p/\log\log p\bigr)$.
+
+This leads to the constant
+$\beta_K=\limsup_{p:\,\tau(2^p+1)\le K}\log\omega(2^p-1)\,\log\log p/\log p$ and the conjecture $\beta_K=0$.
+We do not settle it. We prove that a disproof would settle two open problems at once. We give barrier theorems, in
+sketch form: axioms that capture the bounded-depth properties of the factorizations are consistent with $\beta_K=0$
+and with $\beta_K=\infty$.
+We give an ``honest ideal'' family showing that exact divisibility at the level of ideals is still not enough.
+We prove the function-field analogue, which holds uniformly in $p$. All numerical claims were re-checked against independent
+factor tables. This corrects a claim in the working notes: $\omega(2^{397}-1)=9$, not at most $8$.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+%======================================================================
+\section{Introduction}
+%======================================================================
+
+\subsection{Erd\H{o}s Problem \#893}
+Write $\tau$ for the divisor function, $\omega$ for the number of distinct prime factors, and
+\[
+T(k)=\tau(2^k-1),\qquad f(n)=\sum_{k\le n}T(k).
+\]
+Erd\H{o}s~\cite{Er98} asked whether $f(2n)/f(n)$ tends to a limit; this is Problem~\#893 in~\cite{EP}.
+He remarked that $f$ probably has no simple asymptotic formula because it grows too fast.
+Kova\v{c} and Luca~\cite{KL} proved $\limsup_{n}f(2n)/f(n)=\infty$, so no finite limit exists. They also proved that
+$f(2n)/f(n)\to\infty$ under either of two conjectures. One of them is
+\begin{equation}\label{eq:KL}
+\omega(\Phi_d(2))\le 10\log d\qquad\text{for all sufficiently large } d.
+\end{equation}
+Whether $f(2n)/f(n)\to\infty$ unconditionally, equivalently whether $\liminf f(2n)/f(n)=\infty$, is open.
+To our knowledge no lower bound for the $\liminf$ beyond the trivial $f(2n)>2f(n)$ has been recorded.
+Part~I proves the following.
+
+\begin{theoremA}[Sharp constant; Theorems~\ref{thm:three}, \ref{thm:fermat}]
+$f(2n)\ge3f(n)$ for all $n\ge1$, with equality exactly for $n\in\{1,2,4\}$. If $a\ge4$ and $F_a=2^{2^a}+1$ is
+composite, then $f(2n)\ge\bigl(4-\frac{16}{3\cdot2^{a-2}+4}\bigr)f(n)$ for $2^a\le n<2^{a+1}$. In particular
+$f(2n)\ge\frac{24}{7}f(n)$ for $32\le n<2^{33}$. If $F_a$ is composite for all large $a$, then
+$\liminf f(2n)/f(n)\ge4$.
+\end{theoremA}
+
+\begin{theoremB}[Good $n$ are everywhere; Theorem~\ref{thm:density}]
+Let $D(M)=\max_{m\le M}\tau(m)$ and $J(C)=\min\{J:D(2^J)-2>J\log_2C\}$. For every $C>1$ and every $n$, some
+$0\le j<J(C)$ has $f(2^{j+1}n)>Cf(2^jn)$. Hence $\{n:f(2n)>Cf(n)\}$ has lower natural density at least
+$1/(2^{J(C)}-1)$. Here $J(C)=O(\log\log C\cdot\log\log\log C)$.
+\end{theoremB}
+
+Theorem~B reproves the theorem of Kova\v{c} and Luca, since it gives $\limsup=\infty$.
+
+\begin{theoremC}[Exact reduction; Theorem~\ref{thm:thin}, Corollary~\ref{cor:cond}]
+Call $k$ \emph{$K$-thin} if the odd part of $k$ has fewer than $K$ divisors. Then $f(2n)/f(n)\to\infty$ if and only if,
+for every fixed $K$, $\sum_{k\le n,\ k\ K\text{-thin}}T(k)=o\bigl(f(2n)-f(n)\bigr)$. Consequently
+$f(2n)/f(n)\to\infty$ provided that, for every $K$, $\omega(\Phi_d(2))=o\bigl(\psi(d)/\log^2d\bigr)$ as $d\to\infty$
+through $K$-thin $d$, where $\psi(x)=\max_{m\le x}\tau(m)=2^{(1+o(1))\log x/\log\log x}$.
+\end{theoremC}
+
+This hypothesis is much weaker than~\eqref{eq:KL}. It allows $\omega(\Phi_d(2))$ as large as $\psi(d)^{1-o(1)}$, and
+it says nothing at all about indices that are not thin.
+
+\begin{theoremD}[What a negative answer needs; Propositions~\ref{prop:negative}, \ref{prop:spike}]
+If $f(2n)\le Cf(n)$ for infinitely many $n$, then for a fixed $K=K(C)$ there are $K$-thin
+$d\le n$ with $\omega(\Phi_d(2))\ge(1-o(1))\psi(n)/(K\log_2^2n)$ for each such $n$. If moreover a single prime index $p\le n$ carries a fixed
+fraction $1/\lambda$ of $f(n)$, then $\tau(2^p+1)\le C\lambda$ and
+$\omega(2^p-1)\ge\exp\bigl((\log2+o(1))\log p/\log\log p\bigr)$ for infinitely many such $p$.
+\end{theoremD}
+
+\subsection{Mersenne numbers beside near-Wagstaff numbers}
+Theorem~D isolates a concrete arithmetic scenario. Let $p$ be prime, $M_p=2^p-1$, and for $K\ge4$ let
+\[
+P_K=\{p:\ \tau(2^p+1)\le K\},\qquad
+\beta_K=\limsup_{p\to\infty,\ p\in P_K}\frac{\log\omega(M_p)\cdot\log\log p}{\log p},
+\]
+with $\beta_K:=0$ if $P_K$ is finite. For $p>3$, $\tau(2^p+1)=4$ exactly when $(2^p+1)/3$ is a Wagstaff prime.
+Theorem~D shows that $\beta_K\ge\log 2$ for some $K$ is necessary for the ``prime spike'' route to a negative answer
+to Problem~\#893.
+
+\begin{conjecture}\label{conj:beta}
+$\beta_K=0$ for every $K\ge4$.
+\end{conjecture}
+
+Gillies' heuristic~\cite{Gi64} (see also Wagstaff~\cite{Wa83}) predicts that $\omega(M_p)$ is typically of
+order $\log p$. This would make
+Conjecture~\ref{conj:beta} true with room to spare. Unconditionally, nothing better than
+$\omega(M_p)\le(\frac{\log2}{2}+o(1))\,p/\log p$ seems to be known pointwise. We do not resolve
+Conjecture~\ref{conj:beta}. Part~II proves:
+\begin{itemize}
+\item a disproof would give infinitely many composite $M_p$ ($p$ prime) on which $(2^p+1)/3$ has at most $K/2-1$
+prime factors (Theorem~\ref{thm:disproof});
+\item barrier theorems: families of fake factorizations satisfy every bounded-depth property of the true ones, yet give
+$\beta_K=0$ or $\beta_K=\infty$ as desired, and even saturate the trivial constant $\frac{\log2}2$
+(Section~\ref{sec:barriers});
+\item an ``honest ideal'' obstruction: elements $2^k-\zeta_p$ share every algebraic feature of $2-\zeta_p$ used by
+class-group, Stickelberger, Galois and lattice methods, but have $\omega\ge\tau(k)$ (Theorem~\ref{thm:honest});
+\item the function-field analogue: over $\F_\ell[T]$, $\tau(a^p+1)\le K$ implies
+$\omega(a^p-1)\le\deg a\,(1+\log_2K)$, uniformly in $p$ (Theorem~\ref{thm:ff});
+\item a divisor-lattice inequality and an incidence lemma that isolate the one estimate every method we tried needs
+(Section~\ref{sec:tools}).
+\end{itemize}
+
+\subsection{What is new, and what is not}
+Section~\ref{sec:novelty} compares each result with the literature. In short, \emph{neither problem is resolved here}.
+The theorem $\limsup f(2n)/f(n)=\infty$ is due to Kova\v{c} and Luca. The trivial bounds, Zsigmondy-type facts and all factor
+data are classical or tabulated. To our knowledge, the following are not in the literature: Theorems~A--D, the barrier
+theorems, the honest-ideal obstruction, the function-field theorem and the divisor-lattice lemma.
+All of them are elementary, or use only classical analytic input (Siegel--Walfisz, Bombieri--Vinogradov).
+Several statements in the working notes behind this paper turned out to be false or imprecise.
+They are corrected in Section~\ref{sec:errata}.
+
+\begin{remark}[Provenance]
+% Author: edit this remark as appropriate for the venue.
+The results were first obtained in two working notes written with extensive help from AI research agents. For this
+paper every proof given in full was re-derived and checked line by line. Every numerical claim was re-verified against
+independent factor tables (Section~\ref{sec:data}). Results proved only in sketch form are labelled as such.
+\end{remark}
+
+%======================================================================
+\section{Preliminaries}
+%======================================================================
+For odd $d$ let $o(d)=\ord_d2$. We use the following standard facts.
+
+\begin{enumerate}
+\item[(P1)] \emph{Cyclotomic factorization.} $2^k-1=\prod_{d\mid k}\Phi_d(2)$, and $2^m+1=\prod_{e\mid2m,\ e\nmid m}\Phi_e(2)$.
+\item[(P2)] \emph{Bang--Zsigmondy}~\cite{Ba86,Zs92}. For $n\notin\{1,6\}$ there is a prime $q$ with $\ord_q2=n$
+(a \emph{primitive} prime for $n$). Primitive primes for distinct $n$ are distinct. A primitive prime for $n$ divides
+$2^k-1$ if and only if $n\mid k$.
+\item[(P3)] \emph{Lifting the exponent.} If $q$ is an odd prime with $q\mid 2^m-1$, then
+$v_q(2^{mt}-1)=v_q(2^m-1)+v_q(t)$.
+\item[(P4)] \emph{Coprimality.} $\gcd(2^m-1,2^m+1)=1$, so $T(2m)=T(m)\,\tau(2^m+1)$.
+\item[(P5)] \emph{Wigert}~\cite{Wi07}. $\psi(x):=\max_{m\le x}\tau(m)=2^{(1+o(1))\log x/\log\log x}$.
+\end{enumerate}
+
+\begin{lemma}[Divisor gain]\label{lem:gain}
+Let $m\mid k$. Suppose $2^k-1$ has $s$ distinct prime factors that do not divide $2^m-1$. Then $T(k)\ge2^sT(m)$.
+In particular, if $E$ is a set of divisors $e$ of $k$ with $e\nmid m$, then $T(k)\ge2^{|E\setminus\{1,6\}|}T(m)$.
+\end{lemma}
+\begin{proof}
+$\tau(N)=\prod_{q\mid N}(v_q(N)+1)$. Every prime factor of $N'=2^m-1$ divides $N=2^k-1$ to at least the same power.
+Each of the $s$ new primes contributes a factor $\ge2$. For the second claim apply (P2).
+\end{proof}
+
+\begin{lemma}\label{lem:Tupper}
+$T(k)\le(k+1)^{\omega(2^k-1)}$ and $\omega(2^k-1)\le\tau(k)\max_{d\mid k}\omega(\Phi_d(2))$.
+\end{lemma}
+\begin{proof}
+Each exponent satisfies $v_q(2^k-1)\le\log_3 2^k<k$. The second bound follows from (P1).
+\end{proof}
+
+\begin{lemma}\label{lem:plus}
+(a) $\tau(2^m+1)\ge4$ unless $m$ is a power of $2$ or $m=3$; also $\tau(9)=3$.
+(b) If $u$ is the odd part of $m$, then $\omega(2^m+1)\ge\tau(u)-1$.
+\end{lemma}
+\begin{proof}
+(a) Suppose $m$ has an odd divisor $u>1$. Then $2^{m/u}+1$ is a proper divisor of $2^m+1$ greater than $1$.
+If $\tau(2^m+1)=3$, then $2^m+1=q^2$, so $(q-1)(q+1)=2^m$, which forces $q=3$ and $m=3$.
+(b) Write $m=2^cu$. By (P1) the indices $e\mid 2m$ with $e\nmid m$ are $e=2^{c+1}w$ with $w\mid u$. There are
+$\tau(u)$ of them, and each except possibly $e=6$ has a primitive prime by (P2).
+\end{proof}
+
+%======================================================================
+\part*{Part I. The doubling ratio}
+\addcontentsline{toc}{part}{Part I. The doubling ratio}
+%======================================================================
+
+\section{An exact identity}
+
+\begin{theorem}\label{thm:identity}
+$f(n)=\sum_{d\ \mathrm{odd}}\lfloor n/o(d)\rfloor$. Hence
+$f(2n)-2f(n)=\#\{d\ \mathrm{odd}:\{n/o(d)\}\ge\frac12\}$, where $\{\cdot\}$ is the fractional part.
+\end{theorem}
+\begin{proof}
+An odd $d$ divides $2^k-1$ if and only if $o(d)\mid k$. So
+$f(n)=\sum_{d}\#\{k\le n:o(d)\mid k\}=\sum_d\lfloor n/o(d)\rfloor$, where only finitely many $d$ contribute.
+For real $x$, $\lfloor2x\rfloor-2\lfloor x\rfloor$ is $1$ if $\{x\}\ge\frac12$ and $0$ otherwise.
+\end{proof}
+
+The identity is elementary and probably folklore. It shows that $f(2n)>2f(n)$ always, since
+$d=3$ gives $\{n/2\}=\frac12$ for odd $n$, and $d=2^{n+1}-1$ gives $o(d)=n+1>n$.
+It also recasts the problem: do the moduli $d$ whose order puts $n$ in the upper half of a period outnumber
+$\sum_d\lfloor n/o(d)\rfloor$ by an unbounded factor?
+
+\section{The sharp constant 3}
+
+Write $F_i=2^{2^i}+1$. By (P4), $T(2^{a+1})=\tau(F_a)\,T(2^a)$ and $T(2^a)=\prod_{i<a}\tau(F_i)$.
+
+\begin{lemma}\label{lem:Cr}
+Let $r=2^bu$ with $u>1$ odd, and $C(r)=\sum_{i=0}^{b}T(2^iu)$. Then $C(r)\le T(2r)/3$.
+\end{lemma}
+\begin{proof}
+By (P4), $T(2^{i+1}u)=T(2^iu)\,\tau(2^{2^iu}+1)$. Since $u>1$, the exponent $2^iu$ is never a power of $2$.
+By Lemma~\ref{lem:plus}(a), each factor $\tau(2^{2^iu}+1)$ is $\ge4$, except the factor $\tau(9)=3$ when $i=0$, $u=3$.
+If all factors are $\ge4$, then $T(2^iu)\le4^{-(b+1-i)}T(2r)$, and $C(r)\le T(2r)\sum_{j\ge1}4^{-j}=T(2r)/3$.
+If $u=3$, the same bound holds for $i\ge1$, and $T(3)=T(6)/3\le T(2r)/(3\cdot4^b)$. Then
+$C(r)\le T(2r)\bigl(\sum_{j=1}^{b}4^{-j}+\frac{1}{3\cdot4^b}\bigr)=T(2r)/3$.
+\end{proof}
+
+\begin{lemma}\label{lem:3pow}
+For $c\ge1$, $T(3\cdot2^c)\ge\frac32\,2^c\,T(2^c)$.
+\end{lemma}
+\begin{proof}
+Let $N=2^{3\cdot2^c}-1$ and $N'=2^{2^c}-1$. The indices $3\cdot2^i$, $0\le i\le c$, $i\ne1$, divide $3\cdot2^c$ but not
+$2^c$. Their $c$ primitive primes (P2) are distinct, do not divide $N'$, and differ from $3$, because $\ord_32=2$.
+By (P3), $v_3(N')=v_3(4^{2^{c-1}}-1)=1$ and $v_3(N)=1+v_3(3\cdot2^{c-1})=2$. So the prime $3$ contributes
+$3$ to $\tau(N)$ against $2$ to $\tau(N')$, and $\tau(N)\ge\tau(N')\cdot\frac32\cdot2^c$.
+\end{proof}
+
+\begin{lemma}\label{lem:fermatsum}
+$T(2^{i+1})\ge2T(2^i)$. Hence $\sum_{i<a}T(2^i)<2T(2^{a-1})$ for $a\ge1$.
+\end{lemma}
+\begin{proof}
+$\tau(F_i)\ge2$. Then $\sum_{i<a}T(2^i)\le T(2^{a-1})\sum_{j=0}^{a-1}2^{-j}<2T(2^{a-1})$.
+\end{proof}
+
+\paragraph{The decomposition.}
+Let $R=\Z\cap(n/2,n]$. Every $m\le n$ is uniquely $m=r/2^j$ with $r\in R$ and $0\le j\le v_2(r)$. Hence
+\begin{equation}\label{eq:decomp}
+f(n)=\sum_{r\in R}C(r),\qquad C(r)=\sum_{j=0}^{v_2(r)}T(r/2^j),
+\end{equation}
+which agrees with Lemma~\ref{lem:Cr} for $r=2^bu$. The numbers $2r$, $r\in R$, are distinct elements of $(n,2n]$.
+So $f(2n)\ge f(n)+\sum_{r\in R}T(2r)$, and for every $\lambda$,
+\begin{equation}\label{eq:master}
+f(2n)-(\lambda+1)f(n)\ \ge\ \sum_{r\in R}\bigl(T(2r)-\lambda\,C(r)\bigr).
+\end{equation}
+
+\begin{theorem}\label{thm:three}
+$f(2n)\ge3f(n)$ for every $n\ge1$, with equality exactly for $n\in\{1,2,4\}$.
+\end{theorem}
+\begin{proof}
+For $n\le15$ this is a direct computation from
+$T(1),\dots,T(30)=1,2,2,4,2,6,2,8,4,8,4,24,2,8,8,16,2,32,2,48,12,16,4,96,8,8,8,64,8,96$.
+The ratios $f(2n)/f(n)$ for $n=1,\dots,15$ are
+$3,\,3,\,3.4,\,3,\,3.545,\,3.941,\,4.053,\,3.741,\,4.355,\,4.744,\,4.953,\,4.672,\,4.768,\,5.208,\,5.941$.
+
+Let $n\ge16$ and $2^a\le n<2^{a+1}$, so $a\ge4$. Apply~\eqref{eq:master} with $\lambda=2$. For $r\in R$, $r\ne2^a$,
+Lemma~\ref{lem:Cr} gives $T(2r)-2C(r)\ge T(2r)/3\ge0$. For $r=2^a$, Lemma~\ref{lem:fermatsum} gives
+\[
+T(2^{a+1})-2\sum_{i\le a}T(2^i)>(\tau(F_a)-2)T(2^a)-4T(2^{a-1})\ge-4T(2^{a-1}).
+\]
+To compensate, let $r_0=3\cdot2^{a-2}$ if $n<3\cdot2^{a-1}$, and $r_0=3\cdot2^{a-1}$ otherwise. In both cases
+$r_0\in R$ and $r_0\ne2^a$. Also $2^{3\cdot2^{a-1}}-1$ divides $2^{2r_0}-1$, so
+$T(2r_0)\ge T(3\cdot2^{a-1})$. By Lemma~\ref{lem:3pow},
+$\tfrac13T(2r_0)\ge\tfrac13T(3\cdot 2^{a-1})\ge2^{a-2}T(2^{a-1})\ge4T(2^{a-1})$.
+The sum in~\eqref{eq:master} is therefore strictly positive.
+\end{proof}
+
+\begin{remark}[Sharpness for soft methods]\label{rem:sharp3}
+The constant $3$ cannot be improved by any argument that uses only the soft properties listed in
+Section~\ref{sec:barrier-doubling}. Consider a model in which $\Phi_{2^a}(2)=F_{a-1}$ is replaced by a product of
+many primes, so that $T^*(2^a)$ dominates $f^*(2^a)$, and $F_a$ is ``prime''. Then
+$T^*(2^{a+1})=2T^*(2^a)$, so $f^*(2^{a+1})/f^*(2^a)\to3$.
+\end{remark}
+
+\begin{theorem}\label{thm:fermat}
+If $a\ge4$ and $F_a$ is composite, then $f(2n)\ge\bigl(4-\frac{16}{3\cdot2^{a-2}+4}\bigr)f(n)$ for all
+$n\in[2^a,2^{a+1})$.
+\end{theorem}
+\begin{proof}
+Apply~\eqref{eq:master} with $\lambda=3$. The terms with $r\ne2^a$ are $\ge0$ by Lemma~\ref{lem:Cr}.
+Since $F_a\equiv2\pmod3$ is not a square, compositeness gives $\tau(F_a)\ge4$. With Lemma~\ref{lem:fermatsum}, the
+$r=2^a$ term is then $\ge T(2^a)-6T(2^{a-1})\ge-4T(2^{a-1})$. Put $t=T(2^{a-1})/f(n)$; this gives
+$f(2n)/f(n)\ge4-4t$. On the other hand $3\cdot2^{a-1}\le2n$, so by Lemma~\ref{lem:3pow}
+$f(2n)\ge T(3\cdot2^{a-1})\ge3\cdot2^{a-2}\,T(2^{a-1})$, that is, $f(2n)/f(n)\ge3\cdot2^{a-2}t$. The larger of the two
+bounds is smallest where they meet, at $t=4/(3\cdot2^{a-2}+4)$.
+\end{proof}
+
+\begin{corollary}\label{cor:fermat}
+(a) $F_5,\dots,F_{32}$ are composite, so $f(2n)\ge\frac{24}{7}f(n)$ for $32\le n<2^{33}$.
+(b) If $F_a$ is composite for all sufficiently large $a$, then $\liminf_{n}f(2n)/f(n)\ge4$.
+\end{corollary}
+\begin{proof}
+(a) Take $a=5$ in Theorem~\ref{thm:fermat}; the bound increases with $a$. (b) Every large $n$ lies in some
+$[2^a,2^{a+1})$, and the bound tends to $4$ as $a\to\infty$.
+\end{proof}
+
+The value $4$ in (b) is the value predicted by the naive ``random integer'' model, which Kova\v{c} and Luca show to be misleading.
+Exact data give $\min_{32\le n\le606}f(2n)/f(n)=14.26$ (Section~\ref{sec:data}).
+
+\section{Growth along chains and the density of good \texorpdfstring{$n$}{n}}
+
+\begin{proposition}\label{prop:mult}
+For all $M,n\ge1$, $f(Mn)\ge2^{D(M)-2}f(n)$, where $D(M)=\max_{m\le M}\tau(m)$.
+\end{proposition}
+\begin{proof}
+Choose $h\le M$ with $\tau(h)=D(M)$, and fix $m\le n$. The indices $me$ with $e\mid h$, $e>1$, divide $hm$ but not $m$.
+There are $\tau(h)-1$ of them, and at most one equals $6$. By Lemma~\ref{lem:gain}, $T(hm)\ge2^{\tau(h)-2}T(m)$.
+The numbers $hm$, $m\le n$, are distinct and at most $Mn$. Summing over $m$ gives the claim.
+\end{proof}
+
+\begin{theorem}\label{thm:density}
+Let $J=J(C)=\min\{J:D(2^J)-2>J\log_2C\}$. For every $n$ some $0\le j<J$ satisfies $f(2^{j+1}n)>Cf(2^jn)$.
+Consequently $\{n:f(2n)>Cf(n)\}$ has lower natural density at least $1/(2^J-1)$. This bound is optimal for the chain
+property alone.
+\end{theorem}
+\begin{proof}
+By Proposition~\ref{prop:mult} with $M=2^J$, $\prod_{j<J}f(2^{j+1}n)/f(2^jn)=f(2^Jn)/f(n)\ge2^{D(2^J)-2}>C^J$.
+So some factor exceeds $C$.
+
+For the density, group $n\le x$ by odd part $m$. The chain $m,2m,4m,\dots$ has
+$\lfloor\log_2(x/m)\rfloor+1$ terms up to $x$. Every $J$ consecutive terms contain a good one, so at least
+$\lfloor(\lfloor\log_2(x/m)\rfloor+1)/J\rfloor=\#\{i\ge0:m2^{iJ+J-1}\le x\}$ terms are good. Summing over odd $m$ gives
+$\sum_{i\ge0}\frac{x}{2^{iJ+J}}+O(J\log x)=\frac{x}{2^J-1}+O(J\log x)$.
+The set $\{n:v_2(n)\equiv J-1\pmod J\}$ meets every chain of $J$ consecutive terms and has density exactly
+$1/(2^J-1)$.
+\end{proof}
+
+By direct computation, $D(2^J)$ for $J=7,8,12,13,20,21$ equals $16,20,48,64,240,288$. Hence $J(4)=8$, $J(16)=13$ and
+$J(10^4)=21$. By (P5), $\log_2D(2^J)=(1+o(1))J\log2/\log J$, so $J(C)=O(\log\log C\cdot\log\log\log C)$.
+
+\begin{corollary}[Kova\v{c}--Luca~\cite{KL}]\label{cor:KL}
+$\limsup_nf(2n)/f(n)=\infty$. More strongly, $f(M(n)n)/f(n)\to\infty$ for every integer sequence $M(n)\to\infty$.
+\end{corollary}
+
+The argument of~\cite{KL} also uses highly composite numbers, through $f'(n)=\sum_{k\le n}2^{\tau(k)}$.
+Theorem~\ref{thm:density} adds the chain and density statements.
+
+\section{Exact reduction to thin indices}
+
+\begin{definition}
+Fix $K\ge2$. An integer $k$ is \emph{$K$-thin} if its odd part has fewer than $K$ divisors. Every divisor of a
+$K$-thin number is $K$-thin.
+\end{definition}
+
+\begin{theorem}\label{thm:thin}
+For all $n$ and all $K\ge2$,
+\[
+\sum_{\substack{k\le n\\ k\text{ not }K\text{-thin}}}T(k)\ \le\ \frac{f(2n)-f(n)}{2^{K-1}-1}.
+\]
+Hence $f(2n)/f(n)\to\infty$ if and only if, for every fixed $K$, the $T$-mass of the $K$-thin $k\le n$ is
+$o\bigl(f(2n)-f(n)\bigr)$.
+\end{theorem}
+\begin{proof}
+For $k\le n$ there is a unique $b\ge1$ with $N=2^bk\in(n,2n]$. The map $k\mapsto(N,b)$ is a bijection onto
+$\{(N,b):N\in(n,2n],\ 1\le b\le v_2(N)\}$. If $k$ is not $K$-thin, then every $2^ik$ has the same odd part $u$ with
+$\tau(u)\ge K$. By (P4) and Lemma~\ref{lem:plus}(b), each doubling multiplies $T$ by at least $2^{K-1}$, so
+$T(N)\ge2^{b(K-1)}T(k)$. Therefore
+\[
+\sum_{k\text{ not thin}}T(k)\le\sum_{N\in(n,2n]}T(N)\sum_{b\ge1}2^{-b(K-1)}=\frac{f(2n)-f(n)}{2^{K-1}-1}.
+\]
+For the equivalence: if the thin mass is $o(f(2n)-f(n))$ for every $K$, then
+$\limsup f(n)/(f(2n)-f(n))\le1/(2^{K-1}-1)$ for every $K$, so the ratio tends to infinity. The converse is trivial,
+since the thin mass is at most $f(n)$.
+\end{proof}
+
+\begin{corollary}[Conditional divergence]\label{cor:cond}
+Suppose that for every $K\ge2$,
+\begin{equation}\label{eq:thinhyp}
+\omega(\Phi_d(2))=o\!\left(\frac{\psi(d)}{\log^2d}\right)\qquad(d\to\infty,\ d\ K\text{-thin}).
+\end{equation}
+Then $f(2n)/f(n)\to\infty$. In particular this holds under~\eqref{eq:KL}, or under
+$\omega(\Phi_d(2))\le\psi(d)^{1-\delta}$ for some $\delta>0$ and all large $d$.
+\end{corollary}
+\begin{proof}
+Fix $K$ and a $K$-thin $k\le n$. Then $\tau(k)<K(\log_2n+1)$, and every divisor $d$ of $k$ is $K$-thin. We claim that
+$\max_{d\mid k}\omega(\Phi_d(2))=o(\psi(n)/\log^2n)$, uniformly in $k\le n$.
+Bounded $d$ contribute $O_K(1)$. If $d\ge\sqrt n$, then $\log d\ge\frac12\log n$ and $\psi(d)\le\psi(n)$, so
+\eqref{eq:thinhyp} gives the claim, uniformly because $d\ge\sqrt n\to\infty$. If $d<\sqrt n$, then
+\eqref{eq:thinhyp} gives $\omega(\Phi_d(2))\le\psi(d)+O_K(1)\le\psi(\sqrt n)+O_K(1)=\psi(n)^{1/2+o(1)}$. This is
+$o(\psi(n)/\log^2n)$ because $\psi(n)$ grows faster than any power of $\log n$.
+By Lemma~\ref{lem:Tupper},
+\[
+\log_2T(k)\le\log_2(n+1)\cdot K(\log_2n+1)\cdot o\bigl(\psi(n)/\log^2n\bigr)=o(\psi(n)).
+\]
+So the thin mass is at most $n\,2^{o(\psi(n))}=2^{o(\psi(n))}$. On the other hand, take $m^*\le n$ with
+$\tau(m^*)=\psi(n)$ and let $N$ be the multiple $2^jm^*$ that lies in $(n,2n]$. Since $2^{m^*}-1\mid2^N-1$, and by
+(P2), $f(2n)-f(n)\ge T(N)\ge T(m^*)\ge2^{\psi(n)-2}$. Theorem~\ref{thm:thin} now applies. The two particular cases imply
+\eqref{eq:thinhyp} because $\log d$ and $\psi(d)^{1-\delta}$ are both $o(\psi(d)/\log^2d)$.
+\end{proof}
+
+\begin{proposition}[What a negative answer needs]\label{prop:negative}
+Suppose $f(2n)\le Cf(n)$ for infinitely many $n$, and fix $K$ with $2^{K-1}-1>2C$. Then for each such $n$ there are a
+$K$-thin $k\le n$ with $\log_2T(k)\ge\psi(n)-3-\log_2n$, and a $K$-thin $d\mid k$ with
+\[
+\omega(\Phi_d(2))\ \ge\ \frac{\psi(n)-3-\log_2n}{K(\log_2n+1)\log_2(n+1)}.
+\]
+\end{proposition}
+\begin{proof}
+By Theorem~\ref{thm:thin}, the non-thin mass is at most $(f(2n)-f(n))/(2^{K-1}-1)<f(n)/2$. So the thin mass is at
+least $f(n)/2\ge2^{\psi(n)-3}$, using $f(n)\ge T(m^*)\ge2^{\psi(n)-2}$. There are at most $n$ thin $k\le n$,
+which gives the first claim. The second follows from Lemma~\ref{lem:Tupper} and $\tau(k)<K(\log_2n+1)$.
+\end{proof}
+
+\begin{proposition}[Prime spikes force near-Wagstaff Mersenne numbers]\label{prop:spike}
+Let $C,\lambda\ge1$. Suppose there are infinitely many $n$ with $f(2n)\le Cf(n)$ for which some prime $p\le n$
+satisfies $T(p)\ge f(n)/\lambda$. Then $P_{C\lambda}$ is infinite and $\beta_{C\lambda}\ge\log2$.
+\end{proposition}
+\begin{proof}
+Since $2p\le2n$, (P4) gives $\tau(2^p+1)=T(2p)/T(p)\le f(2n)/T(p)\le C\lambda$, so $p\in P_{C\lambda}$. As
+$n\to\infty$ we have $T(p)\ge f(n)/\lambda\to\infty$, so infinitely many distinct $p$ occur. Next,
+$\log_2T(p)\ge\log_2f(n)-\log_2\lambda\ge\psi(n)-2-\log_2\lambda\ge\psi(p)-2-\log_2\lambda$. By
+Lemma~\ref{lem:Tupper}, $\omega(M_p)\ge(\psi(p)-2-\log_2\lambda)/\log_2(p+1)$. Hence
+$\log\omega(M_p)\ge(\log2+o(1))\log p/\log\log p$ by (P5).
+\end{proof}
+
+So Conjecture~\ref{conj:beta} would rule out the simplest mechanism for a bounded ratio: a prime index carrying a
+fixed share of $f(n)$. The soft-property models of Theorem~\ref{thm:model-doubling} realize exactly this mechanism.
+
+%======================================================================
+\part*{Part II. Prime factors of \texorpdfstring{$2^p-1$}{2\textasciicircum p-1} when \texorpdfstring{$2^p+1$}{2\textasciicircum p+1} has few divisors}
+\addcontentsline{toc}{part}{Part II. Prime factors of \texorpdfstring{$2^p-1$}{2\textasciicircum p-1} when \texorpdfstring{$2^p+1$}{2\textasciicircum p+1} has few divisors}
+%======================================================================
+
+\section{Elementary structure}
+Throughout, $p\ge5$ is prime, $a_p=\Phi_{2p}(2)=(2^p+1)/3$, $\zeta=\zeta_p$ and $\cO=\Z[\zeta]$.
+
+\begin{lemma}\label{lem:3part}
+$3\parallel2^p+1$, so $\tau(2^p+1)=2\tau(a_p)$.
+\end{lemma}
+\begin{proof}
+$\ord_92=6$ and $p$ is odd and prime to $3$, so $2^p+1\equiv3$ or $6\pmod9$.
+\end{proof}
+
+\begin{lemma}\label{lem:mod8}
+(a) $a_p\equiv3\pmod8$. (b) Every prime $Q\mid a_p$ has $\ord_Q2=2p$, so $Q\equiv1\pmod{2p}$.
+(c) $Q\equiv3\pmod8$ if $(Q-1)/2p$ is odd, and $Q\equiv1\pmod8$ otherwise.
+(d) The number of prime factors $\equiv3\pmod8$ of $a_p$, counted with multiplicity, is odd.
+\end{lemma}
+\begin{proof}
+$2^p\equiv8\pmod{24}$ gives (a). For (b): $2^p\equiv-1\pmod Q$ and $Q\ne3$ by Lemma~\ref{lem:3part}.
+For (c), Euler's criterion gives $(\frac2Q)\equiv(2^p)^{(Q-1)/2p}\equiv(-1)^{(Q-1)/2p}$. Combine this with the parity
+of $(Q-1)/2=p\cdot\frac{Q-1}{2p}$, which fixes $Q\bmod4$. (d) follows from (a), since $3^k\equiv3\pmod8$ if and only
+if $k$ is odd.
+\end{proof}
+
+\begin{corollary}\label{cor:4div}
+$a_p$ is never a square. Hence $4\mid\tau(2^p+1)$ and $P_K=P_{4\lfloor K/4\rfloor}$. In particular $P_6=P_7=P_4$.
+\end{corollary}
+
+\begin{lemma}[Disjoint fibres]\label{lem:fibres}
+Prime factors $q$ of $M_p$ have $\ord_q2=p$, and prime factors $Q$ of $a_p$ have $\ord_Q2=2p$. So no prime divides
+two members of $\{M_p\}\cup\{a_p\}$, and no covering-congruence argument can force $a_p$ to be composite.
+\end{lemma}
+
+\begin{lemma}[Trivial bound]\label{lem:trivial}
+$\omega(M_p)\le(\frac{\log2}2+o(1))\,p/\log p$.
+\end{lemma}
+\begin{proof}
+Let $q_1<\dots<q_k$ be the prime factors. They are $\equiv1\pmod{2p}$, so $q_j>2pj$ and $(2p)^kk!<2^p$. We may
+assume $k\ge p/\log^2p$. Then $\log k\ge\log p-2\log\log p$ and $k!\ge(k/e)^k$ give
+$k(2\log p-2\log\log p+\log 2-1)<p\log2$.
+\end{proof}
+
+Using that $q$ lies in two classes modulo $8p$ and the Montgomery--Vaughan form of the Brun--Titchmarsh
+inequality~\cite{MV73}, one gets the second-order form $\omega(M_p)\le\frac{\log2}2\,p/(\log p-1.0298+o(1))$.
+The constant $\frac{\log2}{2}$ is unchanged.
+
+\begin{remark}[Scale of the problem]
+The quantity in $\beta_K$ lies in $[0,(1+o(1))\log\log p]$. So even $\beta_K<\infty$ requires
+$\omega(M_p)\le p^{O(1/\log\log p)}$ on $P_K$, far beyond Lemma~\ref{lem:trivial}. At most
+$p\log2/\log X$ prime factors exceed $X$. So the range that must be controlled is
+$q\in[p^{1+o(1)},\,2^{p^{1-o(1)}}]$, not a range with a fixed $\varepsilon$.
+\end{remark}
+
+\section{What a disproof, or finiteness, would mean}
+
+\begin{theorem}\label{thm:disproof}
+Suppose $\beta_K>0$ and $0<c<\beta_K$. Then there are infinitely many primes $p$ such that
+$\Omega(a_p)\le K/2-1$, $\omega(a_p)\le\log_2(K/2)$, and $\omega(M_p)\ge\exp(c\log p/\log\log p)$. In particular
+these $M_p$ are composite.
+\end{theorem}
+\begin{proof}
+$\beta_K>0$ forces $P_K$ to be infinite. Apply $\tau(n)\ge\Omega(n)+1$ and $\tau(n)\ge2^{\omega(n)}$ to
+$\tau(a_p)\le K/2$.
+\end{proof}
+
+The infinitude of composite $M_p$ with $p$ prime is open (Guy~\cite{Guy}, A3). A disproof would settle it together
+with an almost-prime statement for $(2^p+1)/3$ on the same set of $p$.
+
+\begin{proposition}\label{prop:finite}
+$P_K$ is finite for every $K$ if and only if $\Omega(a_p)\to\infty$. In particular, finiteness of $P_4$ means that
+there are only finitely many Wagstaff primes.
+\end{proposition}
+This is believed false. The Lenstra--Pomerance--Wagstaff-type heuristic (see~\cite{BSW89}) predicts
+$\asymp\log x$ Wagstaff exponents $p\le x$.
+
+\begin{proposition}[No fixed-family certificate]\label{prop:nocert}
+Let $f_1,\dots,f_r\in\Z[x]$ be nonconstant. There is a set of primes $p$ of positive relative density on which no
+$f_j(p)$ is a divisor of $a_p$ other than $\pm1$, and likewise for $M_p$.
+\end{proposition}
+\begin{proof}
+If $f_j=c\,x^k$, then $f_j(p)=cp^k$ is never such a divisor, because every prime factor of $a_pM_p$ is at least
+$2p+1$. Otherwise write $f_j=x^kg_j$ with $g_j(0)\ne0$ and $g_j$ nonconstant. By Schur's theorem infinitely many primes
+$\ell$ divide some value $g_j(r)$. Choose such odd primes $\ell_j$, distinct and not dividing $g_j(0)$, with residues
+$r_j$. Then $r_j\not\equiv0\pmod{\ell_j}$. By the Chinese remainder theorem and Dirichlet's theorem, a positive proportion of primes satisfy
+$p\equiv r_j\pmod{\ell_j}$ for all $j$. For these $p$ we have $\ell_j\mid f_j(p)$, while $\ell_j<2p+1$ for large $p$. So
+$f_j(p)$ divides neither $a_p$ nor $M_p$, unless $f_j(p)=0$, which happens for finitely many $p$.
+\end{proof}
+
+The working note's proof of Proposition~\ref{prop:nocert} omitted the case $f_j=cx^k$, in which no
+nonzero residue works; the repair is the first sentence above.
+
+%======================================================================
+\section{Barriers for soft and bounded-depth arguments}\label{sec:barriers}
+%======================================================================
+The results in this section are \emph{meta-theorems}. Each lists properties of the true factorizations and builds
+fake factorizations with all of them but with opposite behaviour. Any argument that uses only the listed properties
+therefore proves nothing about the question. The constructions are explicit, but they rely on the
+Siegel--Walfisz or Bombieri--Vinogradov theorems and are ineffective. Full verifications are in the working notes.
+Here we give statements and the key steps; these results are \emph{proved in sketch form only}.
+
+\subsection{Soft properties of \texorpdfstring{$2^k-1$}{2\textasciicircum k-1}}\label{sec:barrier-doubling}
+The \emph{soft properties} are the following:
+\begin{itemize}
+\item the cyclotomic factorization and $\gcd(2^a-1,2^b-1)=2^{\gcd(a,b)}-1$;
+\item a primitive prime $\equiv1\pmod d$ for every index $d\ne1,6$;
+\item $T(2k)=T(k)\tau(2^k+1)$ and lifting-the-exponent multiplicities;
+\item the size $\log\Phi_d(2)\approx\varphi(d)\log 2$ and Aurifeuillian splitting;
+\item the rule $q\equiv\pm1\pmod8$ if and only if $2\mid(q-1)/\ord_q2$, and power-residue rules of bounded depth;
+\item Stewart's lower bound for the largest prime factor~\cite{St13};
+\item Brun--Titchmarsh and averaged sieve bounds.
+\end{itemize}
+
+\begin{theorem}[Models for the doubling problem; sketch]\label{thm:model-doubling}
+There are ``fake'' factorizations, in which each $\Phi_d(2)$ is replaced by a product of genuine primes
+$\equiv1\pmod d$ satisfying all soft properties, of the following kind. They have one prime per generic index (two at
+Aurifeuillian indices). Along a sparse sequence of primes $\ell_j$, index $\ell_j$ carries
+$W_j\ge D(3\ell_j)+O(\log\ell_j)$ primes and index $2\ell_j$ carries one. For these models
+$f^*(2\ell_j)/f^*(\ell_j)\to5$, so $\liminf f^*(2n)/f^*(n)<\infty$. Other models, with every
+$\omega(\Phi_d^*(2))\le d^{o(1)}$, have $f^*(2n)/f^*(n)\to\infty$.
+\end{theorem}
+\begin{proof}[Key steps]
+In $(\ell_j,2\ell_j]$ the only multiples of $\ell_j$ are $\ell_j$ and $2\ell_j$, so
+$T^*(\ell_j)=2^{W_j}$ and $T^*(2\ell_j)=4T^*(\ell_j)$. Every other $k\le2\ell_j$ has
+$\log_2T^*(k)\le D(2\ell_j)+\sum_{i<j}W_i+O(\log \ell_j)$. When the $\ell_j$ grow fast, this is negligible against $W_j$.
+Then $f^*(\ell_j)\sim T^*(\ell_j)$ and $f^*(2\ell_j)\sim5T^*(\ell_j)$. Size is compatible because
+$W_j\ll\ell_j/\log\ell_j$ primes $\equiv1\pmod{\ell_j}$ fit inside $2^{\ell_j}$. Primes in the required residue
+classes, of modulus $O(d)$, exist by Siegel--Walfisz.
+\end{proof}
+
+The model at index $2\ell_j$ has $\Phi^*_{2\ell_j}(2)$ ``prime'', that is, $\tau(2^{\ell_j}+1)=4$, and
+$\omega(M^*_{\ell_j})$ is huge. This is exactly the near-Wagstaff scenario of Proposition~\ref{prop:spike}. The one
+property such models cannot imitate is exact divisibility: $q\mid2^p-1$ if and only if $2$ is a $\frac{q-1}p$-th power
+residue modulo $q$, a residue condition of unbounded depth.
+
+\subsection{Bounded-depth axioms for \texorpdfstring{$M_p$}{M\_p} and \texorpdfstring{$a_p$}{a\_p}}
+
+\begin{definition}[Axioms $\mathrm{Ax}_{D,J}$]
+A family assigns to each prime $p\ge5$ multisets of primes $F(p)$ (a fake $M_p$) and $G(p)$ (a fake $a_p$) such that:
+\begin{enumerate}
+\item[(A1)] $\prod F(p)$ has $p$ bits and $\prod G(p)$ has $p-1$ bits;
+\item[(A2)] every element is $\equiv1\pmod{2p}$;
+\item[(A3)] the mod-$8$ rules of Lemma~\ref{lem:mod8} and $q\equiv\pm1\pmod8$ for $F$-primes hold;
+\item[(A4)] $\prod F\equiv M_p$ and $\prod G\equiv a_p\pmod{8p^J}$; this includes the Fermat-quotient congruence;
+\item[(A5)] for $d\le D$ with $d\mid q-1$: $2^{(q-1)/d}\equiv1\pmod q$ if and only if $d\mid(q-1)/p$ for $F$-primes, or
+$d\mid(q-1)/2p$ for $G$-primes;
+\item[(A6)] fibres are disjoint, and $3\notin G(p)$;
+\item[(A7)] repeated primes are Wieferich-type;
+\item[(A8)] Brun--Titchmarsh holds, and (A9) Stewart's bound holds.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Barrier; sketch, modulo Siegel--Walfisz]\label{thm:barrier}
+The true factorizations satisfy every $\mathrm{Ax}_{D,J}$. For every $D,J$ there are families satisfying
+$\mathrm{Ax}_{D,J}$ with $|G(p)|=1$ for all large $p$, that is, with ``$\tau(2^p+1)=4$'', and with either
+(a) $|F(p)|=1$ for all large $p$, so $\beta_K=0$; or
+(b) $|F(p)|\ge p^{1-\delta}/4-1$ for all large $p$, so $\beta_K=\infty$.
+A diagonal family satisfies all $\mathrm{Ax}_{D,J}$ at once, eventually in $p$.
+\end{theorem}
+\begin{proof}[Construction]
+$F(p)$ consists of $r$ primes ($r$ even) with $q_i\equiv1\pmod{2p}$, $q_i\equiv7\pmod8$, and
+$q_i\equiv2\pmod\ell$ for every odd prime $\ell\le D$, chosen up to $\exp(p^\delta)$. A filler prime fixes (A1)
+and (A4); because $r$ is even, the filler can be taken $\equiv7\pmod 8$. The condition $q\equiv2\pmod\ell$ means that
+the only $d\le D$ dividing $q-1$ are $d\in\{1,2\}$, so (A5) reduces to the quadratic character of $2$, which (A3)
+already fixes. $G(p)$ is a single prime in the right classes. The moduli are at most a fixed power of $\log x$, so
+Siegel--Walfisz applies uniformly.
+\end{proof}
+
+\begin{proposition}[Sharpness]
+(A4) with $8p^J>2^{p-1}$ forces $\prod F(p)=M_p$, and adding exact divisibility $\prod F\mid M_p$ recovers the truth.
+So fake models die only at $p$-adic depth $J\gtrsim p\log2/\log p$, or at residue depth $(q-1)/p$, which is unbounded.
+\end{proposition}
+
+\begin{lemma}[Mod-24 limit of the construction]
+No product of primes that are all $\equiv7\pmod 8$ and $\equiv2\pmod3$ is $\equiv M_p\pmod{24}$.
+\end{lemma}
+\begin{proof}
+$M_p\equiv7\pmod8$ needs an odd number of factors, and $M_p\equiv1\pmod3$ needs an even number.
+\end{proof}
+So adding product congruences modulo $3$ forces genuine Chebotarev conditions in non-abelian Kummer fields such as
+$\Q(\zeta_3,2^{1/3})$. The construction above does not handle these; that extension is \emph{unproved}.
+
+\begin{theorem}[Barrier for the constant; sketch, using Bombieri--Vinogradov and Heath-Brown's Linnik bound~\cite{HB92}]
+\label{thm:constbarrier}
+Fix $\varepsilon\in(0,\frac1{10})$ and $D\ge3$. For all primes $p$ outside a set of relative density zero, there are a set
+$Q'_p$ of at least $(\frac{\log2}2-\varepsilon)\,p/\log p$ primes in $[p^2,p^2(\log p)^{20}]$ and a prime $r$ with the
+following properties. Each of them is $\equiv1\pmod{2p}$, $\equiv7\pmod8$, and $\not\equiv1\pmod\ell$ for odd $\ell\le D$.
+The product $N'=r\prod Q'_p$ satisfies $N'<M_p$ and $N'\equiv M_p\pmod{2^ip^j}$ for all $i\le\varepsilon p/12$,
+$j\le\varepsilon p/(12\log p)$. Brun--Titchmarsh and Stewart's bound hold for them. So no argument that uses only these
+properties can improve the constant in Lemma~\ref{lem:trivial}.
+\end{theorem}
+
+Any improvement of $\frac{\log 2}{2}$ is equivalent to bounding the product of the $q\mid M_p$ in
+$[p^{2-\eta},p^{2+\eta}]$ by $2^{(1-\delta)p}$. This is a concentration lemma proved in the working notes.
+This window is Hooley's middle range in Artin's conjecture.
+
+%======================================================================
+\section{A genuine obstruction: honest ideals with many prime factors}
+%======================================================================
+The fake models violate exact divisibility. The next family does not: it consists of genuine elements of $\cO$.
+
+\begin{theorem}\label{thm:honest}
+Let $p\ge5$, $p\nmid k$, and $\alpha_k=2^k-\zeta$. Then:
+\begin{enumerate}
+\item $\Nm(\alpha_k)=\Phi_p(2^k)=\prod_{d\mid k}\Phi_{dp}(2)$ and $\cO/(\alpha_k)\cong\Z/\Phi_p(2^k)$;
+\item for every prime $q\ne p$ dividing $\Nm(\alpha_k)$, $2^k$ has order exactly $p$ modulo $q$, and
+$(\alpha_k)=\prod_q(q,\zeta-2^k)^{v_q(\Nm\alpha_k)}$, a product of degree-one primes, one above each $q$;
+\item $\omega(\alpha_k)\ge\tau(k)$. Choosing $k<p$ with $\tau(k)$ maximal gives
+$\log\omega(\alpha_k)\ge(\log2+o(1))\log p/\log\log p$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(1) $\Nm(2^k-\zeta)=\prod_{a}(2^k-\zeta^a)=\Phi_p(2^k)$. Since $p\nmid k$, $\Phi_p(x^k)=\prod_{d\mid k}\Phi_{dp}(x)$. Also
+$\cO/(2^k-\zeta)\cong\Z[x]/(\Phi_p(x),x-2^k)\cong\Z/\Phi_p(2^k)$.
+(2) If $q\mid\Phi_p(2^k)$ and $2^k\equiv1\pmod q$, then $\Phi_p(2^k)\equiv p\pmod q$, so $q=p$. Hence $2^k$ has order
+$p$. Because the quotient is cyclic, exactly one prime above $q$ divides $(\alpha_k)$, namely $(q,\zeta-2^k)$, to the
+exponent $v_q(\Nm\alpha_k)$.
+(3) Each $\Phi_{dp}(2)$, $d\mid k$, has a primitive prime (P2), since $dp\notin\{1,6\}$. Distinct $d$ give distinct
+primes. Finally, (P5) gives $\max_{k<p}\tau(k)=2^{(1+o(1))\log p/\log\log p}$.
+\end{proof}
+
+A direct computation for $p=13$, $k=12$ gives $\omega(\alpha_{12})=13\ge\tau(12)=6$.
+
+\begin{remark}
+The structural identities used by class-group, Stickelberger, Galois-orbit and successive-minima approaches hold for
+$\alpha_k$ exactly as for $\alpha_1=2-\zeta$. Examples are the sub-ideal dictionary $\cO/I\cong\Z/d_I$, free Galois orbits of the primes, and
+Stickelberger relations. The only datum separating $2-\zeta$ from $\alpha_k$ is quantitative: the house is $3$
+against $2^k+1$, and $\log\Nm\approx p\log2$ against $kp\log2$. So a proof of Conjecture~\ref{conj:beta} must use the
+\emph{size} of the generator in a way stronger than the norm bound. One caveat: $\alpha_k$ does not satisfy the analogue
+of $p\in P_K$, since $\Nm(2^k+\zeta)$ has at least $\tau(\text{odd part of }k)$ prime factors. The coupling with
+$2+\zeta$ enters the methods tested below only through the residue $2+\zeta\equiv4$, which needs no factorization.
+\end{remark}
+
+%======================================================================
+\section{The function-field analogue is true}
+%======================================================================
+For $g\in\F_\ell[T]$, $\tau(g)$ counts monic divisors and $\omega(g)$ counts distinct monic irreducible factors.
+
+\begin{theorem}\label{thm:ff}
+Let $\ell$ be an odd prime, $a\in\F_\ell[T]$ of degree $d\ge1$, $p\ne\ell$ an odd prime, and $f=\ord_p\ell$. Then
+\begin{enumerate}
+\item $\omega(a^p-1)\le d\,(1+(p-1)/f)$;
+\item $\omega(a^p+1)\ge(p-1)/f$;
+\item if $\tau(a^p+1)\le K$, then $\omega(a^p-1)\le d\,(1+\log_2K)$, uniformly in $p$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $\mu_p\subset\F_{\ell^f}$ be the $p$-th roots of unity. The Frobenius $x\mapsto x^\ell$ acts on
+$\mu_p\setminus\{1\}$ with $(p-1)/f$ orbits of size $f$. For $\eta\ne1$ let
+$\Nm(a-\eta)=\prod_{\sigma}(a-\eta^\sigma)\in\F_\ell[T]$, the product over $\mathrm{Gal}(\F_{\ell^f}/\F_\ell)$.
+
+(1) $a^p-1=(a-1)\prod_{\text{orbits}}\Nm(a-\eta)$. At most $d$ primes divide $a-1$. If an irreducible $\pi$ divides
+$a^p-1$ but not $a-1$, then $a$ has order $p$ in $(\F_\ell[T]/\pi)^\times$, a cyclic group of order
+$\ell^{\deg\pi}-1$. So $f\mid\deg\pi$. Each $\Nm(a-\eta)$ has degree $df$, so it has at most $d$ distinct
+irreducible factors of degree $\ge f$.
+
+(2) $a^p+1=\prod_{\eta\in\mu_p}(a+\eta)$, since $p$ is odd. The norms $\Nm(a+\eta)$ over distinct orbits are nonconstant.
+They are pairwise coprime: a common prime factor in $\F_{\ell^f}[T]$ of $a+\eta^\sigma$ and $a+\eta'^{\sigma'}$ would
+divide the nonzero constant $\eta^\sigma-\eta'^{\sigma'}$.
+
+(3) $2^{(p-1)/f}\le2^{\omega(a^p+1)}\le\tau(a^p+1)\le K$, so $(p-1)/f\le\log_2K$; now apply (1).
+\end{proof}
+
+\begin{remark}[Why it does not transfer]
+The constant-field Frobenius order $f$ controls both $a^p-1$ and $a^p+1$. Over $\Z$, every prime above $q\mid M_p$ and
+above $Q\mid a_p$ has residue degree $1$ in $\Q(\zeta_p)$, so no shared invariant exists. Over $\Z$, a uniform bound
+$\omega(M_p)\le C(K)$ on $P_K$ would be the literal analogue of (3). The data already strain it: $p=43,79,191,701$ have
+$a_p$ prime and $\omega(M_p)=3,3,5,8$.
+\end{remark}
+
+%======================================================================
+\section{Exact-divisibility tools, and the single open estimate}\label{sec:tools}
+%======================================================================
+
+\begin{lemma}[Incidence/norm lemma]\label{lem:incidence}
+For $q\mid M_p$, the primes of $\cO$ above $q$ are $\mathfrak q_{q,j}=(q,\zeta-2^j)$, $1\le j\le p-1$. They are
+distinct, of degree $1$, and $v_{\mathfrak q_{q,j}}(\zeta-2^j)=v_q(M_p)$. Consequently, for $P\in\Z[x]$ with
+$\Phi_p\nmid P$,
+\[
+\sum_{j=1}^{p-1}\log\gcd\bigl(P(2^j),M_p\bigr)\ \le\ \log|\Nm(P(\zeta))|\ \le\ (p-1)\log\|P\|_1 .
+\]
+\end{lemma}
+\begin{proof}
+$2$ has order $p$ modulo $q$, so the roots of $\Phi_p$ modulo $q$ are $2^j$, $1\le j\le p-1$, and $q$ splits completely.
+For $1\le j\le p-1$, $\Nm(2^j-\zeta)=\Phi_p(2^j)$. By (P3), $v_q(\Phi_p(2^j))=v_q(2^{jp}-1)=v_q(M_p)+v_q(j)=v_q(M_p)$.
+The quotient $\cO/(2^j-\zeta)$ is cyclic, so only $\mathfrak q_{q,j}$ above $q$ divides $(2^j-\zeta)$, to exponent
+$v_q(M_p)$. Hence $P(\zeta)\equiv P(2^j)\pmod{\mathfrak q_{q,j}^{\,v_q(M_p)}}$, and
+$v_{\mathfrak q_{q,j}}(P(\zeta))\ge\min(v_q(P(2^j)),v_q(M_p))$. The ideals $\mathfrak q_{q,j}$ are distinct of norm
+$q$, which gives the first inequality. The second is $|P(\zeta^a)|\le\|P\|_1$.
+\end{proof}
+In the fake models this fails: for a fake $q$, $(q,\zeta-2)=(1)$. It is the basic exact-divisibility input.
+Lattice-existence (Siegel, Minkowski) arguments cannot extract a bound on $|S|$ from it, because both sides agree up to
+factors independent of $|S|$.
+
+\begin{lemma}[Divisor lattices]\label{lem:O}
+Let $s>N^\theta$ with $\gcd(s,N)=1$. Let a nonempty set $D'$ of divisors of $N$ meet $R$ residue classes modulo $s$.
+Then $\theta\,\omega(N)<1+\log_2R+\log_2(\tau(N)/|D'|)$.
+\end{lemma}
+\begin{proof}
+Let $t=\lfloor\theta\,\omega(N)\rfloor$ and let $A$ be the product of the $t$ smallest prime-power parts of $N$. Then
+$A\le N^{t/\omega(N)}\le N^\theta<s$. Write $N=AB$. Every divisor is $ab$ with $a\mid A$, $b\mid B$. If $ab\equiv a'b\pmod s$,
+then $a\equiv a'$ because $b$ is invertible modulo $s$, so $a=a'$ because $a,a'\le A<s$. Hence each class contains at most
+$\tau(B)=\tau(N)/\tau(A)\le\tau(N)/2^t$ divisors. So $|D'|\le R\,\tau(N)/2^t$, and $\theta\,\omega(N)<t+1$.
+\end{proof}
+
+A hypothesis that all divisors of $M_p$ lie in few classes modulo some $s\ge M_p^{1/4+\varepsilon}$ is what Lenstra's
+theorem~\cite{Le84} or Coppersmith--Howgrave-Graham--Nagaraj~\cite{CHN08} would need. By Lemma~\ref{lem:O}, that
+hypothesis already gives the conclusion up to a factor $4$ in $\omega$. So the input is the problem itself.
+
+\begin{proposition}[$p$-adic constraints are void]
+Write the prime factors of $M_p$, with multiplicity $w=\Omega(M_p)$, as $q_i=1+2pm_i$. Modulo $p^J$ the full constraint
+is $\prod_i(1+2pm_i)\equiv M_p\pmod{p^{J+1}}$, one equation in the cyclic group $(1+p\Z)/(1+p^{J+1}\Z)$ of order
+$p^J$. Its solution set in $(\Z/p^J)^w$ has exactly $p^{J(w-1)}$ elements, a density of $p^{-J}$ for every $w$. So no
+number of factors is ever excluded, and the elementary symmetric functions of the $m_i$ are not individually determined.
+\end{proposition}
+\begin{proof}
+$m\mapsto1+2pm$ is a bijection from $\Z/p^J$ onto that group, and $M_p\equiv1\pmod p$.
+\end{proof}
+
+\paragraph{Further tests.} The working notes test four more families of methods, each with a stated point of failure.
+\begin{itemize}
+\item \emph{Reciprocity.} Every power-reciprocity law between $2-\zeta$ and $2+\zeta$ reduces to local symbols needing
+neither factorization. For $q\mid M_p$ and $n\mid q-1$ with $p\nmid n$, $2$ is automatically an $n$-th power.
+\item \emph{Subgroup bounds.} $\langle2\rangle\subset\F_q^\times$ is \emph{the} subgroup of order $p$. So
+Stepanov, Heath-Brown--Konyagin and Bourgain--Glibichuk--Konyagin bounds are identical for every $q\equiv1\pmod{2p}$.
+\item \emph{Sparse multiples.} Pigeonhole forces $d\mid\sum_{i\le T}\pm2^{e_i}$ for every odd $d<\binom pT$. The
+needed uniform bound on $\gcd(u,M_p)$ for sparse $u$ is false. For example, $\gcd(2+2^{30}-2^{11}-2^{12},M_{43})=9719$
+with $43\in P_4$.
+\item \emph{Kummer--Chebotarev.} $q\mid M_p$ if and only if $q$ splits completely in $\Q(\zeta_m,2^{1/m})$,
+$m=(q-1)/p$. The degree grows like $(q/p)^2$, and each $m$ has one candidate $q$.
+\end{itemize}
+
+\paragraph{The single open estimate.} Every route above stops at the following statement:
+\begin{equation}\label{eq:open}
+\#\{q\le2^p:\ q\equiv1\ (2p),\ 2^p\equiv1\ (q)\}\le\exp\bigl(o(\log p/\log\log p)\bigr)\quad(p\in P_K\text{ or all }p).
+\end{equation}
+The best known bound is $(\frac{\log2}2+o(1))p/\log p$. We know of no pointwise bound that is even $o(p/\log p)$.
+By Section~\ref{sec:barriers} and Theorem~\ref{thm:honest}, a proof of~\eqref{eq:open} must use exact divisibility of
+unbounded depth \emph{and} the archimedean smallness of $2-\zeta_p$ beyond its norm.
+
+%======================================================================
+\section{Numerical data}\label{sec:data}
+%======================================================================
+All computations were redone independently for this paper. They use the factor-count tables
+OEIS A046801 ($\tau(2^n-1)$, $n\le1206$), A085021 ($\omega(\Phi_n(2))$), A046800 ($\omega(2^n-1)$), A046798
+($\tau(2^n+1)$, $n\le1128$) and A000978 (Wagstaff exponents)~\cite{OEIS}, together with direct computation. The
+script \texttt{paper\_checks.py} reproduces every number below.
+
+\begin{itemize}
+\item $f(2n)\ge3f(n)$ holds for all $n\le606$, with equality only at $n=1,2,4$. Further,
+$\min_{32\le n\le606}f(2n)/f(n)=14.256$, and $\min_{150\le n\le300}=256.1$.
+\item $f(2n)/f(n)$ at $n=8,16,32,64,128$ is $3.741,\ 5.337,\ 15.134,\ 18.446,\ 154.843$. The minimum over
+$16\le n\le150$ is at $n=16$. Local minima sit at powers of $2$, the configuration singled out by
+Theorems~\ref{thm:three}--\ref{thm:fermat}.
+\item The record values of $T(k)$ for $k\le600$ occur at
+$k=1,2,4,6,8,12,18,20,24,36,48,60,72,84,108,120,144,168,180,288,300,360,420,540$.
+\item $\max_{d<600}\omega(\Phi_d(2))=9$, attained only at $d=397$. Indeed
+\[
+M_{397}=2383\cdot6353\cdot50023\cdot53993\cdot202471\cdot5877983\cdot p_{30}\cdot p'_{31}\cdot p''_{31},
+\]
+where $p_{30}=814132872808522587940886856743$, $p'_{31}=1234904213576000272542841146073$ and
+$p''_{31}=6597485910270326519900042655193$. We checked that the product is exactly $2^{397}-1$, that every factor is
+$\equiv1\pmod{794}$, and that every factor passes the BPSW test. Also $\omega(M_{431})=8$.
+\item The triples $(p,\tau(2^p+1),\omega(M_p))$ for $p\le293$ used in the working notes agree with the tables in all
+61 cases. Every $\tau(2^p+1)$ with $5\le p\le1128$ is divisible by $4$ (Corollary~\ref{cor:4div}).
+\item On $P_4$ with $p\le1128$, that is, on the Wagstaff exponents $5,\dots,701$, the values of $\omega(M_p)$ are
+$1,1,2,1,1,1,2,1,3,1,3,2,1,2,5,2,4,2,8$. The maximum is $\omega(M_{701})=8$. On $P_8$ the maximum is also $8$.
+\item \emph{Small factors versus Gillies.} For the 782 primes $3\le p\le6000$, let $c_p$ be the number of prime factors
+$q\le p^2$ of $M_p$. The observed counts of $c_p=0,1,2,3,4$ are $436,264,65,16,1$; the maximum is $c_{397}=4$ and the
+mean is $0.57$. Gillies' heuristic~\cite{Gi64} predicts $c_p$ is approximately Poisson with mean
+$\mu_p=\log(\log p^2/\log(2p+1))$. The mixture of these Poisson laws predicts $428.8,\ 257.4,\ 77.5,\ 15.6,\ 2.4$.
+An extremal configuration would need about $236$ such factors.
+\end{itemize}
+
+%======================================================================
+\section{Corrections to the working notes and problem statements}\label{sec:errata}
+%======================================================================
+\begin{enumerate}
+\item The round-2 note on the doubling problem states $\max_{d<600}\omega(\Phi_d(2))=8$ and
+$\max_{p<600}\omega(2^p-1)=8$, at $p=431$. \textbf{Both are false}: $\omega(\Phi_{397}(2))=\omega(M_{397})=9$. The
+problem statement for $\beta_K$ repeats the first claim for $d\le600$. The value $\omega(M_{431})=8$ is correct.
+\item The note on $\beta_K$ says the heuristic predicts about $C\log\log x$ Wagstaff exponents up to $x$. The
+prediction is $\asymp\log x$ exponents $p\le x$; the quantity $\log\log x$ is the count of Wagstaff \emph{numbers} up to
+$x$. No proof is affected.
+\item The proof of the no-certificate proposition in the $\beta_K$ note fails for $f=cx^k$; it is repaired in
+Proposition~\ref{prop:nocert}.
+\item The $\beta_K$ note's one-line summary of the constant barrier omits that the fake products satisfy $N'<M_p$
+rather than having exactly $p$ bits. Theorem~\ref{thm:constbarrier} states it correctly.
+\item The round-2 note says a negative answer to \#893 ``requires'' thin $k$ with $\tau(2^k+1)$ bounded. What is
+proved unconditionally is Proposition~\ref{prop:negative}. Bounded $\tau(2^k+1)$ follows under the spike hypothesis of
+Proposition~\ref{prop:spike}.
+\item Problem-statement corrections recorded in the $\beta_K$ note, all confirmed. Brun--Titchmarsh is not needed for
+Lemma~\ref{lem:trivial}. The $p$-adic digits of $M_p$ fix only $\sum_k(2p)^{k-1}e_k=(2^{p-1}-1)/p$, not each
+elementary symmetric function $e_k$. ``$(2+\zeta_p)$ has at most $\log_2(K/2)$ prime-ideal factors'' holds for distinct
+factors; with multiplicity the bound is $K/2-1$.
+\end{enumerate}
+
+%======================================================================
+\section{Relation to the literature}\label{sec:novelty}
+%======================================================================
+A literature search was carried out in November 2026: erdosproblems.com, arXiv, the Kova\v{c}--Luca paper and its
+references, and standard sources on Mersenne and Wagstaff numbers. ``New'' below means not found there.
+\begin{center}
+\small
+\begin{tabular}{p{6.2cm}p{8.4cm}}
+\toprule
+Result & Status \\
+\midrule
+Identity (Thm.~\ref{thm:identity}) & Elementary; probably folklore. \\
+$\limsup f(2n)/f(n)=\infty$ & \textbf{Known}: Kova\v{c}--Luca~\cite{KL}. Corollary~\ref{cor:KL} is a variant proof. \\
+$f(2n)\ge3f(n)$, sharp (Thm.~\ref{thm:three}) & New; first $\liminf$ bound above $2$. Elementary. \\
+Fermat bound, $\liminf\ge4$ if $F_a$ composite (Thm.~\ref{thm:fermat}) & New. Elementary. \\
+Chains and density (Thm.~\ref{thm:density}) & New. Elementary. \\
+Thin reduction and conditional result (Thm.~\ref{thm:thin}, Cor.~\ref{cor:cond}) & New. The hypothesis is strictly
+weaker than the conjecture used in~\cite{KL}. \\
+Necessary conditions; spike $\Rightarrow\beta\ge\log2$ (Props.~\ref{prop:negative}, \ref{prop:spike}) & New. \\
+Soft-property and bounded-depth barriers (Sec.~\ref{sec:barriers}) & New as stated; proved in sketch. The method
+(random or fake models) is standard in spirit, and the analytic input is classical. \\
+Mod-8 structure, $4\mid\tau(2^p+1)$ & Elementary; the mod-8 facts on Wagstaff divisors are classical. \\
+Trivial bound (Lemma~\ref{lem:trivial}) & Folklore. \\
+Disproof $\Rightarrow$ open problems & Elementary implications of known open problems~\cite{Guy}. \\
+Honest-ideal obstruction (Thm.~\ref{thm:honest}) & New framing; elementary. \\
+Function-field analogue (Thm.~\ref{thm:ff}) & New as stated; an elementary consequence of the factorization of
+cyclotomic polynomials over finite fields. \\
+Divisor-lattice inequality (Lemma~\ref{lem:O}) & New to our knowledge; elementary; compare~\cite{Le84}. \\
+Incidence lemma (Lemma~\ref{lem:incidence}) & Standard algebraic number theory. \\
+Factor data & \textbf{Known}: Cunningham project~\cite{Cunningham}, OEIS. We contribute verification and corrections. \\
+Conjecture~\ref{conj:beta} & Not found in the literature. Consistent with Gillies' heuristic. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\emph{No result in this paper resolves Erd\H{o}s Problem~\#893 or Conjecture~\ref{conj:beta}.}
+The new results are modest and elementary in technique. Their value lies in sharp constants, exact reductions and
+precise statements of what any resolution must use.
+
+\section{Open problems}
+\begin{enumerate}
+\item Is $\liminf f(2n)/f(n)>3$? Is it at least $4$ unconditionally, or $\infty$?
+\item Prove~\eqref{eq:thinhyp}, or any bound $\omega(\Phi_d(2))\le\psi(d)^{1-\delta}$ on thin $d$.
+\item Prove $\omega(M_p)=o(p/\log p)$ for all primes $p$, or even for a density-one set of $p$. By
+Theorem~\ref{thm:constbarrier} this requires exact divisibility in Hooley's middle range.
+\item Determine $\beta_K$. A first step would be to rule out $\beta_K\ge\log2$, which by Proposition~\ref{prop:spike}
+would close the prime-spike route to a negative answer to \#893.
+\end{enumerate}
+
+\begin{thebibliography}{99}
+\bibitem{Ba86} A.~S.~Bang, Taltheoretiske unders{\o}gelser, \emph{Tidsskrift Math.}~4 (1886), 70--80, 130--137.
+\bibitem{BSW89} P.~T.~Bateman, J.~L.~Selfridge and S.~S.~Wagstaff, Jr., The new Mersenne conjecture,
+\emph{Amer. Math. Monthly}~96 (1989), 125--128.
+\bibitem{Cunningham} J.~Brillhart, D.~H.~Lehmer, J.~L.~Selfridge, B.~Tuckerman and S.~S.~Wagstaff, Jr.,
+\emph{Factorizations of $b^n\pm1$}, 3rd ed., Contemp. Math.~22, AMS, 2002; and the Cunningham Project tables.
+\bibitem{CHN08} D.~Coppersmith, N.~Howgrave-Graham and S.~V.~Nagaraj, Divisors in residue classes, constructively,
+\emph{Math. Comp.}~77 (2008), 531--545.
+\bibitem{EP} T.~F.~Bloom, Erd\H{o}s Problems, Problem \#893, \url{https://www.erdosproblems.com/893}.
+\bibitem{Er98} P.~Erd\H{o}s, Some of my new and almost new problems and results in combinatorial number theory,
+in \emph{Number Theory (Eger, 1996)}, de Gruyter, 1998, 169--180.
+\bibitem{Gi64} D.~B.~Gillies, Three new Mersenne primes and a statistical theory, \emph{Math. Comp.}~18 (1964), 93--97.
+\bibitem{Guy} R.~K.~Guy, \emph{Unsolved Problems in Number Theory}, 3rd ed., Springer, 2004.
+\bibitem{HB92} D.~R.~Heath-Brown, Zero-free regions for Dirichlet $L$-functions, and the least prime in an arithmetic
+progression, \emph{Proc. London Math. Soc.}~64 (1992), 265--338.
+\bibitem{KL} V.~Kova\v{c} and F.~Luca, On the number of divisors of Mersenne numbers, arXiv:2506.04883 (2025);
+\emph{Experimental Mathematics} (2026), doi:10.1080/10586458.2026.2636060.
+\bibitem{Le84} H.~W.~Lenstra, Jr., Divisors in residue classes, \emph{Math. Comp.}~42 (1984), 331--340.
+\bibitem{MV73} H.~L.~Montgomery and R.~C.~Vaughan, The large sieve, \emph{Mathematika}~20 (1973), 119--134.
+\bibitem{OEIS} OEIS Foundation, The On-Line Encyclopedia of Integer Sequences, sequences A000978, A046798, A046800,
+A046801, A085021, \url{https://oeis.org}.
+\bibitem{St13} C.~L.~Stewart, On divisors of Lucas and Lehmer numbers, \emph{Acta Math.}~211 (2013), 291--314.
+\bibitem{Wa83} S.~S.~Wagstaff, Jr., Divisors of Mersenne numbers, \emph{Math. Comp.}~40 (1983), 385--397.
+\bibitem{Wi07} S.~Wigert, Sur l'ordre de grandeur du nombre des diviseurs d'un entier, \emph{Ark. Mat. Astron. Fys.}~3
+(1907), 1--9.
+\bibitem{Zs92} K.~Zsigmondy, Zur Theorie der Potenzreste, \emph{Monatsh. Math. Phys.}~3 (1892), 265--284.
+\end{thebibliography}
+
+\end{document}

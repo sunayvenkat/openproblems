@@ -1,0 +1,990 @@
+{
+  "problem": 624,
+  "status": "INCOMPLETE",
+  "goal": "Prove H(n)-log2(n) tends to infinity for unrestricted set functions.",
+  "equivalent_goal": "p(h)=max{n:H(n)<=h} satisfies p(h)/2^h -> 0.",
+  "unrestricted_upper_bound": {
+    "status": "proved in this session; unrestricted lower-gap conjecture remains open",
+    "finite_condition": "7 <= h <= n and (2^(h-1)-h)/n >= ln(n)+3 ln(h+1) imply H(n) <= h",
+    "consequence": "H(n) <= ceil(log2(2 n (ln n + 4 ln ln n + 10))) for sufficiently large n; hence log2 n + log2 log2 n + O(1)",
+    "construction": "Randomly color all subsets of size <= h-2 with n colors. For each h-set Y, reserve Y itself for one missing color; match remaining (Y,c) demands to distinct (h-1)-faces of Y.",
+    "hall": "Each demand has h candidate faces. If every (h-1)-face A has load sum_{x outside A} (|M(A+x)|-1)_+ <= h, Hall follows by edge counting.",
+    "probability": "R=h+1, beta=(2^(h-1)-h)/n. For bad load, choose ell extensions and k_i>=2 missing colors with sum(k_i-1)=R, t=R+ell, and d distinct colors. Common low subsets of A number 2^(h-1)-1, each private x-family numbers 2^(h-1)-h; these families are disjoint. Witness probability <= exp(-beta(d+R+ell)); witness count <= 2^R n^(d+ell) (2R)^(2R). With a=n exp(-beta)<=1, d+ell>=3, P(any bad A)<=2R^2 2^R (2R)^(2R) n^(h+2) exp(-beta(R+3)) <= 2 n^-2 R^-7 (8/R)^R <1.",
+    "verification": {
+      "exhaustive_low_colorings": 1024,
+      "local_load_good": 1020,
+      "successful_repairs": 1020,
+      "finite_criterion_max_n": 1000000
+    },
+    "outside_transfer": "H_unrestricted(n) <= H_outside(n) <= H_unrestricted(n)+1: replace f(A) in A arbitrarily outside A; every (h+1)-set Y and color c contains an h-set Z avoiding c, so a witness in Z is preserved."
+  },
+  "ordered_monoid_obstruction": {
+    "statement": "For n=2^m, h=m+C with fixed C>=0, any f(A)=D(|A|, ordered product of a_x in a finite monoid M) satisfying full coverage obeys log2|M| >= (m/2)(log2 m-log2 log2 m)-O_C(m). No commutativity needed.",
+    "lemma": "For s>=1, R=floor(h/(2s))>=1, N=floor((n-h)/R), if binom(N,s)>|M| then some h-set Y has palette <=2^h(1-2^(-2s))^R. Reserve the last h ordered points for padding, partition the first n-h points into R consecutive intervals of size at least N. In each interval take two distinct s-sets with the same ordered product. Their union has b<=2s elements and at most 2^b-1 (cardinality,product) states. Concatenate these blocks and pad from the reserved interval. No commutativity is needed.",
+    "asymptotics": "Take s=floor(0.5 log2 m-0.5 log2 log2 m-K_C), K_C=2+0.5log2(C+1). Then R*2^(-2s) >=16(C+1)+o(1)>C ln2. Thus if |M|<binom(N,s), the palette is <=2^(m+C) exp(-R2^(-2s))<2^m. Necessarily |M|>=binom(N,s). Since N/s=(2+o(1))2^m/(m+C), log2 binom(N,s)>=s log2(N/s)=0.5m(log2m-log2log2m)-O_C(m)."
+  },
+  "finite_search": {
+    "implementation": "search.py",
+    "python_version": "3.12",
+    "python_sat_version": "1.9.dev21",
+    "encoding": "One-hot colors on sets of rank <h. For each h-set and each pair of colors, at least one color appears on a proper subset. Thus at most one color is missing, which the private top set repairs.",
+    "symmetry": "Empty color is 0. Order singleton color classes and ground points so singleton colors are nondecreasing; then canonically order unused colors by first appearance among low-rank sets. These conditions preserve existence.",
+    "verification": "Every positive model is completed on rank h and explicitly checked on every ground-set subset of size >=h; the verifier uses no SAT clauses or solver.",
+    "checked": [
+      {
+        "n": 10,
+        "h": 4,
+        "q": 12,
+        "result": "SAT",
+        "solver": "MergeSat 3",
+        "encoding": "missing",
+        "seconds": 12.25,
+        "sets_checked": 848,
+        "witness": "witness_10_4_12_94b043222e3f1257f08f0949effcae392e25eaa5e1d38c33aaac5ce303c24f7a.json",
+        "sha256": "94b043222e3f1257f08f0949effcae392e25eaa5e1d38c33aaac5ce303c24f7a",
+        "verification": "Direct exhaustive verifier run again after model generation. Since q exceeds n, this does not establish H(12)<=4."
+      },
+      {
+        "n": 4,
+        "h": 2,
+        "q": 4,
+        "result": "UNSAT",
+        "meaning": "Reproduces an elementary known obstruction; no new proof certificate asserted."
+      },
+      {
+        "n": 6,
+        "h": 3,
+        "q": 6,
+        "result": "SAT",
+        "sets_checked": 42,
+        "witness": "witness_6_3_6.json",
+        "sha256": "b8505b4d160c1be78a567cf64db530af3d85d7ea4439c996cb77fab2d44476b2"
+      },
+      {
+        "n": 7,
+        "h": 3,
+        "q": 7,
+        "result": "UNSAT",
+        "meaning": "Reproduces the independently proved obstruction; no SAT proof certificate asserted."
+      },
+      {
+        "n": 11,
+        "h": 4,
+        "q": 11,
+        "result": "SAT",
+        "sets_checked": 1816,
+        "witness": "witness_11_4_11_20b48784f2de053d0d0b9dee5d761b7085d9c7a3686e19b7424302d55d514296.json",
+        "sha256": "20b48784f2de053d0d0b9dee5d761b7085d9c7a3686e19b7424302d55d514296"
+      },
+      {
+        "n": 7,
+        "h": 4,
+        "q": 12,
+        "result": "SAT",
+        "encoding": "missing",
+        "sets_checked": 64,
+        "witness": "witness_7_4_12_356a71599bbbc561559b9d402cd86a9736897c5bfc28ade566cedb778cf1262f.json",
+        "sha256": "356a71599bbbc561559b9d402cd86a9736897c5bfc28ade566cedb778cf1262f",
+        "verification": "Direct exhaustive verifier run again after model generation."
+      },
+      {
+        "n": 8,
+        "h": 4,
+        "q": 12,
+        "result": "SAT",
+        "encoding": "missing",
+        "sets_checked": 163,
+        "witness": "witness_8_4_12_3fbb336b5fd2cd85252860f0789cf1669e6559cae3926182d93da29db2fd26ab.json",
+        "sha256": "3fbb336b5fd2cd85252860f0789cf1669e6559cae3926182d93da29db2fd26ab",
+        "verification": "Direct exhaustive verifier run again after model generation."
+      },
+      {
+        "n": 9,
+        "h": 4,
+        "q": 12,
+        "result": "SAT",
+        "encoding": "missing",
+        "sets_checked": 382,
+        "witness": "witness_9_4_12_7ee6a971d5b51fd3390b0d5c981dd6542b0e97979807addfe66379ec2839172f.json",
+        "sha256": "7ee6a971d5b51fd3390b0d5c981dd6542b0e97979807addfe66379ec2839172f",
+        "verification": "Direct exhaustive verifier run again after model generation."
+      },
+      {
+        "n": 6,
+        "h": 3,
+        "q": 7,
+        "result": "SAT",
+        "witness": "witness_6_3_7_49269362393da500ea740864b965434fbac5f001aa74e9551d6a39f8eefc2735.json",
+        "sha256": "49269362393da500ea740864b965434fbac5f001aa74e9551d6a39f8eefc2735",
+        "sets_checked": 42
+      },
+      {
+        "n": 7,
+        "h": 3,
+        "q": 6,
+        "result": "SAT",
+        "witness": "witness_7_3_6_bccd7559d707734c9c409ad35a45d822472c56f785e5b0afe8a86856341ed757.json",
+        "sha256": "bccd7559d707734c9c409ad35a45d822472c56f785e5b0afe8a86856341ed757",
+        "sets_checked": 99
+      },
+      {
+        "n": 10,
+        "h": 4,
+        "q": 12,
+        "result": "SAT",
+        "solver": "MergeSat 3",
+        "encoding": "missing with dominance normalization",
+        "seconds": 52.297,
+        "sets_checked": 848,
+        "witness": "witness_10_4_12_a680b78f2bfa704f1404b6d732469ab325446beb6b16409925fb7ea7b24b54b6.json",
+        "sha256": "a680b78f2bfa704f1404b6d732469ab325446beb6b16409925fb7ea7b24b54b6"
+      }
+    ],
+    "unresolved": [
+      {
+        "n": 10,
+        "h": 4,
+        "q": 12,
+        "solvers": [
+          "MiniSat 2.2",
+          "MapleCM"
+        ],
+        "encoding": "missing",
+        "seconds_each": 120,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout"
+      },
+      {
+        "n": [
+          11,
+          12
+        ],
+        "h": 4,
+        "q": 12,
+        "solver": "MergeSat 3",
+        "encoding": "missing",
+        "seconds_each": 180,
+        "result": "INCONCLUSIVE",
+        "notes": "Both runs ended; their final tool output was lost to context truncation. No new witness file exists. No SAT or UNSAT conclusion can be drawn. Phase hints used the verified 10-point witness."
+      },
+      {
+        "n": 12,
+        "h": 4,
+        "q": 12,
+        "solver": "Glucose 4.2",
+        "result": "UNKNOWN",
+        "notes": "Generic and fixed-singleton-pattern searches inconclusive. An initial cooperative timer overrun was explicitly stopped; process deadlines now enforce subsequent limits."
+      },
+      {
+        "n": 12,
+        "h": 4,
+        "q": 12,
+        "solver": "CaDiCaL 3.0.0",
+        "result": "UNKNOWN",
+        "notes": "Both conflict-budgeted and uninterrupted bounded searches inconclusive."
+      },
+      {
+        "n": 11,
+        "h": 4,
+        "q": 12,
+        "solver": "Glucose 4.2",
+        "seconds": 120,
+        "result": "UNKNOWN"
+      },
+      {
+        "n": 10,
+        "h": 4,
+        "q": 12,
+        "solver": "Glucose 4.2",
+        "seconds": 60,
+        "result": "UNKNOWN"
+      },
+      {
+        "n": 12,
+        "h": 4,
+        "q": 12,
+        "solver": "Glucose 4.2",
+        "encoding": "missing",
+        "seconds": 180,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout"
+      },
+      {
+        "n": 12,
+        "h": 4,
+        "q": 12,
+        "solver": "CaDiCaL 3.0.0",
+        "encoding": "missing",
+        "seconds": 180,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout"
+      },
+      {
+        "n": 11,
+        "h": 4,
+        "q": 12,
+        "solver": "Glucose 4.2",
+        "encoding": "missing",
+        "seconds": 120,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout"
+      },
+      {
+        "n": 10,
+        "h": 4,
+        "q": 12,
+        "solver": "Glucose 4.2",
+        "encoding": "missing",
+        "seconds": 90,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout",
+        "phase_hint": "new checked 8-point q=12 witness; nonbinding"
+      },
+      {
+        "n": 10,
+        "h": 4,
+        "q": 12,
+        "solver": "CaDiCaL 3.0.0",
+        "encoding": "missing",
+        "seconds": 90,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout",
+        "phase_hint": "new checked 9-point q=12 witness; nonbinding"
+      },
+      {
+        "n": 11,
+        "h": 4,
+        "q": 12,
+        "solver": "MergeSat 3",
+        "encoding": "missing",
+        "pattern": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "seconds": 180,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout",
+        "scope": "Fixed singleton pattern only; cannot imply unrestricted impossibility."
+      },
+      {
+        "n": 11,
+        "h": 4,
+        "q": 12,
+        "solver": "MergeSat 3",
+        "encoding": "missing with dominance normalization",
+        "pattern": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "seconds": 180,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout",
+        "scope": "Fixed singleton pattern only."
+      },
+      {
+        "n": 11,
+        "h": 4,
+        "q": 12,
+        "solver": "MapleChrono",
+        "encoding": "missing with dominance normalization",
+        "pattern": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          9,
+          10
+        ],
+        "phase_hint": "verified 11-point 11-color witness; nonbinding",
+        "seconds": 180,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout",
+        "scope": "Fixed singleton pattern only; no impossibility conclusion."
+      },
+      {
+        "n": 11,
+        "h": 4,
+        "q": 12,
+        "solver": "MapleSAT",
+        "encoding": "missing with dominance normalization",
+        "pattern": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          9,
+          10
+        ],
+        "phase_hint": "verified 11-point 11-color witness; nonbinding",
+        "seconds": 180,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout",
+        "scope": "Fixed singleton pattern only; no impossibility conclusion."
+      },
+      {
+        "n": 11,
+        "h": 4,
+        "q": 12,
+        "solver": "Lingeling",
+        "encoding": "missing with dominance normalization",
+        "pattern": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          9,
+          10
+        ],
+        "phase_hint": "verified 11-point 11-color witness; nonbinding",
+        "seconds": 180,
+        "result": "UNKNOWN",
+        "reason": "wall_timeout",
+        "scope": "Fixed singleton pattern only; no impossibility conclusion."
+      }
+    ],
+    "excluded_backend_result": {
+      "solver": "Kissat 4.0.4",
+      "result": "ERROR",
+      "windows_exit_code": 3221225477,
+      "notes": "Succeeded on one clause, crashed natively on the boundary CNF. This supplies no mathematical evidence."
+    },
+    "alternative_encoding": {
+      "name": "missing",
+      "description": "A missing-color flag for each color on each h-face, with a sequential at-most-one constraint. A flag must be true when its color is absent; thus at most one color can be absent.",
+      "exhaustive_equivalence_check": {
+        "n": 3,
+        "h": 2,
+        "q": 3,
+        "assignments": 81,
+        "accepted": 60,
+        "both_encodings_match_direct_condition": true
+      },
+      "known_cases_reproduced": [
+        "(4,2,4) UNSAT",
+        "(7,3,7) UNSAT",
+        "(11,4,11) SAT with exhaustive verification"
+      ]
+    },
+    "conflict_guided_extension": {
+      "implementation": "search.py --repair-from <checked witness>",
+      "algorithm": "Verify the source witness and its hash. Start with its low-set color assignments as SAT assumptions. On an unsatisfiable assumption set, release one high-rank assignment from the returned failed-assumption core and retry. Empty failed cores establish hard-formula unsatisfiability; source restrictions alone are never reported as a global obstruction. The existing supervisor enforces a hard process deadline.",
+      "checks": "Known (7,3,7) obstruction reproduced after releasing 20 assumptions; two remaining assumptions were unnecessary in the final empty core. Positive (8,4,12), (9,4,12), and (7,3,6) outputs checked on every relevant subset. The new 7->8->9 chain preserves every earlier low-rank assignment.",
+      "new_certificates": [
+        {
+          "n": 8,
+          "h": 4,
+          "q": 12,
+          "result": "SAT",
+          "witness": "witness_8_4_12_9d9e7f5883f022c9e79c16fc71fdd10f488e138423012f62fdcdedda8efba159.json",
+          "sha256": "9d9e7f5883f022c9e79c16fc71fdd10f488e138423012f62fdcdedda8efba159",
+          "sets_checked": 163
+        },
+        {
+          "n": 9,
+          "h": 4,
+          "q": 12,
+          "result": "SAT",
+          "witness": "witness_9_4_12_25fb2a639f23f5089891ef71857955e74936a16d425fa3c7f6763f3b960f6b94.json",
+          "sha256": "25fb2a639f23f5089891ef71857955e74936a16d425fa3c7f6763f3b960f6b94",
+          "sets_checked": 382
+        },
+        {
+          "n": 6,
+          "h": 3,
+          "q": 7,
+          "result": "SAT",
+          "witness": "witness_6_3_7_49269362393da500ea740864b965434fbac5f001aa74e9551d6a39f8eefc2735.json",
+          "sha256": "49269362393da500ea740864b965434fbac5f001aa74e9551d6a39f8eefc2735",
+          "sets_checked": 42
+        },
+        {
+          "n": 7,
+          "h": 3,
+          "q": 6,
+          "result": "SAT",
+          "witness": "witness_7_3_6_bccd7559d707734c9c409ad35a45d822472c56f785e5b0afe8a86856341ed757.json",
+          "sha256": "bccd7559d707734c9c409ad35a45d822472c56f785e5b0afe8a86856341ed757",
+          "sets_checked": 99
+        }
+      ],
+      "unresolved": [
+        {
+          "n": 10,
+          "h": 4,
+          "q": 12,
+          "solver": "CaDiCaL 3.0.0",
+          "seconds": 120,
+          "status": "UNKNOWN",
+          "reason": "wall_timeout",
+          "source": "witness_9_4_12_7ee6a971d5b51fd3390b0d5c981dd6542b0e97979807addfe66379ec2839172f.json",
+          "assignments_relaxed_at_least": 64
+        },
+        {
+          "n": 10,
+          "h": 4,
+          "q": 12,
+          "solver": "Glucose 4.2",
+          "seconds": 120,
+          "status": "UNKNOWN",
+          "reason": "wall_timeout",
+          "source": "witness_9_4_12_25fb2a639f23f5089891ef71857955e74936a16d425fa3c7f6763f3b960f6b94.json"
+        }
+      ],
+      "processes": "Both ten-point searches reached their deadlines and exited; no solver remains running from these runs."
+    },
+    "dominance_normalization": {
+      "statement": "For 2<=|B|<h and 2^|B|<=q, require f(B) different from f(A) for every proper subset A of B. Singleton patterns are left fixed.",
+      "proof": "Process B in increasing rank. If its color already occurs on a proper subset, choose any color absent there; fewer than q colors occur. The old color remains available in every larger set through the proper subset, so every palette is preserved or enlarged. Later higher-rank changes cannot invalidate this condition.",
+      "exhaustive_check": {
+        "n": 3,
+        "h": 3,
+        "q": 4,
+        "colorings_checked": 16384,
+        "all_palettes_preserved": true
+      },
+      "solver_checks": "(7,3,7) known UNSAT reproduced; (10,4,12) SAT, independently verified on all 848 relevant subsets."
+    }
+  },
+  "source_connections": [
+    {
+      "name": "Cooling codes",
+      "url": "https://ymchee66.github.io/home/PDF/coolingjournal.pdf",
+      "exact_equivalence": "A q-coloring with all h-faces full is a binary (N,N-h)-cooling code with q disjoint codesets.",
+      "limitation": "The retrieved general upper bound is q<=2^h, with perfect-code exclusions. Constant-weight Turan bounds do not sum directly over mixed-rank fibers."
+    },
+    {
+      "name": "Zero-fixing zero-error dispersers",
+      "url": "https://eccc.weizmann.ac.il/report/2014/160/download/",
+      "exact_equivalence": "For q=2^m, a full-palette set map is a zero-error disperser with h free coordinates and m output bits.",
+      "limitation": "The retrieved impossibility theorem needs N>Tower(h^2); it does not reach h~log2 N."
+    },
+    {
+      "name": "Pikhurko, Constructions of Turan systems that are tight up to a multiplicative constant (2025 revision)",
+      "url": "https://arxiv.org/html/2406.07443v3",
+      "verified_statement": "Disproves de CaenÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢s conjecture r*t(r+1,r)->infinity. In particular t(r+1,r)<=4.911/(r+1) for all sufficiently large r. More generally the covering cost is bounded for fixed codimension R=h-r.",
+      "limitation": "This is an upper construction for a single uniform-rank cover, and does not supply the mixed-rank integral packing converse required for 624. Do not invoke the disproved conjecture as an available route."
+    },
+    {
+      "name": "Brouwer-Tolhuizen (1993), nonexistence of shortened linear Preparata parameters",
+      "url": "https://link.springer.com/article/10.1007/BF01388407",
+      "original_author_source": "https://aeb.win.tue.nl/preprints/NoPreparata.gz",
+      "local_original_source": "NoPreparata.troff",
+      "verified_statement": "For t>3 no binary linear [2^t-2,2^t-2t-1,5] code exists. The freely available original proof was read.",
+      "restricted_consequence": "For two full binary geometries on 2^m-1 points, stacking their check matrices gives a code of dimension >=2^m-1-2m. If it had minimum distance >=6, puncturing would violate the theorem. Thus there is a common zero-sum set of size <=5; in simple binary matroids every zero-sum set of size 3,4,or5 is a circuit. This improves the elementary no-two-packing statement to every m>=4. It is not used in the self-contained asymptotic packing proof."
+    }
+  ],
+  "remaining_gap": "The unrestricted lower-gap conjecture remains unproved. A self-contained bound q=O(2^(2r/3)) now rules out packing low-rank binary circuit families in the relevant regime. However, explicit h-unavoidable antichains of bounded average cost can lack any contained binary matroid circuit family, so no reduction of arbitrary colorings has been established.",
+  "free_set_route_barrier": {
+    "status": "proved directly; no novelty claim",
+    "construction": "For m>=2, X=F_2^m minus {0}. On every proper A, use f(A)=xor(A) when xor(A) is a nonzero point outside A; otherwise use the smallest point outside A. In particular f(empty)=1.",
+    "proof_upper": "If Y is linearly dependent, choose nonempty S subset Y with xor(S)=0 and c in S. Then xor(S minus {c})=c, so the prescribed map has f(S minus {c})=c in Y. Hence every free Y is linearly independent and has size at most m.",
+    "proof_exactness": "Every linearly independent Y avoiding 1 is free: the only invalid sums of subsets of Y are the empty-set and singleton sums, whose fallback is 1. Such a basis exists for m>=2. Thus this map has maximum free-set size exactly m.",
+    "consequence": "A universal free-set lower bound log2(n)+omega(1) is false. It cannot be used as a stronger route to problem 624.",
+    "exhaustive_checks": [
+      {
+        "m": 2,
+        "n": 3,
+        "maximum_free_size": 2,
+        "free_counts_by_size": [
+          1,
+          2,
+          1
+        ],
+        "subsets_checked": 8
+      },
+      {
+        "m": 3,
+        "n": 7,
+        "maximum_free_size": 3,
+        "free_counts_by_size": [
+          1,
+          6,
+          15,
+          16
+        ],
+        "subsets_checked": 128
+      },
+      {
+        "m": 4,
+        "n": 15,
+        "maximum_free_size": 4,
+        "free_counts_by_size": [
+          1,
+          14,
+          91,
+          336,
+          616
+        ],
+        "subsets_checked": 32768
+      }
+    ],
+    "palette_limitation": "If an h-set Y lies in a subspace U avoiding 1 and dim(U)=ceil(log2(h+1)), then every image lies in (U minus {0}) union {1}. Its palette has at most 2^dim(U)<2(h+1) colors. The construction does not refute 624."
+  },
+  "random_free_set_benchmark": {
+    "status": "first-moment calculation only, not a universal bound",
+    "exact_probability": "For a random outside map with all proper-subset outputs chosen independently, P(a fixed k-set Y is free) = product_{r=0}^k ((n-k)/(n-r))^(binom(k,r)).",
+    "asymptotic_probability": "For k=O(log n), log P(Y free)=-(1+o(1))*k*2^(k-1)/n in the threshold regime 2^k=Theta(n log n).",
+    "expected_count": "binom(n,k)*P(Y free). Its first-moment transition is near log2 n+log2(ln n)+1. A large expectation alone does not prove a free set exists.",
+    "correction": "The earlier informal suggestion that the random-map free-set threshold is log2 n-log2 log n was incorrect; that expression was a general lower bound, not the random first-moment benchmark."
+  },
+  "fractional_packing_barrier": {
+    "status": "proved directly; no novelty claim; not a solution of the integral problem",
+    "formulation": "Let Q(N,h) be the maximum number of pairwise disjoint h-unavoidable families of subsets of [N]. Completing unused sets to arbitrary colors identifies this with the full-palette coloring problem on N ground points and Q output colors. Allow a nonnegative weight on each actual h-unavoidable antichain, with total weight of antichains containing any fixed set at most 1. This is a stronger fractional relaxation than fractional one-color incidence constraints.",
+    "statement": "For m>=2, h=m+1, N=2^m-1, this fractional packing has value at least N-2=2^(h-1)-3, using only minimal binary dependencies.",
+    "construction": "Identify the ground set with the nonzero vectors of F_2^m. Let C be its family of matroid circuits. Every h-set is linearly dependent and contains a circuit. For every permutation sigma of the ground set, give sigma(C) weight (N-2)/N!, aggregating weights when the same antichain recurs.",
+    "density_formula": "For 3<=r<=m+1, the proportion p_r of r-sets that are circuits is product_{j=0}^{r-2}(2^m-2^j) / product_{j=0}^{r-1}(N-j). This follows by ordering a circuit: its first r-1 vectors are independent and its last vector is their forced xor. For r=1,2, and r>m+1, p_r=0.",
+    "capacity_proof": "p_3=p_4=1/(N-2) when rank 4 exists, and p_{r+1}/p_r=(N+1-2^(r-1))/(N-r)<=1 for r>=3. Hence p_r<=1/(N-2) at every rank. For any fixed nonempty A, its total fractional load is (N-2)*p_|A|<=1. The empty set has load zero. The total packed weight is N-2.",
+    "consequence": "A dual bound obtained by assigning weights to individual subsets and requiring each genuine h-unavoidable antichain to have weight at least 1 cannot prove an o(2^h) upper bound: its optimum here is at least 2^(h-1)-3. The conjecture would require an unbounded integrality gap for this relaxation along these parameters. Indeed, any integral packing of q<=N families restricts to q ground points and gives H(q)<=h; if q>N, merge colors to N first.",
+    "exhaustive_checks": [
+      {
+        "m": 2,
+        "N": 3,
+        "h": 3,
+        "circuit_counts": {
+          "1": 0,
+          "2": 0,
+          "3": 1
+        },
+        "h_faces_checked": 1
+      },
+      {
+        "m": 3,
+        "N": 7,
+        "h": 4,
+        "circuit_counts": {
+          "1": 0,
+          "2": 0,
+          "3": 7,
+          "4": 7
+        },
+        "h_faces_checked": 35
+      },
+      {
+        "m": 4,
+        "N": 15,
+        "h": 5,
+        "circuit_counts": {
+          "1": 0,
+          "2": 0,
+          "3": 35,
+          "4": 105,
+          "5": 168
+        },
+        "h_faces_checked": 3003
+      }
+    ],
+    "formula_checks": "Exact rational recurrence and maximum density checked for m=2,...,16. These computations confirm the proof identities; the proof does not depend on them."
+  },
+  "mixed_rank_de_caen_warning": {
+    "status": "explicit counterexample to directly summing the uniform-rank inequality",
+    "construction": "For fixed h>=3 and large N, take U of size approximately N/2, partition its complement into h-1 nearly equal classes, and let F contain all singleton sets from U and all pairs within one class. Every h-set contains a singleton in U or two points in one outside class. F is an antichain.",
+    "calculation": "Writing p_r=|F intersect binom([N],r)|/binom(N,r), we have p_1->1/2 and p_2->1/[4(h-1)]. Thus sum_r p_r*binom(h-1,r-1)->3/4, not at least 1. This does not by itself contradict a possible inequality that accounts for tail ranks or for cross-color disjointness."
+  },
+  "common_binary_circuit_lemma": {
+    "status": "proved directly by affine restriction and pigeonhole; no external theorem required",
+    "statement": "Let u:X->F_2^r minus {0} and v:X->F_2^s minus {0} be injective labelings of the same N points. If binom(ceil(N/4),3)>2^(r+s-2), their binary matroids have a common circuit of size 4 or 6.",
+    "proof": "Choose independent uniformly random linear functionals a,b. Each point satisfies a(u(x))=b(v(x))=1 with probability 1/4, so some restriction W has at least ceil(N/4) points. Every 3-set T in W has its pair of sums in the affine set a=1,b=1, of size 2^(r+s-2). Two distinct triples with the same pair of sums give a nonempty symmetric difference S of size 2,4,or6, with zero sum in both labelings. Size 2 is impossible by injectivity. Each labeling on W has no zero-sum set of size 1,2,or3: the two affine parity conditions exclude odd sizes, and injectivity excludes size 2. A proper nonempty zero-sum subset of S and its complement would both have size at least 4, impossible for |S|<=6. Hence S is a circuit in both matroids.",
+    "full_geometry_consequence": "For N=2^m-1 and r=s=m, the condition holds for every m>=7. Therefore no two permuted complete-binary-geometry circuit antichains are disjoint. Within that restricted orbit hypergraph, the integral packing number is 1 and the fractional packing number is exactly N-2: rank-3 capacity gives the matching fractional upper bound.",
+    "explicit_checked_example": {
+      "witness": "common_circuit_127_cube.json",
+      "m": 7,
+      "N": 127,
+      "second_labeling": "x^3 over F_(2^7), polynomial x^7+x+1",
+      "affine_functionals": [
+        1,
+        1
+      ],
+      "restriction_size": 36,
+      "triple_count": 7140,
+      "affine_pair_states": 4096,
+      "colliding_triples": [
+        [
+          1,
+          65,
+          121
+        ],
+        [
+          3,
+          7,
+          61
+        ]
+      ],
+      "common_circuit": [
+        1,
+        3,
+        7,
+        61,
+        65,
+        121
+      ],
+      "second_labels": [
+        1,
+        15,
+        107,
+        63,
+        113,
+        43
+      ],
+      "verification": "Both sums are zero; every nonempty proper subset has nonzero sum in each labeling. Independent pair-sum check found no common 4-circuit, so the 6-circuit case is necessary here."
+    }
+  },
+  "binary_matroid_circuit_packing_bound": {
+    "status": "proved directly; applies to matroid circuit families, not arbitrary color fibers",
+    "statement": "If q<=N binary matroids of rank at most r on the same N points have pairwise disjoint circuit families, then q=O(2^(2r/3)). One explicit bound is q<=288+144*(6*2^(2r-2))^(1/3), for r>=1.",
+    "low_rank_budget": "Write ell_i for the number of loops and p_i for the number of parallel nonloop pairs of matroid i. Disjoint circuits imply sum_i ell_i<=N and sum_i p_i<=binom(N,2). Thus sum_i (ell_i/N+p_i/binom(N,2))<=2. For q>=16, choose two matroids with this cost at most 4/q each; at least q/2 matroids meet this bound.",
+    "common_simple_restriction": "Delete the loops of the chosen pair, leaving N0>=N(1-8/q)>=N/2 points. Form a bipartite graph whose endpoints are the nonzero vector labels in the two representations and whose edges are the ground points. A repeated edge would be a common 2-circuit, so the graph is simple. Its sums of squared degrees satisfy D_1+D_2<=2N0+8N^2/q.",
+    "matching_lemma": "For any simple bipartite graph with E edges, some matching has size at least E^2/(sum_v deg(v)^2-E). To prove this, order edges randomly and keep an edge if it precedes every adjacent edge. These edges form a matching; the expected size is sum_{uv} 1/(deg(u)+deg(v)-1), which is at least the stated ratio by Cauchy-Schwarz.",
+    "restriction_size": "Apply the matching lemma to get a common restriction on at least Nq/(4q+32N)>=q/36 points where both vector labelings are injective and nonzero. The affine restriction in the common-circuit lemma then has at least ceil(q/144) points. Consequently binom(ceil(q/144),3)<=2^(2r-2), or a common circuit would contradict disjointness. Since binom(k,3)>=(k-2)^3/6 for k>=3, the displayed explicit bound follows. For q<16 it is automatic.",
+    "problem_624_consequence": "This proves the required divergence in the restricted class where every nonempty color fiber contains all circuits of a binary matroid of rank <=h-1. In fact n=q then implies h>=1.5*log2(n)-O(1). The known unrestricted upper construction shows that arbitrary color classes cannot in general be reduced to this class.",
+    "separate_kernel_subcover_consequence": "If a fiber is supported on nonempty zero-sum sets of a binary labeling of rank exactly h-1, covering every h-set forces it to contain every circuit: extend an independent basis of a circuit to a full basis, creating an h-set whose only nonempty zero-sum subset is that circuit. Hence the packing bound also applies when each fiber has its own full-rank parity check. The rank-exactness condition is essential; lower-rank kernels may admit proper h-unavoidable subcovers.",
+    "remaining_gap": "No inverse theorem has been proved that represents an arbitrary efficient unavoidable family by binary circuits or by an appropriate approximate circuit family. Local modifications can remove short circuits and repair exceptional faces, so an exact representation cannot simply be assumed."
+  },
+  "exact_matroid_inverse_counterexample": {
+    "status": "proved directly; demonstrates why the new circuit-packing theorem is restricted",
+    "construction": "For m>=4, N=2^m-1, h=m+1, let Gamma be the binary-geometry circuit antichain. Remove one fixed 3-circuit S. Add every h-set Y whose only Gamma-circuit is S. Call the resulting antichain F.",
+    "cover_and_cost": "Every h-set either retains a Gamma-circuit or is itself added. The new h-sets contain no retained circuit, so F is an antichain. On each h-face the witness count never increases: it either decreases by one, or the deleted unique S is replaced by that face. Thus E|F intersect P(Y)|<=E|Gamma intersect P(Y)|<=2^h/(N-2)=2+o(1). The density of added h-sets is at most P(S subset Y)=binom(h,3)/binom(N,3).",
+    "no_contained_binary_matroid": "F has no singletons or pairs. A binary matroid on N points with all its circuits contained in F must therefore be simple. If its rank is <=m, the equality N=2^m-1 forces rank exactly m and every nonzero binary column once, so it has N(N-1)/6 three-circuits. But F has one fewer three-set than this, a contradiction. Hence F contains no complete circuit family of any binary matroid of rank <=h-1.",
+    "verification": {
+      "m": 4,
+      "n": 15,
+      "h": 5,
+      "removed_circuit": [
+        1,
+        2,
+        3
+      ],
+      "replacement_h_faces": 48,
+      "h_faces_checked": 3003,
+      "mean_circuits_before": 1.2097902097902098,
+      "mean_witnesses_after": 1.2037962037962038,
+      "antichain": true,
+      "number_of_triples_after": 34,
+      "number_of_triples_in_any_simple_rank_4_binary_matroid_on_15_points": 35
+    },
+    "implication": "Constant expected witness count does not force exact containment of a binary circuit cover. An eventual unrestricted argument would need to handle exceptional repairs and their simultaneous compatibility across colors."
+  },
+  "central_cover_inverse_barrier": {
+    "status": "proved; strengthens the obstruction to an exact low-rank binary-matroid inverse theorem",
+    "parameters": "N=2^m-1, h=m+1, g=floor(h/2-h^(2/3)), for sufficiently large m",
+    "construction": "Let Gamma be all circuits of the full binary projective geometry on F_2^m minus zero. Keep only circuits of size greater than g. Add each h-set containing no kept circuit as a new top-level edge. Call the resulting family F.",
+    "cover_and_cost": "F is an antichain meeting every h-set. On each h-set Y, its witness count is at most the Gamma witness count: either the kept circuits cover Y, or the sole F-edge is Y itself. Hence its mean witness count is at most (2^h-1)/(N-h+1)=2+o(1). Every F-edge has size greater than g.",
+    "top_repairs": "The proportion of added h-sets is at most sum_{r=3}^g binom(h,r) p_r <= (N-2)^(-1) sum_{r=0}^g binom(h,r) <= (2+o(1)) exp(-2 h^(1/3))=o(1), using p_r<=1/(N-2) and the binomial lower-tail estimate. Thus the added top-level contribution to mean cost tends to zero.",
+    "rank_obstruction": "If all circuits of a binary matroid M on these N points belong to F, M has girth greater than g. Put t=floor(g/2). All subsets of at most t columns have different binary syndromes, since a collision yields a circuit of size at most 2t<=g. Therefore rank(M)>=log2(sum_{j=0}^t binom(N,j))>=(1/4-o(1))m^2. Bounded mean cost and almost entirely central witnesses do not force containment of a rank O(h) binary circuit cover.",
+    "finite_check": {
+      "m": 4,
+      "N": 15,
+      "h": 5,
+      "g": 3,
+      "original_circuits": 308,
+      "kept_long_circuits": 273,
+      "added_top_sets": 1680,
+      "h_sets_verified": 3003,
+      "original_mean": 1.2097902097902098,
+      "new_mean": 1,
+      "pointwise_cover_cost_and_antichain_verified": true
+    },
+    "scope": "A barrier to this proof strategy; it gives neither an unrestricted packing bound nor a counterexample to Erdos 624."
+  },
+  "sparse_central_repair_barrier": {
+    "status": "proved by a probabilistic covering construction; strengthens the central-cover inverse barrier to simultaneous rank-density bounds",
+    "parameters": "N=2^m-1, h=m+1, g=floor(h/2-h^(2/3)), k=floor(h/2), D=2h ln N; sufficiently large m",
+    "construction": "Keep every binary projective-geometry circuit of size greater than g. For each removed circuit C of size r<=g, independently select each k-set S containing C with probability D/binom(h-r,k-r). These probabilities are less than 1 for large m. Let R be the union of selected k-sets, and then discard from R any set containing a kept circuit.",
+    "coverage_probability": "For each pair (C,Y) with C a removed circuit contained in an h-set Y, exactly binom(h-r,k-r) possible selected supersets lie in Y, so the probability none is selected is at most exp(-D). There are at most binom(N,h)2^h<=N^h 2^h such pairs. The union bound makes the probability of any failure less than 1/4. An h-set with a kept circuit is already covered; otherwise every selected repair inside it survives pruning.",
+    "expected_repair_cost": "Write p_r for the original circuit density and delta=sum_{r=3}^g binom(h,r)p_r. Then E[density_k(R)] <= D/binom(h,k) * delta, since binom(k,r)/binom(h-r,k-r)=binom(h,r)/binom(h,k). Hence the expected local witness cost is at most D delta. Markov's inequality gives, with probability at least 3/4, both quantities at most four times these bounds. This event and complete coverage occur together with positive probability.",
+    "asymptotics": "p_r<=1/(N-2), so delta <= (N-2)^(-1) sum_{r=0}^g binom(h,r) <= (2+o(1))exp(-2h^(1/3)). Consequently 4D delta=o(1). Also 4D sum_{r=0}^g binom(h,r)/binom(h,k)=o(1), by the same binomial tail bound and binom(h,k)=Theta(2^h/sqrt(h)). Thus the added rank-k density is o(1/N).",
+    "resulting_cover": "There exists an antichain h-cover F with every edge larger than g, mean witness cost at most 2+o(1), and density at every rank at most (1+o(1))/N. Its sum of rank densities is at most (h-g)/(N-2)+o(1/N)=(1/2+o(1))h/N. All repairs occur at rank k, and their local cost tends to zero.",
+    "inverse_obstruction": "As in the preceding barrier, every binary matroid whose entire circuit family is contained in F has rank at least (1/4-o(1))m^2. Even simultaneous bounds on local cost and on every individual rank density do not imply exact containment of a rank O(h) binary circuit cover.",
+    "proof_checks": "The binomial identity and parameter inequalities were evaluated at m=64,128,256,512,1024,4096. The argument is asymptotic and does not assert the o(1) errors are small at the first sampled values.",
+    "scope": "This is an obstruction to exact inverse and completion strategies. It does not settle disjoint packing of many covers, and it does not resolve Erdos 624."
+  },
+  "two_disjoint_efficient_covers": {
+    "status": "proved; rules out a pairwise intersection theorem even with both local-cost and global rank-density control",
+    "parameters": "N=2^m-1, h=m+1; Gamma_1 is the binary projective-geometry circuit cover and Gamma_2 is a uniformly permuted copy",
+    "repair": "Keep Gamma_2 minus Gamma_1. For every common circuit C of size r<h, add all (r+1)-sets containing C. For every common h-circuit C, add all its (h-1)-facets. Finally retain only inclusion-minimal members of the resulting second cover.",
+    "disjointness_and_coverage": "A proper superset of a Gamma_1 circuit is not a Gamma_1 circuit, and a proper subset of one is not a Gamma_1 circuit. Thus every repair avoids Gamma_1. An h-set containing a noncommon Gamma_2 circuit is covered; one containing a common circuit of size less than h contains an added immediate superset; if its Gamma_2 circuit is the entire h-set, it contains added facets. Pruning preserves coverage and disjointness.",
+    "intersection_expectation": "If p_r<=1/(N-2) is the rank-r circuit density, the expected common-circuit density is p_r^2. Immediate-superset repairs add rank-(r+1) density at most (r+1) times the common rank-r density. Facet repairs add rank-(h-1) density at most (N-h+1) times the common rank-h density.",
+    "bounds": "Expected extra local witness cost is at most [h*2^(h-1)+h*N]/(N-2)^2=O(h/N). Expected extra sum of rank densities is O(1/N+h^2/N^2). By two applications of Markov's inequality there is a permutation where both extras are at most four times their expectations. Both disjoint antichain covers therefore have mean at most 2+o(1), and sum of rank densities at most h/N+O(1/N).",
+    "scope": "Only two covers are constructed. The union of many earlier antichains need not be an antichain, so these repairs cannot be iterated with the same disjointness argument. No unrestricted many-color packing bound follows.",
+    "finite_check": {
+      "N": 15,
+      "h": 5,
+      "permutation_seed": 624,
+      "first_cover_edges": 308,
+      "common_circuits_before_repair": 16,
+      "second_cover_edges_after_pruning": 404,
+      "h_sets_verified": 3003,
+      "first_mean": 1.2097902097902098,
+      "second_mean": 1.29004329004329,
+      "disjoint_verified": true,
+      "first_rank_density_sum": 0.2097902097902098,
+      "second_rank_density_sum": 0.24828504828504827
+    }
+  },
+  "outside_tree_reformulation": {
+    "statement": "For outside-valued f, direct each proper Boolean-lattice vertex A to A union {f(A)}. Rank increases along every edge, every path reaches X, and there are 2^N-1 edges, so the underlying graph is a spanning tree.",
+    "ideal_boundary": "For the ideal P(Y), its induced subgraph is a forest. Each component has exactly one outgoing edge, and the labels on all such outgoing edges are exactly f(P(Y)) minus Y. Full coverage therefore requires all N-|Y| external directions on this boundary.",
+    "status": "Exact reformulation only; no improved asymptotic bound derived."
+  },
+  "rational_derivative_orbit_obstruction": {
+    "status": "proved using the classical Hasse-Weil bound and the Artin-Schreier genus formula; restricted decoder/list system only",
+    "decoder_class": "On X=F_(2^m), an output c outside a fixed fallback palette R is permitted for A only if c is not in A and sum_{a in A} 1/(c+a)=0. Equivalently P_A_prime(c)=0 for P_A(t)=product_{a in A}(t+a). Arbitrary fallback outputs are not covered by this restriction.",
+    "span_lemma": "Let K=F_Q with Q=2^d and E=F_(Q^e), e>1. If Q>4(e-1)^2 and c has degree e over K, the F_2-span of {1/(c+x):x in K} is all of E.",
+    "span_proof": "Otherwise a nonzero b in E annihilates that span under the absolute trace pairing. The rational function R_b(t)=sum_{j=0}^{e-1} b^(Q^j)/(t+c^(Q^j)) lies in K(t), has exactly e simple geometric poles, and vanishes at infinity. For every x in K, Tr_(K/F_2)(R_b(x))=Tr_(E/F_2)(b/(c+x))=0. The geometrically irreducible Artin-Schreier curve y^2+y=R_b(t) has genus e-1, two K-points over each x in K, and two K-points over infinity: 2Q+2 points. Hasse-Weil gives at most Q+1+2(e-1)sqrt(Q), a contradiction when Q>4(e-1)^2. Simple poles ensure geometric irreducibility and the stated genus; no finite pole lies in K.",
+    "Hall_obstruction": "Put m=ed and h=m+C<=Q. Select m points of K whose inverse labels at c form an F_2-basis, and pad to an h-set Y in K. There are exactly 2^C subsets A of Y, including the empty subset, with zero inverse sum at c. The e distinct Galois conjugates c,c^Q,...,c^(Q^(e-1)) have exactly the same eligible subsets, because P_A_prime has coefficients in K. If e>2^C, Hall fails for these e colors: only 2^C inputs can encode them. This rules out every choice of a single permitted root per input.",
+    "fallback_qualification": "For a fixed fallback palette, choose a full-degree orbit disjoint from it; such an orbit exists for large parameters. The span lemma works for every full-degree c. No claim is made for unrestricted, A-dependent fallback colors.",
+    "asymptotic_consequence": "Choose e tending to infinity (primes suffice), d=ceil(log2(16e^2)), Q=2^d, m=ed. Then a root-selector decoder would require C>=ceil(log2 e) whenever m+C<=Q. Along this sequence this is C>=log2 m-log2 log2 m-O(1), hence an overhead of order log2 log2 n. This does not apply to arbitrary f.",
+    "classical_input_source": "https://arxiv.org/pdf/1304.7876 (Artin-Schreier genus formula, equation (1)); Hasse-Weil point bound for smooth projective curves",
+    "explicit_verified_example": {
+      "base_field_degree": 6,
+      "base_polynomial_hex": "0x43",
+      "extension_polynomial": "T^3+T+a",
+      "a": 6,
+      "m": 18,
+      "field_size": 262144,
+      "h": 19,
+      "C": 1,
+      "root_orbit": [
+        64,
+        129536,
+        129600
+      ],
+      "Y": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        20,
+        15
+      ],
+      "basis_size": 18,
+      "zero_sum_masks_in_each_orbit_column": [
+        [
+          0,
+          275153
+        ],
+        [
+          0,
+          275153
+        ],
+        [
+          0,
+          275153
+        ]
+      ],
+      "nonempty_zero_sum_subset": [
+        0,
+        4,
+        6,
+        7,
+        9,
+        12,
+        13,
+        15
+      ],
+      "subsets_checked_per_root": 524288,
+      "orbit_colors": 3,
+      "available_subsets": 2,
+      "Hall_deficit": 1
+    },
+    "verification_scope": "For the explicit example, finite-field arithmetic and irreducibility were checked, inverse labels have rank 18, and all 524288 subsets were enumerated separately for each of three conjugate roots. This checks the concrete Hall deficit independently of the curve theorem."
+  },
+  "ordered_independence_formulation": {
+    "definition": "For outside-valued f, call Y independent if it admits an ordering y_1,...,y_t such that y_j is absent from f(P({y_1,...,y_(j-1)})) for every j.",
+    "hereditary": "Every subsequence of a valid ordering is valid, so these sets form an independence system.",
+    "recurrence": "Y is independent iff some x in Y has Y minus x independent and x absent from f(P(Y minus x)).",
+    "maximal_basis_bound": "If B is maximal independent inside a restriction S, every x in S minus B lies in f(P(B)); otherwise append x. Therefore |S|-|B|<=2^|B|.",
+    "full_coverage_rank_bound": "If every h-set is fully covered and h<N, no h-set can be independent: its last ordered point has no witness avoiding itself, and outside-valued f cannot witness it on a set containing it. Hence every independent set has size <=h-1.",
+    "bounded_overhead_consequence": "For N=2^m and h=m+C, every maximal independent B in X has m<=|B|<=m+C-1 for large m. In any restriction S of constant positive density, maximal independent sizes also lie in an interval of bounded length.",
+    "nonmatroid_counterexample": {
+      "N": 5,
+      "default": "f(A) is the least point outside A, for every proper subset; points are 0,1,2,3,4.",
+      "override_mask_outputs": {
+        "0": 4,
+        "1": 1,
+        "2": 2,
+        "4": 0,
+        "8": 1,
+        "6": 3,
+        "12": 1,
+        "10": 2
+      },
+      "minimal_dependent_masks": [
+        7,
+        14,
+        16
+      ],
+      "elimination_failure": "Circuits {0,1,2} and {1,2,3} share point 1, while their union minus 1 is {0,2,3}, an independent set. Thus circuit elimination fails.",
+      "verification": "All 32 sets and all 32 restrictions checked by the displayed recurrence; heredity and the maximal-basis bound verified."
+    },
+    "barrier": "The existing binary XOR/fallback example has ordered independence rank exactly m on N=2^m-1 points. Any new point in the span of an earlier prefix is already an output of a subset of that prefix, so an independent ordering is linearly independent. A binary basis avoiding the fixed fallback point is free, giving equality. Yet low-dimensional test sets have very small palettes. Low ordered rank alone does not imply full coverage.",
+    "status": "Exact auxiliary formulation and necessary bounds; no unrestricted asymptotic improvement obtained."
+  },
+  "monomial_ideal_formulation": {
+    "statement": "Replace each color fiber by its inclusion-minimal sets F_c and let I_c be the squarefree monomial ideal generated by product_{i in A} x_i for A in F_c. Full coverage on all h-sets is equivalent to every I_c containing every squarefree degree-h monomial.",
+    "packing_constraint": "The minimal generator families F_c are pairwise disjoint as sets of monomials. Conversely, any such disjoint h-cover families define a coloring by assigning these generators their colors and completing the remaining inputs arbitrarily.",
+    "qualification": "The generators may divide generators belonging to other colors. Disjoint minimal generator lists therefore do not imply a Betti splitting of their sum. Individual ideal bounds are subject to the existing fractional-packing barrier.",
+    "status": "Equivalent algebraic formulation only; no new bound from homological algebra has been established."
+  },
+  "nonlinear_perfect_code_experiment": {
+    "status": "Finite construction experiment; unrestricted problem remains unsolved. Work paused by user.",
+    "source": "https://arxiv.org/e-print/0806.2513v3",
+    "classification_paper": "https://arxiv.org/abs/0806.2513",
+    "data_file": "perfect15",
+    "archive_member": "anc/perfect15",
+    "data_bytes": 61271903,
+    "data_sha256": "3bcb77324a7770c44f64b785d67d8da0f003113451575e06ca24852c7e5084f3",
+    "encoding": "Reverse each hexadecimal token before parsing; each line contains 2048 distinct words in F_2^15.",
+    "decoder": "Color A by 0 if A is a codeword and by i+1 if A differs from its unique nearest codeword in coordinate i. The 16 radius-one error translates partition the cube.",
+    "verification": "All 5983 representatives independently verified by assigning all 32768 words to disjoint radius-one balls.",
+    "h5_at_origin": {
+      "checked": 5983,
+      "passes": 0
+    },
+    "h6_at_origin": {
+      "checked": 5983,
+      "passes": 80,
+      "passing_zero_based_indices": [
+        858,
+        859,
+        2217,
+        2218,
+        2219,
+        5545,
+        5582,
+        5583,
+        5584,
+        5585,
+        5586,
+        5587,
+        5597,
+        5632,
+        5633,
+        5640,
+        5655,
+        5656,
+        5657,
+        5658,
+        5659,
+        5660,
+        5661,
+        5662,
+        5663,
+        5664,
+        5665,
+        5666,
+        5667,
+        5668,
+        5669,
+        5670,
+        5671,
+        5672,
+        5673,
+        5674,
+        5675,
+        5676,
+        5677,
+        5678,
+        5679,
+        5680,
+        5681,
+        5682,
+        5683,
+        5688,
+        5689,
+        5690,
+        5691,
+        5692,
+        5693,
+        5694,
+        5695,
+        5696,
+        5697,
+        5698,
+        5699,
+        5700,
+        5701,
+        5702,
+        5703,
+        5704,
+        5705,
+        5850,
+        5851,
+        5852,
+        5853,
+        5856,
+        5857,
+        5858,
+        5859,
+        5873,
+        5882,
+        5883,
+        5884,
+        5886,
+        5887,
+        5909,
+        5980,
+        5982
+      ]
+    },
+    "translation_criterion": "For a face with free coordinates Y, fixed outside coordinates J, and anchor a, all 16 colors occur iff the projection of C onto J contains a restricted to J and each of its unit-coordinate neighbors in J. Translations of a code therefore require separate checks.",
+    "h5_all_anchors": {
+      "verified_initial_representatives": 4000,
+      "successful_anchors_in_these": 0,
+      "anchor_count_per_representative": 32768,
+      "additional_explicitly_checked_indices": [
+        5545,
+        5980,
+        5982
+      ],
+      "additional_successful_anchors": 0,
+      "status": "User paused the task and the running check was interrupted. No claim for the remaining representatives."
+    },
+    "limitations": "These are finite results for the special nearest-codeword decoder class. No asymptotic obstruction or construction for arbitrary set functions follows."
+  }
+}

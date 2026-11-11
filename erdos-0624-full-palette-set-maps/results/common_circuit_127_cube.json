@@ -1,0 +1,81 @@
+{
+  "m": 7,
+  "N": 127,
+  "field_polynomial_hex": "0x83",
+  "second_labeling": "x^3 in F_(2^7)",
+  "affine_functionals": [
+    1,
+    1
+  ],
+  "restriction_size": 36,
+  "restriction": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    15,
+    17,
+    19,
+    21,
+    23,
+    25,
+    31,
+    33,
+    37,
+    45,
+    47,
+    49,
+    53,
+    61,
+    63,
+    65,
+    71,
+    73,
+    75,
+    77,
+    79,
+    83,
+    85,
+    97,
+    99,
+    107,
+    111,
+    117,
+    119,
+    121,
+    125
+  ],
+  "triple_count": 7140,
+  "affine_pair_states": 4096,
+  "colliding_triples": [
+    [
+      1,
+      65,
+      121
+    ],
+    [
+      3,
+      7,
+      61
+    ]
+  ],
+  "common_circuit": [
+    1,
+    3,
+    7,
+    61,
+    65,
+    121
+  ],
+  "second_labels": [
+    1,
+    15,
+    107,
+    63,
+    113,
+    43
+  ],
+  "all_proper_subsets_checked_in_both_labelings": true,
+  "no_common_4_circuit_pair_sum_check": true
+}

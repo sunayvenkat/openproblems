@@ -1,0 +1,18 @@
+Fresh-context adversarial review, 6 November 2026.
+Reviewer: /root/review_marcus_reflection.
+Artifacts: marcus-reflection-search.mjs, marcus-reflection-experiments.tex,
+and the seven saved search JSON files.
+
+No substantive defects found after thorough examination.
+The reviewer reproduced all seven saved results without modifying files,
+independently enumerated all six exhaustive cases using restricted-growth
+partitions and direct permutation sums, and matched all counts and maxima.
+Exact polynomial expansion and independent BigInt Ryser permanents verified
+the determinant/Fock formula. BigInt permutation enumeration verified every
+saved winning block entry and block permanent. Cache keys and safe-integer
+arithmetic were checked. The exhaustive total is 1,560,041.
+
+The B4 case is a separate random search, not an exhaustive optimum.
+No general inequality or novelty claim follows from these finite searches.
+Cross-model skipped: autonomous continuation. No external CLI invoked.
+External literature and TeX compilation were not checked.

@@ -1,0 +1,2 @@
+m 111546435 [3, 5, 7, 11, 13, 17, 19, 23] mu 1 phi/m=0.3272 T 3 rho0 2060355
+ level 2 window start E+1 = 2060356 first nonzero (offset, c_N) = (1, 1152646887758848384) -> no carry (52s)

@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\title{Exact counterexample search for Erd\H{o}s Problem 243}
+\author{Research notes; no novelty claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Status.} No infinite counterexample has been constructed.
+The six computed rational starts below all enter a Sylvester tail.
+An arbitrarily long finite near-counterexample does not disprove the
+eventual assertion in Problem 243. The search treats a full disproof as
+equally valid as a full proof.
+
+\paragraph{The exact target for a disproof.}
+The following reformulation belongs to the rational-tail framework of
+\href{https://math.colgate.edu/~integers/aa28/aa28.pdf}{Koizumi (2026)};
+the converse from exact integer dynamics is also recorded in
+\href{https://github.com/wcook04/plectis-erdos/blob/main/paper/243/erdos243-reciprocal-tail-reasoning-surface.tex}{Cook's companion, Section 4}.
+We include the short argument to make the construction obligation explicit.
+
+\begin{theorem}[Sufficient exact orbit for a full disproof]
+Suppose positive integers $C_n,D_n,a_n$, with $a_n\ge2$, satisfy
+\[
+ C_{n+1}=a_nC_n-D_n>0,\qquad D_{n+1}=a_nD_n.
+\]
+Set $E_n=D_n-(a_n-1)C_n$ and $\varepsilon_n=E_n/C_n$.
+If $\varepsilon_n\to0$ and $E_n\ne0$ arbitrarily late, a tail of $(a_n)$
+is a counterexample to the full Erd\H{o}s 243 conjecture.
+\end{theorem}
+\begin{proof}
+Put $r_n=C_n/D_n$. Then $r_{n+1}=r_n-1/a_n>0$ and
+$a_n=r_n^{-1}+1-\varepsilon_n$. If $r_n$ had a positive limit, the
+$a_n$ would be bounded, contradicting infinitely many positive subtractions
+$1/a_n$ from $r_0$. Hence $r_n\to0$, $a_n\to\infty$, and
+$\sum_n1/a_n=C_0/D_0\in\mathbb Q$.
+The exact identity
+\[
+ a_{n+1}=\frac{a_n^2}{1-\varepsilon_n}-a_n+1-\varepsilon_{n+1}
+\]
+gives $a_{n+1}/a_n^2\to1$, and thus eventual strict increase.
+If the Sylvester recurrence held eventually, its unique vanishing
+reciprocal tail would be $1/(a_n-1)$, forcing $E_n=0$ eventually.
+This contradicts the last hypothesis. Discarding a finite prefix
+preserves rationality of the reciprocal sum and all asymptotic properties.
+\end{proof}
+
+\begin{lemma}[The reduced numerator must also diverge]
+In a non-Sylvester orbit of the theorem, let
+$G_n=\gcd(C_n,D_n)$ and $A_n=C_n/G_n$. Then $A_n\to\infty$.
+\end{lemma}
+\begin{proof}
+Once $|E_n|<C_n$ on a tail, a zero error is absorbing: the error identity
+$E_{n+1}=a_n^2E_n-(a_{n+1}-a_n^2+a_n-1)C_{n+1}$ forces the next
+error to be zero as well. Hence $E_n\ne0$ at every sufficiently late index.
+The integer $E_n/G_n$ is then nonzero, so
+$1/A_n\le|E_n|/C_n\to0$.
+\end{proof}
+
+\paragraph{Controlled finite prefixes.}
+The following family deliberately shadows the scalar profile $C_n=M+n$.
+This is a finite construction and is not asserted to persist indefinitely.
+An earlier
+\href{https://www.erdosproblemaday.com/report/243}{working report of
+12 August 2026} gives a stronger flat-transient construction, with either
+sign of the error and a prescribed eventual zero tail. The finite
+construction below is therefore not offered as a new result.
+
+\begin{lemma}
+Let $M\ge3$, $N\ge2$, and $\kappa\ge1$ be integers. Start the
+pseudo-greedy recurrence at
+\[
+ C_0=M,\qquad D_0=\kappa\prod_{j=0}^{N-1}(M+j)-1,
+ \qquad a_n=1+\operatorname{round}(D_n/C_n).
+\]
+Then $C_n=M+n$ and $E_n=-1$ for $0\le n<N$.
+The first $N$ multipliers are strictly increasing, and, for $0\le n<N-1$,
+\[
+ 0<1-\frac{a_{n+1}}{a_n^2}
+ <\frac1{M+1}+\frac1{a_0}.
+\]
+Thus noncanonical prefixes of any prescribed finite length can have
+uniformly small relative squaring errors and uniformly small nonzero gaps.
+\end{lemma}
+\begin{proof}
+If $D_n+1$ is divisible by $\prod_{j=n}^{N-1}(M+j)$, then
+$D_n/C_n$ is an integer minus $1/C_n$. Since $C_n\ge3$, rounding gives
+$a_n=(D_n+1)/C_n+1$, hence $E_n=-1$ and $C_{n+1}=C_n+1$.
+Moreover
+\[
+ D_{n+1}+1=\frac{(D_n+1)(D_n+C_n)}{C_n},
+\]
+which preserves divisibility by the remaining product. This proves the
+prefix assertion by induction. On consecutive forced steps,
+\[
+ a_{n+1}=\frac{C_n}{C_n+1}a_n^2-a_n+1+\frac1{C_n+1}.
+\]
+Here $a_0\ge M+2\ge5$, and the formula inductively gives $a_{n+1}>a_n$.
+Dividing by $a_n^2$ proves the displayed bound. Also
+$|E_n|/C_n=1/(M+n)\le1/M$ throughout the prefix.
+\end{proof}
+
+\paragraph{Exact modular continuation.}
+The executable \texttt{erdos243-modular-search.mjs} implements Koizumi's
+modular recomputation instead of constructing doubly exponential denominators.
+To determine $D_n\bmod C_n$, it starts with
+$D_0\bmod\prod_{j=0}^n C_j$ and replays each earlier step modulo the
+remaining product. Knowing $D_j$ modulo $C_j Q$ determines
+$(D_j-E_j)/C_j+1$ modulo $Q$ by exact division. Thus it determines
+$D_{j+1}=a_jD_j$ modulo $Q$. This remains valid when the $C_j$ are not
+coprime. The final residue determines the centered error exactly and also
+$\gcd(C_n,D_n)$.
+
+The controlled prefix is filled from its proved identity, with the initial
+product divisibility checked exactly. The implementation was compared with
+direct big-integer updates on reduced fractions $p/q$ for $0<p\le q\le30$,
+and on small controlled prefixes, including a comparison of the filled
+prefix with full modular recomputation. A direct-comparison horizon was
+limited to ten steps in the latter tests to avoid constructing denominators
+over 100,000 bits; the modular computation has no such denominator-size bound.
+
+The completed six-case experiment is:
+\[
+\begin{array}{r|r|r|r|r|r}
+ M&N&\kappa&\operatorname{bits}(D_0)&\text{rows through first zero}&\max C_n\\\hline
+ 17&32&1&159&43&59\\
+ 101&128&1&938&129&229\\
+ 1009&512&1&5271&519&5327\\
+ 1009&512&17&5275&519&5327\\
+ 10007&1024&1&13681&1027&11031\\
+ 10007&1024&17&13685&1027&11031
+\end{array}
+\]
+Every case reached an exact zero error, so every one has an eventual
+Sylvester tail. The 1024-step examples therefore refute no part of the
+eventual conjecture. All initial states and computed numerator/error rows
+are saved in \texttt{erdos243-modular-results.json}.
+
+\paragraph{The missing infinite construction.}
+The construction target still requires integrality and positivity at
+\emph{every} step, vanishing relative errors, and nonzero errors arbitrarily
+late in one fixed orbit. Increasing $N$ while changing $D_0$ does not meet
+that requirement. No such infinite orbit or exclusion of all such orbits
+has been obtained here.
+\end{document}

@@ -1,0 +1,505 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\lcm}{\operatorname{lcm}}
+
+\title{The ratio $f(2n)/f(n)$ for $f(n)=\sum_{k\le n}\tau(2^k-1)$:\\
+what the method proves, and exactly what it needs}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Status (read first)}
+
+\textbf{No unconditional decision was reached.} Neither the affirmative statement
+($f(2n)/f(n)\to\infty$) nor the negative one ($\liminf f(2n)/f(n)<\infty$) is proved here.
+What \emph{is} proved, completely and with explicit constants:
+
+\begin{enumerate}
+\item[(A)] \emph{Unconditional facts.} $f(2n)>2f(n)$ for every $n$, $\limsup f(2n)/f(n)=\infty$
+  (Theorem~\ref{thm:dyadic}); $f(2n)\ge(3-48/(n+16))f(n)$, so $\liminf f(2n)/f(n)\ge3$
+  (Theorem~\ref{thm:three}); and $f(Mn)\ge2^{D(M)-2}f(n)$ for all $M,n$, so
+  $f(M(n)\,n)/f(n)\to\infty$ for every integer sequence $M(n)\to\infty$ (Proposition~\ref{prop:mult}).
+\item[(B)] \emph{Conditional affirmative.} If $(\mathrm{H}_\delta)$ (stated in
+  Theorem~\ref{thm:cond}: $\omega(\Phi_d(2))\le2^{(1-\delta)\log d/\log\log d}$ for large $d$) holds
+  for some $\delta>0$, then
+  $f(2n)/f(n)\ge 2^{2^{(\delta-o(1))\log n/\log\log n}}$; the exact condition the squeeze needs is
+  $(\star)$ of Theorem~\ref{thm:squeeze}.
+\item[(C)] \emph{What the negative would force.} If $f(2n)\le Cf(n)$ for infinitely many $n$, then
+  infinitely many $k$ satisfy simultaneously $\tau(2^k+1)\le 4C$ and
+  $\omega(2^k-1)\ge 2^{(1-o(1))\log k/\log\log k}$; in particular $(\mathrm H_\delta)$ fails for
+  every $\delta>0$ (Theorem~\ref{thm:converse}).
+\item[(D)] \emph{The hypothesis cannot be removed by the method.} An abstract model satisfying every
+  property used in Steps~1--5, with $\omega_d\le 2^{(1+\delta)\log d/\log\log d}$, has
+  $f^*(2\ell_j)/f^*(\ell_j)\to 5$ along a sequence $\ell_j\to\infty$, so $\liminf f^*(2n)/f^*(n)\le 5$
+  (Theorem~\ref{thm:model}); with spikes at powers of $2$ instead, $\liminf=3$ exactly
+  (Proposition~\ref{prop:fermat}). So for this method the leading exponent $1$ in
+  $(\mathrm H_\delta)$ is sharp: $1-\delta$ suffices, $1+\delta$ does not. (Bounds at exponent
+  exactly $1$, e.g.\ $2^{g(d)}(\log d)^A$, are covered by neither side.)
+\end{enumerate}
+
+The remaining gap is a statement about factorisations of individual numbers $2^p\pm1$, stated
+precisely in Section~\ref{sec:gap}.
+
+\section{Notation and cited theorems}
+
+$T(k)=\tau(2^k-1)$, $f(n)=\sum_{k=1}^nT(k)$; $\omega(m)$ is the number of distinct prime factors
+of $m$; logarithms are natural, $\log_2$ is base~$2$. For $N\ge1$ write $N=2^aM$ with $M$ odd.
+$P_n$ is the largest primorial $p_1p_2\cdots p_r\le n$ ($n\ge2$), $r=r(n)=\pi(p_r)$, so
+$\tau(P_n)=2^{r(n)}$. Put $g(x)=\log x/\log\log x$ for $x>e$; $g$ is increasing on $[e^e,\infty)$
+since $g'(x)=(\log\log x-1)/(x(\log\log x)^2)$. Put
+\[
+  m(n)=\max_{1\le d\le n}\omega(\Phi_d(2)),\qquad \Lambda(n)=\log_2(n+1)\,(1+\log_2 n).
+\]
+Elementary facts used without comment: $\tau(uv)=\tau(u)\tau(v)$ for $\gcd(u,v)=1$;
+$u\mid v\Rightarrow\tau(u)\le\tau(v)$; $\tau(m)\ge 2^{\omega(m)}$;
+$\tau(\lcm(u,v))\,\tau(\gcd(u,v))=\tau(u)\tau(v)$ (prime by prime,
+$(\max(e,e')+1)(\min(e,e')+1)=(e+1)(e'+1)$); $\gcd(2^a-1,2^b-1)=2^{\gcd(a,b)}-1$ (Euclid).
+
+\paragraph{Zsigmondy's theorem (Bang 1886 for base 2).} For $d\ge2$, $d\ne6$, there is a prime
+$q$ with $q\mid 2^d-1$ and $q\nmid 2^j-1$ for $1\le j<d$. (Zsigmondy's general exceptions for
+$a^n-b^n$, $a>b\ge1$ coprime, are $n=1$ with $a-b=1$; $n=2$ with $a+b$ a power of $2$; and
+$(a,b,n)=(2,1,6)$. For $(a,b)=(2,1)$: $n=1$ is excluded as $2^1-1=1$; $n=2$ is not exceptional
+since $a+b=3$; $n=6$ is the one genuine exception, $2^6-1=3^2\cdot7$ with $3\mid2^2-1$,
+$7\mid2^3-1$.) Such $q$ has $\operatorname{ord}_q(2)=d$, hence
+\begin{equation}\label{eq:prim}
+  q\mid 2^k-1\iff d\mid k,\qquad\text{and}\qquad q\equiv1\pmod d .
+\end{equation}
+Fix one such prime $q_d$ for every $d\notin\{1,6\}$; by \eqref{eq:prim}, $d\ne d'$ implies
+$q_d\ne q_{d'}$.
+
+\paragraph{Prime number theorem.} $\theta(x)=\sum_{p\le x}\log p\sim x$ and
+$\pi(x)\sim x/\log x$.
+
+\begin{lemma}[size of $\tau(P_n)$]\label{lem:primorial}
+$r(n)=(1+o(1))\,g(n)$, i.e.\ $\tau(P_n)=2^{(1+o(1))\log n/\log\log n}$.
+\end{lemma}
+\begin{proof}
+By maximality $\theta(p_r)\le\log n<\theta(p_{r+1})$. By $\theta(x)\sim x$,
+$p_r\le(1+o(1))\log n$ and $p_{r+1}\ge(1-o(1))\log n$. Since $\pi$ is non-decreasing and
+$\pi(x)\sim x/\log x$: $r=\pi(p_r)\le(1+o(1))g(n)$ and
+$r+1=\pi(p_{r+1})\ge(1-o(1))g(n)$.
+\end{proof}
+
+\begin{lemma}[divisor bound; Wigert]\label{lem:wigert}
+For every $\varepsilon>0$ there is $x_0(\varepsilon)$ with
+$D(x):=\max_{k\le x}\tau(k)\le 2^{(1+\varepsilon)g(x)}$ for $x\ge x_0(\varepsilon)$.
+\end{lemma}
+\begin{proof}
+For $k\ge3$ and $0<\eta\le1$, $\tau(k)k^{-\eta}=\prod_{p^\alpha\parallel k}(\alpha+1)p^{-\alpha\eta}$.
+If $p\ge2^{1/\eta}$ the factor is $\le(\alpha+1)2^{-\alpha}\le1$. If $p<2^{1/\eta}$ it is
+$\le\sup_{x\ge0}(x+1)e^{-cx}$ with $c=\eta\log2<1$, which equals $e^{c-1}/c\le1/c$. Hence
+$\log_2\tau(k)\le\eta\log_2k+2^{1/\eta}\log_2\!\big(1/(\eta\log2)\big)$. With $L=\log k$, $\lambda=\log L$
+choose $1/\eta=(\lambda-2\log\lambda)/\log2$ (valid for large $k$): then $2^{1/\eta}=L/\lambda^2$,
+$\eta\log_2k=L/(\lambda-2\log\lambda)=(1+o(1))L/\lambda$ and
+$2^{1/\eta}\log_2(1/(\eta\log2))=O(L\log\lambda/\lambda^2)=o(L/\lambda)$. So
+$\log_2\tau(k)\le(1+o(1))g(k)$. As $g$ increases on $[e^e,\infty)$ and small $k$ contribute a
+bounded amount, $\log_2D(x)\le(1+o(1))g(x)$.
+\end{proof}
+
+\section{Step 1: primitive divisors}
+
+\begin{lemma}\label{lem:step1}
+Let $d\mid t$, $d\nmid k$, $d\notin\{1,6\}$. Then $2^d-1$ has a prime factor (namely $q_d$) that
+divides $2^t-1$ and is coprime to $2^k-1$.
+\end{lemma}
+\begin{proof}
+$q_d\mid2^d-1\mid2^t-1$, and $q_d\nmid2^k-1$ by \eqref{eq:prim} since $d\nmid k$.
+\end{proof}
+
+\begin{corollary}\label{cor:omega}
+Let $N=2^aM$, $M$ odd. Then $\omega(2^N+1)\ge\tau(M)-\varepsilon_N\ge\tau(M)-1$, where
+$\varepsilon_N=1$ if $N\equiv3\pmod 6$ and $\varepsilon_N=0$ otherwise. Consequently
+$\tau(2^N+1)\ge2^{\tau(M)-1}$. Also $\omega(2^k-1)\ge\tau(k)-2$ and $T(k)\ge2^{\tau(k)-2}$
+for all $k\ge1$.
+\end{corollary}
+\begin{proof}
+Let $\mathcal D=\{d:\ d\mid2N,\ d\nmid N\}=\{2^{a+1}m:\ m\mid M\}$, so $|\mathcal D|=\tau(M)$ and
+$1\notin\mathcal D$; $6\in\mathcal D$ iff $a=0$ and $3\mid M$, i.e.\ iff $N\equiv3\pmod6$. For
+$d\in\mathcal D\setminus\{6\}$, Lemma~\ref{lem:step1} with $t=2N$, $k=N$ gives
+$q_d\mid(2^N-1)(2^N+1)$ and $q_d\nmid2^N-1$, so $q_d\mid2^N+1$; these primes are distinct.
+For the second claim apply the same to $d\mid k$, $d\notin\{1,6\}$, and use
+$\tau\ge2^{\omega}$.
+\end{proof}
+
+\begin{lemma}[propagation]\label{lem:prop}
+If $k\mid K$ then $T(K)\ge T(k)\cdot2^{\#\{d\mid K:\ d\nmid k,\ d\ne6\}}$.
+\end{lemma}
+\begin{proof}
+If $u\mid v$ then $\tau(v)\ge\tau(u)\,2^{s}$ where $s$ is the number of primes dividing $v$ but
+not $u$. Apply with $u=2^k-1$, $v=2^K-1$; the $q_d$ ($d\mid K$, $d\nmid k$, $d\ne6$; $d\ne1$ is
+automatic) are such primes.
+\end{proof}
+
+\section{Step 2: supermodularity and the doubling identity}
+
+\begin{lemma}\label{lem:super}
+For all $a,b\ge1$: $T(\lcm(a,b))\,T(\gcd(a,b))\ge T(a)\,T(b)$, and $T(2k)=T(k)\,\tau(2^k+1)$;
+in particular $T(2k)\ge2T(k)$.
+\end{lemma}
+\begin{proof}
+Let $x=2^a-1$, $y=2^b-1$, $g=\gcd(a,b)$, $l=\lcm(a,b)$. Then $\gcd(x,y)=2^g-1$, and
+$x,y\mid2^l-1$ gives $\lcm(x,y)\mid2^l-1$. Hence
+$T(l)T(g)\ge\tau(\lcm(x,y))\tau(\gcd(x,y))=\tau(x)\tau(y)=T(a)T(b)$.
+Next $2^{2k}-1=(2^k-1)(2^k+1)$ with $\gcd(2^k-1,2^k+1)=\gcd(2^k-1,2)=1$, so
+$T(2k)=T(k)\tau(2^k+1)$, and $2^k+1\ge3$ gives $\tau(2^k+1)\ge2$.
+\end{proof}
+
+\section{Step 3: record doubling}
+
+\begin{proposition}\label{prop:record}
+Let $n\ge1$ and let $N\le n$ satisfy $T(N)=\max_{k\le n}T(k)$. Then $N>n/2$, and with $M$ the odd
+part of $N$,
+\[
+  \frac{f(2n)}{f(n)}\ \ge\ 1+\frac{\tau(2^N+1)}{n}\ \ge\ 1+\frac{2^{\tau(M)-1}}{n}.
+\]
+\end{proposition}
+\begin{proof}
+If $N\le n/2$ then $2N\le n$ and $T(2N)\ge2T(N)>T(N)$, contradicting maximality. So
+$n<2N\le2n$ and $f(2n)\ge f(n)+T(2N)=f(n)+T(N)\tau(2^N+1)$, while $f(n)\le nT(N)$. Divide, and use
+Corollary~\ref{cor:omega}.
+\end{proof}
+
+\section{Step 4: dyadic warm-up}
+
+\begin{theorem}\label{thm:dyadic}
+Let $A(x)=\sum_{x<t\le2x}T(t)$ for real $x>0$. Then $A(x)\ge2A(x/2)$ for all $x>0$;
+$f(2n)>2f(n)$ for every $n\ge1$; and $\limsup_{n}f(2n)/f(n)=\infty$.
+\end{theorem}
+\begin{proof}
+$s\mapsto2s$ maps the integers of $(x/2,x]$ injectively into those of $(x,2x]$, so
+$A(x)\ge\sum_{x/2<s\le x}T(2s)\ge2A(x/2)$.
+The intervals $(2n/2^{j+1},2n/2^j]$, $j\ge0$, partition $(0,2n]$, so
+$f(2n)=\sum_{j\ge0}A(n/2^j)$ and likewise $f(n)=\sum_{j\ge0}A(n/2^{j+1})$ (finite sums, since
+$A(y)=0$ for $y<1/2$). Hence $f(2n)-2f(n)=\sum_{j\ge0}\big(A(n/2^j)-2A(n/2^{j+1})\big)$, each
+term $\ge0$. For $J$ with $2^J\le n<2^{J+1}$ the term $j=J+1$ is
+$A(n/2^{J+1})-2A(n/2^{J+2})\ge T(1)-0=1$, because $1\in(n/2^{J+1},n/2^J]$ and
+$(n/2^{J+2},n/2^{J+1}]\subset(0,1)$ contains no integer. So $f(2n)>2f(n)$.
+
+If $f(2n)\le Cf(n)$ for all $n\ge n_0$, then for $x\ge n_0$, choosing $j$ with
+$2^jn_0\le x<2^{j+1}n_0$, monotonicity gives $f(x)\le C^{j+1}f(n_0)\le C\,f(n_0)(x/n_0)^{\log_2C}$,
+polynomial in $x$. But $f(n)\ge T(P_n)\ge2^{\tau(P_n)-2}=2^{2^{(1+o(1))g(n)}}$ by
+Corollary~\ref{cor:omega} and Lemma~\ref{lem:primorial}, and $2^{(1+o(1))g(n)}/\log n\to\infty$.
+Contradiction.
+\end{proof}
+
+\begin{lemma}\label{lem:tau4}
+$\tau(2^r+1)\ge4$ for every $r\ge1$ that is neither a power of $2$ nor equal to $3$.
+\end{lemma}
+\begin{proof}
+Such $r$ has an odd divisor $u>1$, and $x+1\mid x^u+1$ with $x=2^{r/u}$ gives a divisor
+$3\le2^{r/u}+1<2^r+1$; so $2^r+1$ is composite and $\tau\ge3$. If $\tau(2^r+1)=3$ then $2^r+1=q^2$,
+$2^r=(q-1)(q+1)$, so $q-1,q+1$ are powers of $2$ differing by $2$: $q=3$, $r=3$.
+\end{proof}
+
+\begin{theorem}[unconditional: $\liminf\ge3$]\label{thm:three}
+For every $n\ge6$, $f(2n)\ge\big(3-48/(n+16)\big)f(n)$. Hence $\liminf_n f(2n)/f(n)\ge3$.
+\end{theorem}
+\begin{proof}
+Let $2^J$ be the power of $2$ in $(n/2,n]$; $J\ge2$. Let $\mathcal R$ be the integers in $(n/2,n]$
+and $\tau_r=\tau(2^r+1)$.
+(i) The even integers of $(n,2n]$ are the $2r$, $r\in\mathcal R$, so by Lemma~\ref{lem:super}
+$f(2n)\ge f(n)+\sum_{r\in\mathcal R}T(r)\tau_r$.
+(ii) Every $m\le n/2$ is $r/2^j$ for a unique $r\in\mathcal R$ and $1\le j\le v_2(r)$. Put
+$c(r)=\sum_{j=1}^{v_2(r)}T(r/2^j)$, so $f(n)=\sum_{r\in\mathcal R}(T(r)+c(r))$. Since
+$T(r)\ge2^jT(r/2^j)$, $c(r)<T(r)$, and $c(2^J)\le2T(2^{J-1})$.
+(iii) Hence $f(2n)-3f(n)\ge\sum_{r\in\mathcal R}\big(T(r)(\tau_r-2)-2c(r)\big)$. Each term with $r$ odd
+is $\ge0$ ($c(r)=0$, $\tau_r\ge2$); each term with $r$ even, $r\ne2^J$, is $>0$ by
+Lemma~\ref{lem:tau4} ($r\ge4$, so $r\neq 3$, and $\tau_r\ge4$); the term $r=2^J$ is
+$\ge-4T(2^{J-1})$. So $f(2n)\ge3f(n)-4T(2^{J-1})$.
+(iv) $3\cdot2^{J-1}\le\frac32n\le2n$, and by Lemma~\ref{lem:prop} (new divisors $3\cdot2^i$,
+$0\le i\le J-1$, minus $d=6$) $f(2n)\ge T(3\cdot2^{J-1})\ge2^{J-1}T(2^{J-1})$.
+With $x=T(2^{J-1})/f(n)$ and $A=2^{J-1}>n/4$:
+$f(2n)/f(n)\ge\max(3-4x,Ax)\ge3A/(A+4)=3-12/(A+4)>3-48/(n+16)$.
+\end{proof}
+
+\begin{proposition}[unconditional: growing multipliers]\label{prop:mult}
+For all $n,M\ge1$: $f(Mn)\ge2^{D(M)-2}f(n)$, where $D(M)=\max_{J\le M}\tau(J)$. In particular, for
+every $C$ there is $M$ with $f(Mn)\ge Cf(n)$ for all $n$.
+\end{proposition}
+\begin{proof}
+Let $J\le M$ with $\tau(J)=D(M)$. The map $m\mapsto Jm$ is injective from $[1,n]$ into $[1,Mn]$,
+and by Lemma~\ref{lem:prop} (new divisors $me$, $e\mid J$, $e>1$, minus possibly $6$)
+$T(Jm)\ge2^{\tau(J)-2}T(m)$.
+\end{proof}
+
+\section{Step 5: forcing a highly divisible record}
+
+\begin{lemma}\label{lem:upper}
+For $N\ge1$: $\log_2T(N)\le\log_2(N+1)\cdot\omega(2^N-1)\le\log_2(N+1)\sum_{d\mid N}\omega(\Phi_d(2))$.
+\end{lemma}
+\begin{proof}
+If $q^e\parallel2^N-1$ then $q\ge3$ and $3^e<2^N$, so $e+1\le N<N+1$; hence
+$\tau(2^N-1)\le(N+1)^{\omega(2^N-1)}$. Every prime factor of $2^N-1=\prod_{d\mid N}\Phi_d(2)$
+divides some $\Phi_d(2)$, $d\mid N$.
+\end{proof}
+
+\begin{theorem}[the squeeze and its exact condition]\label{thm:squeeze}
+Let $n\ge2$ and $N=2^aM$ a maximiser of $T$ on $[1,n]$. Then
+\begin{equation}\label{eq:squeeze}
+  \tau(M)\ \ge\ \frac{\tau(P_n)-2}{\Lambda(n)\,m(n)} .
+\end{equation}
+Consequently $\tau(M)-\log_2n\to\infty$, and hence $f(2n)/f(n)\to\infty$, as soon as
+\[
+  (\star)\qquad \frac{\tau(P_n)-2}{\Lambda(n)\,m(n)}-\log_2n\ \longrightarrow\ \infty .
+\]
+$(\star)$ is exactly the condition under which \eqref{eq:squeeze} forces
+$\tau(M)-\log_2n\to\infty$. It holds whenever $m(n)=o\big(\tau(P_n)/(\log n)^3\big)$; by
+Lemma~\ref{lem:primorial}, it holds if $\log_2m(n)\le(1-\delta)g(n)$ for large $n$ (any fixed
+$\delta>0$), and \eqref{eq:squeeze} is vacuous for large $n$ once $\log_2 m(n)\ge(1+\delta)g(n)$.
+\end{theorem}
+\begin{proof}
+By maximality, Corollary~\ref{cor:omega} and Lemma~\ref{lem:upper},
+\[
+  \tau(P_n)-2\le\log_2T(P_n)\le\log_2T(N)\le\log_2(N+1)\sum_{d\mid N}\omega(\Phi_d(2))
+  \le\log_2(n+1)\,\tau(N)\,m(n),
+\]
+and $\tau(N)=(a+1)\tau(M)\le(1+\log_2n)\tau(M)$; $m(n)\ge\omega(3)=1$. This is
+\eqref{eq:squeeze}. Under $(\star)$, $\tau(M)-\log_2n\to\infty$ and
+Proposition~\ref{prop:record} gives $f(2n)/f(n)\ge2^{\tau(M)-1-\log_2n}\to\infty$. If
+$m(n)=o(\tau(P_n)/(\log n)^3)$ then, as $\Lambda(n)\log_2n=O((\log n)^3)$, the fraction in
+$(\star)$ is $\ge h(n)\log_2n$ with $h\to\infty$, so $(\star)$ holds. The last two assertions follow
+from $\tau(P_n)=2^{(1+o(1))g(n)}$ and $\Lambda(n)\log_2 n=2^{O(\log\log n)}=2^{o(g(n))}$.
+\end{proof}
+
+\begin{theorem}[conditional affirmative]\label{thm:cond}
+Suppose that for some $\delta>0$ and all $d\ge d_0$,
+\[
+  (\mathrm H_\delta)\qquad \omega(\Phi_d(2))\le2^{(1-\delta)\log d/\log\log d}.
+\]
+Then $f(2n)/f(n)\ge2^{\,2^{(\delta-o(1))\log n/\log\log n}}$; in particular $f(2n)/f(n)\to\infty$.
+\end{theorem}
+\begin{proof}
+Take $d_0\ge16>e^e$. For $n\ge d_0$ and $d_0\le d\le n$,
+$\omega(\Phi_d(2))\le2^{(1-\delta)g(d)}\le2^{(1-\delta)g(n)}$ ($g$ increasing), while
+$c_0:=\max(1,\max_{d<d_0}\omega(\Phi_d(2)))$ is a constant; so $m(n)\le c_0\,2^{(1-\delta)g(n)}$
+for $n\ge d_0$. By \eqref{eq:squeeze} and Lemma~\ref{lem:primorial},
+$\tau(M)\ge2^{(1+o(1))g(n)-(1-\delta)g(n)-O(\log\log n)}=2^{(\delta+o(1))g(n)}$. Since
+$1+\log_2n=2^{o(g(n))}$, $\tau(M)-1-\log_2n\ge2^{(\delta+o(1))g(n)}$, and
+Proposition~\ref{prop:record} gives $f(2n)/f(n)\ge2^{\tau(M)-1-\log_2n}$.
+\end{proof}
+
+\section{Step 6: the hypothesis}
+
+\subsection{What the negative statement would force}
+
+\begin{theorem}\label{thm:converse}
+Let $C\ge1$ and $n\ge2$ with $f(2n)\le Cf(n)$. Then there is $k\le n$ with
+\[
+  \tau(2^k+1)\le4C,\qquad \tau(M_k)\le3+\log_2C,\qquad
+  \omega(2^k-1)\ \ge\ \frac{\tau(P_n)-3-\log_2n}{\log_2(n+1)},
+\]
+($M_k$ the odd part of $k$), and some $d\mid k$ with
+$\omega(\Phi_d(2))\ge(\tau(P_n)-3-\log_2n)/\big(\Lambda(n)(3+\log_2C)\big)$.
+Consequently, if $\liminf f(2n)/f(n)<\infty$ then $(\mathrm H_\delta)$ fails for every
+$\delta>0$: for every $\delta>0$ there are infinitely many $d$ with
+$\omega(\Phi_d(2))>2^{(1-\delta)\log d/\log\log d}$, and infinitely many $k$ with
+$\tau(2^k+1)\le 4C$ and $\omega(2^k-1)\ge2^{(1-o(1))\log k/\log\log k}$.
+\end{theorem}
+\begin{proof}
+Write $f(2n)=\sum_{k\le n}T(2k)+\sum_{j\le2n,\,j\text{ odd}}T(j)\ge\sum_{k\le n}T(k)\tau(2^k+1)$. Let
+$E=\{k\le n:\tau(2^k+1)>4C\}$. Then $Cf(n)\ge f(2n)>4C\sum_{k\in E}T(k)$, so
+$\sum_{k\le n,\,k\notin E}T(k)\ge\frac34f(n)$ and some $k\notin E$ has
+$T(k)\ge\frac{3}{4n}f(n)\ge\frac3{4n}2^{\tau(P_n)-2}$, i.e.\
+$\log_2T(k)\ge\tau(P_n)-3-\log_2n$. For this $k$: $2^{\tau(M_k)-1}\le\tau(2^k+1)\le4C$ gives the
+bound on $\tau(M_k)$; Lemma~\ref{lem:upper} gives the bound on $\omega(2^k-1)$; and
+$\sum_{d\mid k}\omega(\Phi_d(2))$ has $\tau(k)\le(1+\log_2n)(3+\log_2C)$ terms, giving $d$.
+
+If $f(2n)\le Cf(n)$ for $n$ in an infinite set $S$, the lower bound $R(n)$ for
+$\omega(\Phi_d(2))$ tends to $\infty$ along $S$, so the $d$'s produced are unbounded (each fixed $d$
+has a fixed $\omega(\Phi_d(2))$). As $d\le n$ and $g$ is increasing,
+$R(n)=2^{(1+o(1))g(n)}\ge2^{(1-\delta/2)g(n)}>2^{(1-\delta)g(n)}\ge2^{(1-\delta)g(d)}$ for large
+$n\in S$ (strict since $g(n)\to\infty$). Same for $k$.
+\end{proof}
+
+\begin{remark}[a weaker sufficient input]
+The proof shows that the affirmative follows from the following statement, which is weaker than
+$(\mathrm H_\delta)$: \emph{for every fixed $B$, $\max\{\omega(2^k-1):k\le n,\ \tau(2^k+1)\le B\}
+=o\big(\tau(P_n)/\log n\big)$.} Indeed, then for every $B$ the $T$-weight of
+$\{k\le n:\tau(2^k+1)\le B\}$ is $\le n\cdot 2^{o(\tau(P_n))}<2^{-\tau(P_n)/2}f(n)$ for large $n$,
+so $f(2n)\ge\sum_{k\le n}T(k)\tau(2^k+1)\ge(1-o(1))Bf(n)$. It is implied by
+$(\mathrm H_\delta)$: if $\tau(2^k+1)\le B$ then $\tau(M_k)\le1+\log_2B$ (Corollary~\ref{cor:omega}),
+so $\tau(k)\le(1+\log_2n)(1+\log_2B)$ and
+$\omega(2^k-1)\le\tau(k)\,m(n)=2^{(1-\delta+o(1))g(n)}=o(\tau(P_n)/\log n)$.
+\end{remark}
+
+\subsection{The method cannot remove the hypothesis: an abstract model}
+
+Fix $\delta>0$. We replace each $\Phi_d(2)$ by a product of new primes.
+
+\paragraph{Construction.} By Lemma~\ref{lem:wigert} (with $\varepsilon=\delta/2$) and
+$g(2x)\le g(x)+\log2/\log\log x$, there is $x_1$ such that for all $x\ge x_1$
+\begin{equation}\label{eq:x1}
+  \log_2(2x)+D(2x)\ \le\ \tfrac14\,W(x),\qquad W(x):=\big\lfloor2^{(1+\delta)g(x)}\big\rfloor .
+\end{equation}
+Choose primes $\ell_1<\ell_2<\cdots$ recursively with $\ell_j\ge\max(x_1,2\ell_{j-1}+1)$ ($\ell_0:=16$) and
+\begin{equation}\label{eq:sparse}
+  W_j:=W(\ell_j)\ \ge\ 4\,(W_1+\cdots+W_{j-1}+j);
+\end{equation}
+possible since $W(x)\to\infty$. Set $\omega_{\ell_j}=W_j$ and $\omega_d=1$ for every other $d\ge2$.
+Choose pairwise disjoint finite sets $S_d$ of primes ($d\ge2$) with $|S_d|=\omega_d$, $S_2=\{3\}$,
+and every $q\in S_d$ satisfying $q\equiv1\pmod d$: proceed in increasing $d$; infinitely many
+primes $\equiv1\pmod d$ exist because, by Zsigmondy, the primitive primes $q_{ds}$ ($s\ge4$,
+so $ds\notin\{1,6\}$) are pairwise distinct and $q_{ds}\equiv1\pmod{ds}$. Define
+\[
+  Q_d=\prod_{q\in S_d}q,\quad X_k=\prod_{d\mid k,\ d\ge2}Q_d,\quad
+  Y_k=X_{2k}/X_k=\prod_{d\mid2k,\ d\nmid k}Q_d,\quad T^*(k)=\tau(X_k),\quad f^*(n)=\sum_{k\le n}T^*(k).
+\]
+$X_k$ is squarefree, so $T^*(k)=2^{L(k)}$ with $L(k)=\sum_{d\mid k,\,d\ge2}\omega_d$.
+($X_k$ plays $2^k-1$, $Y_k$ plays $2^k+1$, $Q_d$ plays $\Phi_d(2)$; we give \emph{every} $d\ge2$,
+including $d=6$, a new prime, which only strengthens the analogue of Zsigmondy.)
+
+\paragraph{Every property used in Steps 1--5 holds in the model.}
+\begin{itemize}
+\item[(M1)] $q\in S_d$ divides $X_k$ iff $d\mid k$; so for $d\mid t$, $d\nmid k$, $d\ge2$, $Q_d$
+  has a prime factor dividing $X_t$ and coprime to $X_k$; and
+  $\omega(Y_N)=\sum_{d\mid2N,\,d\nmid N}\omega_d\ge\tau(M)\ge\tau(M)-1$. Primes of $Q_d$ are
+  $\equiv1\pmod d$.
+\item[(M2)] $\gcd(X_a,X_b)=X_{\gcd(a,b)}$ and $X_a,X_b\mid X_{\lcm(a,b)}$; since
+  $\{d\mid\lcm\}\supseteq\{d\mid a\}\cup\{d\mid b\}$, $\{d\mid\gcd\}=\{d\mid a\}\cap\{d\mid b\}$ and
+  $\omega_d\ge0$, $L(\lcm(a,b))+L(\gcd(a,b))\ge L(a)+L(b)$, i.e.\ supermodularity. $X_{2k}=X_kY_k$
+  with $\gcd(X_k,Y_k)=1$, so $T^*(2k)=T^*(k)\tau(Y_k)\ge2T^*(k)$.
+\item[(M3)] Hence a maximiser $N$ of $T^*$ on $[1,n]$ has $N>n/2$ and
+  $f^*(2n)/f^*(n)\ge1+\tau(Y_N)/n\ge1+2^{\tau(M)-1}/n$ (same proof as
+  Proposition~\ref{prop:record}).
+\item[(M4)] $A^*(x)\ge2A^*(x/2)$ and $f^*(2n)>2f^*(n)$ (same proof as Theorem~\ref{thm:dyadic}).
+\item[(M5)] $T^*(P)\ge2^{\tau(P)-1}\ge2^{\tau(P)-2}$ for every $P$, and
+  $\log_2T^*(N)=L(N)\le\log_2(N+1)\sum_{d\mid N}\omega_d$.
+\item[(M6)] $1\le\omega_d\le2^{(1+\delta)\log d/\log\log d}$ for all $d\ge3$ (for $d=\ell_j$ by
+  definition of $W$; otherwise $\omega_d=1$).
+\end{itemize}
+
+\begin{theorem}\label{thm:model}
+In this model $f^*(2\ell_j)/f^*(\ell_j)\to5$ as $j\to\infty$; hence $\liminf_n f^*(2n)/f^*(n)\le5$.
+Moreover $Y_{\ell_j}=3\cdot q$ for a single prime $q$, mirroring $2^p+1=3\cdot(\text{prime})$.
+\end{theorem}
+\begin{proof}
+Fix $j$. The divisors $\ge2$ of $\ell_j$ are $\{\ell_j\}$ and of $2\ell_j$ are $\{2,\ell_j,2\ell_j\}$, so
+$L(\ell_j)=W_j$ and $L(2\ell_j)=1+W_j+1=W_j+2$; $Y_{\ell_j}=Q_2Q_{2\ell_j}$ is $3$ times one prime.
+Let $k\le2\ell_j$, $k\notin\{\ell_j,2\ell_j\}$. Then $\ell_j\nmid k$, and $\ell_i\nmid k$ for $i>j$
+(as $\ell_i>2\ell_j$). Every divisor $d\ge2$ of $k$ has $\omega_d=1$ unless $d=\ell_i$ with $i<j$, so
+\[
+  L(k)=(\tau(k)-1)+\sum_{i<j,\ \ell_i\mid k}(W_i-1)\ <\ D(2\ell_j)+\sum_{i<j}W_i .
+\]
+Let $R_j=\sum_{k\le2\ell_j,\ k\notin\{\ell_j,2\ell_j\}}2^{L(k)}$ and $R_j'=\sum_{k<\ell_j}2^{L(k)}\le R_j$.
+By \eqref{eq:x1} and \eqref{eq:sparse},
+$\log_2R_j\le\log_2(2\ell_j)+D(2\ell_j)+\sum_{i<j}W_i\le\frac14W_j+\frac14W_j=\frac12W_j$. Since
+$f^*(\ell_j)=2^{W_j}+R'_j$ and $f^*(2\ell_j)=2^{W_j}+2^{W_j+2}+R_j$,
+\[
+  \frac{5}{1+2^{-W_j/2}}\ \le\ \frac{f^*(2\ell_j)}{f^*(\ell_j)}\ \le\ 5+2^{-W_j/2},
+\]
+and $W_j\to\infty$.
+\end{proof}
+
+\begin{proposition}[spikes at powers of $2$: the constant $3$ is sharp]\label{prop:fermat}
+Modify the construction: replace the primes $\ell_j$ by powers $K_j=2^{a_j}$ with $a_{j+1}\ge a_j+2$,
+$K_j\ge x_1$, and $W_j:=W(K_j)$ satisfying \eqref{eq:sparse}; set $\omega_{K_j}=W_j$ and
+$\omega_d=1$ for all other $d\ge2$ (sets $S_d$ as before). Then (M1)--(M6) hold,
+$f^*(2K_j)/f^*(K_j)\to3$, and $f^*(2n)\ge(3-48/(n+16))f^*(n)$ for $n\ge6$. So in this model
+$\liminf f^*(2n)/f^*(n)=3$ exactly.
+\end{proposition}
+\begin{proof}
+(M1)--(M6) are verified exactly as before. Let $K=K_j$. The multiples of $K$ in $[1,2K]$ are $K,2K$;
+$L(K)\ge W_j$ and $L(2K)=L(K)+\omega_{2K}=L(K)+1$ (as $2K$ is not a spike). For any other
+$k\le2K$, no $K_i$ with $i\ge j$ divides $k$, so $L(k)<D(2K)+\sum_{i<j}W_i$ and, as in
+Theorem~\ref{thm:model}, the sum $R$ of all other terms satisfies $R\le2^{W_j/2}\le2^{L(K)-W_j/2}$.
+Hence $f^*(2K)/f^*(K)=(3\cdot2^{L(K)}+R)/(2^{L(K)}+R')\to3$. The lower bound: the proof of
+Theorem~\ref{thm:three} uses only $T^*(2k)=T^*(k)\tau(Y_k)\ge2T^*(k)$, $\tau(Y_r)\ge4$ for $r$ not a
+power of $2$ (here $\omega(Y_r)\ge\tau(M_r)\ge2$), and
+$T^*(3\cdot2^{J-1})\ge2^{J}T^*(2^{J-1})$ (the $J$ new divisors $3\cdot2^i$); all hold in the model.
+\end{proof}
+
+In the integers the configuration of Proposition~\ref{prop:fermat} is: the Fermat number
+$F_{a-1}=\Phi_{2^a}(2)$ has more than $\approx2^{\log 2^a/\log\log 2^a}$ prime factors, while
+$F_a$ is prime. Thus Theorem~\ref{thm:three} is the best constant obtainable from the properties used
+here, and Theorem~\ref{thm:model} (prime spikes, value $5$) is the configuration named in Step~6.
+
+\paragraph{Abstract systems.} Call an \emph{abstract system} any choice of integers
+$\omega_d\ge1$ ($d\ge2$) and pairwise disjoint finite sets $S_d$ of primes with $|S_d|=\omega_d$,
+$q\equiv1\pmod d$ for $q\in S_d$, with $Q_d,X_k,Y_k,T^*,f^*$ defined as above. For an abstract
+system put $m^*(n)=\max_{2\le d\le n}\omega_d$.
+
+\begin{proposition}[the method needs the hypothesis; formal version]\label{prop:formal}
+(a) Every abstract system satisfies the analogues of Lemma~\ref{lem:step1},
+Corollary~\ref{cor:omega}, Lemmas~\ref{lem:prop}, \ref{lem:super}, \ref{lem:tau4} (in the form
+$\tau(Y_r)\ge4$ for $r$ not a power of $2$), \ref{lem:upper}, Proposition~\ref{prop:record},
+Theorems~\ref{thm:dyadic}, \ref{thm:three}, \ref{thm:squeeze}, and Theorem~\ref{thm:cond}: if
+$\omega_d\le2^{(1-\delta)\log d/\log\log d}$ for all large $d$, then $f^*(2n)/f^*(n)\to\infty$.
+(b) For every $\delta>0$ there is an abstract system with $\omega_d\le2^{(1+\delta)\log d/\log\log d}$
+for all $d\ge3$ and $\liminf f^*(2n)/f^*(n)\le5$ (Theorem~\ref{thm:model}), and one with
+$\liminf=3$ (Proposition~\ref{prop:fermat}).
+Hence no argument valid for all abstract systems (in particular, none built only from the facts of
+Steps~1--5) can derive $f(2n)/f(n)\to\infty$ from a bound $\omega(\Phi_d(2))\le
+2^{(1+\delta)\log d/\log\log d}$.
+\end{proposition}
+\begin{proof}
+(a) The proofs of those statements use only: for each $d\ge2$, $d\ne6$, a prime dividing $X_k$ iff
+$d\mid k$ (in a system every $q\in S_d$ is such a prime); $\gcd(X_a,X_b)=X_{\gcd(a,b)}$ and
+$X_a\mid X_{\lcm(a,b)}$; $X_{2k}=X_kY_k$ with $\gcd(X_k,Y_k)=1$; every prime of $X_N$ lies in some
+$Q_d$, $d\mid N$; $\tau(X_N)\le(N+1)^{\omega(X_N)}$ (here $X_N$ is squarefree); and
+$\omega(Y_r)\ge\tau(M_r)$, replacing the algebraic factorisation in Lemma~\ref{lem:tau4}. All hold
+in every abstract system, with $m^*$ in place of $m$. (b) is Theorem~\ref{thm:model},
+Proposition~\ref{prop:fermat} and (M6).
+\end{proof}
+
+\begin{remark}[why $5$]
+In the model the record on $[1,\ell_j]$ is the prime $\ell_j$; on $(\ell_j,2\ell_j]$ only
+$2\ell_j$ inherits it, with factor $\tau(Y_{\ell_j})=4$. In the integers the corresponding
+configuration is a prime $p$ with $T(p)\ge2p\,T(k)$ for all $k\le2p$, $k\notin\{p,2p\}$ (which
+forces $\omega(2^p-1)\ge(\tau(P_p)-2)/\log_2(p+1)=2^{(1+o(1))\log p/\log\log p}$ by
+Lemma~\ref{lem:upper}) while $(2^p+1)/3$ is prime (so $\tau(2^p+1)=4$); see the third bullet of
+Section~\ref{sec:gap}. Nothing in Steps 1--5 excludes this.
+\end{remark}
+
+\section{Exact remaining gap}\label{sec:gap}
+
+Combining Theorems~\ref{thm:cond} and~\ref{thm:converse} with the elementary observation
+below, the principal question is pinned between two statements about individual factorisations:
+
+\begin{itemize}
+\item \emph{Affirmative} $\Leftarrow$ $(\mathrm H_\delta)$ for some $\delta>0$; more weakly
+  $\Leftarrow$ the Remark after Theorem~\ref{thm:converse}.
+\item \emph{Affirmative} $\Rightarrow$ for every $B$ only finitely many primes $p$ satisfy
+  $\tau(2^p+1)\le B$ and $T(p)\ge B\sum_{k\le2p,\ k\ne p,2p}T(k)$.
+  (Proof: for such $p$, $f(2p)\le(B+2)T(p)\le(B+2)f(p)$.)
+\item \emph{Negative} $\Leftarrow$ infinitely many primes $p>3$ such that $(2^p+1)/3$ is prime and
+  $T(p)\ge2p\,T(j)$ for every $j\le2p$, $j\notin\{p,2p\}$. (Proof: $9\mid2^p+1$ iff $p\equiv3\pmod6$,
+  so $\tau(2^p+1)=4$ and $T(2p)=4T(p)$; then $f(2p)\le T(p)+4T(p)+2p\cdot T(p)/(2p)=6T(p)\le6f(p)$.)
+\item \emph{Negative} $\Rightarrow$ infinitely many $k$ with $\tau(2^k+1)$ bounded and
+  $\omega(2^k-1)\ge2^{(1-o(1))\log k/\log\log k}$; in particular $(\mathrm H_\delta)$ fails for
+  every $\delta>0$.
+\end{itemize}
+
+Call $E$ the statement: \emph{there are a constant $B$ and infinitely many $k$ with
+$\tau(2^k+1)\le B$ and $\omega(2^k-1)\ge2^{(1-o(1))\log k/\log\log k}$.} A negative answer requires
+$E$; disproving $E$ (or proving the input of the Remark after Theorem~\ref{thm:converse}) yields
+the affirmative; proving $E$ alone decides nothing. Disproving $E$ needs an upper bound
+$\omega(2^k-1)\le k^{o(1)}$ at such $k$. The only unconditional bound obtainable from the tools
+used here is $\omega(2^k-1)\le\pi(k)+k/\log_2k=O(k/\log k)$ (at most $\pi(k)$ prime factors are
+$\le k$; those $>k$ multiply to less than $2^k$), which is polynomial in $k$. This input was not
+obtained, so the principal question is left undecided by this work.
+
+\appendix
+\section{Numerical sanity check (not used in any proof)}
+
+$2^k-1$ was factored for all $k\le276$ via $\prod_{d\mid k}\Phi_d(2)$ (ECM, SIQS, Aurifeuillian
+splitting for $d\equiv4\pmod8$); every factorisation multiplies back exactly, large factors are
+probable primes (Miller--Rabin, 24 bases) without certificates. Findings:
+\begin{itemize}
+\item $\min f(2n)/f(n)$ over dyadic blocks: $3$ at $n\in\{1,2,4\}$; $3.74$ on $[8,15]$; $5.34$ on
+  $[16,31]$; $14.26$ on $[32,63]$; $18.45$ on $[64,127]$; $152.8$ on $[128,138]$.
+\item Records of $T$ are highly divisible: $N=60,120,180$ ($T(180)=6{,}291{,}456$, odd part $45$),
+  every record index $\ge24$ is a multiple of $12$. No record occurs at an odd prime.
+\item $\max_{p\le276}\omega(2^p-1)=6$ ($p=223,239$), far below what a dominating prime spike would
+  need.
+\end{itemize}
+This is consistent with the affirmative being true, and with $(\mathrm H_\delta)$; it proves nothing
+asymptotic.
+
+\end{document}

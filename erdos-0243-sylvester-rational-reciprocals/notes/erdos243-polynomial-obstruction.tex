@@ -1,0 +1,179 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\title{Prime-adic obstructions to polynomial numerator patterns in Erd\H{o}s 243}
+\author{Research notes; no novelty claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Status.} The full
+\href{https://conjectures.io/problems/erdos243-erdos-243}{Erd\H{o}s 243 problem}
+remains unsolved here. These results exclude certain exact numerator patterns,
+including patterns with jumps much larger than the previously imposed
+$O(\log\log C_n)$ bound. No argument makes an arbitrary counterexample's
+numerator polynomial. A surviving finite modular state is not an integer
+counterexample. The finite-state exclusions below are computational results
+with reproducible exact verification, not Lean proofs.
+
+Let positive integers $C_n,D_n,a_n$, with $a_n\ge2$, satisfy
+\begin{equation}\label{state}
+ C_{n+1}=a_nC_n-D_n,\qquad D_{n+1}=a_nD_n.
+\end{equation}
+In the rational-tail setting, $D_n=s\prod_{i<n}a_i$ and
+$C_n=D_n\sum_{i\ge n}1/a_i$. The original asymptotic hypothesis implies
+$C_{n+1}/C_n\to1$ and $\log C_n=o(n)$, but the finite modular obstructions
+will not need these growth estimates.
+
+\begin{lemma}[Persistent divisibility]\label{persistent}
+If $p\mid D_N$, then $p\mid D_n$ for every $n\ge N$. If in addition
+$p\mid C_m$ at some $m\ge N$, then $p\mid C_n$ for every $n\ge m$.
+Consequently, if the residues of $C_n$ modulo $p$ are eventually periodic
+and take both zero and a nonzero value arbitrarily late, then $p$ divides
+none of the $D_n$ or $a_n$.
+\end{lemma}
+\begin{proof}
+Both persistence assertions follow immediately from \eqref{state}.
+A periodic residue pattern containing both kinds of values cannot become
+permanently zero. If $p$ ever divides $a_n$, it divides $D_{n+1}$, so the
+same argument applies.
+\end{proof}
+
+\begin{theorem}[Polynomial support obstruction]\label{poly}
+Suppose eventually $C_n=P(n)$ for a nonconstant $P\in\mathbb Q[x]$.
+Outside the finite set of primes needed to clear denominators, every prime
+which ever divides $D_n$ must have the following property: the reduction
+of $P$ modulo that prime is either root-free or the zero function.
+If $P$ has a root modulo every sufficiently large prime, no such state
+sequence exists. In particular, $P$ cannot have a rational root.
+\end{theorem}
+\begin{proof}
+Choose $h$ with $F=hP\in\mathbb Z[x]$. Outside primes dividing $h$, the
+residues of $P(n)$ are periodic. If the reduction has a root and a nonzero
+value, Lemma~\ref{persistent} prohibits that prime from dividing $D_n$.
+For all sufficiently large primes, a nonzero reduction of $F$ of fixed
+degree cannot be the zero function. Only finitely many primes divide all
+coefficients of $F$.
+
+Under the root hypothesis, therefore, all $D_n$ and $a_n$ have prime support
+in a fixed finite set $S$. Let
+\[
+ L_n=\operatorname{lcm}(D_0,a_0,\ldots,a_{n-1}),\qquad
+ \Delta_n=D_n/L_n.
+\]
+The quotient is an integer. Moreover
+$C_n/D_n=C_0/D_0-\sum_{i<n}1/a_i$, so multiplying by $L_n$ shows
+$\Delta_n\mid C_n$. Directly,
+\[
+ \Delta_{n+1}/\Delta_n=\gcd(a_n,L_n).
+\]
+After every prime of $S$ that ever occurs has occurred, every $a_n\ge2$
+has a prime factor already in $L_n$. Thus $\Delta_{n+1}\ge2\Delta_n$
+eventually, contradicting the polynomial upper bound on $C_n$.
+If $u/v\in\mathbb Q$ is a root of $P$, reduction modulo every sufficiently
+large prime sends $u/v$ to a root, giving the final assertion.
+\end{proof}
+
+The root hypothesis is not restricted to polynomials with rational roots.
+For instance $(x^2-13)(x^2-17)(x^2-221)$ has a root modulo every odd prime
+other than $13,17$: if both $13$ and $17$ are nonsquares, their product is
+a square. Its eventual positive values are therefore also excluded.
+
+\begin{theorem}[An elementary quadratic exclusion]\label{quadratic}
+There is no state sequence satisfying \eqref{state} with
+$C_n=n^2+k$ eventually, for any integer $k$.
+\end{theorem}
+\begin{proof}
+The parity of $n^2+k$ alternates, so Lemma~\ref{persistent} forces every
+$D_n$ and $a_n$ to be odd. Choose a sufficiently late $n$ for which $C_n$
+is odd, so $C_{n+1}$ is even. Eliminating $D_n$ from two steps gives
+\[
+ C_{n+2}=(a_{n+1}+a_n)C_{n+1}-a_n^2 C_n.
+\]
+Modulo four the first term vanishes and $a_n^2\equiv1$, hence
+$C_{n+2}\equiv-C_n\pmod4$. But $(n+2)^2+k\equiv n^2+k\pmod4$.
+An odd integer cannot equal its negative modulo four, a contradiction.
+\end{proof}
+
+\paragraph{A general finite-state obstruction.}
+Suppose a proposed numerator has a known period $T$ modulo $q=p^e$,
+with table $c_j$, and its residues modulo $p$ recurrently take both zero
+and a nonzero value. By Lemma~\ref{persistent}, $D_n$ and $a_n$ are units
+modulo $q$. Form a directed graph with vertices
+\[
+ (j,d),\qquad j\in\mathbb Z/T\mathbb Z,\quad d\in(\mathbb Z/q\mathbb Z)^*.
+\]
+For each unit $a$ satisfying $ac_j-d=c_{j+1}$ modulo $q$, include the edge
+\[
+ (j,d)\longrightarrow(j+1,ad).
+\]
+An infinite integer orbit of the proposed form induces an infinite walk
+in this finite graph. An acyclic graph therefore excludes that form.
+A sufficient certificate of acyclicity is an integer rank strictly
+decreasing along every edge. No compatibility between different moduli
+is needed when one modulus already excludes the pattern.
+
+\paragraph{Exact completed calculations.}
+The program \texttt{erdos243-polynomial-obstruction.mjs} constructs these
+graphs for $c_j=j^d+k\pmod q$, exhausts every $k\pmod q$, and checks a
+strictly decreasing rank on every edge of every claimed acyclic graph.
+It computes every solution of the edge congruence: for
+$g=\gcd(c_j,q)$ there are no solutions unless $g\mid d+c_{j+1}$;
+otherwise it solves modulo $q/g$ and examines all $g$ lifts, discarding
+nonunits. The completed results are:
+\[
+\begin{array}{c|c|c|r|r}
+ p&q&\text{exponent representatives}&\text{offset cases}&\text{maximum rank}\\\hline
+ 2&4&2&4&3\\
+ 3&9&3&9&6\\
+ 3&27&5,11,17&81&6\\
+ 5&25&3,7,11,15,19&125&8\\
+ 11&121&13&121&18
+\end{array}
+\]
+All $340$ graphs are acyclic. There are $1,702,554$ vertices and
+$1,556,322$ edges across these computations. A separate direct enumeration
+of candidate multipliers and an independent DFS cycle check agree on
+every offset for the small control families. A linear polynomial control
+has a modular cycle, preventing an automatic negative verdict on every
+input. The output is \texttt{erdos243-polynomial-results.json}.
+
+\begin{corollary}[Excluded power-plus-constant numerators]
+If $C_n=n^d+k$ eventually, where $d\ge1$ and $k\in\mathbb Z$, then the
+following necessary conditions hold:
+\[
+ d\ge25,\qquad d\equiv1\pmod{12},\qquad d\not\equiv13\pmod{110}.
+\]
+In particular every degree $1\le d\le24$ is excluded.
+The same exclusions hold for a fixed positive rational multiple of
+$n^d+k$.
+\end{corollary}
+\begin{proof}
+For even $d\ge2$, reduction modulo four gives the exponent-two table.
+For $d\equiv3\pmod6$, reduction modulo nine gives the exponent-three
+table. For $d\equiv5\pmod6$, the unit exponent modulo $27$ is one of
+$5,11,17$ modulo $18$, while a multiple of three raised to these powers
+vanishes modulo $27$. Thus the listed tables cover that entire class.
+Similarly, every $d\equiv3\pmod4$ reduces modulo $25$ to one of the five
+listed exponents modulo $20$; nonunits vanish since $d\ge3$.
+Finally $d\equiv13\pmod{110}$ gives the same table as exponent thirteen
+modulo $121$, using the unit-group exponent $110$ and vanishing on
+multiples of eleven.
+
+The first four exclusions leave only $d\equiv1\pmod{12}$.
+Degree one is excluded by Theorem~\ref{poly}, and degree thirteen by the
+last table, so the first remaining degree is twenty-five.
+For $C_n=t(n^d+k)$ with fixed positive rational $t$, set
+$\widetilde D_n=D_n/t=a_n(n^d+k)-((n+1)^d+k)$ on the tail.
+These are positive integers and satisfy the same recurrences with
+$\widetilde C_n=n^d+k$, reducing to the preceding case.
+\end{proof}
+
+\paragraph{The full gap remains.}
+No step here proves that a general numerator with $\log C_n=o(n)$ must
+follow an exact polynomial. Remaining degrees are not claimed possible,
+and local modular cycles are not integer orbits. The original conjecture
+is neither proved nor disproved by these exclusions.
+\end{document}

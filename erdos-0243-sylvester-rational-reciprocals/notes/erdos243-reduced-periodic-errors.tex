@@ -1,0 +1,250 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\title{Periodicity of errors after reducing rational tails}
+\author{Research notes on Erd\H{o}s 243; no priority claim}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Status.} This is a restricted theorem, not a solution
+of Erd\H{o}s 243. It rules out eventual periodicity and two particular
+bounded alphabets of signed errors in lowest terms in a counterexample.
+It allows infinitely many common
+factors to be cancelled when reducing successive tails. It does not
+assert that bounded or arbitrary errors are periodic.
+
+The rational-tail framework is from
+\href{https://math.colgate.edu/~integers/aa28/aa28.pdf}{Koizumi (2026)}.
+The use of large prime powers in a reduced denominator, and their
+protection below a numerator threshold, is developed in
+\href{https://github.com/wcook04/plectis-erdos/blob/main/paper/243/erdos243-reciprocal-tail-reasoning-surface.tex}{Cook's companion paper}.
+We prove explicitly the variants needed here, including exclusion of
+any fixed finite set of primes from the supply lemma. No priority is
+claimed.
+
+\paragraph{Reduced states.}
+Let $a_n$ be strictly increasing positive integers with
+$a_{n+1}/a_n^2\to1$ and rational reciprocal sum. Write the positive tail
+in lowest terms as
+\[
+ R_n=\sum_{j\ge n}\frac1{a_j}=\frac{u_n}{v_n},\qquad
+ \gcd(u_n,v_n)=1.
+\]
+Define integers
+\[
+ e_n=v_n-(a_n-1)u_n,\quad
+ w_n=a_nu_n-v_n=u_n-e_n>0,\quad
+ h_n=\gcd(w_n,a_nv_n).
+\]
+Then
+\begin{equation}\label{eq:reduced}
+ h_nu_{n+1}=u_n-e_n,\qquad h_nv_{n+1}=a_nv_n.
+\end{equation}
+The usual tail expansion gives $v_n/u_n=a_n-1+o(1)$, so
+$e_n/u_n\to0$. Also, for some $c>0$,
+\begin{equation}\label{eq:growth}
+ \log a_n=c2^n+o(1),\qquad \log u_n=o(n).
+\end{equation}
+Here the first assertion follows by summing
+$\log a_{n+1}-2\log a_n=o(1)$ with geometric weights; a zero limiting
+coefficient would imply $\log a_n\to0$, contrary to strict increase.
+For the second, if the full sum has denominator $q$, the unreduced
+integer numerator $C_n=q(\prod_{j<n}a_j)R_n$ has
+$C_{n+1}/C_n=a_n-R_n^{-1}\to1$. Hence $\log C_n=o(n)$ and
+$u_n\le C_n$ gives the assertion.
+
+An error zero at a sufficiently late index is absorbing. Indeed,
+$e_n=0$ implies $u_n=1$, $v_n=a_n-1$, and the next reduced tail is
+$1/[a_n(a_n-1)]$. Thus $u_{n+1}=1$; since $e_{n+1}/u_{n+1}\to0$
+and the next errors are integers, on a tail where all relative errors
+have absolute value below $1$ this forces $e_{n+1}=0$, and induction
+applies. It also gives $a_{n+1}=a_n^2-a_n+1$. Therefore, in a
+counterexample, every sufficiently late $e_n$ is nonzero and
+\begin{equation}\label{eq:udiverges}
+ u_n\longrightarrow\infty
+\end{equation}
+by $1/u_n\le|e_n|/u_n\to0$.
+
+\begin{lemma}[Prime powers outside a finite set]\label{lem:supply}
+For any finite set $S$ of primes and any fixed positive integer $K$,
+all sufficiently late $v_n$ have a prime-power divisor $Q=p^k$ with
+$p\notin S$ and $Q>u_n+K$.
+\end{lemma}
+\begin{proof}
+The reduced denominator $v_n$ divides
+$L_n=\operatorname{lcm}(q,a_1,\ldots,a_{n-1})$. Put $s=|S|$.
+For each prime in $S$, its maximal exponent in this lcm is attained
+in $q$ or one earlier multiplier. After merging repeated indices, the
+$S$ part of $v_n$ is at most $q$ times a product of at most $s$
+distinct earlier multipliers, and hence at most
+$q\prod_{j=1}^s a_{n-j}$. By~\eqref{eq:growth} its logarithm is at most
+$c(1-2^{-s})2^n+O(1)$. On the other hand,
+$\log v_n=\log u_n+\log a_n+o(1)\ge c2^n+o(1)$.
+Consequently the part $v_n^{(S)}$ supported outside $S$ satisfies
+\[
+ \log v_n^{(S)}\ge c_S2^n
+\]
+for some $c_S>0$ and all sufficiently large $n$.
+If all its prime-power factors were at most $B_n=u_n+K$, it would
+divide $\operatorname{lcm}(1,\ldots,B_n)$, so
+$\log v_n^{(S)}\le B_n\log B_n$. But
+$\log B_n=o(n)$ by~\eqref{eq:growth}, so
+$B_n\log B_n=e^{o(n)}=o(2^n)$, a contradiction.
+\end{proof}
+
+\begin{lemma}[Protection of a prime power]\label{lem:protect}
+In a reduced step~\eqref{eq:reduced}, if $p^k\mid v_n$ and
+$0<w_n<p^{k+1}$, then $p^k\mid v_{n+1}$.
+\end{lemma}
+\begin{proof}
+Write $b=\nu_p(v_n)\ge k$ and $d=\nu_p(a_n)$. Coprimality makes
+$u_n$ a unit modulo $p$. If $d<b$ then $\nu_p(w_n)=d$ and
+$\nu_p(v_{n+1})=b$; if $d>b$ then
+$\nu_p(w_n)=b$ and $\nu_p(v_{n+1})=d$. If $d=b$, then
+$\nu_p(w_n)\ge b$, whereas $w_n<p^{k+1}$ makes
+$\nu_p(w_n)\le k$. Thus $b=d=k$ and $\nu_p(w_n)=k$, again giving
+$\nu_p(v_{n+1})=k$. These cases exhaust the possibilities.
+\end{proof}
+
+\begin{theorem}[Periodic reduced errors force a Sylvester tail]
+Under the stated hypotheses, if $(e_n)$ is eventually periodic, then
+\[
+ a_{n+1}=a_n^2-a_n+1
+\]
+for every sufficiently large $n$.
+\end{theorem}
+\begin{proof}
+Assume there is no Sylvester tail and shift to a tail where the errors
+are periodic with period $L\ge1$, nonzero, and $|e_n|\le M$ for a
+fixed $M\ge1$. Then~\eqref{eq:udiverges} holds. Write
+$T=\sum_{i=0}^{L-1}e_i$ for the signed period sum.
+
+First suppose $T=0$. During any consecutive run of steps with $h_n=1$,
+the numerator changes by minus the partial sums of the periodic errors.
+Thus it never rises more than $LM$ above its value at the start of the
+run. At a step with $h_n\ge2$,
+$u_{n+1}\le(u_n+M)/2$. If $B$ is the value just after one such
+step, the value just after the next is at most
+$(B+(L+1)M)/2$. These bounds also hold from the initial value of the
+tail. Therefore all run-start values are bounded by
+$\max(u_N,(L+1)M)$, and all values are bounded by this plus $LM$.
+The same conclusion is immediate if there are only finitely many
+cancellations. This contradicts $u_n\to\infty$.
+
+Now suppose $T\ne0$. Let $S$ be the finite set of prime divisors of
+$|T|$, with $S$ empty if $|T|=1$. Choose a sufficiently late index $N$
+and, by Lemma~\ref{lem:supply}, a divisor $Q=p^k$ of $v_N$ such that
+\[
+ p\nmid T,\qquad Q>u_N+2ML+1.
+\]
+We show $Q$ can never be lost. Work up to a putative first step at
+which $p^k$ ceases to divide the next reduced denominator. Before it,
+$p\mid v_n$ and therefore $p\nmid u_n$.
+
+There cannot be $Lp$ consecutive steps with $h_n=1$ in this interval.
+In such a run, taking every $L$th state gives
+$u_{t+jL}=u_t-jT$ modulo $p$. Since $p\nmid T$, one of the first
+$p$ such states is zero modulo $p$, contrary to coprimality.
+
+Put $H=Lp$. Between cancellations there are at most $H-1$ steps,
+each increasing $u$ by at most $M$. If a run starts at $B$, its
+next post-cancellation value is at most $(B+HM)/2$. Inductively every
+run-start value, up to and including the putative loss step, is at most
+$\max(u_N,HM)$. At every intervening step, including that loss step,
+\[
+ w_n=u_n-e_n\le\max(u_N,HM)+HM
+ \le u_N+2MLp<pQ=p^{k+1}.
+\]
+The final strict inequality follows from the choice of $Q$ and $p\ge2$.
+Lemma~\ref{lem:protect} contradicts loss of $p^k$. Thus no such
+first loss exists. The same run-length and contraction estimates now
+bound $u_n$ for all $n\ge N$, again contradicting~\eqref{eq:udiverges}.
+This finishes both cases.
+\end{proof}
+
+\begin{theorem}[Fixed magnitude, with arbitrary signs]\label{thm:magnitude}
+Under the same rational near-squaring hypotheses, if $|e_n|=m$ for
+a fixed $m\ge1$ and every sufficiently large $n$, then a Sylvester
+tail follows. Thus a nonterminal error sequence cannot eventually have
+a fixed nonzero absolute value, even with an aperiodic sign pattern.
+\end{theorem}
+\begin{proof}
+Suppose a nonterminal orbit has $e_n\in\{-m,m\}$ on a tail. Then
+$u_n\to\infty$. Apply Lemma~\ref{lem:supply} with the prime divisors
+of $m$ as the excluded set and choose $Q=p^k\mid v_N$ such that
+$p\nmid m$ and $Q>u_N+2m+1$.
+
+Work up to a putative first loss of $p^k$. In a consecutive run with
+$h_n=1$, the numerator takes steps $\pm m$ on the lattice
+$B+m\Z$, starting at its initial value $B$. All vertices are units
+modulo $p$, because the denominator is divisible by $p$. There is a
+multiple of $p$ on this lattice above $B$, at distance at most $mp$.
+A nearest-neighbor walk on the lattice cannot pass it without landing
+on it. Thus throughout the run $u_n\le B+m(p-1)$, a bound valid
+regardless of the run's length. At the next cancellation,
+\[
+ u_{n+1}\le\frac{B+mp}{2}.
+\]
+Consequently all run-start values before first loss are at most
+$\max(u_N,mp)$, and at every step, including the putative loss step,
+\[
+ w_n\le\max(u_N,mp)+mp\le u_N+2mp<pQ.
+\]
+Lemma~\ref{lem:protect} forbids first loss. The same bounds then hold
+forever and contradict $u_n\to\infty$.
+\end{proof}
+
+\begin{theorem}[Two magnitudes with odd common factor]\label{thm:twomagnitudes}
+Under the same hypotheses, fix an odd positive integer $m$. If
+\[
+ e_n\in\{-2m,-m,m,2m\}
+\]
+for every sufficiently large $n$, then a Sylvester tail follows.
+No periodicity of the choices or signs is assumed.
+\end{theorem}
+\begin{proof}
+Suppose this is a nonterminal orbit, so $u_n\to\infty$. Exclude the
+prime divisors of $2m$ and choose, by Lemma~\ref{lem:supply},
+$Q=p^k\mid v_N$ with $p\nmid2m$ and $Q>u_N+6m+1$.
+
+Before a putative first loss, consider a run with $h_n=1$ starting at
+$B$. The numerators lie in $B+m\Z$ and take steps of length $m$
+or $2m$, in either direction. Moreover
+\[
+ \gcd(u_n,e_n)=\gcd(u_n,v_n)=1.
+\]
+In particular, a step of length $2m$ must start at an odd integer.
+There is an odd multiple $z$ of $p$ on $B+m\Z$ above $B$, at
+distance at most $2mp$: multiples of $p$ on this lattice occur at
+spacing $mp$, which is odd, so their parities alternate.
+
+This $z$ is an impassable upper barrier for the run. Landing on it
+would contradict $p\nmid u_n$. A step of length $m$ cannot skip a
+lattice vertex. The only step of length $2m$ that could pass $z$
+without landing is from $z-m$ to $z+m$; since $m$ and $z$ are odd,
+it would start at an even integer, contradicting
+$\gcd(u_n,e_n)=1$. Hence $u_n<B+2mp$ throughout the run.
+At its next cancellation, $w_n\le B+2mp+2m$. Put
+$J=2m(p+1)\le3mp$ since $p\ge2$. Post-cancellation values are
+therefore at most $(B+J)/2$, and induction bounds every run-start
+value by $\max(u_N,J)$. At every step up to and including first loss,
+\[
+ w_n\le\max(u_N,J)+J\le u_N+2J\le u_N+6mp<pQ.
+\]
+Protection again prevents first loss, and the resulting uniform bound
+on all $u_n$ contradicts $u_n\to\infty$.
+\end{proof}
+
+\paragraph{Limit of the result.}
+A possible counterexample must therefore have reduced errors that are
+not eventually periodic. Its magnitudes cannot eventually be constant,
+or confined to $\{m,2m\}$ for a fixed odd $m$.
+The proof does not exclude all bounded aperiodic integer error sequences,
+nor unbounded errors whose relative size tends to zero. These remaining cases have not been excluded
+or constructed here. The full proof or disproof of Erd\H{o}s 243 is
+still outstanding.
+\end{document}

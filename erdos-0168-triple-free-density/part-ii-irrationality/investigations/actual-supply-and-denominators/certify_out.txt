@@ -1,0 +1,23 @@
+model (5, 8) den bits 44 log2 eps -23.83
+model (12, 19) den bits 108 log2 eps -80.83
+model (41, 65) den bits 393 log2 eps -145.83
+model (53, 84) den bits 507 log2 eps -565.83
+model (306, 485) den bits 2908 log2 eps -1535.83
+model (665, 1054) den bits 18184 log2 eps -25777.83
+model (15601, 24727) den bits 148363 log2 eps -75231.83
+model (31867, 50508) den bits 303048 log2 eps -176247.83
+model (79335, 125743) den bits 754461 log2 eps -301990.83
+
+Nonvanishing certificates: |z_n - z_best| - eps_n - eps_best > 0 implies z_n != Z
+(5, 8) log2|z_n - z_best| = -31.58  certified z_n != Z: False 
+(12, 19) log2|z_n - z_best| = -92.81  certified z_n != Z: False 
+(41, 65) log2|z_n - z_best| = -156.09  certified z_n != Z: False 
+(53, 84) log2|z_n - z_best| = -578.33  certified z_n != Z: False 
+(306, 485) log2|z_n - z_best| = -1548.90  certified z_n != Z: False 
+(665, 1054) log2|z_n - z_best| = -63973.13  certified z_n != Z: False 
+(15601, 24727) log2|z_n - z_best| = -75252.35  certified z_n != Z: False 
+(31867, 50508) log2|z_n - z_best| = -212338.04  certified z_n != Z: False 
+
+certified CF terms of Z: 71933  last convergent den bits: 150991
+largest partial quotients (bits, index, preceding convergent den bits): [(27607, 10707, 18184), (21, 2627, 4486), (18, 28230, 75700), (18, 17055, 56516), (17, 33589, 84959)]
+geometric mean of a_1..: 3.5168

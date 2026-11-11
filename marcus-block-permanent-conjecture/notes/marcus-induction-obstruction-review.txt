@@ -1,0 +1,18 @@
+Fresh-context adversarial review, 6 November 2026.
+Reviewer: /root/review_marcus_induction.
+Artifacts: marcus-induction-obstruction.tex/.mjs/.json.
+
+Finding: wording could be read as asserting a full operator inequality on
+all homogeneous forms. Classification: valid and actionable.
+Correction: the text now explicitly says that the operator inequality WOULD
+be equivalent to a stronger all-homogeneous-form assertion, and that it is
+not proved. The original Marcus claim requires only split-form evaluations.
+
+The reviewer independently checked the complex cofactor placement, the exact
+Gaussian-integer example, and the algebraic family, and found no other
+substantive issue after thorough examination. The unchanged arithmetic was
+not rerun just for the wording fix.
+No counterexample to Marcus is claimed. The example defeats only the stated
+stronger gap-monotonicity induction.
+Cross-model skipped: autonomous continuation. No external CLI invoked.
+TeX compilation and novelty were not checked.

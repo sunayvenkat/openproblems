@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-10",
+  "files": [
+    {
+      "path": "research_notes/Erdos 168 potential theoretic obstruction/adversarial_audit_p.py",
+      "bytes": 4317,
+      "sha256": "5ff1a8ab6579d5155c0f4613c2486726fb5d303686bc73607eb55adc9bfd55be"
+    },
+    {
+      "path": "research_notes/Erdos 168 potential theoretic obstruction/notes.md",
+      "bytes": 21030,
+      "sha256": "bda4bee8144cf3825a283ba0f948901c4879584771892284dc7778ee4c14032c"
+    },
+    {
+      "path": "research_notes/Erdos 168 potential theoretic obstruction/verify_potential_theory.py",
+      "bytes": 5723,
+      "sha256": "e1acacc45493cf946193f9c819073ad76c18fad3a094b4a56715f63557164ace"
+    },
+    {
+      "path": "research_notes/Erdos 168 breakthrough synthesis/adversarial_audit.md",
+      "bytes": 11843,
+      "sha256": "c77a1cbb50ac27688f9ad1788312e67c1b0a13bdab91bc5157f5207d1814953b"
+    },
+    {
+      "path": "research_notes/Erdos 168 breakthrough synthesis/master_proof.md",
+      "bytes": 17256,
+      "sha256": "06050f898ee8f0de7f8cd1e8b49dc4daac7a539138ef4a84a3a9bd9818e5e03a"
+    }
+  ]
+}

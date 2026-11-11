@@ -1,0 +1,39 @@
+Fresh-context adversarial reviews, 6 November 2026
+
+Artifact: erdos243-quadratic-rate.tex and its explicit computational inputs.
+
+Mathematical review: /root/review_243_rate_math, isolated context.
+Contract: exclude all exact centered quadratic numerator profiles
+C_n=A*n(n+1)+B (A>0 rational,B rational), and deduce irrationality under
+a_n^2/a_(n+1)=1+2/n+o(n^-2). The review assumed the two complete elliptic
+integral-x lists, which were audited separately.
+The reviewer independently recomputed every finite-field certificate and
+checked normalization, the simultaneous Chebotarev argument, both norm
+reductions, the elliptic-coordinate filtering, and asymptotic extraction.
+Final: "Assuming the stated complete integral-x lists, I cannot find a
+substantive mathematical defect after thorough examination."
+
+Computational review: /root/review_243_rate_computation, isolated context.
+Contract: audit erdos243-elliptic-points.m, actual recorded Magma output
+erdos243-elliptic-magma-certified.xml, the stated completeness conditions,
+unconditional bounds, full-group flags, both curve models, and local
+Node certificate generation and its saved JSON. The documented Magma
+integral-point implementation could be trusted; independent reimplementation
+of elliptic logarithm algorithms was outside this contract.
+Final: "I cannot find a substantive defect after thorough examination
+of the stated contract."
+The reviewer did not rerun Magma or reproduce its algorithm independently;
+that reliance is disclosed in the paper.
+
+Reconciliation: no substantive findings requiring changes. The proof is
+computer-assisted: Magma's full Mordell-Weil proof flags are explicitly
+asserted true, the free bases are supplied to IntegralPoints, and both
+class-group bound maps are explicitly set to Minkowski bounds. The
+resulting complete x-coordinate sets are {-8,4} and {-2,2,16,44,52}.
+The finite residue certificates are independently enumerated via the
+quadratic identity and via the original two recurrences; all end empty.
+
+Cross-model review skipped in this autonomous goal continuation.
+No novelty or priority claim is made. This remains a restricted theorem:
+the original ratio limit does not imply the 2/n+o(n^-2) rate. No full
+proof or disproof of Erdős243 has been obtained.

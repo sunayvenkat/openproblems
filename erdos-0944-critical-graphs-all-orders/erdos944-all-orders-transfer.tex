@@ -1,0 +1,304 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\title{From One Robust Four-Chromatic Seed to All Sufficiently Large Orders}
+\author{Research draft for independent verification}
+\date{6 November 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove an order-completion theorem: if a vertex-critical four-chromatic
+graph on $g$ vertices remains four-chromatic after deletion of at most $r$
+edges, then such a graph exists on every number $N\geq45g^2$ of vertices.
+The proof combines the published substitution lemma of Skottov\'a and
+Steiner with Haj\'os joins of three small critical graphs and an elementary
+two-generator conductor bound. Consequently, the seed-existence theorem
+of Kruer and Kohlmeyer implies $f_4(N)\to\infty$, the all-orders form of
+Erd\H{o}s problem 944. The seed theorem is the external input; it is not
+re-proved here. This manuscript makes no claim of independently established
+publication priority for the order-completion argument.
+\end{abstract}
+
+\section{Statement and source input}
+
+All graphs are finite and simple. A graph is \emph{vertex-critical
+four-chromatic} if $\chi(G)=4$ and $\chi(G-v)=3$ for every vertex $v$.
+We call $G$ a \emph{$(4,r)$-graph} if it is vertex-critical four-chromatic
+and $\chi(G-F)=4$ for every set $F\subseteq E(G)$ with $|F|\leq r$.
+In contrast, a \emph{4-critical skeleton} below is four-chromatic and
+becomes three-colorable upon deletion of any edge or any vertex.
+The distinction is essential: a $(4,r)$-graph for $r\geq1$ is not
+edge-critical.
+
+Following Skottov\'a and Steiner~\cite{SS}, let $f_4(N)$ be the largest
+integer $r\geq1$ for which a $(4,r)$-graph of order $N$ exists, and set it
+to zero if no such $r$ exists. Thus $r$ denotes the edge-deletion tolerance,
+not the minimum size of an edge set whose deletion lowers the chromatic
+number; the latter is at least $r+1$.
+
+Kruer and Kohlmeyer~\cite[Theorem 1.1]{KK} assert that for every $r\geq1$
+there exists a finite $(4,r)$-graph. Their introductory scope statement
+does not claim existence at every sufficiently large order. The following
+transfer supplies that implication from an arbitrary single seed.
+
+\begin{theorem}[Single-seed order completion]\label{thm:main}
+Let $r\geq1$, and suppose that a $(4,r)$-graph of order $g$ exists.
+Then a $(4,r)$-graph exists on every integer number $N\geq45g^2$ of
+vertices. More precisely, it suffices that
+\[
+N\geq
+\begin{cases}
+45g^2-46g+13,&g\text{ odd},\\
+\dfrac{45}{2}g^2-8g+1,&g\text{ even}.
+\end{cases}
+\]
+\end{theorem}
+
+\begin{corollary}\label{cor:limit}
+The seed-existence theorem of Kruer and Kohlmeyer implies
+$\displaystyle\lim_{N\to\infty}f_4(N)=\infty$.
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor:limit}]
+Fix an arbitrary integer $r\geq1$ and choose a seed of order $g=g(r)$
+using~\cite[Theorem 1.1]{KK}. Theorem~\ref{thm:main} gives $f_4(N)\geq r$
+for every $N\geq45g(r)^2$. This is exactly the asserted divergence.
+\end{proof}
+
+\section{The published substitution lemma, with proof}
+
+For a map $\psi:V(G)\to\{1,2,3\}$, write $m_G(\psi)$ for the number
+of edges whose endpoints receive the same color. The edge-robustness
+condition is equivalent to
+\begin{equation}\label{eq:mono}
+m_G(\psi)\geq r+1\qquad\hbox{for every }\psi:V(G)\to\{1,2,3\}.
+\end{equation}
+Indeed, deleting all monochromatic edges produces a proper three-coloring;
+conversely, a proper three-coloring after deletion of at most $r$ edges
+has at most $r$ monochromatic edges in the original graph.
+
+\begin{lemma}[Skottov\'a--Steiner substitution]\label{lem:sub}
+Suppose that a $(4,r)$-graph $G$ has $g$ vertices and that $H$ is a
+4-critical skeleton with $h$ vertices and $e$ edges. Then there is a
+$(4,r)$-graph of order $h+(g-1)e$.
+\end{lemma}
+
+This is the equal-seed case of~\cite[Lemma 2.1]{SS}. The proof is included
+to make every criticality condition in the transfer explicit; the
+substitution itself is not claimed as a new construction.
+
+\begin{proof}
+Choose $v\in V(G)$ and a proper three-coloring $\varphi$ of $G-v$.
+Split $v$ into two nonadjacent terminals $a,b$. Attach $a$ to the
+neighbors of $v$ of $\varphi$-color 1, and attach $b$ to the remaining
+neighbors of $v$. Keep all edges of $G-v$, obtaining a graph $S$ with
+$g-1$ internal vertices. We use the following properties.
+
+First, $S$ has a proper three-coloring with distinct terminal colors:
+keep $\varphi$ and assign $a=2,b=1$. Permuting the colors realizes any
+prescribed pair of distinct terminal colors. Second, every three-color
+assignment with equal terminal colors has at least $r+1$ monochromatic
+edges: identifying the terminals recovers $G$ edge for edge, so
+\eqref{eq:mono} applies. Third, deleting any internal vertex $x$ permits
+a proper three-coloring with equal terminal colors, by taking a
+three-coloring of $G-x$ and giving both terminals the color of $v$.
+Permuting colors realizes any prescribed common color. Fourth, deleting
+either terminal leaves a three-colorable graph, with any prescribed color
+at the surviving terminal, by restricting and permuting the first coloring.
+
+For every edge $xy$ of $H$, delete that edge and insert a fresh copy of
+$S$, identifying its terminals with $x,y$. All gadget interiors are
+disjoint. Call the resulting simple graph $T(H)$.
+
+A proper four-coloring of $H$ extends to $T(H)$: each gadget has distinct
+terminal colors, and its proper three-coloring can be relabeled using
+those two colors and any third one from the four-color palette.
+On the other hand, any three-color assignment to $T(H)$ restricts to an
+assignment on $H$ with a monochromatic edge $xy$. The gadget replacing
+that edge contributes at least $r+1$ monochromatic edges. Therefore no
+deletion of at most $r$ edges makes $T(H)$ three-colorable, and
+$\chi(T(H)-F)=4$ for all such $F$.
+
+It remains to check every vertex deletion. If $x$ is internal to the
+gadget replacing $uv$, take a proper three-coloring of $H-uv$.
+The endpoints $u,v$ necessarily have equal colors, for otherwise this
+would properly three-color $H$. Extend over the punctured gadget using
+the third property, and over every other gadget using the first.
+If instead a skeleton vertex $u$ is deleted, properly three-color $H-u$.
+Use the first property for gadgets not incident with $u$ and the fourth
+for each gadget that has lost its terminal $u$. Thus every vertex
+deletion is three-colorable. Its chromatic number is exactly three,
+since adding one vertex to a two-colorable graph cannot produce a
+four-chromatic graph. Finally, each skeleton edge contributes exactly
+$g-1$ new vertices, proving the order formula.
+\end{proof}
+
+\section{Three critical skeletons and Haj\'os joins}
+
+We use skeletons with the following vertex and edge counts:
+\[
+\begin{array}{c|r|r}
+\text{graph}&|V|&|E|\\\hline
+K_4&4&6\\
+C_5\text{ with an additional universal hub}&6&10\\
+M(C_5)\text{, the Gr\"otzsch graph}&11&20
+\end{array}
+\]
+All three are 4-critical skeletons. This is immediate for $K_4$.
+The odd wheel is four-chromatic because its rim needs three colors and
+its hub needs another. Removing a rim edge allows two colors on the
+remaining rim path and a third at the hub. Removing a spoke allows the
+hub and that spoke's rim endpoint to share a color; the remaining four
+rim vertices form a path and can use the other two colors.
+Every vertex deletion is then three-colorable: choose an incident edge
+and restrict a three-coloring after deleting that edge.
+
+For completeness, define $M(C_5)$ to have vertices
+$v_0,\ldots,v_4,u_0,\ldots,u_4,w$, with subscripts modulo five, and
+edges $v_iv_{i+1}$, $u_iv_{i-1}$, $u_iv_{i+1}$, and $wu_i$.
+In a hypothetical three-coloring give $w$ color 3; all $u_i$ then have
+colors 1 or 2. Recolor each $v_i$ of color 3 with the color of $u_i$.
+Two adjacent $v_i$ cannot both have originally had color 3, and the
+cross edges ensure that recoloring only one endpoint preserves properness.
+This would give a proper two-coloring of $C_5$, a contradiction.
+A four-coloring is obtained by three-coloring the rim, giving each $u_i$
+the color of $v_i$, and giving $w$ a fourth color.
+
+The dihedral symmetries have three edge orbits. Here are proper
+three-colorings after deleting one representative of each, in vertex
+order $(v_0,\ldots,v_4,u_0,\ldots,u_4,w)$, using colors $0,1,2$:
+\[
+\begin{array}{c|c}
+\text{deleted edge}&\text{color tuple}\\\hline
+v_0v_1&(1,1,0,1,0,\,2,2,2,1,2,\,0)\\
+u_0v_1&(0,1,0,1,2,\,1,1,2,1,2,\,0)\\
+wu_0&(0,1,0,1,2,\,0,1,2,1,2,\,0)
+\end{array}
+\]
+Inspection of the displayed edge definition verifies each tuple.
+Symmetry covers every edge. There are no isolated vertices, so
+edge-deletion colorability also gives vertex-deletion colorability.
+
+\begin{lemma}[Haj\'os join]\label{lem:hajos}
+If $H_1,H_2$ are 4-critical skeletons, there is a 4-critical skeleton $J$
+with
+\[
+|V(J)|=|V(H_1)|+|V(H_2)|-1,\qquad
+|E(J)|=|E(H_1)|+|E(H_2)|-1.
+\]
+\end{lemma}
+
+\begin{proof}
+Start with disjoint copies. Choose edges $a_1b_1$ and $a_2b_2$, delete
+them, identify $a_1,a_2$ to one vertex $a$, and insert edge $b_1b_2$.
+The counts follow immediately, and the graph remains simple.
+In any proper three-coloring of $H_i-a_ib_i$, the distinguished endpoints
+must have equal colors. Thus a proper three-coloring of $J$ would force
+$b_1,b_2$ to agree, contrary to their new edge. A four-coloring exists:
+take proper four-colorings of the two summands, permute them to match
+at $a$, and permute the other three colors on one summand so that
+$b_1,b_2$ differ.
+
+Deleting the new edge permits three-colorings of both edge-deleted
+summands, matched at $a$. If an old edge $f$ from the first summand is
+deleted, take a three-coloring of $H_1-f$. Its distinguished endpoints
+$a_1,b_1$ differ, because their original edge is present in that graph.
+Combine it with a three-coloring of $H_2-a_2b_2$, whose distinguished
+endpoints agree, matching the colors at $a$. The new edge is proper.
+The other summand is symmetric. Hence every edge deletion is
+three-colorable. Every vertex has an incident edge, so restricting
+one of these colorings proves vertex-deletion colorability as well.
+\end{proof}
+
+\section{Order completion and the explicit threshold}
+
+\begin{lemma}[Two-generator conductor]\label{lem:coins}
+If positive integers $u,v$ are coprime, every integer
+$t\geq(u-1)(v-1)$ equals $\alpha u+\beta v$ for some
+$\alpha,\beta\in\Z_{\geq0}$.
+\end{lemma}
+
+\begin{proof}
+Choose $\beta\in\{0,\ldots,u-1\}$ such that $\beta v\equiv t\pmod u$.
+Then
+$t-\beta v\geq (u-1)(v-1)-(u-1)v=-(u-1)>-u$.
+Since it is a multiple of $u$, it is nonnegative.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Put $c=g-1$. Start with $K_4$ and take $a$ Haj\'os joins with copies of
+$K_4$, $b$ joins with copies of the five-rim wheel, and $d$ joins with
+copies of $M(C_5)$, where $a,b,d$ are arbitrary nonnegative integers.
+Lemma~\ref{lem:hajos} gives a 4-critical skeleton $H$ with
+\[
+|V(H)|=4+3a+5b+10d,\qquad |E(H)|=6+5a+9b+19d.
+\]
+Substitution using Lemma~\ref{lem:sub} therefore realizes every order
+\begin{align*}
+N&=4+6c+a(3+5c)+b(5+9c)+d(10+19c)\\
+ &=6g-2+a(5g-2)+b(9g-4)+d(19g-9).
+\end{align*}
+Write $N_*=6g-2$, $A=5g-2$, $B=9g-4$, $C=19g-9$.
+The key identity is
+\begin{equation}\label{eq:gcd}
+9A-5B=2.
+\end{equation}
+
+If $g$ is odd, $A,B$ are odd, so~\eqref{eq:gcd} implies
+$\gcd(A,B)=1$. Lemma~\ref{lem:coins} with $d=0$ realizes every order
+\[
+N\geq N_*+(A-1)(B-1)=45g^2-46g+13.
+\]
+
+If $g$ is even, $A,B$ are even, $\gcd(A/2,B/2)=1$, and $C$ is odd.
+Put $Q=(A/2-1)(B/2-1)$. For any remainder $t=N-N_*\geq C+2Q$,
+choose $d=0$ when $t$ is even and $d=1$ when $t$ is odd.
+Then $t-dC$ is even and at least $2Q$.
+Lemma~\ref{lem:coins} represents $(t-dC)/2$ using $A/2,B/2$.
+Consequently every order
+\[
+N\geq N_*+C+2Q=\frac{45}{2}g^2-8g+1
+\]
+is realized. Both sufficient thresholds are at most $45g^2$ for
+$g\geq1$. Every realization retains the required vertex-criticality
+and edge tolerance by Lemma~\ref{lem:sub}.
+\end{proof}
+
+\section{Scope}
+
+The transfer theorem is a finite, elementary construction independent of
+how the seed is obtained. Applying the asserted seed theorem of~\cite{KK}
+closes the all-orders implication described in~\cite[Problem 1.1]{SS}.
+The substitution lemma and Haj\'os operation are prior ingredients;
+the arithmetic completion above supplies the additional argument.
+The source search did not establish whether this completion has appeared
+elsewhere. No explicit growth rate for $f_4(N)$ is claimed without a bound
+on the order $g(r)$ of a seed. No Lean formalization or independent
+re-proof of the cyclic and Chinese-remainder seed construction is included.
+
+\begin{thebibliography}{9}
+\bibitem{KK}
+Liam Kruer and Jensen Kohlmeyer,
+\emph{Vertex-critical four-chromatic graphs with no small critical edge set},
+Theorem 1.1, source manuscript consulted 6 November 2026.
+\url{https://github.com/JENW1N/complete-math-solutions/blob/main/papers/erdos-944.pdf}.
+
+\bibitem{SS}
+Skottov\'a and Steiner, arXiv:2508.08703,
+especially Problem 1.1, Lemmas 2.1--2.2 and Theorem 2.3.
+\url{https://arxiv.org/html/2508.08703}.
+
+\bibitem{EP}
+Erd\H{o}s Problems, Problem 944 and its history.
+\url{https://www.erdosproblems.com/history/944}.
+\end{thebibliography}
+\end{document}

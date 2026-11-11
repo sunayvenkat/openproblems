@@ -1,0 +1,53 @@
+selfcheck ok 105
+selfcheck ok 1155
+selfcheck ok 15015
+d=385 K=155363 s=3 T=249228 sign=NEG digits=18 matches_strict=True exact_time=0.0s h=1 log10B=20.9
+  value=-220001591787563872
+d=595 K=100529 s=3 T=155767 sign=NEG digits=20 matches_strict=True exact_time=0.0s h=2 log10B=21.9
+  value=-63399739558053042144
+d=7315 K=8177 s=3 T=13846 sign=NEG digits=20 matches_strict=True exact_time=0.0s h=4 log10B=23.6
+  value=-17398677259469651600
+d=7735 K=7733 s=3 T=12980 sign=NEG digits=20 matches_strict=True exact_time=0.0s h=4 log10B=23.6
+  value=-99330943205275202388
+d=8645 K=6919 s=3 T=11538 sign=NEG digits=22 matches_strict=True exact_time=0.0s h=9 log10B=24.9
+  value=-6609215804930840640803
+d=13585 K=4403 s=3 T=6923 sign=NEG digits=21 matches_strict=True exact_time=0.0s h=6 log10B=23.9
+  value=-786891207452544865251
+d=14245 K=4199 s=3 T=6923 sign=NEG digits=20 matches_strict=True exact_time=0.0s h=4 log10B=23.5
+  value=-21608798357967147171
+d=17765 K=3367 s=3 T=5192 sign=NEG digits=20 matches_strict=True exact_time=0.0s h=6 log10B=23.7
+  value=-41597941961703106980
+d=26455 K=2261 s=3 T=3461 sign=NEG digits=19 matches_strict=True exact_time=0.0s h=4 log10B=22.9
+  value=-1118109419964169500
+d=85085 K=703 s=3 T=1298 sign=NEG digits=28 matches_strict=True exact_time=0.0s h=156 log10B=30.3
+  value=-1848537658261605328968125331
+d=455 K=131461 s=4 T=207690 sign=NEG digits=26 matches_strict=True exact_time=0.0s h=1 log10B=28.0
+  value=-54355285109907508246260125
+d=6545 K=9139 s=4 T=15576 sign=NEG digits=26 matches_strict=True exact_time=0.0s h=3 log10B=30.8
+  value=-95955184452646802952050785
+d=12155 K=4921 s=4 T=7788 sign=NEG digits=30 matches_strict=True exact_time=0.0s h=8 log10B=32.6
+  value=-166758899449539353137110155800
+d=20995 K=2849 s=4 T=4326 sign=NEG digits=29 matches_strict=True exact_time=0.0s h=12 log10B=33.1
+  value=-63577835414942547912170357400
+d=95095 K=629 s=5 T=1153 sign=NEG digits=45 matches_strict=True exact_time=0.1s h=172 log10B=49.3
+  value=-160218440454742227789329896892217115752476508
+d=185185 K=323 s=3 T=576 sign=NEG digits=24 matches_strict=True exact_time=0.1s h=44 log10B=28.0
+  value=-830541557748485460846724
+d=242165 K=247 s=3 T=432 sign=NEG digits=24 matches_strict=True exact_time=0.1s h=47 log10B=28.0
+  value=-208028913458978524779230
+d=270655 K=221 s=5 T=384 sign=NEG digits=40 matches_strict=True exact_time=0.3s h=60 log10B=46.3
+  value=-1636420029994323076283418455785065961720
+d=286195 K=209 s=3 T=360 sign=NEG digits=26 matches_strict=True exact_time=0.1s h=92 log10B=29.1
+  value=-95503479216864142677011616
+d=323323 K=185 s=3 T=288 sign=NEG digits=27 matches_strict=True exact_time=0.1s h=173 log10B=29.6
+  value=-109800118265383039295472960
+d=629629 K=95 s=5 T=144 sign=NEG digits=51 matches_strict=True exact_time=0.8s h=2037 log10B=54.6
+  value=-529051781841684576357136473517781328902537643654829
+d=776815 K=77 s=4 T=120 sign=NEG digits=35 matches_strict=True exact_time=0.6s h=214 log10B=39.6
+  value=-78312688348554791512290890403711750
+d=1616615 K=37 s=4 T=72 sign=NEG digits=47 matches_strict=True exact_time=3.7s h=23363 log10B=50.8
+  value=-10044752129176918852904749090601264322720301050
+d=8544965 K=7 s=4 T=12 sign=NEG digits=50 matches_strict=True exact_time=19.7s h=189877 log10B=54.4
+  value=-87527233935022552687152959659071352619848825683750
+d=319865 K=187 s=14 T=320 sign=NEG digits=103 matches_strict=True exact_time=5.5s h=74 log10B=125.2
+  value=-1520253729835682489009660250984324126036598472617997222575928512536367514883405582551885287178152647140
